@@ -3,6 +3,9 @@
 # the site serves - so it is not worth versioning.
 tools/cover-map.json
 
+# Same again for the Deezer lookups behind the Rock Band covers.
+tools/deezer-cache.json
+
 # OS noise
 .DS_Store
 Thumbs.db
