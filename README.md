@@ -122,7 +122,7 @@ Uninstall it whenever you like. Profiles, scores, backdrops and song folders liv
 | | |
 |---|---|
 | **File** | `FullVolumeSetup-0.9.0.exe` |
-| **Size** | 141 MB |
+| **Size** | 250 MB |
 | **Version** | 0.9.0 beta |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | Local. Nothing to sign up for |
