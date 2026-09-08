@@ -43,7 +43,7 @@ Every karaoke game wants to sell you the music. Full Volume hasn't got any to se
 Straight out of the game. Nothing here is a mock-up.
 
 <p align="center">
-  <img src="./shots/shot-11.png" alt="Gameplay: the vocal track across the screen, cover art and progress top left, score and five stars top right" width="820">
+  <img src="./shots/shot-15.png" alt="Gameplay: the vocal track across the screen, cover art and progress top left, score and five stars top right" width="820">
 </p>
 
 <details>
