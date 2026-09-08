@@ -1,0 +1,1572 @@
+/* ============================================================
+   FULL VOLUME - fullvolumethegame.xyz
+   Palette and type are the game's own (Assets/UI Assets/ui).
+   ============================================================ */
+
+/* ---------- The game's display face ---------- */
+@font-face {
+  font-family: "FullVolume";
+  src: url("../assets/fonts/FullVolume.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ---------- Reading face: Poppins, self-hosted ----------
+   Geometric sans - the circular bowls echo the drawn plates and the
+   round logo mark, and it holds up at 800 for the small caps labels.
+   Static cuts (Poppins ships no variable file), latin first with
+   latin-ext behind a unicode-range so only the used subset downloads.
+   Self-hosted so the page owes Google nothing and still works offline. */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-400-latin-ext.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-600-latin.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-600-latin-ext.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-700-latin.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-700-latin-ext.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-800-latin.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-800-latin-ext.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-400i-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-400i-latin-ext.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-600i-latin.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-600i-latin-ext.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  /* Sampled from FullVolumePallet.png - do not drift from these. */
+  --bg:        #171719;
+  --panel:     #353238;
+  --raised:    #454149;
+  --cream:     #F3EEE7;
+  --coral:     #D86F67;
+  --gold:      #E0B866;
+  --sage:      #829B87;
+  --muted:     #8A858E;
+  --ink:       #1A181B;
+
+  /* Derived */
+  --bg-deep:   #101011;
+  --cream-dim: rgba(243, 238, 231, .72);
+  --cream-faint: rgba(243, 238, 231, .46);
+  --hairline:  rgba(243, 238, 231, .12);
+  --hairline-2:rgba(243, 238, 231, .2);
+
+  /* Type */
+  --display: "FullVolume", "Impact", sans-serif;
+  --body: "Poppins", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  /* Rhythm - 4/8 scale */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+  --s9: 96px; --s10: 128px;
+
+  --wrap: 1180px;
+  --radius: 14px;
+
+  /* Motion - strong curves; the built-ins are too weak. */
+  --ease-out:    cubic-bezier(.23, 1, .32, 1);
+  --ease-in-out: cubic-bezier(.77, 0, .175, 1);
+  --t-press: 140ms;
+  --t-hover: 200ms;
+  --t-enter: 520ms;
+
+  /* Layers */
+  --z-bg: 0; --z-body: 1; --z-sticky: 40; --z-nav: 50; --z-top: 100;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* the sticky bar is ~68px; keep anchors clear of it */
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  /* paper grain, so the flat black doesn't read as a default */
+  background-image:
+    radial-gradient(1200px 700px at 50% -10%, rgba(224,184,102,.06), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+[hidden] { display: none !important; }
+p { margin: 0 0 1em; }
+
+::selection { background: var(--gold); color: var(--ink); }
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute; top: -60px; left: var(--s4);
+  z-index: var(--z-top);
+  background: var(--gold); color: var(--ink);
+  padding: var(--s3) var(--s5);
+  font-weight: 700; border-radius: 0 0 10px 10px;
+  transition: top var(--t-hover) var(--ease-out);
+}
+.skip-link:focus { top: 0; }
+
+.wrap {
+  width: min(100% - 2 * var(--s5), var(--wrap));
+  margin-inline: auto;
+}
+.nowrap { white-space: nowrap; }
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+
+/* The display face is hollow outlines - it turns to lace under ~28px.
+   It lives on headings only, exactly as it does in the game. */
+.h2, .h3, .hero__tagline, .stat__num, .card__title, .plate__label,
+.nav__word, .marquee b, .foot__name, .step__t {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: .02em;
+  paint-order: stroke fill;
+}
+
+/* The face is hollow outlines, so it turns to lace as it gets smaller. The game
+   solves this with FvTheme.WeightFor - a sliding _FaceDilate, heavier the smaller
+   the label. A stroke on a sliding scale is the same trick in CSS: big headings
+   barely need it, a 21px card title needs a lot. */
+.h2, .hero__tagline           { -webkit-text-stroke: .5px currentColor; }
+.h3, .stat__num               { -webkit-text-stroke: .7px currentColor; }
+.card__title, .marquee b      { -webkit-text-stroke: 1px  currentColor; }
+.step__t, .nav__word,
+.foot__name                   { -webkit-text-stroke: 1.05px currentColor; }
+
+.h2 {
+  font-size: clamp(34px, 5.2vw, 62px);
+  line-height: 1.06;
+  margin: 0 0 var(--s5);
+  color: var(--cream);
+}
+.h3 {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.15;
+  margin: 0 0 var(--s4);
+  color: var(--cream);
+}
+.h3--tight { margin-bottom: var(--s5); }
+
+.ink-coral { color: var(--coral); }
+.ink-gold  { color: var(--gold); }
+
+.eyebrow {
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 var(--s4);
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+.sec-head .eyebrow { justify-content: center; }
+
+.lead {
+  font-size: clamp(18px, 2vw, 21px);
+  line-height: 1.6;
+  color: var(--cream);
+}
+.lead--center { max-width: 56ch; margin-inline: auto; }
+
+p, .card p, .duo__card p, .step p { color: var(--cream-dim); }
+.lead { color: rgba(243, 238, 231, .88); }
+
+em { font-style: italic; color: var(--gold); }
+.lead em, .hero__tagline em { font-style: italic; }
+
+code {
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: .88em;
+  background: rgba(243,238,231,.08);
+  padding: 2px 6px;
+  border-radius: 5px;
+  color: var(--gold);
+}
+
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--sage);
+  box-shadow: 0 0 0 3px rgba(130, 155, 135, .22);
+  flex: none;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section { padding: clamp(72px, 11vw, 140px) 0; position: relative; }
+
+.section--panel {
+  background: var(--panel);
+  border-block: 2px solid var(--ink);
+  box-shadow: inset 0 1px 0 rgba(243,238,231,.06);
+}
+
+.section--download {
+  background:
+    radial-gradient(900px 420px at 20% 0%, rgba(216,111,103,.14), transparent 65%),
+    radial-gradient(800px 400px at 85% 100%, rgba(224,184,102,.12), transparent 65%);
+}
+
+.sec-head { text-align: center; margin-bottom: clamp(48px, 6vw, 76px); }
+
+/* ============================================================
+   BUTTONS - the drawn plates, straight out of the game.
+
+   The game has exactly one button: FV_UI_Button_Not_Hovered.png in gold,
+   swapping to FV_UI_Button_Hovered.png in coral, at three sizes
+   (FvTheme: 500x120 / 300x72 / 192x46). MenuButton.cs scales it to 1.08
+   over 0.12s on pointer-enter. This is that button, on the web.
+   ============================================================ */
+.plate {
+  --plate-h: 64px;
+  --plate-scale: 1;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s3);
+  min-height: 48px;               /* touch target, even when the art is shorter */
+  height: var(--plate-h);
+  padding: 0 clamp(24px, 3vw, 42px);
+  color: var(--ink);
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  isolation: isolate;
+  /* 120ms - MenuButton.scaleAnimDuration, to the millisecond */
+  transition: transform 120ms var(--ease-out);
+  transform: scale(var(--plate-scale));
+  will-change: transform;
+}
+
+/* The plate art is a single drawing, so it is stretched, not nine-sliced -
+   its own rounded ends are wide enough that this reads cleanly at any width. */
+.plate::before,
+.plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.plate::before { background-image: url("../assets/img/plate.png"); }
+.plate::after  { background-image: url("../assets/img/plate-hover.png"); opacity: 0; }
+
+.plate__label {
+  font-size: 21px;
+  letter-spacing: .06em;
+  line-height: 1;
+  -webkit-text-stroke: .7px var(--ink);
+  translate: 0 1px;   /* the drawn plate's optical centre sits a hair high */
+}
+.plate__icon {
+  width: 20px; height: 20px;
+  filter: brightness(0);   /* the icons are drawn white; the plate is gold */
+  translate: 0 1px;
+  flex: none;
+}
+
+/* FvTheme's three sizes */
+.plate--lg { --plate-h: 78px; }
+.plate--lg .plate__label { font-size: 28px; }
+.plate--lg .plate__icon { width: 26px; height: 26px; }
+
+.plate--md { --plate-h: 64px; }
+
+.plate--sm { --plate-h: 48px; padding: 0 24px; }
+.plate--sm .plate__label { font-size: 16px; }
+.plate--sm .plate__icon { width: 17px; height: 17px; }
+
+/* Icon-only, for the gallery arrows.
+   The full plate art is 534x128 with an empty band along the top that the
+   hover sprite fills with three gold sparkles. Squashed into a square that
+   band turns to slivers, so these use the plate cropped to its own drawing. */
+.plate--icon { padding: 0; width: 58px; }
+.plate--icon::before { background-image: url("../assets/img/plate-icon.png"); }
+.plate--icon::after  { background-image: url("../assets/img/plate-icon-hover.png"); }
+.plate--icon .plate__icon { width: 22px; height: 22px; translate: 0 0; }
+.plate--icon.is-flipped .plate__icon { scale: -1 1; }
+
+.plate--block { display: flex; width: 100%; }
+
+/* Hover is the game's: sprite swap to coral, scale to 1.08 */
+@media (hover: hover) and (pointer: fine) {
+  .plate:hover { --plate-scale: 1.08; }
+  /* A swap, not a cross-fade: the game swaps the sprite outright, and holding
+     both on at once lets the gold edge tint through the coral's soft border. */
+  .plate:hover::before { opacity: 0; }
+  .plate:hover::after  { opacity: 1; }
+}
+/* Press reads as the plate going back down under the finger */
+.plate:active { --plate-scale: .98; }
+
+.plate[disabled] { opacity: .34; cursor: not-allowed; }
+.plate[disabled]:hover { --plate-scale: 1; }
+.plate[disabled]:hover::after { opacity: 0; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  background: rgba(23, 23, 25, 0);
+  border-bottom: 2px solid transparent;
+  transition: background 260ms var(--ease-out),
+              border-color 260ms var(--ease-out),
+              backdrop-filter 260ms var(--ease-out);
+}
+.nav.is-stuck {
+  background: rgba(23, 23, 25, .88);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom-color: var(--ink);
+}
+
+.nav__inner {
+  width: min(100% - 2 * var(--s5), var(--wrap));
+  margin-inline: auto;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+}
+
+.nav__brand { display: flex; align-items: center; gap: var(--s3); }
+.nav__mark {
+  width: 30px; height: 30px;
+  filter: invert(1);   /* the mark is drawn in ink; the site's ground is dark */
+  opacity: .92;
+}
+.nav__word {
+  font-size: 19px;
+  letter-spacing: .05em;
+  color: var(--cream);
+  -webkit-text-stroke: .5px var(--cream);
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--s5);
+  margin-left: auto;
+  font-size: 15px;
+  font-weight: 600;
+}
+.nav__links a {
+  position: relative;
+  color: var(--cream-dim);
+  padding: var(--s2) 0;
+  transition: color var(--t-hover) var(--ease-out);
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-hover) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav__links a:hover { color: var(--cream); }
+  .nav__links a:hover::after { transform: scaleX(1); }
+}
+.nav__links a.is-active { color: var(--gold); }
+.nav__links a.is-active::after { transform: scaleX(1); }
+
+.nav__cta { margin-left: var(--s2); }
+
+/* SFX toggle - the game's own hover/click sounds, off until asked for */
+.sfx-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  min-width: 44px;
+  padding: 0 var(--s3);
+  margin-left: var(--s4);
+  border: 2px solid var(--hairline-2);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cream-faint);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  cursor: pointer;
+  transition: color var(--t-hover) var(--ease-out),
+              border-color var(--t-hover) var(--ease-out),
+              transform var(--t-press) var(--ease-out);
+}
+.sfx-toggle__on { display: none; }
+.sfx-toggle[aria-pressed="true"] { color: var(--gold); border-color: rgba(224,184,102,.5); }
+.sfx-toggle[aria-pressed="true"] .sfx-toggle__on  { display: block; }
+.sfx-toggle[aria-pressed="true"] .sfx-toggle__off { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .sfx-toggle:hover { color: var(--cream); border-color: var(--hairline-2); }
+  .sfx-toggle[aria-pressed="true"]:hover { color: var(--gold); }
+}
+.sfx-toggle:active { transform: scale(.96); }
+
+.nav__mobile-cta { margin-top: var(--s4); }
+
+.nav__burger {
+  display: none;
+  width: 44px; height: 44px;
+  margin-left: auto;
+  background: none;
+  border: 2px solid var(--hairline-2);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 11px 10px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav__burger span {
+  display: block; height: 2px; width: 100%;
+  background: var(--cream);
+  border-radius: 2px;
+  transition: transform 220ms var(--ease-out), opacity 160ms var(--ease-out);
+}
+.nav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+.nav__mobile {
+  background: rgba(23,23,25,.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 2px solid var(--ink);
+  padding: var(--s3) var(--s5) var(--s5);
+  display: flex;
+  flex-direction: column;
+}
+.nav__mobile a {
+  padding: var(--s3) 0;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--cream-dim);
+}
+.nav__mobile a:last-child { border-bottom: 0; color: var(--gold); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: min(88svh, 860px);
+  display: flex;
+  align-items: center;
+  padding: clamp(88px, 12vh, 140px) 0 clamp(64px, 8vh, 104px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: -6% 0 -6%;      /* headroom for the parallax drift */
+  z-index: -2;
+  will-change: transform;
+}
+.hero__still, .hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__video { opacity: 0; transition: opacity 700ms var(--ease-out); }
+.hero__video.is-ready { opacity: 1; }
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(105deg, rgba(23,23,25,.94) 0%, rgba(23,23,25,.82) 38%, rgba(23,23,25,.42) 68%, rgba(23,23,25,.62) 100%),
+    linear-gradient(to top, var(--bg) 2%, transparent 32%);
+}
+
+.hero__inner { position: relative; }
+.hero__eyebrow, .hero__logo, .hero__tagline, .hero__blurb, .hero__cta, .hero__note {
+  max-width: 760px;
+}
+
+.hero__eyebrow { color: var(--gold); }
+
+.hero__logo { margin: 0 0 var(--s5); }
+.hero__logo img {
+  width: min(100%, 560px);
+  filter: drop-shadow(0 12px 34px rgba(0,0,0,.55));
+}
+
+.hero__tagline {
+  font-size: clamp(26px, 3.6vw, 42px);
+  line-height: 1.14;
+  color: var(--cream);
+  margin: 0 0 var(--s5);
+}
+.hero__tagline em { color: var(--coral); }
+
+.hero__blurb {
+  font-size: clamp(16px, 1.7vw, 19px);
+  max-width: 56ch;
+  color: rgba(243,238,231,.84);
+  margin-bottom: var(--s7);
+}
+.hero__blurb em { font-style: italic; color: inherit; }
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s4);
+  align-items: center;
+  margin-bottom: var(--s5);
+}
+
+.hero__note {
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  margin: 0;
+}
+
+/* --- the vocal track, borrowed as scenery --- */
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee {
+  background: var(--coral);
+  border-block: 2px solid var(--ink);
+  overflow: hidden;
+  padding: var(--s3) 0;
+  color: var(--ink);
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+.marquee__group {
+  display: flex;
+  align-items: center;
+  gap: var(--s6);
+  padding-right: var(--s6);
+  white-space: nowrap;
+}
+.marquee b {
+  font-size: 21px;
+  letter-spacing: .09em;
+  -webkit-text-stroke: .5px var(--ink);
+}
+.marquee i { font-style: normal; opacity: .55; font-size: 14px; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   ABOUT + STATS
+   ============================================================ */
+.about {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(40px, 6vw, 88px);
+  align-items: start;
+}
+.about__copy p:last-child { margin-bottom: 0; }
+
+.stats {
+  display: grid;
+  gap: var(--s4);
+  position: sticky;
+  top: 104px;
+}
+.stat {
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s6);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.38);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+.stat:nth-child(odd)  { transform: rotate(-.5deg); }
+.stat:nth-child(even) { transform: rotate(.4deg); }
+
+.stat__num {
+  font-size: clamp(44px, 5vw, 66px);
+  line-height: .95;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  -webkit-text-stroke: .8px var(--gold);
+}
+.stat:nth-child(2) .stat__num { color: var(--coral); -webkit-text-stroke-color: var(--coral); }
+
+.stat__label {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--cream-dim);
+}
+
+/* ============================================================
+   FEATURE CARDS
+   ============================================================ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--s5);
+}
+.card {
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s6);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.4);
+  transition: transform var(--t-hover) var(--ease-out),
+              border-color var(--t-hover) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover { transform: translateY(-4px); border-color: var(--gold); }
+}
+.card__title {
+  font-size: 27px;
+  margin: 0 0 var(--s3);
+  color: var(--cream);
+}
+.card p { margin: 0; font-size: 15.5px; }
+
+.card__glyph {
+  width: 52px; height: 52px;
+  margin-bottom: var(--s5);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  background: rgba(224,184,102,.09);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 26px 26px;
+}
+.card:nth-child(2) .card__glyph { border-color: var(--coral); background-color: rgba(216,111,103,.1); }
+.card:nth-child(3) .card__glyph { border-color: var(--sage);  background-color: rgba(130,155,135,.1); }
+.card:nth-child(5) .card__glyph { border-color: var(--coral); background-color: rgba(216,111,103,.1); }
+.card:nth-child(6) .card__glyph { border-color: var(--sage);  background-color: rgba(130,155,135,.1); }
+
+/* Inline SVG glyphs - one stroke weight, one family, no emoji. */
+[data-glyph="pitch"]   { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E0B866' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12h3l3-8 4 16 3-11 2 3h5'/%3E%3C/svg%3E"); }
+[data-glyph="folder"]  { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D86F67' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpath d='M9 15V9.5l5-1V14'/%3E%3Ccircle cx='7.6' cy='15' r='1.5'/%3E%3Ccircle cx='12.6' cy='14' r='1.5'/%3E%3C/svg%3E"); }
+[data-glyph="people"]  { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23829B87' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3.2'/%3E%3Cpath d='M3 20a6 6 0 0 1 12 0'/%3E%3Cpath d='M16 5.5a3.2 3.2 0 0 1 0 5'/%3E%3Cpath d='M18 14.4A6 6 0 0 1 21 20'/%3E%3C/svg%3E"); }
+[data-glyph="wifi"]    { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E0B866' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 9a14 14 0 0 1 19 0'/%3E%3Cpath d='M6 12.6a9 9 0 0 1 12 0'/%3E%3Cpath d='M9.4 16.2a4.2 4.2 0 0 1 5.2 0'/%3E%3Ccircle cx='12' cy='19.6' r='1.2' fill='%23E0B866'/%3E%3C/svg%3E"); }
+[data-glyph="picture"] { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D86F67' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4.5' width='18' height='15' rx='2'/%3E%3Ccircle cx='8.5' cy='10' r='1.6'/%3E%3Cpath d='M3.5 17l4.8-4.6 3.4 3.2 3-2.8 5.8 5.2'/%3E%3C/svg%3E"); }
+[data-glyph="list"]    { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23829B87' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6h10M4 11h10M4 16h6'/%3E%3Ccircle cx='17' cy='17' r='3'/%3E%3Cpath d='M20 17V8l2.5 1.2'/%3E%3C/svg%3E"); }
+[data-glyph="tune"]    { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23829B87' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 21V14M5 10V3M12 21v-9M12 8V3M19 21v-5M19 12V3'/%3E%3Cpath d='M2.5 14h5M9.5 8h5M16.5 16h5'/%3E%3C/svg%3E"); }
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery { position: relative; }
+
+.gallery__viewport {
+  overflow: hidden;
+  padding: var(--s2) 0 var(--s6);
+  cursor: grab;
+}
+.gallery__viewport.is-dragging { cursor: grabbing; }
+
+.gallery__track {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s6);
+  /* No edge padding: the script centres the current slide in the viewport,
+     so any padding here would just push it back off to one side. */
+  padding-inline: 0;
+  transition: transform 420ms var(--ease-out);
+}
+.gallery__track.no-anim { transition: none; }
+
+.slide {
+  flex: 0 0 min(88vw, 1120px);
+  text-align: center;
+}
+.slide img {
+  display: block;
+  width: 100%;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 8px 10px 0 rgba(0,0,0,.42);
+  background: var(--bg-deep);
+  transition: opacity 320ms var(--ease-out),
+              transform 320ms var(--ease-out);
+  transform: scale(.9);
+  opacity: .34;
+  pointer-events: none;
+}
+.slide.is-current img { opacity: 1; transform: scale(1); }
+
+.slide__cap {
+  margin: var(--s4) auto 0;
+  max-width: 46ch;
+  font-size: 14px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  transition: color 300ms var(--ease-out),
+              opacity 300ms var(--ease-out);
+  opacity: 0;
+}
+.slide.is-current .slide__cap { opacity: 1; }
+.slide.is-current .slide__cap { color: var(--gold); }
+
+.gallery__ui {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s5);
+}
+.gallery__dots { display: flex; gap: var(--s2); }
+.gallery__dots button {
+  width: 44px; height: 44px;      /* real touch target around a small dot */
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.gallery__dots button::before {
+  content: "";
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--hairline-2);
+  transition: background var(--t-hover) var(--ease-out),
+              transform var(--t-hover) var(--ease-out);
+}
+.gallery__dots button[aria-selected="true"]::before {
+  background: var(--gold);
+  transform: scale(1.5);
+}
+
+/* ============================================================
+   MULTIPLAYER
+   ============================================================ */
+.duo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--s5);
+}
+.duo__card {
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: clamp(28px, 4vw, 44px);
+  box-shadow: 6px 7px 0 rgba(0,0,0,.4);
+}
+.duo__tag {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--gold);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: var(--s5);
+}
+.duo__tag--alt { background: var(--sage); }
+
+.ticks { display: grid; gap: var(--s3); margin-top: var(--s5); }
+.ticks li {
+  position: relative;
+  padding-left: 30px;
+  font-size: 15px;
+  color: var(--cream-dim);
+  line-height: 1.5;
+}
+.ticks li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 4px;
+  width: 18px; height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23829B87' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5.5 5.5L20 6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* ============================================================
+   LIBRARY
+   ============================================================ */
+.library {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: start;
+}
+
+.steps { display: grid; gap: var(--s5); margin-top: var(--s7); }
+.step { display: flex; gap: var(--s4); }
+.step__n {
+  flex: none;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+.step__t { font-size: 21px; margin: 2px 0 var(--s2); color: var(--cream); }
+.step p { margin: 0; font-size: 15.5px; }
+
+.lib-card {
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s6);
+  box-shadow: 6px 7px 0 rgba(0,0,0,.4);
+  position: sticky;
+  top: 104px;
+}
+.lib-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+  padding-bottom: var(--s4);
+  border-bottom: 2px solid var(--hairline);
+}
+.lib-card__head img { width: 30px; height: 30px; opacity: .9; }
+.lib-card__head h3 { font-size: 17px; margin: 0; font-weight: 700; color: var(--cream); }
+
+.lib-card__foot {
+  margin: var(--s5) 0 0;
+  padding-top: var(--s4);
+  border-top: 2px solid var(--hairline);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--cream-faint);
+}
+
+.kv { margin: 0; display: grid; gap: var(--s3); }
+.kv > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s4);
+}
+.kv dt { font-size: 14.5px; color: var(--cream-dim); }
+.kv dd {
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.kv--good { color: var(--sage) !important; }
+.kv--wide dd { color: var(--cream); font-weight: 600; font-size: 15px; }
+
+/* ============================================================
+   DOWNLOAD
+   ============================================================ */
+.dl {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: clamp(32px, 5vw, 64px);
+  box-shadow: 8px 10px 0 rgba(0,0,0,.42);
+}
+.dl__cta {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+  flex-wrap: wrap;
+  margin: var(--s7) 0 var(--s5);
+}
+.dl__meta {
+  font-size: 14px;
+  color: var(--cream-faint);
+  font-variant-numeric: tabular-nums;
+}
+.dl__note { margin: 0; font-size: 14.5px; color: var(--cream-faint); }
+.dl__small {
+  margin: var(--s5) 0 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--cream-faint);
+}
+.dl__right {
+  border-left: 2px solid var(--hairline);
+  padding-left: clamp(24px, 4vw, 48px);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot {
+  background: var(--bg-deep);
+  border-top: 2px solid var(--ink);
+  padding: clamp(56px, 7vw, 88px) 0 var(--s6);
+}
+.foot__inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--s7);
+  align-items: center;
+}
+.foot__brand { display: flex; align-items: center; gap: var(--s4); }
+.foot__mark { width: 44px; height: 44px; filter: invert(1); opacity: .9; }
+.foot__name { font-size: 20px; margin: 0; letter-spacing: .05em; -webkit-text-stroke: .5px var(--cream); }
+.foot__dom { margin: 0; font-size: 13.5px; color: var(--cream-faint); }
+
+.foot__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s3) var(--s5);
+  font-size: 14.5px;
+}
+.foot__links a {
+  color: var(--cream-dim);
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  transition: color var(--t-hover) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .foot__links a:hover { color: var(--gold); } }
+
+.foot__by {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  justify-content: flex-end;
+  text-align: right;
+}
+.foot__by p { margin: 0; font-size: 14px; color: var(--cream-dim); line-height: 1.5; }
+.foot__by span { color: var(--cream-faint); font-size: 13px; }
+.foot__weed {
+  width: 58px; height: 58px;
+  flex: none;
+  order: 1;
+  transition: transform 420ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .foot__by:hover .foot__weed { transform: rotate(12deg) scale(1.08); }
+}
+
+.foot__rule {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s4);
+  flex-wrap: wrap;
+  margin-top: var(--s8);
+  padding-top: var(--s5);
+  border-top: 2px solid rgba(243,238,231,.09);
+}
+.foot__rule p { margin: 0; font-size: 12.5px; color: var(--cream-faint); }
+
+/* ============================================================
+   REVEAL / ENTRANCE
+   ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 620ms var(--ease-out), transform 620ms var(--ease-out);
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+[data-hero] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--t-enter) var(--ease-out), transform var(--t-enter) var(--ease-out);
+}
+.is-ready [data-hero] { opacity: 1; transform: none; }
+/* 70ms stagger - a cascade, not a queue */
+.is-ready [data-hero="1"] { transition-delay: 60ms; }
+.is-ready [data-hero="2"] { transition-delay: 130ms; }
+.is-ready [data-hero="3"] { transition-delay: 200ms; }
+.is-ready [data-hero="4"] { transition-delay: 270ms; }
+.is-ready [data-hero="5"] { transition-delay: 340ms; }
+.is-ready [data-hero="6"] { transition-delay: 410ms; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .about, .library, .dl { grid-template-columns: 1fr; }
+  .stats { position: static; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .lib-card { position: static; }
+  .dl__right { border-left: 0; border-top: 2px solid var(--hairline); padding-left: 0; padding-top: var(--s6); }
+  .foot__inner { grid-template-columns: 1fr; text-align: center; }
+  .foot__brand, .foot__by { justify-content: center; }
+  .foot__by { text-align: left; }
+}
+
+@media (max-width: 860px) {
+  .nav__links, .nav__cta { display: none; }
+  .nav__burger { display: flex; }
+  .hero { min-height: auto; }
+  .hero__tagline { max-width: none; }
+  .slide { flex-basis: 90vw; }
+  .gallery__track { gap: var(--s5); }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .wrap, .nav__inner { width: calc(100% - 2 * var(--s4)); }
+  .hero__cta { flex-direction: column; align-items: stretch; }
+  .hero__cta .plate, .hero__cta .ghost-btn { justify-content: center; width: 100%; }
+  .stat { flex-direction: column; gap: var(--s2); }
+  .foot__rule { justify-content: center; text-align: center; }
+}
+
+/* ============================================================
+   REDUCED MOTION - fewer and gentler, not zero.
+   Opacity stays (it aids comprehension); movement goes.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+
+  /* keep the fades, drop the travel */
+  [data-reveal], [data-hero] {
+    transform: none !important;
+    transition: opacity 200ms linear !important;
+  }
+  .marquee__track { animation: none !important; }
+  .hero__bg { transform: none !important; }
+  .gallery__track { transition: none !important; }
+}
+
+/* ============================================================
+   SYSTEM REQUIREMENTS
+   Two tiers side by side, the way a store page does it.
+   ============================================================ */
+.specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--s5);
+}
+
+.spec {
+  background: rgba(23, 23, 25, .55);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  padding: var(--s5);
+}
+.spec--rec { border-color: rgba(224, 184, 102, .38); }
+
+.spec__tier {
+  margin: 0 0 var(--s4);
+  padding-bottom: var(--s3);
+  border-bottom: 2px solid var(--hairline);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+.spec--rec .spec__tier { color: var(--gold); border-bottom-color: rgba(224, 184, 102, .3); }
+
+.spec__list { margin: 0; display: grid; gap: var(--s3); }
+.spec__list > div { display: grid; gap: 2px; }
+.spec__list dt {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+.spec__list dd {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: var(--cream-dim);
+}
+.spec--rec .spec__list dd { color: var(--cream); }
+
+/* the library card's tick list sits tighter than the multiplayer one */
+.ticks--card { margin-top: 0; }
+.ticks--card li { font-size: 14.5px; }
+
+/* the step headings are small for a hollow face, so give them room */
+/* Small headings in a hollow face go to mush, so they get the card title's
+   size rather than a smaller one. */
+.step__t { font-size: 27px; letter-spacing: .01em; line-height: 1.15; }
+
+
+/* ============================================================
+   REQUIREMENTS BLOCK
+   ============================================================ */
+.reqs {
+  margin-top: var(--s7);
+  padding-top: var(--s7);
+  border-top: 2px solid var(--hairline);
+}
+.reqs__title { text-align: center; }
+.reqs .specs { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.reqs .dl__small { text-align: center; margin-top: var(--s5); }
+
+/* The download panel holds the requirements too now, so it is one column with
+   the two spec tiers side by side underneath. */
+.section--download .dl { display: block; }
+.section--download .dl__left { max-width: 62ch; }
+
+/* ============================================================
+   DEPTH - the page as a lit room, not a flat sheet
+
+   Everything below the hero used to sit on one even charcoal. The game is
+   drawn on warm paper under a lamp, so the site is too: pools of gold and
+   coral light down the page, grain over the top, and the burst the game
+   pops around a hovered button used as the site's one flourish.
+   ============================================================ */
+
+/* Alternating pools of light, so the eye moves down the page instead of
+   scrolling past one even wall of dark. */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 520px at 12% 0%, rgba(224,184,102,.10), transparent 62%),
+    radial-gradient(900px 460px at 92% 88%, rgba(216,111,103,.09), transparent 62%);
+}
+.section:nth-of-type(even)::before {
+  background:
+    radial-gradient(1000px 500px at 88% 4%, rgba(216,111,103,.10), transparent 62%),
+    radial-gradient(950px 460px at 8% 92%, rgba(130,155,135,.09), transparent 62%);
+}
+.section > * { position: relative; z-index: 1; }
+
+/* An inked seam where a panel meets the ground, drawn rather than ruled. */
+.section--panel { border-block: 0; }
+.section--panel::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -1px; bottom: -1px;
+  z-index: 2;
+  pointer-events: none;
+  background-position: 0 0, 0 100%;
+  background-size: 240px 9px, 240px 9px;
+  background-repeat: repeat-x, repeat-x;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='9' viewBox='0 0 240 9' preserveAspectRatio='none'%3E%3Cpath d='M0 4.4c18-2.2 30 1.9 48 .6s30-3.4 46-2.1 26 3.9 44 3.1 34-3.6 52-2.4 32 2.8 50 1.5' fill='none' stroke='%231A181B' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E"),
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='9' viewBox='0 0 240 9' preserveAspectRatio='none'%3E%3Cpath d='M0 4.6c20 2.1 28-1.8 46-.7s32 3.5 48 2.2 24-4 42-3 36 3.7 54 2.5 30-2.9 50-1.6' fill='none' stroke='%231A181B' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+.section--panel::before { box-shadow: inset 0 60px 90px -60px rgba(0,0,0,.55); }
+
+/* Grain and a soft vignette over the whole page. Both are quiet alone;
+   together they stop the dark reading as a browser default. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+  background:
+    radial-gradient(135% 100% at 50% 42%, transparent 52%, rgba(0,0,0,.5) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E");
+}
+
+/* ---- The flourish -------------------------------------------------------
+   assets/img/sparkle.png is lifted straight out of FV_UI_Button_Hovered.png:
+   the three gold wedges the game pops around a button you are pointing at.
+   It marks a section heading and appears nowhere else. */
+.sec-head { position: relative; }
+.sec-head::before {
+  content: "";
+  display: block;
+  width: 34px; height: 38px;
+  margin: 0 auto var(--s4);
+  background: url("../assets/img/sparkle.png") center / contain no-repeat;
+  opacity: .9;
+}
+
+/* ---- Cards, lit from above ---------------------------------------------
+   A drawn card catches the light along its top edge. */
+.card, .stat, .duo__card, .lib-card, .dl, .spec {
+  background-image: linear-gradient(180deg, rgba(243,238,231,.055), rgba(0,0,0,.14));
+}
+.card  { box-shadow: 5px 6px 0 rgba(0,0,0,.45), inset 0 1px 0 rgba(243,238,231,.10); }
+.stat  { box-shadow: 5px 6px 0 rgba(0,0,0,.42), inset 0 1px 0 rgba(243,238,231,.10); }
+.duo__card { box-shadow: 6px 7px 0 rgba(0,0,0,.45), inset 0 1px 0 rgba(243,238,231,.10); }
+.dl    { box-shadow: 8px 10px 0 rgba(0,0,0,.46), inset 0 1px 0 rgba(243,238,231,.10); }
+
+/* Each feature card pulls its own glyph colour into the corner behind it, so
+   six cards read as six things rather than one box repeated. */
+.card { position: relative; overflow: hidden; }
+.card::before {
+  content: "";
+  position: absolute;
+  left: -40px; top: -50px;
+  width: 190px; height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(224,184,102,.16), transparent);
+  pointer-events: none;
+}
+.card:nth-child(2)::before, .card:nth-child(5)::before {
+  background: radial-gradient(closest-side, rgba(216,111,103,.16), transparent);
+}
+.card:nth-child(3)::before, .card:nth-child(6)::before {
+  background: radial-gradient(closest-side, rgba(130,155,135,.16), transparent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    box-shadow: 5px 6px 0 rgba(0,0,0,.45),
+                inset 0 1px 0 rgba(243,238,231,.14),
+                0 0 40px rgba(224,184,102,.10);
+  }
+}
+
+/* ---- The sticker --------------------------------------------------------
+   The stats column ran out well before the copy beside it did. The game's
+   own line goes in the gap, pinned at an angle like the cards above it. */
+.sticker {
+  position: relative;
+  background: var(--coral);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s6);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.18);
+  transform: rotate(1.4deg);
+}
+.sticker::after {
+  content: "";
+  position: absolute;
+  right: -14px; top: -18px;
+  width: 40px; height: 45px;
+  background: url("../assets/img/sparkle.png") center / contain no-repeat;
+}
+.sticker__line {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.05;
+  -webkit-text-stroke: .6px var(--ink);
+}
+.sticker__foot {
+  margin: var(--s3) 0 0;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .74;
+}
+
+/* ---- Screens ------------------------------------------------------------
+   The strip used to be guillotined at the window edge. Now the slides either
+   side dissolve into the ground and the one in focus is lit. */
+.gallery__viewport {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+}
+.slide.is-current img {
+  box-shadow: 8px 10px 0 rgba(0,0,0,.42), 0 0 90px rgba(224,184,102,.14);
+}
+
+/* ---- Marquee ------------------------------------------------------------ */
+.marquee {
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.16),
+              inset 0 -2px 0 rgba(0,0,0,.22),
+              0 0 70px rgba(216,111,103,.22);
+}
+
+/* ---- Download: the facts panel that fills the right of the card --------- */
+.section--download .dl {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+.section--download .dl__left { max-width: none; }
+
+.receipt {
+  border-left: 2px solid var(--hairline);
+  padding-left: clamp(20px, 3vw, 40px);
+}
+.receipt h3 {
+  margin: 0 0 var(--s5);
+  font-size: 13px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 800;
+}
+.receipt dl { margin: 0; display: grid; gap: var(--s3); }
+.receipt dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding-bottom: var(--s3);
+  border-bottom: 1px dashed var(--hairline);
+}
+.receipt dt { font-size: 13.5px; color: var(--cream-faint); }
+.receipt dd {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--cream);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Footer ------------------------------------------------------------- */
+.foot { position: relative; }
+.foot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(700px 260px at 50% 0%, rgba(224,184,102,.07), transparent 70%);
+}
+.foot > * { position: relative; }
+.foot__weed { animation: weed-bob 5.5s ease-in-out infinite; }
+@keyframes weed-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-5px) rotate(2deg); }
+}
+
+@media (max-width: 980px) {
+  .section--download .dl { grid-template-columns: 1fr; }
+  .receipt {
+    border-left: 0;
+    border-top: 2px solid var(--hairline);
+    padding-left: 0;
+    padding-top: var(--s6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foot__weed { animation: none; }
+}
+
+/* ============================================================
+   DOWNLOAD - the payoff, not another grey card
+
+   This is the one thing the whole page is asking for, and it was the
+   flattest block on it. It now closes the loop back to the hero: the same
+   room, dimmed, with the lamp turned up on the panel in front of it.
+   ============================================================ */
+.section--download {
+  overflow: hidden;
+  background: none;
+}
+.section--download::before {
+  background:
+    linear-gradient(180deg, var(--bg) 0%, rgba(23,23,25,.90) 20%, rgba(23,23,25,.92) 72%, var(--bg-deep) 100%),
+    radial-gradient(1100px 560px at 50% 34%, rgba(224,184,102,.26), transparent 68%),
+    radial-gradient(115% 95% at 50% 42%, transparent 26%, rgba(16,16,17,.88) 100%),
+    url("../assets/img/room.jpg") center 38% / cover no-repeat;
+}
+
+/* The panel is lit and gold-rimmed, so it reads as the thing to press. */
+.section--download .dl {
+  position: relative;
+  border-color: rgba(224,184,102,.42);
+  background-color: rgba(30,28,32,.9);
+  background-image: linear-gradient(180deg, rgba(224,184,102,.10), rgba(0,0,0,.28));
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 10px 12px 0 rgba(0,0,0,.5),
+              inset 0 1px 0 rgba(243,238,231,.14),
+              0 0 100px rgba(224,184,102,.16);
+}
+.section--download .dl::after {
+  content: "";
+  position: absolute;
+  right: -22px; top: -26px;
+  width: 58px; height: 66px;
+  background: url("../assets/img/sparkle.png") center / contain no-repeat;
+  transform: scaleX(-1) rotate(-24deg);
+}
+
+.section--download .h2 { margin-bottom: var(--s4); }
+.dl__cta { margin: var(--s7) 0 var(--s5); }
+
+/* One button, given the room to be the loudest thing in the section. */
+.dl__cta .plate--lg { --plate-h: 92px; }
+.dl__cta .plate--lg .plate__label { font-size: 32px; }
+.dl__cta .plate--lg .plate__icon { width: 30px; height: 30px; }
+
+/* The facts read as the label printed on the box: sunk into the panel,
+   set in the same tabular figures as the game's own score column. */
+.receipt {
+  border-left: 0;
+  padding: var(--s6);
+  border-radius: var(--radius);
+  background: rgba(0,0,0,.3);
+  box-shadow: inset 0 0 0 1px rgba(243,238,231,.09),
+              inset 0 2px 14px rgba(0,0,0,.45);
+}
+.receipt__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+}
+.receipt__head img {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  border: 1px solid rgba(243,238,231,.14);
+}
+.receipt h3 { margin: 0; }
+
+/* Requirements sit under the panel and stay quiet, so the button wins. */
+.reqs { opacity: .92; }
+.section--download .reqs { margin-top: clamp(48px, 6vw, 80px); }
+
+@media (max-width: 980px) {
+  .section--download .dl::after { right: -16px; top: -22px; }
+  .dl__cta .plate--lg { --plate-h: 78px; }
+  .dl__cta .plate--lg .plate__label { font-size: 26px; }
+}

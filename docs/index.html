@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Volume - the karaoke game that plays your own music</title>
+<meta name="description" content="Full Volume is a PC karaoke game and a spiritual successor to LIPS. Point it at your Clone Hero or Rock Band library and sing anything in it - on your own, or online with your mates and live voice chat.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="assets/img/app-icon.png">
+<meta property="og:title" content="Full Volume">
+<meta property="og:description" content="The karaoke game that plays your own music library.">
+<meta property="og:image" content="assets/img/app-icon.png">
+<meta property="og:type" content="website">
+<link rel="preload" href="assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#top" aria-label="Full Volume, home">
+      <img class="nav__mark" src="assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULL VOLUME</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about">The game</a>
+      <a href="#features">Features</a>
+      <a href="#shots">Screens</a>
+      <a href="#together">Multiplayer</a>
+      <a href="#library">Your library</a>
+      <a href="Marketplace/">Marketplace</a>
+    </nav>
+
+    <button class="sfx-toggle" id="sfxToggle" type="button"
+            aria-pressed="false" title="Play the game's own button sounds">
+      <svg class="sfx-toggle__on" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="sfx-toggle__off" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sfx-toggle__text">SFX</span>
+    </button>
+
+    <a class="plate plate--sm nav__cta" href="#download">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+
+    <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    <a href="#about">The game</a>
+    <a href="#features">Features</a>
+    <a href="#shots">Screens</a>
+    <a href="#together">Multiplayer</a>
+    <a href="#library">Your library</a>
+    <a href="Marketplace/">Marketplace</a>
+    <a class="plate plate--sm plate--block nav__mobile-cta" href="#download">
+      <img class="plate__icon" src="assets/img/icons/play.png" alt="" width="512" height="512">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero__bg" id="heroBg">
+    <img class="hero__still" src="assets/img/room.jpg" alt="" width="1920" height="1080">
+    <video class="hero__video" id="heroVideo" poster="assets/img/room.jpg"
+           muted loop playsinline preload="none" aria-hidden="true"></video>
+  </div>
+  <div class="hero__scrim"></div>
+
+  <div class="hero__inner wrap">
+    <p class="eyebrow hero__eyebrow" data-hero="1">
+      <span class="dot" aria-hidden="true"></span>
+      Windows &middot; v0.9.0 beta &middot; free
+    </p>
+
+    <h1 class="hero__logo" data-hero="2">
+      <img src="assets/img/logo.png" alt="Full Volume" width="1080" height="615">
+    </h1>
+
+    <p class="hero__tagline" data-hero="3">The karaoke game that plays<br><em>your own</em> music library.</p>
+
+    <p class="hero__blurb" data-hero="4">
+      A spiritual successor to <span class="nowrap">Xbox 360 <em>LIPS</em></span>, built for PC.
+      Point it at the songs you already have and sing any of them. On your own, or in a
+      room online with your mates.
+    </p>
+
+    <div class="hero__cta" data-hero="5">
+      <a class="plate plate--lg" href="#download">
+        <img class="plate__icon" src="assets/img/icons/play.png" alt="" width="512" height="512">
+        <span class="plate__label">DOWNLOAD</span>
+      </a>
+      <a class="plate plate--md" href="#shots">
+        <img class="plate__icon" src="assets/img/icons/multiplayer.png" alt="" width="512" height="512">
+        <span class="plate__label">SEE IT RUNNING</span>
+      </a>
+    </div>
+
+    <p class="hero__note" data-hero="6">No storefront. No song packs. No subscription.</p>
+  </div>
+</section>
+
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track" id="marqueeTrack">
+    <span class="marquee__group">
+      <b>TURN IT UP</b><i>&#9733;</i><b>FIND YOUR SOUND</b><i>&#9733;</i><b>SING BADLY, LOUDLY</b><i>&#9733;</i><b>5,000+ SONGS ALREADY ON YOUR DISK</b><i>&#9733;</i>
+    </span>
+    <span class="marquee__group" aria-hidden="true">
+      <b>TURN IT UP</b><i>&#9733;</i><b>FIND YOUR SOUND</b><i>&#9733;</i><b>SING BADLY, LOUDLY</b><i>&#9733;</i><b>5,000+ SONGS ALREADY ON YOUR DISK</b><i>&#9733;</i>
+    </span>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="wrap about">
+    <div class="about__copy" data-reveal>
+      <p class="eyebrow">What it is</p>
+      <h2 class="h2">A karaoke machine<br>for the songs you<br><span class="ink-coral">already own.</span></h2>
+      <p class="lead">
+        Every karaoke game wants to sell you the music. Full Volume hasn't got any to sell.
+        It reads the songs already sitting on your drive and turns them into a proper
+        karaoke night: lyrics, pitch, scoring, stars, the lot.
+      </p>
+      <p>
+        And it listens properly. Hold a note and you watch the score climb; slide off it
+        and you know about it straight away. Sing the whole thing an octave down if that's
+        where your voice lives. It still counts.
+      </p>
+      <p>
+        It also looks like somewhere you'd actually want to sing. Every last bit of it is
+        hand drawn. And if you don't fancy the room, drop in a picture or a video of your
+        own and that's your stage instead.
+      </p>
+    </div>
+
+    <ul class="stats" data-reveal>
+      <li class="stat">
+        <span class="stat__num" data-count="5000" data-count-suffix="+">0</span>
+        <span class="stat__label">songs ready to sing on one ordinary drive, found the moment you point at the folder</span>
+      </li>
+      <li class="stat">
+        <span class="stat__num">$0</span>
+        <span class="stat__label">to spend on any of them. There is no shop to put one in</span>
+      </li>
+      <li class="sticker">
+        <p class="sticker__line">Sing badly,</p>
+        <p class="sticker__line">loudly.</p>
+        <p class="sticker__foot">The only rule</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="section section--panel" id="features">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">Features</p>
+      <h2 class="h2">Everything's in the box.</h2>
+      <p class="lead lead--center">The whole game, one installer, nothing phoning home.</p>
+    </header>
+
+    <div class="cards">
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="pitch" aria-hidden="true"></div>
+        <h3 class="card__title">It actually hears you</h3>
+        <p>Land the note and it knows. Nail it dead centre and it <em>really</em> knows. Sing
+           high, sing low, sing it an octave down - if it's the right note, you get the
+           points.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="folder" aria-hidden="true"></div>
+        <h3 class="card__title">Your library, not a store</h3>
+        <p>Point it at your song folders and it takes it from there. Only songs somebody
+           actually sings on make the list, so you never pick a track and find there's
+           nothing to sing.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="list" aria-hidden="true"></div>
+        <h3 class="card__title">Line up a set list</h3>
+        <p>Queue songs up while somebody else is still singing, so the night runs itself
+           instead of stopping dead between every track.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="wifi" aria-hidden="true"></div>
+        <h3 class="card__title">Online, with voices</h3>
+        <p>Name a room, send it to your mates, and sing together from wherever you are.
+           Chat freely between songs, and hold your key mid-song when you want to be
+           heard over it.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="picture" aria-hidden="true"></div>
+        <h3 class="card__title">Make it your room</h3>
+        <p>Drop a picture or a video into a folder and it turns up as a backdrop you can
+           pick. Give the menus one and your songs another.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="tune" aria-hidden="true"></div>
+        <h3 class="card__title">Tuned to your gear</h3>
+        <p>One button and it sorts out your audio delay on its own. Or tap along for a few
+           bars and let it work you out. Either way, everything lines up.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCREENSHOTS ================= -->
+<section class="section" id="shots">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">Screens</p>
+      <h2 class="h2">Have a look.</h2>
+      <p class="lead lead--center">Straight out of the game. Nothing here is a mock-up.</p>
+    </header>
+  </div>
+
+  <div class="gallery" data-reveal>
+    <div class="gallery__viewport" id="galleryViewport">
+      <ul class="gallery__track" id="galleryTrack">
+        <li class="slide">
+          <img src="assets/img/shots/shot-01.png" alt="The title screen. The logo over the player's own backdrop, with PRESS START along the bottom." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Press start.</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-02.png" alt="The WHO IS SINGING panel, listing the JURMR profile, a Guest option and New Singer." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Sign in, play as a guest, or make a profile</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-03.png" alt="The main menu: Play, Multiplayer, Settings and Quit on gold plates, with the signed-in singer along the bottom." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Play, Multiplayer, Settings, Quit</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-04.png" alt="The song browser: album art down the left, an A to Z rail, a detail panel with cover and metadata, and Easy and Sing plates." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Your library, with your best score on every row</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-14.png" alt="The song browser with the queue overlay open, showing two songs lined up and the song count at the foot of the list." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Queue up a set list before anyone argues</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-10.png" alt="The song intro card: Kryptonite by 3 Doors Down, marked VOCALS and EASY, over the backdrop." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">The intro card, while the chart loads</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-11.png" alt="Gameplay: the vocal track across the screen, cover art and progress top left, score and five stars top right, GET READY in the header." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">The vocal track, waiting for the first phrase</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-12.png" alt="The pause menu: Resume, Settings, Start Over, Skip Song and a coral End Song plate." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Pause, with the settings you can change mid-song</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-13.png" alt="The results screen: The Kill by 30 Seconds to Mars graded BRILLIANT, five stars, 118,242 points, 42 of 42 phrases landed and a FULL COMBO banner." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Stars, streak, and how close to perfect you got</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-05.png" alt="The Sing Together screen showing the open rooms list, five JURMR Karaoke rooms each marked OPEN with a Join plate." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Public rooms, listed and joinable</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-06.png" alt="The Host a Room form: room name, optional room code, how many singers, and whether it appears in the open rooms list." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Host one: name it, lock it, cap it</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-07.png" alt="The Join by Name form, asking for a room name and a code only if the room is locked." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">Or join with a name and a code</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-08.png" alt="The room lobby: who is in the room, a TALKING voice meter, a chat panel, and Ready and Choose A Song plates." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">The lobby, with live voice and chat</p>
+        </li>
+        <li class="slide">
+          <img src="assets/img/shots/shot-09.png" alt="The same lobby with Kryptonite queued, marked IN YOUR LIBRARY, and the status line waiting for one more singer to go ready." loading="lazy" width="1920" height="1080">
+          <p class="slide__cap">It checks everyone actually has the song</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="gallery__ui wrap">
+      <button class="plate plate--icon" id="galleryPrev" type="button" aria-label="Previous screenshot">
+        <img class="plate__icon" src="assets/img/icons/back.png" alt="" width="512" height="512">
+      </button>
+      <div class="gallery__dots" id="galleryDots" role="tablist" aria-label="Choose a screenshot"></div>
+      <button class="plate plate--icon is-flipped" id="galleryNext" type="button" aria-label="Next screenshot">
+        <img class="plate__icon" src="assets/img/icons/back.png" alt="" width="512" height="512">
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MULTIPLAYER ================= -->
+<section class="section section--panel" id="together">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">Multiplayer</p>
+      <h2 class="h2">Singing alone is<br>only half of it.</h2>
+      <p class="lead lead--center">Host a room, send it round, and sing together from wherever you all are.</p>
+    </header>
+
+    <div class="duo">
+      <article class="duo__card" data-reveal>
+        <span class="duo__tag">The room</span>
+        <h3 class="h3">Name it, lock it,<br>send it round.</h3>
+        <p>
+          Host it from inside the game. Put a code on it if you'd rather keep it to
+          yourselves, or leave it public and let people wander in.
+        </p>
+        <ul class="ticks">
+          <li>Public rooms listed in the game, joinable in one click</li>
+          <li>Or a name and a code, for a room only your mates can find</li>
+          <li>Say how many singers it takes, and it holds the door at that</li>
+          <li>Anyone can queue a song, and it says up front who hasn't got it</li>
+        </ul>
+      </article>
+
+      <article class="duo__card" data-reveal>
+        <span class="duo__tag duo__tag--alt">The voices</span>
+        <h3 class="h3">You can actually<br>hear each other.</h3>
+        <p>
+          Voice chat is part of the game, not something you bolt on beside it. The gap
+          between songs ends up being half the fun.
+        </p>
+        <ul class="ticks">
+          <li>Open mics in the lobby, so nobody's sat there in silence</li>
+          <li>Push to talk once a song starts, so nobody's singing comes back at you over the music</li>
+          <li>Everyone stays perfectly in time, wherever they are</li>
+          <li>Everybody's score on screen at once, which is rather the point</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIBRARY ================= -->
+<section class="section" id="library">
+  <div class="wrap library">
+    <div class="library__copy" data-reveal>
+      <p class="eyebrow">Your library</p>
+      <h2 class="h2">You probably already<br>own the songs.</h2>
+      <p class="lead">
+        If you've already got a Clone Hero song folder, you've already got a set list.
+        Rock Band packages and .sng archives count too. Nothing to convert, nothing to
+        import, nothing to buy.
+      </p>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step__n">1</span>
+          <div>
+            <h3 class="step__t">Point it at your songs</h3>
+            <p>Settings, then Library, then Add Folder. Add as many as you've got, on as many drives as you like.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__n">2</span>
+          <div>
+            <h3 class="step__t">Put the kettle on</h3>
+            <p>It reads through them once, tells you how it's getting on, and then remembers. You'll not wait on it again.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__n">3</span>
+          <div>
+            <h3 class="step__t">Sing</h3>
+            <p>Search it, sort it, pick something, and go. It opens on the list, not on
+               a loading bar.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <aside class="lib-card" data-reveal>
+      <div class="lib-card__head">
+        <img src="assets/img/icons/multiplayer.png" alt="" width="512" height="512">
+        <h3>Works with what you've got</h3>
+      </div>
+      <ul class="ticks ticks--card">
+        <li>Clone Hero song folders, exactly as they sit on your drive</li>
+        <li>.sng archives, read straight out of the file</li>
+        <li>Rock Band _rb3con packages, no unpacking first</li>
+        <li>Album art, so the list looks like your record shelf</li>
+        <li>Your best score on every row, so you know what to beat</li>
+        <li>Search and sort by title, artist, album or year</li>
+      </ul>
+      <p class="lib-card__foot">
+        Songs nobody sings on are quietly left out. You'll never pick a track and find there's nothing to sing.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= DOWNLOAD ================= -->
+<section class="section section--download" id="download">
+  <div class="wrap">
+    <div class="dl" data-reveal>
+      <div class="dl__left">
+        <p class="eyebrow">Download</p>
+        <h2 class="h2">Go on then.</h2>
+        <p class="lead">
+          One installer, everything in it. No account, no launcher, no admin rights.
+          Hand it to your mates and it just works.
+        </p>
+
+        <div class="dl__cta">
+          <a class="plate plate--lg" href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe">
+            <img class="plate__icon" src="assets/img/icons/play.png" alt="" width="512" height="512">
+            <span class="plate__label">GET IT</span>
+          </a>
+        </div>
+
+        <p class="dl__note">
+          Uninstall it whenever you like. Your profiles, scores, backdrops and song
+          folders stay exactly where they were.
+        </p>
+      </div>
+
+      <aside class="receipt">
+        <div class="receipt__head">
+          <img src="assets/img/app-icon.png" alt="" width="512" height="512">
+          <h3>What you are downloading</h3>
+        </div>
+        <dl>
+          <div><dt>File</dt><dd>FullVolumeSetup.exe</dd></div>
+          <div><dt>Size</dt><dd>141 MB</dd></div>
+          <div><dt>Version</dt><dd>0.9.0 beta</dd></div>
+          <div><dt>Runs on</dt><dd>Windows 10 and 11, 64&#8209;bit</dd></div>
+          <div><dt>Account</dt><dd>Local</dd></div>
+          <div><dt>Songs included</dt><dd>None. You bring those</dd></div>
+        </dl>
+      </aside>
+
+    </div>
+
+    <div class="reqs" data-reveal>
+      <h3 class="h3 h3--tight reqs__title">System requirements</h3>
+        <div class="specs">
+          <section class="spec">
+            <h4 class="spec__tier">Minimum</h4>
+            <dl class="spec__list">
+              <div><dt>OS</dt><dd>Windows 10, 64-bit</dd></div>
+              <div><dt>Processor</dt><dd>Any dual core from the last ten years</dd></div>
+              <div><dt>Memory</dt><dd>4 GB RAM</dd></div>
+              <div><dt>Graphics</dt><dd>Anything that does DirectX 11</dd></div>
+              <div><dt>Storage</dt><dd>250 MB available space</dd></div>
+              <div><dt>Sound</dt><dd>A microphone. Any microphone.</dd></div>
+            </dl>
+          </section>
+
+          <section class="spec spec--rec">
+            <h4 class="spec__tier">Recommended</h4>
+            <dl class="spec__list">
+              <div><dt>OS</dt><dd>Windows 11, 64-bit</dd></div>
+              <div><dt>Processor</dt><dd>Any quad core</dd></div>
+              <div><dt>Memory</dt><dd>8 GB RAM</dd></div>
+              <div><dt>Graphics</dt><dd>DirectX 12 or Vulkan</dd></div>
+              <div><dt>Storage</dt><dd>250 MB, plus room for your songs</dd></div>
+              <div><dt>Sound</dt><dd>A headset or USB microphone</dd></div>
+            </dl>
+          </section>
+        </div>
+        <p class="dl__small">You bring the songs. A Clone Hero or Rock Band library is all it asks for.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <div class="foot__brand">
+      <img class="foot__mark" src="assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <div>
+        <p class="foot__name">FULL VOLUME</p>
+        <p class="foot__dom">fullvolumethegame.xyz</p>
+      </div>
+    </div>
+
+    <nav class="foot__links" aria-label="Footer">
+      <a href="#about">The game</a>
+      <a href="#features">Features</a>
+      <a href="#shots">Screens</a>
+      <a href="#together">Multiplayer</a>
+      <a href="#library">Your library</a>
+      <a href="Marketplace/">Marketplace</a>
+      <a href="#download">Download</a>
+    </nav>
+
+    <div class="foot__by">
+      <img class="foot__weed" src="assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
+      <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
+    </div>
+  </div>
+
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. Full Volume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
+    <p>v0.9.0 &middot; beta</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

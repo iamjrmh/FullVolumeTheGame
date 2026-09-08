@@ -1,0 +1,497 @@
+/* ============================================================
+   FULL VOLUME - Marketplace
+   Loaded after style.css. Tokens, plates, nav and footer all come
+   from there; this file is only the browse-and-download page.
+
+   The list is a grid, not a table, for one reason: a row has to be
+   able to open a detail panel underneath itself without a colspan
+   hack, and it has to turn into a card on a phone without losing
+   the header's column meanings.
+   ============================================================ */
+
+/* ---- Page head ---------------------------------------------------------- */
+.mkt-hero {
+  position: relative;
+  padding: clamp(48px, 7vw, 92px) 0 clamp(28px, 4vw, 44px);
+  background:
+    radial-gradient(900px 420px at 18% -10%, rgba(224,184,102,.16), transparent 66%),
+    radial-gradient(760px 380px at 88% 0%, rgba(216,111,103,.12), transparent 64%);
+}
+/* Left edge shared with the table below it - .wrap centres itself, so the
+   narrower measure has to be a child of it rather than the same element. */
+.mkt-hero__inner { max-width: 780px; }
+.mkt-hero__title { margin-bottom: var(--s4); }
+.mkt-hero__lead { max-width: 58ch; margin-bottom: var(--s6); }
+
+/* Three figures, in the game's tabular score figures so they do not twitch. */
+.mkt-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s6);
+}
+.mkt-stats b {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1;
+  color: var(--gold);
+  -webkit-text-stroke: .7px currentColor;
+  font-variant-numeric: tabular-nums;
+}
+.mkt-stats span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+/* Said plainly when the library is not actually being served yet. */
+.mkt-notice {
+  margin: var(--s6) 0 0;
+  padding: var(--s3) var(--s4);
+  border-left: 3px solid var(--coral);
+  background: rgba(216,111,103,.10);
+  border-radius: 0 8px 8px 0;
+  font-size: 15px;
+  color: var(--cream-dim);
+}
+
+/* ---- The browser -------------------------------------------------------- */
+.mkt { padding: 0 0 clamp(64px, 9vw, 120px); }
+
+.mkt-bar {
+  position: sticky;
+  top: 72px;                      /* clears the nav bar exactly */
+  z-index: var(--z-sticky);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--s4);
+  padding: var(--s4);
+  margin-bottom: var(--s5);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: rgba(23,23,25,.92);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 6px 7px 0 rgba(0,0,0,.42), inset 0 1px 0 rgba(243,238,231,.08);
+}
+
+.mkt-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  flex: 1 1 320px;
+  min-width: 0;
+  height: 48px;
+  padding: 0 var(--s4);
+  border-radius: 10px;
+  background: rgba(0,0,0,.34);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  color: var(--cream-faint);
+  transition: box-shadow var(--t-hover) var(--ease-out);
+}
+.mkt-search:focus-within { box-shadow: inset 0 0 0 2px rgba(224,184,102,.75); }
+.mkt-search svg { flex: none; }
+.mkt-search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: none;
+  color: var(--cream);
+  font: inherit;
+  font-size: 16px;
+  outline: none;
+}
+.mkt-search input::placeholder { color: var(--cream-faint); }
+.mkt-search input::-webkit-search-cancel-button { display: none; }
+.mkt-search__clear {
+  flex: none;
+  width: 26px; height: 26px;
+  border: 0; border-radius: 50%;
+  background: rgba(243,238,231,.12);
+  color: var(--cream);
+  font-size: 18px; line-height: 1;
+  cursor: pointer;
+  transition: background var(--t-hover) var(--ease-out);
+}
+.mkt-search__clear:hover { background: var(--coral); color: var(--ink); }
+
+.mkt-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+}
+.mkt-field { display: flex; flex-direction: column; gap: 6px; }
+.mkt-field > span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  padding-left: 2px;
+}
+.mkt-field select {
+  height: 40px;
+  min-width: 132px;
+  padding: 0 34px 0 var(--s3);
+  border: 0;
+  border-radius: 9px;
+  background: rgba(0,0,0,.34);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  color: var(--cream);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238A858E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: box-shadow var(--t-hover) var(--ease-out);
+}
+.mkt-field select:hover { box-shadow: inset 0 0 0 1px var(--hairline-2); }
+.mkt-field select option { background: var(--panel); color: var(--cream); }
+
+.mkt-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s4);
+  margin-bottom: var(--s3);
+  /* The right end has to clear the flourish on the panel's corner below it. */
+  padding: 0 46px 0 var(--s2);
+}
+.mkt-count {
+  margin: 0;
+  font-size: 14px;
+  color: var(--cream-faint);
+  font-variant-numeric: tabular-nums;
+}
+.mkt-count b { color: var(--gold); font-weight: 700; }
+.mkt-reset {
+  border: 0; background: none;
+  color: var(--coral);
+  font: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+}
+.mkt-reset:hover { border-bottom-color: currentColor; }
+
+/* ---- Rows --------------------------------------------------------------- */
+.mkt-table {
+  position: relative;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(243,238,231,.045), rgba(0,0,0,.16));
+  box-shadow: 8px 10px 0 rgba(0,0,0,.44), inset 0 1px 0 rgba(243,238,231,.08);
+}
+/* Radius is kept by the children rather than by clipping the panel, so the
+   corner flourish can sit outside the edge the way it does elsewhere. */
+.mkt-head { border-radius: 12px 12px 0 0; }
+.mkt-list { overflow: hidden; border-radius: 0 0 12px 12px; }
+
+/* Same gold wedges the game pops around a hovered button, and the same
+   top-right corner they sit in on the download panel. */
+.mkt-table::after {
+  content: "";
+  position: absolute;
+  right: -30px; top: -40px;
+  width: 46px; height: 52px;
+  background: url("../assets/img/sparkle.png") center / contain no-repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mkt-head,
+.song__row {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 148px 118px 72px 96px 116px;
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s3) var(--s5);
+}
+.mkt-head {
+  padding-block: var(--s3);
+  background: rgba(0,0,0,.28);
+  border-bottom: 1px solid var(--hairline);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+.song { border-bottom: 1px solid rgba(243,238,231,.07); }
+.song:last-child { border-bottom: 0; }
+
+.song__row {
+  width: 100%;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--t-hover) var(--ease-out);
+}
+.song__row:hover { background: rgba(243,238,231,.05); }
+.song.is-open .song__row { background: rgba(224,184,102,.08); }
+
+/* Cover, or a drawn tile with the initial when a chart brought no art. */
+.song__art {
+  width: 46px; height: 46px;
+  border-radius: 8px;
+  border: 1px solid rgba(243,238,231,.14);
+  object-fit: cover;
+  background: var(--panel);
+}
+.song__tile {
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--ink);
+  -webkit-text-stroke: .8px var(--ink);
+  user-select: none;
+}
+.song__tile--gold  { background: var(--gold); }
+.song__tile--coral { background: var(--coral); }
+.song__tile--sage  { background: var(--sage); }
+
+.song__title {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.song__artist {
+  display: block;
+  font-size: 14px;
+  color: var(--cream-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.song__charter,
+.song__len,
+.song__genre {
+  font-size: 14px;
+  color: var(--cream-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.song__len { font-variant-numeric: tabular-nums; }
+
+/* The chips carry the same facts as the columns, for the layout where the
+   columns are gone. Built for every row, shown only when they are needed. */
+.song__chips { display: none; }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tag--parts { background: rgba(130,155,135,.18); color: var(--sage); }
+.tag--harm  { background: rgba(224,184,102,.18); color: var(--gold); }
+.tag--fmt   { background: rgba(243,238,231,.10); color: var(--cream-dim); }
+.tag--ext   { background: rgba(216,111,103,.18); color: var(--coral); }
+
+.song__get { justify-self: end; }
+.song__get .plate { --plate-h: 40px; padding: 0 18px; }
+.song__get .plate__label { font-size: 15px; }
+
+/* ---- Detail drawer ------------------------------------------------------ */
+.song__detail {
+  padding: 0 var(--s5) var(--s5) calc(var(--s5) + 54px + var(--s4));
+  background: rgba(0,0,0,.22);
+  border-top: 1px solid var(--hairline);
+}
+.song__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--s2) var(--s6);
+  margin: var(--s4) 0 0;
+}
+.song__facts > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding: 7px 0;
+  border-bottom: 1px dotted rgba(243,238,231,.16);
+}
+.song__facts dt { font-size: 13px; color: var(--cream-faint); }
+.song__facts dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cream);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.song__hash {
+  margin: var(--s3) 0 0;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+  color: var(--cream-faint);
+  word-break: break-all;
+}
+
+.song__detail-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+  flex-wrap: wrap;
+  margin-top: var(--s5);
+}
+.song__link {
+  font-size: 14px;
+  color: var(--gold);
+  border-bottom: 1px solid rgba(224,184,102,.4);
+}
+.song__link:hover { border-bottom-color: currentColor; }
+
+.mkt-empty {
+  margin: 0;
+  padding: var(--s8) var(--s5);
+  text-align: center;
+  color: var(--cream-faint);
+}
+
+.mkt-more {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--s6);
+}
+
+/* Skeleton rows while the index is on its way. */
+.song--load .song__row { cursor: default; }
+.song--load .bone {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(243,238,231,.07), rgba(243,238,231,.14), rgba(243,238,231,.07));
+  background-size: 200% 100%;
+  animation: boneSweep 1.4s linear infinite;
+}
+.song--load .song__art { background: rgba(243,238,231,.08); border-color: transparent; }
+@keyframes boneSweep { to { background-position: -200% 0; } }
+
+/* ---- Formats and steps -------------------------------------------------- */
+.mkt-formats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s5);
+  margin-bottom: var(--s7);
+}
+.mkt-format {
+  padding: var(--s6);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: rgba(0,0,0,.22);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.4), inset 0 1px 0 rgba(243,238,231,.08);
+}
+.mkt-format .h3 { color: var(--gold); margin-bottom: var(--s3); }
+.mkt-format p { margin: 0; }
+
+.mkt-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s5);
+  counter-reset: step;
+}
+.mkt-steps li {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+}
+.mkt-steps b {
+  flex: none;
+  width: 38px; height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 19px;
+  -webkit-text-stroke: .8px var(--ink);
+}
+.mkt-steps span { color: var(--cream-dim); }
+
+.mkt-foot {
+  margin: var(--s7) 0 0;
+  text-align: center;
+  color: var(--cream-faint);
+  font-size: 15px;
+}
+
+/* ============================================================
+   NARROW
+   Below 1080 the row stops pretending to be a table and becomes
+   a card: art and title on top, the facts as labelled chips.
+   ============================================================ */
+@media (max-width: 1080px) {
+  .mkt-head { display: none; }
+
+  .song__row {
+    grid-template-columns: 54px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "art song get"
+      "art meta get";
+    row-gap: var(--s2);
+    padding: var(--s4) var(--s5);
+  }
+  .song__c-art    { grid-area: art; }
+  .song__c-song   { grid-area: song; }
+  .song__c-meta   { grid-area: meta; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); white-space: normal; overflow: visible; }
+  .song__chips    { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); }
+  .song__c-get    { grid-area: get; }
+  .song__c-hide   { display: none; }
+
+  .song__detail { padding-left: var(--s5); }
+}
+
+@media (max-width: 620px) {
+  .mkt-bar { position: static; padding: var(--s3); }
+  .mkt-filters { width: 100%; }
+  .mkt-field { flex: 1 1 140px; }
+  .mkt-field select { min-width: 0; width: 100%; }
+
+  /* The button stays its own size next to the title - stretched across the
+     card it reads as the card's own edge rather than a button. */
+  .song__row {
+    grid-template-columns: 46px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "art song get"
+      "meta meta meta";
+    padding: var(--s4);
+  }
+  .song__c-meta { margin-top: var(--s1); }
+
+  .mkt-formats, .mkt-steps { grid-template-columns: 1fr; }
+  .mkt-stats { gap: var(--s5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .song--load .bone { animation: none; }
+}
