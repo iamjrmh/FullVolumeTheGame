@@ -162,8 +162,7 @@
   justify-content: space-between;
   gap: var(--s4);
   margin-bottom: var(--s3);
-  /* The right end has to clear the flourish on the panel's corner below it. */
-  padding: 0 46px 0 var(--s2);
+  padding-inline: var(--s2);
 }
 .mkt-count {
   margin: 0;
@@ -189,22 +188,7 @@
   border-radius: var(--radius);
   background: linear-gradient(180deg, rgba(243,238,231,.045), rgba(0,0,0,.16));
   box-shadow: 8px 10px 0 rgba(0,0,0,.44), inset 0 1px 0 rgba(243,238,231,.08);
-}
-/* Radius is kept by the children rather than by clipping the panel, so the
-   corner flourish can sit outside the edge the way it does elsewhere. */
-.mkt-head { border-radius: 12px 12px 0 0; }
-.mkt-list { overflow: hidden; border-radius: 0 0 12px 12px; }
-
-/* Same gold wedges the game pops around a hovered button, and the same
-   top-right corner they sit in on the download panel. */
-.mkt-table::after {
-  content: "";
-  position: absolute;
-  right: -30px; top: -40px;
-  width: 46px; height: 52px;
-  background: url("../assets/img/sparkle.png") center / contain no-repeat;
-  pointer-events: none;
-  z-index: 1;
+  overflow: hidden;
 }
 
 .mkt-head,
