@@ -1,0 +1,9 @@
+# Build cache: the artist+title -> album-art map tools/fill-covers.py sweeps
+# out of Chorus Encore. Several MB, rebuildable in one command, and nothing
+# the site serves - so it is not worth versioning.
+tools/cover-map.json
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
