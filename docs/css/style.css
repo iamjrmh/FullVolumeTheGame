@@ -1524,6 +1524,23 @@ body::after {
 .dl__cta .plate--lg .plate__label { font-size: 32px; }
 .dl__cta .plate--lg .plate__icon { width: 30px; height: 30px; }
 
+/* The second route stays quiet on purpose: itch's own widget rather than
+   another plate, so it cannot compete with GET IT. The widget draws its own
+   2px border in the site's hairline tone, so it needs none from us. */
+.dl__itch { margin-top: var(--s6); }
+.dl__itch-label {
+  margin: 0 0 var(--s3);
+  font-size: 13.5px;
+  color: var(--cream-faint);
+}
+.dl__itch-embed {
+  display: block;
+  width: 100%;
+  max-width: 554px;
+  height: 169px;
+  border: 0;
+}
+
 /* The facts read as the label printed on the box: sunk into the panel,
    set in the same tabular figures as the game's own score column. */
 .receipt {
