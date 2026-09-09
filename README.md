@@ -1,4 +1,10 @@
 <p align="center">
+  <a href="README.md">README</a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="FullVolume%20Roadmap.md">ROADMAP</a>
+</p>
+
+<p align="center">
   <a href="https://fullvolumethegame.xyz">
     <img src="./logo.png" alt="FullVolume" width="420">
   </a>
