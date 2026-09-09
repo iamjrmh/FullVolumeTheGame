@@ -1,6 +1,6 @@
 # FullVolume
 
-_Last updated: 2026-09-09 16:26_
+_Last updated: 2026-09-09 16:27_
 
 ## Up Next
 
@@ -14,6 +14,7 @@ _Last updated: 2026-09-09 16:26_
 ## QoL
 
 - [x] full audio and sfx sweep - need to obtain a ton of sfx first. also adding background music from users library
+- [ ] discord bot / announcements / server / activity status  *(In Progress)*
 
 ## Major
 
@@ -38,7 +39,3 @@ _Last updated: 2026-09-09 16:26_
 ## Deferred
 
 - [ ] leaderboards?
-
-## Tasks
-
-- [ ] discord bot / announcements / server / activity status  *(In Progress)*
