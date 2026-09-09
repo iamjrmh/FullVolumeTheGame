@@ -203,7 +203,7 @@ Open an [issue](../../issues) and say what you were doing, what happened, and wh
 
 **Sing badly, loudly.** The only rule.
 
-Made by **JURMR** and one very patient microphone.
+Made by **JURMR**.
 [fullvolumethegame.xyz](https://fullvolumethegame.xyz)
 
 <sub>© 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, Harmonix or Microsoft.</sub>
