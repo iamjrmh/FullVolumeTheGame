@@ -16,9 +16,10 @@ A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs al
 [![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
 
-**[Download FullVolume on GitHub →](https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe)**
 
-[**Download FullVolume on itch.io →**](https://jurmr.itch.io/fullvolume)
+<a href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="20" alt="FullVolume"> [Download FullVolume on GitHub →**</a>
+
+<a href="https://jurmr.itch.io/fullvolume"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="20" alt="FullVolume"> **Play FullVolume on itch.io →**</a>
 
 </div>
 
