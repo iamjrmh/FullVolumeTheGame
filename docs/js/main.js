@@ -1,5 +1,5 @@
 /* ============================================================
-   FULL VOLUME - fullvolumethegame.xyz
+   FULLVOLUME - fullvolumethegame.xyz
 
    Motion rules followed throughout:
      - transform / opacity only, so everything composites on the GPU

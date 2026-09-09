@@ -5,7 +5,7 @@ Source is Rhythmverse, through the endpoint its own browse page uses:
     POST https://rhythmverse.co/api/rb3xbox/songfiles/list/
     data_type=full&page=N&records=250&instrument=vocals
 
-``rb3xbox`` is the Xbox CON format - the .rb3con files Full Volume reads -
+``rb3xbox`` is the Xbox CON format - the .rb3con files FullVolume reads -
 and ``instrument=vocals`` is a real server-side filter, which takes the
 46.8k charts in that section down to about 37k.
 
@@ -217,7 +217,7 @@ def write(rows: list, total: int, scanned: int) -> None:
     rows.sort(key=lambda r: (r[2].lower(), r[1].lower()))     # artist, then title
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     header = f'''/* ============================================================
-   FULL VOLUME - Marketplace index: Rock Band 3 customs (.rb3con).
+   FULLVOLUME - Marketplace index: Rock Band 3 customs (.rb3con).
 
    {len(rows):,} charts with vocals, of the {scanned:,} scanned,
    collected {stamp} from Rhythmverse
