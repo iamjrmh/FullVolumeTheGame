@@ -1524,21 +1524,45 @@ body::after {
 .dl__cta .plate--lg .plate__label { font-size: 32px; }
 .dl__cta .plate--lg .plate__icon { width: 30px; height: 30px; }
 
-/* The second route stays quiet on purpose: itch's own widget rather than
-   another plate, so it cannot compete with GET IT. The widget draws its own
-   2px border in the site's hairline tone, so it needs none from us. */
-.dl__itch { margin-top: var(--s6); }
-.dl__itch-label {
-  margin: 0 0 var(--s3);
-  font-size: 13.5px;
-  color: var(--cream-faint);
+/* The second route stays quiet on purpose: a sunken strip in the panel's own
+   tones rather than another plate, so it cannot compete with GET IT. */
+.dl__alt {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  margin-top: var(--s6);
+  max-width: 420px;
+  padding: var(--s4) var(--s5);
+  border-radius: var(--radius);
+  background: rgba(0,0,0,.3);
+  box-shadow: inset 0 0 0 1px rgba(243,238,231,.09),
+              inset 0 2px 14px rgba(0,0,0,.45);
+  color: var(--cream-dim);
+  transition: color var(--t-hover) var(--ease-out),
+              box-shadow var(--t-hover) var(--ease-out),
+              background var(--t-hover) var(--ease-out);
 }
-.dl__itch-embed {
-  display: block;
-  width: 100%;
-  max-width: 554px;
-  height: 169px;
-  border: 0;
+.dl__alt-body { display: grid; gap: 3px; min-width: 0; }
+.dl__alt-label { font-size: 13.5px; color: var(--cream-faint); }
+.dl__alt-name {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--gold);
+}
+.dl__alt-arrow {
+  margin-left: auto;
+  flex: none;
+  color: var(--gold);
+  transition: transform var(--t-hover) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dl__alt:hover {
+    background: rgba(224,184,102,.07);
+    box-shadow: inset 0 0 0 1px rgba(224,184,102,.34),
+                inset 0 2px 14px rgba(0,0,0,.45);
+  }
+  .dl__alt:hover .dl__alt-arrow { transform: translateX(4px); }
 }
 
 /* The facts read as the label printed on the box: sunk into the panel,
