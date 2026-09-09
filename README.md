@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://fullvolumethegame.xyz">
-    <img src="./logo.png" alt="Full Volume" width="420">
+    <img src="./logo.png" alt="FullVolume" width="420">
   </a>
 </p>
 
@@ -20,13 +20,13 @@ A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs al
 
 </div>
 
-> This repository is the **download and issue tracker** for Full Volume. The game itself is closed source, so there is no game code here - just the installer, the release notes, and somewhere to shout at me when it breaks.
+> This repository is the **download and issue tracker** for FullVolume. The game itself is closed source, so there is no game code here - just the installer, the release notes, and somewhere to shout at me when it breaks.
 
 ---
 
 ## 🎤 What It Is
 
-Every karaoke game wants to sell you the music. Full Volume hasn't got any to sell. It reads the songs already on your drive and turns them into a proper karaoke night: lyrics, pitch, scoring, stars, the lot.
+Every karaoke game wants to sell you the music. FullVolume hasn't got any to sell. It reads the songs already on your drive and turns them into a proper karaoke night: lyrics, pitch, scoring, stars, the lot.
 
 - **It actually hears you** - land the note and it knows, nail it dead centre and it *really* knows. Sing it an octave down if that's where your voice lives, it still counts
 - **Your library, not a store** - point it at your Clone Hero or Rock Band folders and it takes it from there. Songs nobody sings on are quietly left out, so you never pick a track and find there's nothing to sing
@@ -191,7 +191,7 @@ You bring the songs. A Clone Hero or Rock Band library is all it asks for.
 
 ## 🐛 Something Broken?
 
-Open an [issue](../../issues) and say what you were doing, what happened, and which version you're on. If it crashed, the log is at `%USERPROFILE%\AppData\LocalLow\JURMR\Full Volume\Player.log` - attach it and I'll have a far better idea what went wrong.
+Open an [issue](../../issues) and say what you were doing, what happened, and which version you're on. If it crashed, the log is at `%USERPROFILE%\AppData\LocalLow\JURMR\FullVolume\Player.log` - attach it and I'll have a far better idea what went wrong.
 
 ---
 
@@ -203,6 +203,6 @@ Open an [issue](../../issues) and say what you were doing, what happened, and wh
 Made by **JURMR** and one very patient microphone.
 [fullvolumethegame.xyz](https://fullvolumethegame.xyz)
 
-<sub>© 2026 JURMR. Full Volume is not affiliated with Clone Hero, YARG, Harmonix or Microsoft.</sub>
+<sub>© 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, Harmonix or Microsoft.</sub>
 
 </div>

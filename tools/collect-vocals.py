@@ -176,7 +176,7 @@ def write(rows: list, total: int) -> None:
     rows.sort(key=lambda r: (r[2].lower(), r[1].lower()))     # artist, then title
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     header = f'''/* ============================================================
-   FULL VOLUME - Marketplace index: vocal charts only.
+   FULLVOLUME - Marketplace index: vocal charts only.
 
    {len(rows):,} charts, every one of them with a vocals track,
    collected {stamp} from Chorus Encore
