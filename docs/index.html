@@ -316,6 +316,7 @@
         <img class="plate__icon" src="assets/img/icons/back.png" alt="" width="512" height="512">
       </button>
       <div class="gallery__dots" id="galleryDots" role="tablist" aria-label="Choose a screenshot"></div>
+      <p class="gallery__count" id="galleryCount" aria-hidden="true"><b>1</b> / 1</p>
       <button class="plate plate--icon is-flipped" id="galleryNext" type="button" aria-label="Next screenshot">
         <img class="plate__icon" src="assets/img/icons/back.png" alt="" width="512" height="512">
       </button>
@@ -543,6 +544,63 @@
     <p>v0.9.0 &middot; beta</p>
   </div>
 </footer>
+
+
+<!-- ================= TIP JAR =================
+     Ko-fi, drawn out of the game's own parts. The launcher is a plain
+     link to the Ko-fi page, so with scripting off it still does the one
+     thing the widget is for; main.js upgrades it into the box. -->
+<div class="tipjar" id="tipjar">
+  <div class="tipjar__panel" id="tipjarPanel" role="dialog" aria-labelledby="tipjarTitle">
+    <div class="tipjar__head">
+      <span class="tipjar__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path d="M4 8.5h11v6.5a4.5 4.5 0 0 1-4.5 4.5h-2A4.5 4.5 0 0 1 4 15z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15 10.5h2.2a2.6 2.6 0 0 1 0 5.2H15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7.5 2.5v2.2M11.5 2.5v2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div class="tipjar__heading">
+        <p class="eyebrow tipjar__eyebrow">Tip jar</p>
+        <h2 class="tipjar__title" id="tipjarTitle">BUY ME A BREW</h2>
+      </div>
+      <button class="tipjar__close" id="tipjarClose" type="button" aria-label="Close the tip jar">
+        <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="tipjar__copy">
+      FullVolume is free and it stays free. No storefront, no song packs, no
+      subscription. If it has earned you a good night, you can put something
+      in the jar.
+    </p>
+
+    <dl class="tipjar__ledger">
+      <div><dt>Keeps up</dt><dd>The online rooms</dd></div>
+      <div><dt>Pays for</dt><dd>The next feature</dd></div>
+      <div><dt>Mostly</dt><dd>Tea</dd></div>
+    </dl>
+
+    <a class="plate plate--sm plate--block tipjar__go"
+       href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">
+      <span class="plate__label">OPEN KO&#8209;FI</span>
+    </a>
+
+    <p class="tipjar__note">One&#8209;off or monthly. No account needed.</p>
+  </div>
+
+  <a class="plate plate--sm tipjar__launch" id="tipjarLaunch" aria-label="Tip jar"
+     href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">
+    <svg class="tipjar__icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 8.5h11v6.5a4.5 4.5 0 0 1-4.5 4.5h-2A4.5 4.5 0 0 1 4 15z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M15 10.5h2.2a2.6 2.6 0 0 1 0 5.2H15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M7.5 2.5v2.2M11.5 2.5v2.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span class="plate__label">TIP JAR</span>
+  </a>
+</div>
 
 <script src="js/main.js"></script>
 </body>

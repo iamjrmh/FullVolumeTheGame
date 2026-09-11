@@ -310,7 +310,7 @@
 }
 .song__facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
   gap: var(--s2) var(--s6);
   margin: var(--s4) 0 0;
 }
