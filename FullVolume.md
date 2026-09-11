@@ -1,6 +1,6 @@
 # FullVolume
 
-_Last updated: 2026-09-11 01:28_
+_Last updated: 2026-09-11 02:29_
 
 ## bugfixes
 
@@ -15,7 +15,7 @@ _Last updated: 2026-09-11 01:28_
 ## Major
 
 - [x] Make the vocal track a lot smoother, still jumps between octaves. it should be a lot closer to fortnite festival
-- [ ] Overall improve performance, loading times, and general polishing touches  *(In Progress)*
+- [x] Overall improve performance, loading times, and general polishing touches
 - [x] add sorting options in both the downloader AND the song browser when choosing what to sing. it is extremely lacking.
 - [x] add bulk downloading / selecting multiple songs and downloading them at once from the downloader
 - [ ] create an anti-cheat to keep people from cheating inside of a karaoke game  *(Deferred)*
