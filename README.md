@@ -205,7 +205,9 @@ Open an [issue](../../issues) and say what you were doing, what happened, and wh
 ---
 
 <div align="center">
-  <img src="./logo-mark.png" alt="" width="72">
+  <a href="https://fullvolumethegame.xyz">
+    <img src="./logo-mark.png" width="72">
+  </a>
 
 **Sing badly, loudly.** The only rule.
 
