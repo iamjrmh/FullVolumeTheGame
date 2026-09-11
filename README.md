@@ -14,7 +14,7 @@
 
 ### The karaoke game that plays *your own* music library.
 
-A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs already sitting on your drive and sing any of them - on your own, or in a room online with your mates.
+A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs already sitting on your drive and sing any of them - on your own, or in a room online with your buddies.
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043)](#-system-requirements)
 [![Version](https://img.shields.io/badge/version-0.9.2%20beta-ff6b6b)](../../releases)
@@ -42,7 +42,7 @@ Every karaoke game wants to sell you the music. FullVolume hasn't got any to sel
 - **It actually hears you** - land the note and it knows, nail it dead centre and it *really* knows. Sing it an octave down if that's where your voice lives, it still counts
 - **Your library, not a store** - point it at your Clone Hero or Rock Band folders and it takes it from there. Songs nobody sings on are quietly left out, so you never pick a track and find there's nothing to sing
 - **Line up a set list** - queue songs while somebody else is still singing, so the night runs itself instead of stopping dead between every track
-- **Online, with voices** - name a room, send it to your mates, and sing together from wherever you are. Voice chat is part of the game, not something you bolt on beside it
+- **Online, with voices** - name a room, send it to your buddies, and sing together from wherever you are. Voice chat is part of the game, not something you bolt on beside it
 - **Make it your room** - every last bit of it is hand drawn, and if you don't fancy the room, drop in a picture or a video of your own and that's your stage instead
 - **Tuned to your gear** - one button and it sorts out your audio delay on its own, or tap along for a few bars and let it work you out
 
