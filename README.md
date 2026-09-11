@@ -43,7 +43,6 @@ Every karaoke game wants to sell you the music. FullVolume hasn't got any to sel
 - **Online, with voices** - name a room, send it to your mates, and sing together from wherever you are. Voice chat is part of the game, not something you bolt on beside it
 - **Make it your room** - every last bit of it is hand drawn, and if you don't fancy the room, drop in a picture or a video of your own and that's your stage instead
 - **Tuned to your gear** - one button and it sorts out your audio delay on its own, or tap along for a few bars and let it work you out
-- **Nothing phoning home** - no account, no launcher, no storefront, no song packs, no subscription
 
 ---
 
