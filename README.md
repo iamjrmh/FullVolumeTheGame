@@ -51,19 +51,27 @@ Every karaoke game wants to sell you the music. FullVolume hasn't got any to sel
 Straight out of the game. Nothing here is a mock-up.
 
 <p align="center">
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-15.png" alt="Gameplay: the vocal track across the screen, cover art and progress top left, score and five stars top right" width="820">
+  </a>
 </p>
 
 <details>
 <summary><h3 align="center">The menus</h3></summary>
 <p align="center">
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-01.png" alt="The title screen">
+  </a>
   <em>Press start.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-02.png" alt="The WHO IS SINGING panel">
+  </a>
   <em>Sign in, play as a guest, or make a profile.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-03.png" alt="The main menu: Play, Multiplayer, Settings and Quit">
+  </a>
   <em>Play, Multiplayer, Settings, Quit.</em>
 </p>
 </details>
@@ -71,10 +79,14 @@ Straight out of the game. Nothing here is a mock-up.
 <details>
 <summary><h3 align="center">Your library</h3></summary>
 <p align="center">
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-04.png" alt="The song browser with album art, an A to Z rail and a detail panel">
+  </a>
   <em>Your library, with your best score on every row.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-14.png" alt="The song browser with the queue overlay open">
+  </a>
   <em>Queue up a set list before anyone argues.</em>
 </p>
 </details>
@@ -82,16 +94,24 @@ Straight out of the game. Nothing here is a mock-up.
 <details>
 <summary><h3 align="center">Singing</h3></summary>
 <p align="center">
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-10.png" alt="The song intro card">
+  </a>
   <em>The intro card, while the chart loads.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-11.png" alt="The vocal track in gameplay">
+  </a>
   <em>The vocal track, waiting for the first phrase.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-12.png" alt="The pause menu">
+  </a>
   <em>Pause, with the settings you can change mid-song.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-13.png" alt="The results screen with five stars and a FULL COMBO banner">
+  </a>
   <em>Stars, streak, and how close to perfect you got.</em>
 </p>
 </details>
@@ -99,19 +119,29 @@ Straight out of the game. Nothing here is a mock-up.
 <details>
 <summary><h3 align="center">Multiplayer</h3></summary>
 <p align="center">
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-05.png" alt="The Sing Together screen showing open rooms">
+  </a>
   <em>Public rooms, listed and joinable.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-06.png" alt="The Host a Room form">
+  </a>
   <em>Host one: name it, lock it, cap it.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-07.png" alt="The Join by Name form">
+  </a>
   <em>Or join with a name and a code.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-08.png" alt="The room lobby with a voice meter and chat panel">
+  </a>
   <em>The lobby, with live voice and chat.</em>
   <br><br>
+  <a href="https://fullvolumethegame.xyz">
   <img src="./shots/shot-09.png" alt="The lobby with a song queued, marked IN YOUR LIBRARY">
+  </a>
   <em>It checks everyone actually has the song.</em>
 </p>
 </details>
