@@ -121,7 +121,7 @@ Straight out of the game. Nothing here is a mock-up.
 
 ## 📥 Installing
 
-1. Grab **`FullVolumeSetup-0.9.0.exe`** from the [latest release](../../releases/latest).
+1. Grab **`FullVolumeSetup.exe`** from the [latest release](../../releases/latest).
 2. Run it. It installs **per user**, so there is no UAC prompt and no admin rights needed - hand it to four friends and that's four installs and zero arguments with IT.
 3. It lands in `%USERPROFILE%\Program Files\Full Volume`, with shortcuts on the Start menu and desktop.
 4. Launch it, plug a microphone in, and pick it under **Settings → Audio**.
