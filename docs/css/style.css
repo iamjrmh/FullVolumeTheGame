@@ -246,7 +246,7 @@ p { margin: 0 0 1em; }
 /* The display face is hollow outlines - it turns to lace under ~28px.
    It lives on headings only, exactly as it does in the game. */
 .h2, .h3, .hero__tagline, .stat__num, .card__title, .plate__label,
-.nav__word, .marquee b, .foot__name, .step__t {
+.nav__word, .marquee b, .foot__name, .step__t, .tipjar__title {
   font-family: var(--display);
   font-weight: 400;
   letter-spacing: .02em;
@@ -259,7 +259,8 @@ p { margin: 0 0 1em; }
    barely need it, a 21px card title needs a lot. */
 .h2, .hero__tagline           { -webkit-text-stroke: .5px currentColor; }
 .h3, .stat__num               { -webkit-text-stroke: .7px currentColor; }
-.card__title, .marquee b      { -webkit-text-stroke: 1px  currentColor; }
+.card__title, .marquee b,
+.tipjar__title                { -webkit-text-stroke: 1px  currentColor; }
 .step__t, .nav__word,
 .foot__name                   { -webkit-text-stroke: 1.05px currentColor; }
 
@@ -757,7 +758,7 @@ code {
    ============================================================ */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: var(--s5);
 }
 .card {
@@ -864,8 +865,25 @@ code {
   align-items: center;
   justify-content: center;
   gap: var(--s5);
+  /* fourteen 44px targets and two arrows is wider than a phone. Wrapping
+     is the guard; the media query below is what actually keeps it tidy. */
+  flex-wrap: wrap;
+  row-gap: var(--s3);
 }
-.gallery__dots { display: flex; gap: var(--s2); }
+.gallery__dots { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); }
+
+/* Fourteen dots is a row nobody can hit with a thumb anyway, so the phone
+   gets the count instead and drives the strip by swiping it. */
+.gallery__count {
+  display: none;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  font-variant-numeric: tabular-nums;
+  color: var(--cream-faint);
+}
+.gallery__count b { color: var(--gold); font-weight: 700; }
 .gallery__dots button {
   width: 44px; height: 44px;      /* real touch target around a small dot */
   padding: 0;
@@ -893,7 +911,7 @@ code {
    ============================================================ */
 .duo {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
   gap: var(--s5);
 }
 .duo__card {
@@ -1139,7 +1157,7 @@ code {
    ============================================================ */
 @media (max-width: 1024px) {
   .about, .library, .dl { grid-template-columns: 1fr; }
-  .stats { position: static; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .stats { position: static; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
   .lib-card { position: static; }
   .dl__right { border-left: 0; border-top: 2px solid var(--hairline); padding-left: 0; padding-top: var(--s6); }
   .foot__inner { grid-template-columns: 1fr; text-align: center; }
@@ -1154,6 +1172,11 @@ code {
   .hero__tagline { max-width: none; }
   .slide { flex-basis: 90vw; }
   .gallery__track { gap: var(--s5); }
+}
+
+@media (max-width: 640px) {
+  .gallery__dots { display: none; }
+  .gallery__count { display: block; }
 }
 
 @media (max-width: 560px) {
@@ -1194,7 +1217,7 @@ code {
    ============================================================ */
 .specs {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
   gap: var(--s5);
 }
 
@@ -1254,7 +1277,7 @@ code {
   border-top: 2px solid var(--hairline);
 }
 .reqs__title { text-align: center; }
-.reqs .specs { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.reqs .specs { grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
 .reqs .dl__small { text-align: center; margin-top: var(--s5); }
 
 /* The download panel holds the requirements too now, so it is one column with
@@ -1595,4 +1618,181 @@ body::after {
 @media (max-width: 980px) {
   .dl__cta .plate--lg { --plate-h: 78px; }
   .dl__cta .plate--lg .plate__label { font-size: 26px; }
+}
+
+/* ============================================================
+   TIP JAR - the Ko-fi widget, redrawn
+
+   Ko-fi ships a round blue chat bubble that belongs to Ko-fi and to
+   nothing else on this page. This is the same thing built from parts
+   the site already owns: the drawn plate for the launcher, the library
+   card's panel for the box, and the download receipt's dashed rows for
+   what the money is actually for. Ko-fi keeps the checkout; it does
+   not get to keep the look.
+
+   The launcher is a plain link to the Ko-fi page, so with scripting
+   off it still does the one thing the widget is for. JS upgrades it
+   into the disclosure.
+   ============================================================ */
+.tipjar {
+  position: fixed;
+  right: clamp(14px, 2.4vw, 28px);
+  bottom: clamp(14px, 2.4vw, 28px);
+  z-index: var(--z-top);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s3);
+  /* only the launcher and the open panel take the pointer; the column
+     itself must not eat clicks on the page behind it */
+  pointer-events: none;
+}
+.tipjar > * { pointer-events: auto; }
+
+/* ---- Launcher ---------------------------------------------------------- */
+.tipjar__launch {
+  /* the plate art carries its own drawn edge, so all it needs is the
+     drop that lifts it off whatever it happens to be sitting over */
+  filter: drop-shadow(4px 5px 0 rgba(0, 0, 0, .45));
+  /* held back until the hero has landed - JS adds .is-in */
+  opacity: 0;
+  translate: 0 16px;
+  /* transform stays in the list: .plate animates its own hover scale through it */
+  transition: opacity var(--t-enter) var(--ease-out),
+              translate var(--t-enter) var(--ease-out),
+              transform 120ms var(--ease-out);
+}
+.tipjar__launch.is-in { opacity: 1; translate: 0 0; }
+.tipjar__icon { width: 18px; height: 18px; flex: none; translate: 0 1px; }
+
+/* ---- Panel ------------------------------------------------------------- */
+.tipjar__panel {
+  width: min(320px, calc(100vw - 28px));
+  padding: var(--s5);
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 6px 7px 0 rgba(0, 0, 0, .4);
+  /* it grows out of the launcher it was opened from */
+  transform-origin: 100% 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(.96);
+  transition: opacity 220ms var(--ease-out),
+              transform 220ms var(--ease-out),
+              visibility 0s linear 220ms;
+}
+.tipjar.is-open .tipjar__panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 220ms var(--ease-out),
+              transform 220ms var(--ease-out),
+              visibility 0s;
+}
+
+.tipjar__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+.tipjar__badge {
+  width: 38px; height: 38px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--gold);
+  background: rgba(224, 184, 102, .12);
+  border: 1px solid rgba(224, 184, 102, .3);
+}
+.tipjar__heading { min-width: 0; }
+.tipjar__eyebrow { margin: 0 0 3px; font-size: 10.5px; letter-spacing: .2em; }
+.tipjar__title {
+  margin: 0;
+  font-size: 23px;
+  line-height: 1;
+  color: var(--cream);
+}
+.tipjar__close {
+  margin-left: auto;
+  width: 34px; height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  border: 2px solid var(--hairline-2);
+  border-radius: 9px;
+  color: var(--cream-faint);
+  cursor: pointer;
+  transition: color var(--t-hover) var(--ease-out),
+              border-color var(--t-hover) var(--ease-out),
+              transform var(--t-press) var(--ease-out);
+}
+.tipjar__close:active { transform: scale(.94); }
+
+.tipjar__copy {
+  margin: 0 0 var(--s4);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--cream-dim);
+}
+
+/* The same sunk panel and dashed rows as the download receipt, because
+   this is the same kind of thing: the plain facts, printed small. */
+.tipjar__ledger {
+  margin: 0 0 var(--s5);
+  display: grid;
+  gap: var(--s2);
+  padding: var(--s4);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .3);
+  box-shadow: inset 0 0 0 1px rgba(243, 238, 231, .09),
+              inset 0 2px 14px rgba(0, 0, 0, .45);
+}
+.tipjar__ledger > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s3);
+  padding-bottom: 7px;
+  border-bottom: 1px dashed var(--hairline);
+}
+.tipjar__ledger > div:last-child { padding-bottom: 0; border-bottom: 0; }
+.tipjar__ledger dt { font-size: 12.5px; color: var(--cream-faint); flex: none; }
+.tipjar__ledger dd { margin: 0; font-size: 12.5px; color: var(--cream); text-align: right; }
+
+.tipjar__go { margin-bottom: var(--s3); }
+.tipjar__note {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--cream-faint);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tipjar__close:hover { color: var(--cream); border-color: var(--hairline-2); }
+}
+
+/* On a phone a labelled plate in the corner is wide enough to sit on top of
+   the gallery's next arrow, so it drops to the mug on its own - the same
+   crop of the plate the gallery arrows use. */
+@media (max-width: 640px) {
+  .tipjar__launch { --plate-h: 52px; width: 52px; padding: 0; }
+  .tipjar__launch::before { background-image: url("../assets/img/plate-icon.png"); }
+  .tipjar__launch::after  { background-image: url("../assets/img/plate-icon-hover.png"); }
+  .tipjar__launch .plate__label { display: none; }
+  .tipjar__icon { width: 22px; height: 22px; translate: 0 0; }
+}
+
+@media (max-width: 420px) {
+  .tipjar__panel { padding: var(--s4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tipjar__launch { opacity: 1; translate: 0 0; }
+  .tipjar__panel { transform: none; }
 }

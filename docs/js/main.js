@@ -284,6 +284,13 @@
     var dots = [];
     var settle = null;
 
+    // A phone hides the dot row - fourteen 44px targets is wider than the
+    // screen and none of them is hittable with a thumb anyway - and reads
+    // its place off this instead, driving the strip by swiping it.
+    var countEl = document.getElementById("galleryCount");
+    var countNow = countEl ? countEl.querySelector("b") : null;
+    if (countEl && countEl.lastChild) countEl.lastChild.nodeValue = " / " + count;
+
     function wrap(i) { return ((i % count) + count) % count; }
 
     real.forEach(function (_, i) {
@@ -308,6 +315,7 @@
       slides.forEach(function (s, i) { s.classList.toggle("is-current", i === index); });
       var live = wrap(index);
       dots.forEach(function (d, i) { d.setAttribute("aria-selected", String(i === live)); });
+      if (countNow) countNow.textContent = String(live + 1);
     }
 
     // Snap back into the middle set without animating. Same picture, new index.
@@ -416,7 +424,64 @@
   })();
 
   /* ----------------------------------------------------------
-     9. THE GAME'S BUTTON SOUNDS
+     9. TIP JAR
+     Ko-fi's own floating bubble, replaced by the page's own box.
+     The launcher is a real link to the Ko-fi page, so all this has
+     to do is intercept the click and turn it into a disclosure -
+     with scripting off the link still goes where it says.
+     ---------------------------------------------------------- */
+  (function tipJar() {
+    var root = document.getElementById("tipjar");
+    var launch = document.getElementById("tipjarLaunch");
+    var panel = document.getElementById("tipjarPanel");
+    var shut = document.getElementById("tipjarClose");
+    if (!root || !launch || !panel) return;
+
+    // Only true once the script is here to honour it.
+    launch.setAttribute("aria-expanded", "false");
+    launch.setAttribute("aria-controls", "tipjarPanel");
+
+    var open = false;
+
+    function setOpen(want) {
+      open = want;
+      root.classList.toggle("is-open", open);
+      launch.setAttribute("aria-expanded", String(open));
+      if (!open) return;
+      var go = panel.querySelector(".tipjar__go");
+      if (go) go.focus({ preventScroll: true });
+    }
+
+    launch.addEventListener("click", function (e) {
+      e.preventDefault();                     // the href is the no-script path
+      setOpen(!open);
+    });
+
+    if (shut) {
+      shut.addEventListener("click", function () {
+        setOpen(false);
+        launch.focus({ preventScroll: true });
+      });
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" || !open) return;
+      setOpen(false);
+      launch.focus({ preventScroll: true });
+    });
+
+    document.addEventListener("pointerdown", function (e) {
+      if (open && !root.contains(e.target)) setOpen(false);
+    });
+
+    // It arrives after the hero has landed rather than competing with it.
+    var show = function () { launch.classList.add("is-in"); };
+    if (prefersReduced()) show();
+    else setTimeout(show, 1100);
+  })();
+
+  /* ----------------------------------------------------------
+     10. THE GAME'S BUTTON SOUNDS
      The same two clips MenuButton.cs plays. Off until asked for -
      a page that makes noise at you unprompted is a page people
      close - and the choice is remembered.
@@ -484,7 +549,7 @@
   })();
 
   /* ----------------------------------------------------------
-     10. DOWNLOAD PLACEHOLDER
+     11. DOWNLOAD PLACEHOLDER
      There is no build hosted yet - say so plainly rather than
      handing someone a dead link.
      ---------------------------------------------------------- */
@@ -507,7 +572,7 @@
 
 
   /* ----------------------------------------------------------
-     11. MARQUEE
+     12. MARQUEE
      The CSS slides the track by half its own width, which only
      reads as a loop if each half is wider than the screen. Two
      hard-coded copies were not, so the tail ran out mid-screen
