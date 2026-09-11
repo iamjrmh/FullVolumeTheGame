@@ -27,6 +27,8 @@ A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs al
 
 <a href="https://jurmr.itch.io/fullvolume"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume on itch.io →**</a>
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R2M426SKPE)
+
 </div>
 
 > This repository is the **download and issue tracker** for FullVolume. The game itself is closed source, so there is no game code here - just the installer, the release notes, and somewhere to shout at me when it breaks.
