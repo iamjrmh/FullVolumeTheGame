@@ -79,6 +79,8 @@ jobs:
         run: python tools/index-fingerprint.py --against /tmp/before.json >> "$GITHUB_ENV"
 
       - name: Commit and deploy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           if [ "$CHARTS_CHANGED" != "true" ]; then
             echo "Nothing new this week - only the generated timestamp moved, so leaving it alone."
@@ -86,9 +88,14 @@ jobs:
             exit 0
           fi
 
+          # The homepage quotes the size of the catalogue in two places, and a
+          # sweep is the thing that moves it. Before this it said 5,000+ while
+          # the two catalogues together held 40,488.
+          python tools/sync-version.py
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data
+          git add docs
           git commit -m "chore: weekly chart refresh ($CHARTS_SUMMARY)
 
           Swept Chorus Encore and Rhythmverse for vocal charts, and filled in any
