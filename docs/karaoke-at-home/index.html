@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to run a karaoke night at home from a PC</title>
+<meta name="description" content="What you actually need, why any microphone will do, the audio delay problem that makes scoring feel broken, where to get songs, and how to keep the night moving.">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="../assets/img/app-icon.png">
+<link rel="canonical" href="https://fullvolumethegame.xyz/karaoke-at-home/">
+<meta name="theme-color" content="#171719">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="FullVolume">
+<meta property="og:url" content="https://fullvolumethegame.xyz/karaoke-at-home/">
+<meta property="og:title" content="How to run a karaoke night at home from a PC">
+<meta property="og:description" content="What you actually need, why any microphone will do, the audio delay problem that makes scoring feel broken, where to get songs, and how to keep the night moving.">
+<meta property="og:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to run a karaoke night at home from a PC">
+<meta name="twitter:description" content="What you actually need, why any microphone will do, the audio delay problem that makes scoring feel broken, where to get songs, and how to keep the night moving.">
+<meta name="twitter:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<link rel="preload" href="../assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://fullvolumethegame.xyz/karaoke-at-home/#article",
+      "headline": "How to run a karaoke night at home from a PC",
+      "description": "What you actually need for home karaoke, why any microphone will do, the audio delay problem that makes scoring feel broken, where to get songs, and how to keep the night moving.",
+      "inLanguage": "en",
+      "datePublished": "2026-09-12",
+      "dateModified": "2026-09-12",
+      "author": { "@id": "https://fullvolumethegame.xyz/#jurmr" },
+      "publisher": { "@id": "https://fullvolumethegame.xyz/#jurmr" },
+      "isPartOf": { "@id": "https://fullvolumethegame.xyz/#website" },
+      "image": "https://fullvolumethegame.xyz/assets/img/embed.jpg",
+      "mainEntityOfPage": "https://fullvolumethegame.xyz/karaoke-at-home/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "FullVolume", "item": "https://fullvolumethegame.xyz/" },
+        { "@type": "ListItem", "position": 2, "name": "Karaoke at home", "item": "https://fullvolumethegame.xyz/karaoke-at-home/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What do I need for karaoke at home?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A computer, any microphone, a screen everyone can see, sound that is not laptop speakers, and songs. A karaoke game listens for pitch rather than recording quality, so a cheap USB microphone or a gaming headset is enough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does karaoke scoring feel unfair or always late?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Almost always audio delay. Sound takes time to reach the television and come back to the microphone, and a TV doing picture processing adds more, so the game hears you late on every note. Run the game's latency calibration before you start."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a special karaoke microphone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A USB microphone, gaming headset, webcam microphone or a laptop's built in microphone all work. Avoid Bluetooth microphones, because the wireless hop adds delay and delay is what makes scoring feel wrong. Two cheap microphones beat one expensive one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we do karaoke together over a video call?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Badly. Call apps suppress background noise, duck people who are not talking and prioritise speech over music, and the call latency makes singing together impossible. Everyone running the same game, with it keeping time between them, works properly."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page-guide">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="../index.html" aria-label="FullVolume, home">
+      <img class="nav__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULLVOLUME</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../index.html#about">The game</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../Marketplace/">Marketplace</a>
+    </nav>
+
+    <button class="sfx-toggle" id="sfxToggle" type="button"
+            aria-pressed="false" title="Play the game's own button sounds">
+      <svg class="sfx-toggle__on" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="sfx-toggle__off" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sfx-toggle__text">SFX</span>
+    </button>
+
+    <a class="plate plate--sm nav__cta" href="../index.html#download">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+
+    <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    <a href="../index.html#about">The game</a>
+    <a href="../index.html#features">Features</a>
+    <a href="../index.html#shots">Screens</a>
+    <a href="../index.html#together">Multiplayer</a>
+    <a href="../Marketplace/">Marketplace</a>
+    <a class="plate plate--sm plate--block nav__mobile-cta" href="../index.html#download">
+      <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="art-hero">
+  <div class="wrap">
+    <p class="crumbs">
+      <a href="../index.html">FullVolume</a><span>/</span>How to run a karaoke night at home from a PC
+    </p>
+    <div class="art-hero__inner">
+      <h1>How to run a karaoke night at home from a PC</h1>
+    </div>
+    <p class="art-hero__lead">You need less kit than anyone selling it to you suggests. Here is what actually matters, the delay problem that makes people think they are worse singers than they are, and how to stop the night dying between songs.</p>
+    <p class="art-hero__meta"><span>Setup guide</span><span>Any microphone</span><span>Updated September 2026</span></p>
+  </div>
+</section>
+
+<section class="art">
+  <div class="wrap">
+    <div class="art__col">
+      <h2>What you actually need</h2>
+
+      <p>
+        Less than people expect. A computer, a microphone, something to look at, and
+        songs. Everything past that is refinement, and most of the kit sold for this is
+        aimed at a problem you do not have in a living room.
+      </p>
+
+      <ul class="art__list">
+        <li><strong>A microphone.</strong> Any one. This is the bit people get wrong by
+            spending too much.</li>
+        <li><strong>A screen everyone can see.</strong> A telly is better than a monitor,
+            purely because people can sit down.</li>
+        <li><strong>Sound that is not coming out of the laptop.</strong> The one upgrade
+            that genuinely changes the evening.</li>
+        <li><strong>Songs people actually want to sing.</strong> The whole thing lives or
+            dies here.</li>
+      </ul>
+
+      <h2>The microphone</h2>
+
+      <p>
+        A karaoke game is listening for <em>pitch</em>. It wants to know which note you
+        are landing on, not how warm your voice sounds. That is a much easier job than
+        recording, which is why a fifteen pound USB mic, a gaming headset, a webcam or
+        the microphone already in your laptop will all work.
+      </p>
+
+      <p>
+        Where it is worth spending a little: a mic on a stand or in your hand is better
+        than one built into a laptop, because it hears <em>you</em> rather than the room,
+        the telly and everyone talking. That is the actual difference, and it is a
+        difference in isolation, not in quality.
+      </p>
+
+      <p>
+        Two mics beats one if you want duets or a handover that does not involve wrestling.
+        Two cheap ones beat one expensive one every single time for this.
+      </p>
+
+      <div class="art__note">
+        <p class="art__note-t">Skip</p>
+        <p>
+          Bluetooth microphones. The wireless hop adds delay, and delay is the one thing
+          that actually ruins a karaoke game, because the game hears you late and marks
+          you late. Wired USB, or a dedicated wireless receiver, is the way.
+        </p>
+      </div>
+
+      <h2>The screen and the sound</h2>
+
+      <p>
+        Run an HDMI cable to the telly and set it as the display. Everyone can see the
+        lyrics, nobody is crowded round a desk, and the person singing can stand up,
+        which matters more than it sounds.
+      </p>
+
+      <p>
+        For sound, anything other than laptop speakers. A soundbar, the telly's own
+        speakers, a bluetooth speaker, an old hi-fi. Laptop speakers are quiet enough
+        that people sing quietly, and quiet singing is bad singing.
+      </p>
+
+      <h2>The thing nobody warns you about: delay</h2>
+
+      <p>
+        This is the single most common reason a home karaoke setup feels broken, and
+        people almost always blame themselves or the microphone.
+      </p>
+
+      <p>
+        Sound takes time to get from the computer to the telly and back from your mouth
+        to the microphone. Over HDMI, a television doing its own picture processing can
+        add a surprising amount. The result is that you sing exactly in time, and the game
+        marks you as consistently late, on every single note, all night.
+      </p>
+
+      <p>
+        Every serious rhythm or karaoke game has a calibration for this, and it is worth
+        two minutes before anybody arrives. In FullVolume there is a button that sorts it
+        out on its own, or you can tap along for a few bars and let it work you out. If
+        you use something else, find its audio offset or latency setting and do the same.
+      </p>
+
+      <p>
+        If the scoring suddenly feels unfair for everyone, it is this. It is basically
+        always this.
+      </p>
+
+      <h2>Where the songs come from</h2>
+
+      <p>
+        The part that decides whether this happens twice. There are three approaches and
+        they suit different people.
+      </p>
+
+      <h3>Pay for a catalogue</h3>
+      <p>
+        Karafun, Singa and similar charge monthly and hand you a large licensed library.
+        You never think about files. If the idea of assembling songs sounds like a chore
+        you will not do, this is the honest answer and the fee is the price of not caring.
+      </p>
+
+      <h3>Assemble a free library</h3>
+      <p>
+        UltraStar Deluxe and Vocaluxe use community charted song files that people have
+        been making for twenty years. Free, enormous, and you build the collection
+        yourself. Budget an afternoon the first time.
+      </p>
+
+      <h3>Use one you already have</h3>
+      <p>
+        If anyone in the house has played <strong>Clone Hero</strong> or collected
+        <strong>Rock Band customs</strong>, the songs are already downloaded and already
+        charted, vocals included, and the guitar games simply never play that part.
+        <a href="../clone-hero-vocals/">That library is a karaoke library</a> and nobody
+        ever told you. If not, the
+        <a href="../Marketplace/">Marketplace</a> here lists over 40,000 free charts that
+        have a vocal part in them.
+      </p>
+
+      <h2>Running the actual night</h2>
+
+      <ol class="art__steps">
+        <li>
+          <div>
+            <h3>Set it up before anyone arrives</h3>
+            <p>
+              Screen, sound, mic, calibration, and scan your songs in. A library scan in
+              front of an impatient room is a bad start, and it only ever has to happen
+              once.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Queue songs instead of choosing between them</h3>
+            <p>
+              The night dies in the gaps. If people can line up the next few while
+              somebody is still singing, it runs itself. If everyone has to crowd round
+              and browse after each song, you get three minutes of nothing every three
+              minutes.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Start with something everybody knows</h3>
+            <p>
+              The first song sets whether this is a laugh or a performance. Something
+              universally known and slightly stupid gets more people up than something
+              impressive.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Turn the difficulty down as the night goes on</h3>
+            <p>
+              An easier setting widens how close to the note you have to be. Later on,
+              with everyone louder and less accurate, that is the difference between a
+              scoreboard people enjoy and one that just tells them they are bad.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Let people sing low</h3>
+            <p>
+              Most songs are written for a voice that is not in the room. A game that
+              scores you the same for singing an octave down means nobody has to sit out
+              because the song is too high, which is otherwise the most common reason
+              people stop joining in.
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <h2>If everyone is not in the same house</h2>
+
+      <p>
+        Video calls are genuinely bad at this. Every call app is built to suppress
+        background noise, duck people who are not talking, and prioritise speech over
+        music, which is a precise description of everything you do not want. Add the call
+        latency and singing together is impossible.
+      </p>
+
+      <p>
+        What works is everybody running the same game and it keeping time between them,
+        with voice chat for the bit in between songs. FullVolume does that with rooms: one
+        person hosts, you send round the name, and everyone's score is on screen at once.
+      </p>
+
+      <div class="art__cta">
+        <h2>Everything above, in one installer</h2>
+        <p>
+          Lyrics, pitch scoring, a queue, automatic latency calibration, an easy setting,
+          your own picture or video as the backdrop, and online rooms when people are not
+          in the room. Free, Windows, no account.
+        </p>
+        <div class="art__cta-row">
+          <a class="plate plate--lg" href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe">
+            <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+            <span class="plate__label">DOWNLOAD</span>
+          </a>
+          <a class="plate plate--sm" href="../index.html">
+            <span class="plate__label">WHAT IT IS</span>
+          </a>
+        </div>
+        <p class="art__cta-note">You bring the songs. There is no shop to buy one in.</p>
+      </div>
+
+    </div>
+
+  <div class="art__next">
+    <p class="art__next-t">Read next</p>
+    <div class="art__next-grid">
+      <a href="../clone-hero-vocals/">
+        <b>Sing your Clone Hero library</b>
+        <span>The vocal part is already in your charts. Clone Hero will never play it.</span>
+      </a>
+      <a href="../games-like-singstar/">
+        <b>Games like SingStar and LIPS</b>
+        <span>What to play on a PC now the servers are off and the 360 is in a cupboard.</span>
+      </a>
+    </div>
+  </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <div class="foot__brand">
+      <img class="foot__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <div>
+        <p class="foot__name">FULLVOLUME</p>
+        <p class="foot__dom">fullvolumethegame.xyz</p>
+      </div>
+    </div>
+
+    <nav class="foot__links" aria-label="Footer">
+      <a href="../index.html#about">The game</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../Marketplace/">Marketplace</a>
+      <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+      <a href="../games-like-singstar/">Like SingStar</a>
+      <a href="../karaoke-at-home/">Karaoke at home</a>
+      <a href="../index.html#download">Download</a>
+    </nav>
+
+    <div class="foot__by">
+      <img class="foot__weed" src="../assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
+      <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
+    </div>
+  </div>
+
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
+    <p>v0.9.2 &middot; beta</p>
+  </div>
+</footer>
+
+<!-- ================= TIP JAR =================
+     Ko-fi, drawn out of the game's own parts. The launcher is a plain
+     link to the Ko-fi page, so with scripting off it still does the one
+     thing the widget is for; main.js upgrades it into the box. -->
+<div class="tipjar" id="tipjar">
+  <div class="tipjar__panel" id="tipjarPanel" role="dialog" aria-labelledby="tipjarTitle">
+    <div class="tipjar__head">
+      <span class="tipjar__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path d="M4 8.5h11v6.5a4.5 4.5 0 0 1-4.5 4.5h-2A4.5 4.5 0 0 1 4 15z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15 10.5h2.2a2.6 2.6 0 0 1 0 5.2H15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7.5 2.5v2.2M11.5 2.5v2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div class="tipjar__heading">
+        <p class="eyebrow tipjar__eyebrow">Tip jar</p>
+        <h2 class="tipjar__title" id="tipjarTitle">BUY ME A BREW</h2>
+      </div>
+      <button class="tipjar__close" id="tipjarClose" type="button" aria-label="Close the tip jar">
+        <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="tipjar__copy">
+      FullVolume is free and it stays free. No storefront, no song packs, no
+      subscription. If it has earned you a good night, you can put something
+      in the jar.
+    </p>
+
+    <dl class="tipjar__ledger">
+      <div><dt>Keeps up</dt><dd>The online rooms</dd></div>
+      <div><dt>Pays for</dt><dd>The next feature</dd></div>
+      <div><dt>Mostly</dt><dd>Tea</dd></div>
+    </dl>
+
+    <a class="plate plate--sm plate--block tipjar__go"
+       href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">
+      <span class="plate__label">OPEN KO&#8209;FI</span>
+    </a>
+
+    <p class="tipjar__note">One&#8209;off or monthly. No account needed.</p>
+  </div>
+
+  <a class="plate plate--sm tipjar__launch" id="tipjarLaunch" aria-label="Tip jar"
+     href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">
+    <svg class="tipjar__icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 8.5h11v6.5a4.5 4.5 0 0 1-4.5 4.5h-2A4.5 4.5 0 0 1 4 15z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M15 10.5h2.2a2.6 2.6 0 0 1 0 5.2H15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M7.5 2.5v2.2M11.5 2.5v2.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span class="plate__label">TIP JAR</span>
+  </a>
+</div>
+
+
+<script src="../js/main.js"></script>
+</body>
+</html>

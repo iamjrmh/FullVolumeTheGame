@@ -42,8 +42,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
 INDEX = ROOT / "docs" / "index.html"
-MARKET = ROOT / "docs" / "Marketplace" / "index.html"
 SITEMAP = ROOT / "docs" / "sitemap.xml"
+DOCS = ROOT / "docs"
 DATA = ROOT / "docs" / "data"
 
 RELEASES_API = "https://api.github.com/repos/iamjrmh/FullVolumeTheGame/releases/latest"
@@ -165,10 +165,15 @@ def build_rules(version: str, channel: str, size: str | None, charts: int | None
          r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
          rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1),
 
-        (MARKET, "marketplace footer",
-         r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
-         rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1),
     ]
+
+    # Every other page carries the same footer, and there are more of them every
+    # time a guide gets written, so find them rather than listing them.
+    for page in sorted(DOCS.glob("*/index.html")):
+        rules.append(
+            (page, f"{page.parent.name} footer",
+             r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
+             rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1))
 
     if size:
         rules += [

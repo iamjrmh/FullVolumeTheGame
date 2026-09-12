@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to sing the vocals in your Clone Hero library</title>
+<meta name="description" content="Clone Hero has no vocals and never will, but the vocal part is already inside your charts. What is in a song folder, and how to sing it without converting anything.">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="../assets/img/app-icon.png">
+<link rel="canonical" href="https://fullvolumethegame.xyz/clone-hero-vocals/">
+<meta name="theme-color" content="#171719">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="FullVolume">
+<meta property="og:url" content="https://fullvolumethegame.xyz/clone-hero-vocals/">
+<meta property="og:title" content="How to sing the vocals in your Clone Hero library">
+<meta property="og:description" content="Clone Hero has no vocals and never will, but the vocal part is already inside your charts. What is in a song folder, and how to sing it without converting anything.">
+<meta property="og:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to sing the vocals in your Clone Hero library">
+<meta name="twitter:description" content="Clone Hero has no vocals and never will, but the vocal part is already inside your charts. What is in a song folder, and how to sing it without converting anything.">
+<meta name="twitter:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<link rel="preload" href="../assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://fullvolumethegame.xyz/clone-hero-vocals/#article",
+      "headline": "Your Clone Hero library already has the vocals in it",
+      "description": "Clone Hero has no vocals and is not getting them, but the PART VOCALS track is already inside your charts. What is in a song folder, why the vocal data is there, and how to sing it without converting anything.",
+      "inLanguage": "en",
+      "datePublished": "2026-09-12",
+      "dateModified": "2026-09-12",
+      "author": { "@id": "https://fullvolumethegame.xyz/#jurmr" },
+      "publisher": { "@id": "https://fullvolumethegame.xyz/#jurmr" },
+      "isPartOf": { "@id": "https://fullvolumethegame.xyz/#website" },
+      "about": { "@id": "https://fullvolumethegame.xyz/#game" },
+      "image": "https://fullvolumethegame.xyz/assets/img/embed.jpg",
+      "mainEntityOfPage": "https://fullvolumethegame.xyz/clone-hero-vocals/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "FullVolume", "item": "https://fullvolumethegame.xyz/" },
+        { "@type": "ListItem", "position": 2, "name": "Clone Hero vocals", "item": "https://fullvolumethegame.xyz/clone-hero-vocals/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Clone Hero have vocals?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Clone Hero plays 5 fret guitar, 6 fret guitar, 4 lane drums and Pro Drums. Its FAQ states the game entered long term support at 1.0.4080 and that new instruments are not planned. The vocal data is still inside the chart files as a PART VOCALS track, it simply is not played."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sing the songs in my Clone Hero library?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Point FullVolume at the same songs folder. It reads the same charts, finds the vocal part Clone Hero ignores, and scores you on the pitch you sing. Nothing is copied, converted or moved, and Clone Hero keeps working as it did."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to convert my charts first?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Plain song folders, .sng archives and Rock Band _rb3con packages are all read in the form you already have them, and they can sit in the same library together."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do fewer songs show up than I have in Clone Hero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Charts with no vocal track are left out on purpose, because there is nothing to sing on them. The smaller number is the count of songs somebody actually sings on."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page-guide">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="../index.html" aria-label="FullVolume, home">
+      <img class="nav__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULLVOLUME</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../index.html#about">The game</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../Marketplace/">Marketplace</a>
+    </nav>
+
+    <button class="sfx-toggle" id="sfxToggle" type="button"
+            aria-pressed="false" title="Play the game's own button sounds">
+      <svg class="sfx-toggle__on" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="sfx-toggle__off" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sfx-toggle__text">SFX</span>
+    </button>
+
+    <a class="plate plate--sm nav__cta" href="../index.html#download">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+
+    <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    <a href="../index.html#about">The game</a>
+    <a href="../index.html#features">Features</a>
+    <a href="../index.html#shots">Screens</a>
+    <a href="../index.html#together">Multiplayer</a>
+    <a href="../Marketplace/">Marketplace</a>
+    <a class="plate plate--sm plate--block nav__mobile-cta" href="../index.html#download">
+      <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="art-hero">
+  <div class="wrap">
+    <p class="crumbs">
+      <a href="../index.html">FullVolume</a><span>/</span>Your Clone Hero library already has the vocals in it
+    </p>
+    <div class="art-hero__inner">
+      <h1>Your Clone Hero library already has the vocals in it</h1>
+    </div>
+    <p class="art-hero__lead">Clone Hero does not do vocals, and the people who make it have said it is not getting them. That is not the end of it, because the singing is already sitting in your chart files. Here is what is actually in there, and how to sing it without converting a thing.</p>
+    <p class="art-hero__meta"><span>Clone Hero</span><span>Rock Band customs</span><span>Updated September 2026</span></p>
+  </div>
+</section>
+
+<section class="art">
+  <div class="wrap">
+    <div class="art__col">
+      <h2>The short version</h2>
+
+      <p>
+        Three things are true at once, and together they are better news than they
+        sound.
+      </p>
+
+      <ul class="art__list">
+        <li><strong>Clone Hero has no vocals, and is not getting them.</strong> Its own
+            FAQ says the game entered long term support at 1.0.4080 and that "any new
+            major features, such as new instruments, are not planned". What it plays is
+            5 fret guitar, 6 fret guitar, 4 lane drums and Pro Drums.</li>
+        <li><strong>Your charts have the vocals in them regardless.</strong> The format
+            has carried a <code>PART VOCALS</code> track all along, holding the lead
+            line and the lyrics, and very often <code>HARM2</code> and
+            <code>HARM3</code> for the harmonies underneath it.</li>
+        <li><strong>So the singing is already on your drive</strong>, in the folder you
+            already point Clone Hero at, in songs you already downloaded, and the game
+            you play them with is never going to open that part of the file.</li>
+      </ul>
+
+      <p>
+        That is the whole point of this page. You do not need to download your library
+        again, convert anything, hunt for "karaoke versions" of songs you already have,
+        or touch a single file. You need something that reads the same folder and does
+        not throw the vocal track away.
+      </p>
+
+      <div class="art__note">
+        <p class="art__note-t">If you only read one line</p>
+        <p>
+          Point <a href="../index.html">FullVolume</a> at your existing Clone Hero songs
+          folder. It reads the same charts, finds the vocal part Clone Hero ignores, and
+          you sing it. Nothing is copied, converted or moved, and Clone Hero carries on
+          working exactly as it did.
+        </p>
+      </div>
+
+      <h2>What is actually inside a song folder</h2>
+
+      <p>
+        Open any song in your library and you get some arrangement of these:
+      </p>
+
+      <ul class="art__list">
+        <li><code>notes.mid</code> or <code>notes.chart</code> - the chart itself. This
+            is a multi track file, and each instrument is its own named track. Guitar,
+            bass, drums, and <code>PART VOCALS</code> sitting there next to them.</li>
+        <li><code>song.ini</code> - the metadata. Title, artist, album, year, charter,
+            the difficulty ratings, and which parts the chart actually contains.</li>
+        <li><code>song.ogg</code>, or a set of stems like <code>guitar.ogg</code> and
+            <code>vocals.ogg</code> - the audio. Some charts ship one mixed file, some
+            split it per instrument.</li>
+        <li><code>album.png</code> - the cover art, which is why your song list looks
+            like a record shelf rather than a spreadsheet.</li>
+      </ul>
+
+      <p>
+        A <code>.sng</code> file is the same thing with the lid on: a single compressed
+        container holding all of the above, which is why you cannot open one and poke
+        about inside it. It is not a different kind of chart, just a tidier way to store
+        one. Anything that understands the format reads straight out of it.
+      </p>
+
+      <h2>Why the vocals are there if nobody can sing them</h2>
+
+      <p>
+        Because most of these charts did not start life in Clone Hero. An enormous
+        number of them are Rock Band customs, or conversions of them, and Rock Band had
+        four parts including vocals. When a chart gets converted the vocal track is not
+        stripped out, it simply comes along and then sits unused.
+      </p>
+
+      <p>
+        The charters kept charting it too. Someone sat down and placed every syllable of
+        that song against the pitch it is sung at, with the words attached, because that
+        is what a complete chart is. Then it got uploaded, and downloaded a few thousand
+        times, and the only thing anybody ever did with it was play the guitar part.
+      </p>
+
+      <p>
+        There are tens of thousands of songs in this state. Fully charted vocals, freely
+        available, already downloaded by people who have no way to hear them.
+      </p>
+
+      <h2>How to sing them</h2>
+
+      <ol class="art__steps">
+        <li>
+          <div>
+            <h3>Get FullVolume</h3>
+            <p>
+              One installer, no account, no launcher, no admin rights. It is free and
+              there is nothing in it to buy.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Point it at the folder you already have</h3>
+            <p>
+              Settings, then Library, then Add Folder. Give it the same songs folder
+              Clone Hero uses. Add as many as you like, across as many drives as you
+              like. Nothing is copied and nothing is modified, so Clone Hero is entirely
+              unaffected.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Let it read through once</h3>
+            <p>
+              It scans the library, tells you how it is getting on, and then remembers.
+              A big library takes a few minutes the first time and is instant every time
+              after that. If you add songs later, rescan.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Sing</h3>
+            <p>
+              Search it, sort it, pick something. The lyrics come up, the note line runs
+              across the screen, and holding the right pitch is what scores.
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <h2>What about my Rock Band customs</h2>
+
+      <p>
+        Those work too, in the form you already have them. A <code>_rb3con</code>
+        package is read directly, with no unpacking step and no conversion pass first.
+        If you have been collecting customs for years, that shelf is a karaoke library
+        that nobody ever told you was one.
+      </p>
+
+      <p>
+        Plain song folders, <code>.sng</code> archives and <code>_rb3con</code> packages
+        can all sit in the same library at once. There is no format setting to get
+        right, because it reads whichever it finds.
+      </p>
+
+      <h2>What happens to songs with nothing to sing</h2>
+
+      <p>
+        They are left out of the list, quietly. A chart with no <code>PART VOCALS</code>
+        track is an instrumental as far as singing goes, and putting it on the menu just
+        means somebody picks it and finds there is nothing to do.
+      </p>
+
+      <p>
+        This is worth knowing before you point it at a 5,000 song folder and see a
+        smaller number come back. Nothing is broken. That is the count of songs somebody
+        actually sings on.
+      </p>
+
+      <h2>Do I need a proper microphone</h2>
+
+      <p>
+        No. A USB mic, a gaming headset, a webcam mic or the one built into your laptop
+        will all do the job. What is being measured is the pitch you are landing on, not
+        how flattering the recording is, so cheap equipment is not the handicap you would
+        expect it to be.
+      </p>
+
+      <p>
+        A headset is nicer in a room with other people, purely because it hears you
+        rather than the telly. That is the only real argument for spending anything.
+      </p>
+
+      <h2>If your library is thin</h2>
+
+      <p>
+        The same two places that keep the charts also happen to be the largest free
+        karaoke catalogue nobody has noticed. The
+        <a href="../Marketplace/">Marketplace</a> on this site lists every chart from
+        Chorus Encore and Rhythmverse that has a vocal part in it, which is currently
+        over 40,000 songs. Search it, download one, drop it in your songs folder,
+        rescan.
+      </p>
+
+      <div class="art__cta">
+        <h2>Go and sing the ones you already own</h2>
+        <p>
+          Free, Windows, one installer, and it reads the folder you already have. Your
+          Clone Hero setup carries on exactly as it is.
+        </p>
+        <div class="art__cta-row">
+          <a class="plate plate--lg" href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe">
+            <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+            <span class="plate__label">DOWNLOAD</span>
+          </a>
+          <a class="plate plate--sm" href="../index.html">
+            <span class="plate__label">WHAT IT IS</span>
+          </a>
+        </div>
+        <p class="art__cta-note">
+          FullVolume is not affiliated with Clone Hero, YARG or Harmonix. It just reads
+          the same files.
+        </p>
+      </div>
+
+    </div>
+
+  <div class="art__next">
+    <p class="art__next-t">Read next</p>
+    <div class="art__next-grid">
+      <a href="../games-like-singstar/">
+        <b>Games like SingStar and LIPS</b>
+        <span>What to play on a PC now the servers are off and the 360 is in a cupboard.</span>
+      </a>
+      <a href="../karaoke-at-home/">
+        <b>Run a karaoke night at home</b>
+        <span>Mic, screen, songs, running order. What actually matters and what does not.</span>
+      </a>
+    </div>
+  </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <div class="foot__brand">
+      <img class="foot__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <div>
+        <p class="foot__name">FULLVOLUME</p>
+        <p class="foot__dom">fullvolumethegame.xyz</p>
+      </div>
+    </div>
+
+    <nav class="foot__links" aria-label="Footer">
+      <a href="../index.html#about">The game</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../Marketplace/">Marketplace</a>
+      <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+      <a href="../games-like-singstar/">Like SingStar</a>
+      <a href="../karaoke-at-home/">Karaoke at home</a>
+      <a href="../index.html#download">Download</a>
+    </nav>
+
+    <div class="foot__by">
+      <img class="foot__weed" src="../assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
+      <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
+    </div>
+  </div>
+
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
+    <p>v0.9.2 &middot; beta</p>
+  </div>
+</footer>
+
+<!-- ================= TIP JAR =================
+     Ko-fi, drawn out of the game's own parts. The launcher is a plain
+     link to the Ko-fi page, so with scripting off it still does the one
+     thing the widget is for; main.js upgrades it into the box. -->
+<div class="tipjar" id="tipjar">
+  <div class="tipjar__panel" id="tipjarPanel" role="dialog" aria-labelledby="tipjarTitle">
+    <div class="tipjar__head">
+      <span class="tipjar__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path d="M4 8.5h11v6.5a4.5 4.5 0 0 1-4.5 4.5h-2A4.5 4.5 0 0 1 4 15z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15 10.5h2.2a2.6 2.6 0 0 1 0 5.2H15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7.5 2.5v2.2M11.5 2.5v2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div class="tipjar__heading">
+        <p class="eyebrow tipjar__eyebrow">Tip jar</p>
+        <h2 class="tipjar__title" id="tipjarTitle">BUY ME A BREW</h2>
+      </div>
+      <button class="tipjar__close" id="tipjarClose" type="button" aria-label="Close the tip jar">
+        <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="tipjar__copy">
+      FullVolume is free and it stays free. No storefront, no song packs, no
+      subscription. If it has earned you a good night, you can put something
+      in the jar.
+    </p>
+
+    <dl class="tipjar__ledger">
+      <div><dt>Keeps up</dt><dd>The online rooms</dd></div>
+      <div><dt>Pays for</dt><dd>The next feature</dd></div>
+      <div><dt>Mostly</dt><dd>Tea</dd></div>
+    </dl>
+
+    <a class="plate plate--sm plate--block tipjar__go"
+       href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">
+      <span class="plate__label">OPEN KO&#8209;FI</span>
+    </a>
+
+    <p class="tipjar__note">One&#8209;off or monthly. No account needed.</p>
+  </div>
+
+  <a class="plate plate--sm tipjar__launch" id="tipjarLaunch" aria-label="Tip jar"
+     href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">
+    <svg class="tipjar__icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 8.5h11v6.5a4.5 4.5 0 0 1-4.5 4.5h-2A4.5 4.5 0 0 1 4 15z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M15 10.5h2.2a2.6 2.6 0 0 1 0 5.2H15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M7.5 2.5v2.2M11.5 2.5v2.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span class="plate__label">TIP JAR</span>
+  </a>
+</div>
+
+
+<script src="../js/main.js"></script>
+</body>
+</html>
