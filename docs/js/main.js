@@ -10,7 +10,7 @@
 (function () {
   "use strict";
 
-  /* Pages now live at two depths (/, /Marketplace/), so anything this file
+  /* Pages now live at two depths (/, /marketplace/), so anything this file
      fetches has to be resolved against the site root rather than the page. */
   var ROOT = (function () {
     var self = document.currentScript;
