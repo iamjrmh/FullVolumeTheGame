@@ -1,21 +1,30 @@
 #!/usr/bin/env python3
-"""Copy the version out of README.md and into the site.
+"""Copy the numbers the site quotes in from wherever they are actually true.
 
-README.md is where the version actually gets updated, so it is the source of
-truth and nothing here ever writes back to it. The site carries the same number
-in five places and had drifted two releases behind before this existed.
+Three of them, each with a different source, because the site kept quoting
+figures that had quietly stopped being right:
 
-The installer size is handled the same way and for the same reason, except it
-comes from the latest GitHub release rather than the README, because that is the
-only place it is recorded. That half is best effort: if the API is unreachable
-the version still syncs.
+  version        README.md, which is where it really gets updated. It had
+                 drifted two releases behind, and it is in the page's
+                 structured data now, so stale means a wrong machine-readable
+                 fact rather than just wrong text.
+  installer size the latest GitHub release, the only place it is recorded.
+  chart count    docs/data/*.js, counted off the rows the Marketplace loads.
+                 The weekly refresh moves this, and the site said 5,000+ when
+                 both catalogues together held 40,488.
+
+Nothing here ever writes back to a source. The last two are best effort: if the
+releases API is unreachable or the catalogues are missing, the version still
+syncs.
 
     python tools/sync-version.py            # rewrite the site
     python tools/sync-version.py --check    # report drift, change nothing, exit 1
 
-Every pattern below is expected to match exactly once. A pattern that stops
-matching means the markup moved, and that is an error rather than a silent
-no-op, because a silent no-op is how it went stale the first time.
+Every rule declares how many times it expects to match, and a rule that matches
+a different number of times fails the run naming itself. That is deliberate: a
+silent no-op is exactly how all three of these went stale in the first place.
+Nothing is written until every rule has matched, so a failure cannot leave the
+site half updated.
 """
 
 from __future__ import annotations
@@ -35,6 +44,7 @@ README = ROOT / "README.md"
 INDEX = ROOT / "docs" / "index.html"
 MARKET = ROOT / "docs" / "Marketplace" / "index.html"
 SITEMAP = ROOT / "docs" / "sitemap.xml"
+DATA = ROOT / "docs" / "data"
 
 RELEASES_API = "https://api.github.com/repos/iamjrmh/FullVolumeTheGame/releases/latest"
 INSTALLER = "FullVolumeSetup.exe"
@@ -113,41 +123,76 @@ def fetch_installer_size() -> str | None:
     return None
 
 
-def build_rules(version: str, channel: str, size: str | None):
-    """(file, what, pattern, replacement). Each must match exactly once."""
+def count_charts() -> int | None:
+    """How many vocal charts the Marketplace is carrying, across both catalogues.
+
+    Counted off the row arrays rather than the header comment, so it cannot
+    disagree with what the page actually loads. None if the files are missing.
+    """
+    total = 0
+    for path in (DATA / "vocals.js", DATA / "rb3.js"):
+        if not path.exists():
+            print(f"  chart count: skipped, {path.name} is missing")
+            return None
+        total += len(re.findall(r'^\s*\[".*\],?\s*$', read(path), re.M))
+    return total
+
+
+def headline_charts(total: int) -> tuple[int, str]:
+    """Floor to the nearest thousand, so the trailing "+" is always true."""
+    floored = total // 1000 * 1000
+    return floored, f"{floored:,}"
+
+
+def build_rules(version: str, channel: str, size: str | None, charts: int | None):
+    """(file, what, pattern, replacement, expected matches)."""
     labelled = f"{version} {channel}".strip()
 
     rules = [
         (INDEX, "JSON-LD softwareVersion",
          r'("softwareVersion":\s*")\d+\.\d+\.\d+(")',
-         rf"\g<1>{version}\g<2>"),
+         rf"\g<1>{version}\g<2>", 1),
 
         (INDEX, "hero eyebrow",
          r"(Windows &middot; v)\d+\.\d+\.\d+(?:\s+\w+)?( &middot; free)",
-         rf"\g<1>{labelled}\g<2>" if channel else rf"\g<1>{version}\g<2>"),
+         rf"\g<1>{labelled}\g<2>" if channel else rf"\g<1>{version}\g<2>", 1),
 
         (INDEX, "download receipt version",
          r"(<dt>Version</dt><dd>)\d+\.\d+\.\d+(?:\s+\w+)?(</dd>)",
-         rf"\g<1>{labelled}\g<2>"),
+         rf"\g<1>{labelled}\g<2>", 1),
 
         (INDEX, "homepage footer",
          r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
-         rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>"),
+         rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1),
 
         (MARKET, "marketplace footer",
          r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
-         rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>"),
+         rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1),
     ]
 
     if size:
         rules += [
             (INDEX, "JSON-LD fileSize",
              r'("fileSize":\s*")[^"]*(")',
-             rf"\g<1>{size}\g<2>"),
+             rf"\g<1>{size}\g<2>", 1),
 
             (INDEX, "download receipt size",
              r"(<dt>Size</dt><dd>)[^<]*(</dd>)",
-             rf"\g<1>{size}\g<2>"),
+             rf"\g<1>{size}\g<2>", 1),
+        ]
+
+    if charts:
+        floored, pretty = headline_charts(charts)
+        rules += [
+            # The marquee track is duplicated so the loop has no seam, so this
+            # one legitimately appears twice.
+            (INDEX, "marquee chart count",
+             r"(<b>)[\d,]+\+ SONGS WITH A PART TO SING(</b>)",
+             rf"\g<1>{pretty}+ SONGS WITH A PART TO SING\g<2>", 2),
+
+            (INDEX, "about stat chart count",
+             r'(data-count=")\d+(" data-count-suffix="\+")',
+             rf"\g<1>{floored}\g<2>", 1),
         ]
 
     return rules
@@ -168,16 +213,21 @@ def main() -> int:
     if size:
         print(f"Latest release ships {INSTALLER} at {size}")
 
+    charts = count_charts()
+    if charts:
+        print(f"Marketplace carries {charts:,} vocal charts "
+              f"(headline: {headline_charts(charts)[1]}+)")
+
     pending: dict[Path, str] = {}
     changes: list[str] = []
 
-    for path, what, pattern, repl in build_rules(version, channel, size):
+    for path, what, pattern, repl, expected in build_rules(version, channel, size, charts):
         text = pending.get(path) or read(path)
         new, n = re.subn(pattern, repl, text)
-        if n != 1:
+        if n != expected:
             rel = path.relative_to(ROOT).as_posix()
             sys.exit(
-                f"{rel}: expected exactly one '{what}', matched {n}.\n"
+                f"{rel}: expected {expected} x '{what}', matched {n}.\n"
                 f"  The markup moved. Fix the pattern in tools/sync-version.py "
                 f"rather than letting it silently go stale."
             )
