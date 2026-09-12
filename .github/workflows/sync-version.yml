@@ -1,0 +1,63 @@
+name: Sync version to the site
+
+# README.md is where the version actually gets updated, so the site follows it
+# rather than the other way round. Before this existed the site sat two releases
+# behind, advertising 0.9.0 and a 141 MB installer while 0.9.2 was shipping at
+# 107 MB - and the version is in the page's structured data now, so a stale one
+# is a wrong machine-readable fact rather than just wrong text.
+#
+# Netlify builds on push, so committing is the deploy.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "tools/sync-version.py"
+  # A release changes the installer size, which the README does not carry.
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-version
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Exits non-zero if the README disagrees with itself, or if any of the
+      # patterns stopped matching because the markup moved. Both are worth
+      # failing the run over: a silent no-op is how it went stale last time.
+      - name: Copy the version into the site
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/sync-version.py
+
+      - name: Commit and deploy
+        run: |
+          if [ -z "$(git status --porcelain docs)" ]; then
+            echo "Site already matches the README, nothing to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "chore: sync site version with README
+
+          Ran by .github/workflows/sync-version.yml. README.md is the source of
+          truth for the version; the installer size comes off the latest release."
+          git push
