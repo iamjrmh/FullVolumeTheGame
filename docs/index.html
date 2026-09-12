@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FullVolume - the karaoke game that plays your own music</title>
-<meta name="description" content="FullVolume is a PC karaoke game and a spiritual successor to LIPS. Point it at your Clone Hero or Rock Band library and sing anything in it - on your own, or online with your mates and live voice chat.">
+<title>FullVolume - free PC karaoke game for your own music library</title>
+<meta name="description" content="A free karaoke game for Windows that plays your own music. Point it at your Clone Hero or Rock Band library and sing any of it, on your own or online with friends.">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="assets/img/app-icon.png">
 <link rel="apple-touch-icon" href="assets/img/app-icon.png">
@@ -32,6 +32,176 @@
 <link rel="preload" href="assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+
+<!-- Structured data. This is the machine-readable version of the page: it is
+     what tells a search engine that FullVolume is a game, that it is free,
+     what it runs on, and what the answers in the FAQ actually are. Every
+     value here is also stated in plain English somewhere on the page, which
+     is the rule. If one changes, change the other. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["VideoGame", "SoftwareApplication"],
+      "@id": "https://fullvolumethegame.xyz/#game",
+      "name": "FullVolume",
+      "url": "https://fullvolumethegame.xyz/",
+      "description": "A free karaoke game for Windows that plays your own music library. It reads Clone Hero song folders, .sng archives and Rock Band _rb3con packages, listens to the pitch you are singing and scores it, and can be played on your own or online with friends over built-in voice chat.",
+      "slogan": "Sing badly, loudly.",
+      "image": "https://fullvolumethegame.xyz/assets/img/embed.jpg",
+      "screenshot": [
+        "https://fullvolumethegame.xyz/assets/img/shots/shot-11.png",
+        "https://fullvolumethegame.xyz/assets/img/shots/shot-04.png",
+        "https://fullvolumethegame.xyz/assets/img/shots/shot-13.png",
+        "https://fullvolumethegame.xyz/assets/img/shots/shot-08.png"
+      ],
+      "applicationCategory": "GameApplication",
+      "applicationSubCategory": "Karaoke",
+      "genre": ["Karaoke", "Music", "Rhythm", "Party"],
+      "gamePlatform": "PC",
+      "operatingSystem": "Windows 10, Windows 11 (64-bit)",
+      "softwareVersion": "0.9.2",
+      "fileSize": "107 MB",
+      "downloadUrl": "https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe",
+      "installUrl": "https://fullvolumethegame.xyz/#download",
+      "playMode": ["SinglePlayer", "MultiPlayer", "CoOp"],
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "softwareRequirements": "Windows 10 64-bit, a dual core processor, 4 GB RAM, a DirectX 11 graphics device, 250 MB of storage and any microphone.",
+      "memoryRequirements": "4 GB",
+      "storageRequirements": "250 MB",
+      "featureList": [
+        "Plays the songs already on your drive, with no storefront and no song packs",
+        "Reads Clone Hero song folders, .sng archives and Rock Band _rb3con packages",
+        "Real-time pitch detection that scores the note you are actually singing",
+        "Octave-agnostic scoring, so a low voice is not penalised",
+        "Lyrics, phrase scoring, star ratings and a full combo streak",
+        "A queue, so a set list can be lined up while somebody is still singing",
+        "Online rooms with built-in voice chat and everyone's score on screen",
+        "Custom backdrops from your own images and videos",
+        "Automatic audio latency calibration"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://fullvolumethegame.xyz/#download"
+      },
+      "author": { "@id": "https://fullvolumethegame.xyz/#jurmr" },
+      "publisher": { "@id": "https://fullvolumethegame.xyz/#jurmr" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://fullvolumethegame.xyz/#jurmr",
+      "name": "JURMR",
+      "url": "https://fullvolumethegame.xyz/",
+      "sameAs": [
+        "https://github.com/iamjrmh",
+        "https://jurmr.itch.io/fullvolume",
+        "https://ko-fi.com/fullvolumethegame"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://fullvolumethegame.xyz/#website",
+      "url": "https://fullvolumethegame.xyz/",
+      "name": "FullVolume",
+      "description": "The home of FullVolume, a free PC karaoke game that plays your own music library.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://fullvolumethegame.xyz/#jurmr" },
+      "about": { "@id": "https://fullvolumethegame.xyz/#game" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://fullvolumethegame.xyz/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it actually free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, all of it. There is no shop, no song packs, no subscription and no account to make. Download the installer, run it, sing. There is a tip jar if it earns you a good night, and that is the whole of it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a special microphone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A USB microphone, a gaming headset, a webcam mic or the one built into your laptop will all do. It is listening for the pitch you are singing rather than the quality of the recording, so cheap kit is not a handicap."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do the songs come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your own drive. Point it at a Clone Hero song folder, a pile of .sng archives or your Rock Band _rb3con packages and it reads the lot. Songs with nobody singing on them are quietly left out, so everything on the list has a part to sing. If you have not got a library yet, the Marketplace lists thousands of free charts that do."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this like SingStar or LIPS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Same idea, different source of songs. It is a spiritual successor to LIPS on the Xbox 360: hold the note, watch the score climb, hand the mic over. The difference is that nobody sells you the set list. It comes off your own drive."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sing with friends online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Host a room from inside the game, put a code on it if you would rather keep it to yourselves, and send it round. Voice chat is built in, everybody's score is on screen at once, and the game says up front if somebody in the room has not got the song that is queued."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it run on Mac, Linux or Steam Deck?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not yet. It is a Windows 10 and 11 build, 64-bit, and at the moment that is the only one there is."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to be any good at singing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, and that is rather the point. Sing the whole thing an octave down if that is where your voice lives and it still counts. There is an Easy setting that widens how close you have to be, for when the room has had a few."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it need an internet connection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only for the online rooms. Singing on your own works with the network unplugged. There is no launcher, no login and nothing phoning home."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it on Steam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not at the moment. It comes straight off this site, or from itch.io if you would rather keep it alongside the rest of your library there."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to my scores if I uninstall it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They stay put, along with your profiles, your backdrops and the song folders you added. Reinstall it later and it picks up where you left off."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -98,14 +268,19 @@
   <div class="hero__inner wrap">
     <p class="eyebrow hero__eyebrow" data-hero="1">
       <span class="dot" aria-hidden="true"></span>
-      Windows &middot; v0.9.0 beta &middot; free
+      Windows &middot; v0.9.2 beta &middot; free
     </p>
 
-    <h1 class="hero__logo" data-hero="2">
-      <img src="assets/img/logo.png" alt="FullVolume" width="1080" height="615">
+    <!-- Logo and tagline are one heading on purpose. The logo is a picture, so
+         on its own the h1 read as the single word "FullVolume" and said nothing
+         about what this is. Together they are the page's actual title. Laid out
+         exactly as before; the two spans still stagger in separately. -->
+    <h1 class="hero__title">
+      <span class="hero__logo" data-hero="2">
+        <img src="assets/img/logo.png" alt="FullVolume" width="1080" height="615">
+      </span>
+      <span class="hero__tagline" data-hero="3">The karaoke game that plays<br><em>your own</em> music library.</span>
     </h1>
-
-    <p class="hero__tagline" data-hero="3">The karaoke game that plays<br><em>your own</em> music library.</p>
 
     <p class="hero__blurb" data-hero="4">
       A spiritual successor to <span class="nowrap">Xbox 360 <em>LIPS</em></span>, built for PC.
@@ -425,6 +600,113 @@
   </div>
 </section>
 
+<!-- ================= QUESTIONS ================= -->
+<section class="section section--panel" id="faq">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">Questions</p>
+      <h2 class="h2">The bit before<br>you download it.</h2>
+      <p class="lead lead--center">What people ask first, answered straight.</p>
+    </header>
+
+    <div class="faq" data-reveal>
+
+      <details class="faq__item">
+        <summary class="faq__q">Is it actually free?</summary>
+        <div class="faq__a">
+          <p>Yes, all of it. There is no shop, no song packs, no subscription and no
+             account to make. Download the installer, run it, sing. There is a tip jar
+             if it earns you a good night, and that is the whole of it.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Do I need a special microphone?</summary>
+        <div class="faq__a">
+          <p>No. A USB microphone, a gaming headset, a webcam mic or the one built into
+             your laptop will all do. It is listening for the pitch you are singing
+             rather than the quality of the recording, so cheap kit is not a handicap.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Where do the songs come from?</summary>
+        <div class="faq__a">
+          <p>Your own drive. Point it at a Clone Hero song folder, a pile of .sng
+             archives or your Rock Band _rb3con packages and it reads the lot. Songs
+             with nobody singing on them are quietly left out, so everything on the
+             list has a part to sing. If you have not got a library yet, the
+             <a href="Marketplace/">Marketplace</a> lists thousands of free charts that do.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Is this like SingStar or LIPS?</summary>
+        <div class="faq__a">
+          <p>Same idea, different source of songs. It is a spiritual successor to LIPS
+             on the Xbox 360: hold the note, watch the score climb, hand the mic over.
+             The difference is that nobody sells you the set list. It comes off your
+             own drive.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Can I sing with friends online?</summary>
+        <div class="faq__a">
+          <p>Yes. Host a room from inside the game, put a code on it if you would rather
+             keep it to yourselves, and send it round. Voice chat is built in,
+             everybody's score is on screen at once, and the game says up front if
+             somebody in the room has not got the song that is queued.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Does it run on Mac, Linux or Steam Deck?</summary>
+        <div class="faq__a">
+          <p>Not yet. It is a Windows 10 and 11 build, 64-bit, and at the moment that is
+             the only one there is.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Do I have to be any good at singing?</summary>
+        <div class="faq__a">
+          <p>No, and that is rather the point. Sing the whole thing an octave down if
+             that is where your voice lives and it still counts. There is an Easy
+             setting that widens how close you have to be, for when the room has had
+             a few.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Does it need an internet connection?</summary>
+        <div class="faq__a">
+          <p>Only for the online rooms. Singing on your own works with the network
+             unplugged. There is no launcher, no login and nothing phoning home.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Is it on Steam?</summary>
+        <div class="faq__a">
+          <p>Not at the moment. It comes straight off this site, or from
+             <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
+             if you would rather keep it alongside the rest of your library there.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">What happens to my scores if I uninstall it?</summary>
+        <div class="faq__a">
+          <p>They stay put, along with your profiles, your backdrops and the song
+             folders you added. Reinstall it later and it picks up where you left off.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
 <!-- ================= DOWNLOAD ================= -->
 <section class="section section--download" id="download">
   <div class="wrap">
@@ -468,8 +750,8 @@
         </div>
         <dl>
           <div><dt>File</dt><dd>FullVolumeSetup.exe</dd></div>
-          <div><dt>Size</dt><dd>141 MB</dd></div>
-          <div><dt>Version</dt><dd>0.9.0 beta</dd></div>
+          <div><dt>Size</dt><dd>107 MB</dd></div>
+          <div><dt>Version</dt><dd>0.9.2 beta</dd></div>
           <div><dt>Runs on</dt><dd>Windows 10 and 11, 64&#8209;bit</dd></div>
           <div><dt>Account</dt><dd>Local</dd></div>
           <div><dt>Songs included</dt><dd>None. You bring those</dd></div>
@@ -529,6 +811,7 @@
       <a href="#shots">Screens</a>
       <a href="#together">Multiplayer</a>
       <a href="#library">Your library</a>
+      <a href="#faq">Questions</a>
       <a href="Marketplace/">Marketplace</a>
       <a href="#download">Download</a>
     </nav>
@@ -541,7 +824,7 @@
 
   <div class="wrap foot__rule">
     <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
-    <p>v0.9.0 &middot; beta</p>
+    <p>v0.9.2 &middot; beta</p>
   </div>
 </footer>
 

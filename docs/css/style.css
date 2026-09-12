@@ -635,13 +635,18 @@ code {
 
 .hero__eyebrow { color: var(--gold); }
 
-.hero__logo { margin: 0 0 var(--s5); }
+/* The h1 wraps the logo and the tagline both, so it carries no look of its
+   own - the two spans inside it keep the ones they always had. */
+.hero__title { margin: 0; font-size: inherit; font-weight: inherit; }
+
+.hero__logo { display: block; margin: 0 0 var(--s5); }
 .hero__logo img {
   width: min(100%, 560px);
   filter: drop-shadow(0 12px 34px rgba(0,0,0,.55));
 }
 
 .hero__tagline {
+  display: block;
   font-size: clamp(26px, 3.6vw, 42px);
   line-height: 1.14;
   color: var(--cream);
@@ -1024,6 +1029,80 @@ code {
 }
 .kv--good { color: var(--sage) !important; }
 .kv--wide dd { color: var(--cream); font-weight: 600; font-size: 15px; }
+
+/* ============================================================
+   QUESTIONS
+
+   The feature card, folded shut. Native <details>, so it opens with
+   scripting off and a find-in-page still reaches the answers.
+   ============================================================ */
+.faq {
+  max-width: 860px;
+  margin-inline: auto;
+  display: grid;
+  gap: var(--s3);
+}
+
+.faq__item {
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.4);
+  transition: border-color var(--t-hover) var(--ease-out);
+}
+.faq__item[open] { border-color: var(--gold); }
+@media (hover: hover) and (pointer: fine) {
+  .faq__item:not([open]):hover { border-color: var(--hairline-2); }
+}
+
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s5);
+  padding: var(--s5) var(--s6);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: clamp(16.5px, 1.6vw, 19px);
+  line-height: 1.35;
+  color: var(--cream);
+  /* the default disclosure triangle, gone in both dialects */
+  list-style: none;
+}
+.faq__q::-webkit-details-marker { display: none; }
+
+/* The chevron, same stroke family as the card glyphs. */
+.faq__q::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 22px; height: 22px;
+  background: no-repeat center / 22px 22px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E0B866' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9.5l6 6 6-6'/%3E%3C/svg%3E");
+  transition: transform var(--t-hover) var(--ease-out);
+}
+.faq__item[open] .faq__q::after { transform: rotate(180deg); }
+
+.faq__a {
+  padding: 0 var(--s6) var(--s5);
+  max-width: 70ch;
+  font-size: 15.5px;
+  color: rgba(243,238,231,.84);
+}
+.faq__a p { margin: 0; }
+.faq__a a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .faq__a a:hover { color: var(--coral); }
+}
+
+@media (max-width: 560px) {
+  .faq__q { padding: var(--s4) var(--s5); }
+  .faq__a { padding: 0 var(--s5) var(--s4); }
+}
 
 /* ============================================================
    DOWNLOAD
