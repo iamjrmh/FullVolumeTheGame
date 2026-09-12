@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://fullvolumethegame.xyz/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://fullvolumethegame.xyz/assets/img/shots/shot-11.png</image:loc>
+      <image:title>FullVolume gameplay</image:title>
+      <image:caption>The vocal track across the screen, with cover art, score and five stars.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fullvolumethegame.xyz/assets/img/shots/shot-04.png</image:loc>
+      <image:title>The FullVolume song browser</image:title>
+      <image:caption>Your own library, with album art and your best score on every row.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fullvolumethegame.xyz/assets/img/shots/shot-08.png</image:loc>
+      <image:title>An online room in FullVolume</image:title>
+      <image:caption>The lobby, with live voice chat and everyone who has joined.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://fullvolumethegame.xyz/Marketplace/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

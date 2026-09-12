@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# The chart catalogues are data files the Marketplace page loads for itself.
+# Nothing in them is a page, and between them they are about 7 MB, so keep
+# crawlers spending their time on the pages instead.
+Disallow: /data/
+
+Sitemap: https://fullvolumethegame.xyz/sitemap.xml
