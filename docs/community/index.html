@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The FullVolume community - open rooms, and the people in them</title>
+<meta name="description" content="The FullVolume Discord: who is online right now, which rooms are sitting open in the game, and what the server is actually for. Free to join, no account beyond the one you already have.">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="../assets/img/app-icon.png">
+<link rel="canonical" href="https://fullvolumethegame.xyz/community/">
+<meta name="theme-color" content="#171719">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FullVolume">
+<meta property="og:url" content="https://fullvolumethegame.xyz/community/">
+<meta property="og:title" content="The FullVolume community">
+<meta property="og:description" content="See who is online and which rooms are open right now, then come and fill a seat.">
+<meta property="og:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The FullVolume community">
+<meta name="twitter:description" content="See who is online and which rooms are open right now, then come and fill a seat.">
+<meta name="twitter:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<link rel="preload" href="../assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- The live numbers come from our own endpoint, so warm the connection to it
+     while the stylesheet is still parsing rather than after the page has drawn. -->
+<link rel="preload" href="/api/pulse" as="fetch" crossorigin>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/community.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://fullvolumethegame.xyz/community/#page",
+      "url": "https://fullvolumethegame.xyz/community/",
+      "name": "The FullVolume community",
+      "description": "The FullVolume Discord: who is online, which rooms are open in the game, and what the server is for.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://fullvolumethegame.xyz/#website" },
+      "about": { "@id": "https://fullvolumethegame.xyz/#game" },
+      "breadcrumb": { "@id": "https://fullvolumethegame.xyz/community/#crumbs" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://fullvolumethegame.xyz/community/#crumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "FullVolume", "item": "https://fullvolumethegame.xyz/" },
+        { "@type": "ListItem", "position": 2, "name": "Community", "item": "https://fullvolumethegame.xyz/community/" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page-guide">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="../index.html" aria-label="FullVolume, home">
+      <img class="nav__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULLVOLUME</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__top" id="navGame" type="button"
+                aria-expanded="false" aria-haspopup="true" aria-controls="menu-game">
+          The game
+          <svg class="nav__caret" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav__menu" id="menu-game" aria-labelledby="navGame">
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">The game</p>
+            <a href="../index.html#about">What it is</a>
+            <a href="../index.html#features">Features</a>
+            <a href="../index.html#shots">Screens</a>
+            <a href="../index.html#together">Multiplayer</a>
+            <a href="../index.html#library">Your library</a>
+          </div>
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">Read up</p>
+            <a href="../faq/">All questions</a>
+            <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+            <a href="../yarg-vocals/">YARG vocals</a>
+            <a href="../games-like-singstar/">Like SingStar</a>
+            <a href="../karaoke-at-home/">Karaoke at home</a>
+          </div>
+        </div>
+      </div>
+      <a href="../fullvolumecharter/">Charter</a>
+      <a href="../marketplace/">Marketplace</a>
+      <a href="../community/" aria-current="page">Community</a>
+    </nav>
+
+    <button class="sfx-toggle" id="sfxToggle" type="button"
+            aria-pressed="false" title="Play the game's own button sounds">
+      <svg class="sfx-toggle__on" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="sfx-toggle__off" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sfx-toggle__text">SFX</span>
+    </button>
+
+    <a class="plate plate--sm nav__cta" href="../index.html#download">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+
+    <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    <details class="nav__group">
+      <summary>The game</summary>
+      <a href="../index.html#about">What it is</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../index.html#library">Your library</a>
+    </details>
+    <details class="nav__group">
+      <summary>Read up</summary>
+      <a href="../faq/">All questions</a>
+      <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+      <a href="../yarg-vocals/">YARG vocals</a>
+      <a href="../games-like-singstar/">Like SingStar</a>
+      <a href="../karaoke-at-home/">Karaoke at home</a>
+    </details>
+    <a href="../fullvolumecharter/">FullVolumeCharter</a>
+    <a href="../marketplace/">Marketplace</a>
+    <a href="../community/" aria-current="page">Community</a>
+    <a class="plate plate--sm plate--block nav__mobile-cta" href="../index.html#download">
+      <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO + LIVE SERVER CARD ================= -->
+<section class="com-hero">
+  <div class="wrap com-hero__inner">
+
+    <div class="com-hero__say">
+      <p class="crumbs"><a href="../index.html">FullVolume</a><span>/</span>Community</p>
+      <h1>Somebody is always up for one more.</h1>
+      <p class="com-hero__lead">
+        Singing on your own is practice. Singing with four other people who also cannot
+        hit the note is the entire point. The Discord is where you find them, where the
+        next build gets announced, and where the game gets argued into better shape.
+      </p>
+      <div class="com-hero__cta">
+        <a class="plate plate--lg" id="joinTop" href="https://discord.gg/hut9sPRcr2" target="_blank" rel="noopener">
+          <img class="plate__icon" src="../assets/img/icons/multiplayer.png" alt="" width="512" height="512">
+          <span class="plate__label">JOIN THE DISCORD</span>
+        </a>
+        <a class="com-hero__jump" href="#inside">See what is in there first</a>
+      </div>
+    </div>
+
+    <!-- The card. Every number in it is read live; the ones printed here are the
+         last known good figures, so the shape of the card is right before the
+         first byte arrives and nothing jumps when it does. -->
+    <aside class="server" aria-labelledby="serverName">
+      <div class="server__top">
+        <img class="server__icon" src="../assets/img/app-icon.png" alt="" width="512" height="512">
+        <div class="server__id">
+          <p class="server__name" id="serverName">FullVolumeTheGame</p>
+          <p class="server__tag">discord.gg/hut9sPRcr2</p>
+        </div>
+        <span class="server__live" data-pulse-state="loading">
+          <span class="server__dot" aria-hidden="true"></span>
+          <span class="server__live-t">LIVE</span>
+        </span>
+      </div>
+
+      <p class="server__blurb">
+        The official community for FullVolume, the free PC karaoke game that plays your
+        own music library.
+      </p>
+
+      <dl class="server__nums">
+        <div class="snum snum--online">
+          <dt class="snum__l">online now</dt>
+          <dd class="snum__n" data-pulse="online">&ndash;&ndash;</dd>
+        </div>
+        <div class="snum">
+          <dt class="snum__l">members</dt>
+          <dd class="snum__n" data-pulse="members">&ndash;&ndash;</dd>
+        </div>
+      </dl>
+
+      <a class="plate plate--md plate--block" href="https://discord.gg/hut9sPRcr2" target="_blank" rel="noopener">
+        <span class="plate__label">JOIN</span>
+      </a>
+
+      <p class="server__foot" data-pulse-checked>Reading the server&hellip;</p>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ================= LIVE ROOMS ================= -->
+<section class="section section--panel" id="rooms">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">Right now</p>
+      <h2 class="h2">The rooms, as they stand.</h2>
+      <p class="lead lead--center">
+        Not a screenshot. This is the same list of open rooms the game itself puts in
+        front of you when you press MULTIPLAYER, read a few seconds ago.
+      </p>
+    </header>
+
+    <div class="live" data-reveal>
+      <ul class="live__nums">
+        <li class="lnum">
+          <span class="lnum__n" data-pulse="rooms">&ndash;&ndash;</span>
+          <span class="lnum__l">rooms open</span>
+        </li>
+        <li class="lnum lnum--sing">
+          <span class="lnum__n" data-pulse="singing">&ndash;&ndash;</span>
+          <span class="lnum__l">people in them</span>
+        </li>
+        <li class="lnum lnum--seats">
+          <span class="lnum__n" data-pulse="seats">&ndash;&ndash;</span>
+          <span class="lnum__l">seats free</span>
+        </li>
+      </ul>
+
+      <!-- Filled by community.js. Without scripting the note below is the whole
+           answer, which is honest: there is no live list to show. -->
+      <ul class="rooms" data-rooms hidden></ul>
+
+      <p class="live__note" data-rooms-note>
+        The live room list needs scripting turned on. Press MULTIPLAYER in the game and
+        you will get the same list either way.
+      </p>
+    </div>
+
+    <p class="live__cta">
+      <a class="plate plate--md" href="../index.html#download">
+        <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+        <span class="plate__label">GET THE GAME</span>
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- ================= WHY JOIN ================= -->
+<section class="section" id="why">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">Why bother</p>
+      <h2 class="h2">Six reasons, none of them a newsletter.</h2>
+      <p class="lead lead--center">
+        There is no roadmap for the server, no levels to grind and nothing to buy. It is
+        somewhere to find a duet partner and say what is broken.
+      </p>
+    </header>
+
+    <div class="cards">
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="people" aria-hidden="true"></div>
+        <h3 class="card__title">Never sing alone</h3>
+        <p>Say the word in <b>#open-rooms</b> and four minutes later there are three of
+           you butchering a Queen song. Ask the bot for <b>/rooms</b> and it posts a board
+           of every open room that keeps itself current while you decide.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="list" aria-hidden="true"></div>
+        <h3 class="card__title">Every build, the day it lands</h3>
+        <p><b>#releases</b> gets the new version with the notes and the download link
+           inside ten minutes of it going out, posted without anybody being asked to
+           remember. <b>#roadmap</b> says what is being built next.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="pitch" aria-hidden="true"></div>
+        <h3 class="card__title">Ask for the song you want</h3>
+        <p>Four forums for charts. Request one nobody has made, show off one you did,
+           get it looked over, and if it is good it goes where everybody can find it.
+           Your thread stays yours instead of scrolling away.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="tune" aria-hidden="true"></div>
+        <h3 class="card__title">Break it on purpose</h3>
+        <p><b>#bug-reports</b> and <b>#feature-request</b> are where the game actually
+           changes. Half of what is in it now started as somebody posting that something
+           felt wrong, and it is a short list of people, so you get an answer.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="picture" aria-hidden="true"></div>
+        <h3 class="card__title">Post the run</h3>
+        <p><b>#media</b> is for the five star nobody witnessed and the clip where the
+           harmony worked. The game takes the screenshot; you only have to be smug
+           about it.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="folder" aria-hidden="true"></div>
+        <h3 class="card__title">Make it yours</h3>
+        <p><b>#role-select</b> is three dropdowns: where you got the game, what you play
+           on, and what you are here for. Pick as many as you like, change them whenever,
+           and nobody has to click a tiny reaction on a pinned message.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE CHANNEL MAP ================= -->
+<section class="section section--panel" id="inside">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">What is in there</p>
+      <h2 class="h2">The whole server, on one page.</h2>
+      <p class="lead lead--center">
+        No hidden lobby you have to earn your way into. This is every channel you can
+        see the moment you arrive.
+      </p>
+    </header>
+
+    <div class="map">
+      <section class="map__cat" data-reveal>
+        <h3 class="map__t">Start here</h3>
+        <ul class="chans">
+          <li><b>welcome</b><span>The tour, pinned. Where everything is and who to ask.</span></li>
+          <li><b>rules</b><span>Short, and the short version is be decent.</span></li>
+          <li><b>role-select</b><span>Three dropdowns. Pick what you are here for.</span></li>
+          <li><b>faq</b><span>The questions from this site, answered in there too.</span></li>
+        </ul>
+      </section>
+
+      <section class="map__cat" data-reveal>
+        <h3 class="map__t">News</h3>
+        <ul class="chans">
+          <li class="chans--news"><b>announcements</b><span>Rare, and worth reading. Follow it into your own server.</span></li>
+          <li><b>releases</b><span>Every new build, with its notes and its installer.</span></li>
+          <li><b>roadmap</b><span>What is being worked on, and what is next after it.</span></li>
+        </ul>
+      </section>
+
+      <section class="map__cat" data-reveal>
+        <h3 class="map__t">Community</h3>
+        <ul class="chans">
+          <li><b>main-chat</b><span>Anything. It is not strictly about karaoke.</span></li>
+          <li><b>open-rooms</b><span>Where you say a room is up and people turn up.</span></li>
+          <li><b>media</b><span>Clips, scores and screenshots.</span></li>
+          <li><b>bump</b><span>Keeps the server findable. One click, once every couple of hours.</span></li>
+        </ul>
+      </section>
+
+      <section class="map__cat" data-reveal>
+        <h3 class="map__t">Feedback and charts</h3>
+        <ul class="chans">
+          <li class="chans--forum"><b>bug-reports</b><span>A thread per bug, so yours does not get buried.</span></li>
+          <li class="chans--forum"><b>feature-request</b><span>Ideas, argued about properly.</span></li>
+          <li class="chans--forum"><b>verified-charters</b><span>Finished charts from charters who have been checked.</span></li>
+          <li class="chans--forum"><b>unverified-charters</b><span>Everybody else's, and how you become the other kind.</span></li>
+        </ul>
+      </section>
+
+      <section class="map__cat" data-reveal>
+        <h3 class="map__t">Voice</h3>
+        <ul class="chans">
+          <li class="chans--voice"><b>General</b><span>For when the game's own voice chat is not where the conversation is.</span></li>
+        </ul>
+      </section>
+
+      <section class="map__cat map__cat--bot" data-reveal>
+        <h3 class="map__t">And the bot</h3>
+        <p class="map__p">
+          Ten commands, and the useful ones need no permissions at all.
+        </p>
+        <ul class="cmds">
+          <li><code>/rooms</code><span>A live board of every open room, updating itself.</span></li>
+          <li><code>/download</code><span>The installer, straight from the latest release.</span></li>
+          <li><code>/marketplace</code><span>Search the charts without leaving Discord.</span></li>
+          <li><code>/faq</code><span>Any answer from this site, pulled into the channel.</span></li>
+          <li><code>/applyforcharter</code><span>Start the verified charter application.</span></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHARTERS ================= -->
+<section class="section" id="charters">
+  <div class="wrap narrow">
+    <div class="art__cta" data-reveal>
+      <h2 class="h2">Chart a song and get it played.</h2>
+      <p>
+        If you make charts, the server is where they get seen. Post one in the charter
+        forums, and once you have been checked over your work lands in the Marketplace
+        where every copy of the game can find it. There is no fee, no cut and no
+        exclusivity. Somebody singing your chart badly at one in the morning is the
+        whole reward.
+      </p>
+      <div class="art__cta-row">
+        <a class="plate plate--md" href="../applyforverifiedcharter/">
+          <span class="plate__label">APPLY</span>
+        </a>
+        <a class="com-hero__jump" href="../fullvolumecharter/">Or start with the charting tool</a>
+      </div>
+      <p class="art__cta-note">Free, like the rest of it. Charts stay yours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOUSE RULES + JOIN ================= -->
+<section class="section section--panel" id="join">
+  <div class="wrap narrow">
+    <div class="join" data-reveal>
+      <h2 class="h2">Be decent. Sing badly.</h2>
+      <p class="join__lead">
+        That is most of it. No bigotry, no spam, no arguing about somebody's voice. Keep
+        clips to things you would show your nan, and if somebody is being a problem,
+        say so and it gets dealt with.
+      </p>
+
+      <a class="plate plate--lg" href="https://discord.gg/hut9sPRcr2" target="_blank" rel="noopener">
+        <img class="plate__icon" src="../assets/img/icons/multiplayer.png" alt="" width="512" height="512">
+        <span class="plate__label">JOIN THE DISCORD</span>
+      </a>
+
+      <p class="join__note">
+        Free, and you keep the account you already have.
+        <a href="../privacy/">What the server and this site collect</a>.
+      </p>
+    </div>
+
+    <div class="art__next">
+      <p class="art__next-t">Read next</p>
+      <div class="art__next-grid">
+        <a href="../index.html#together">
+          <b>Singing together</b>
+          <span>How the online rooms work, and what they sound like.</span>
+        </a>
+        <a href="../marketplace/">
+          <b>The Marketplace</b>
+          <span>Free charts with a vocal part, from both community catalogues.</span>
+        </a>
+        <a href="../fullvolumecharter/">
+          <b>FullVolumeCharter</b>
+          <span>Chart the vocals for a song nobody has charted yet.</span>
+        </a>
+        <a href="../faq/">
+          <b>All the questions</b>
+          <span>Thirty-eight of them, answered straight.</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <div class="foot__id">
+      <div class="foot__brand">
+        <img class="foot__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+        <div>
+          <p class="foot__name">FULLVOLUME</p>
+          <p class="foot__dom">fullvolumethegame.xyz</p>
+        </div>
+      </div>
+
+      <p class="foot__tag">The karaoke game that plays your own music library. Free, no account, no song packs.</p>
+
+      <div class="foot__by">
+        <img class="foot__weed" src="../assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
+        <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
+      </div>
+    </div>
+
+    <nav class="foot__nav" aria-label="Footer">
+      <div class="foot__col">
+        <p class="foot__col-t">The game</p>
+        <a href="../index.html#about">What it is</a>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#shots">Screens</a>
+        <a href="../index.html#together">Multiplayer</a>
+        <a href="../index.html#library">Your library</a>
+        <a href="../index.html#download">Download</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Songs</p>
+        <a href="../fullvolumecharter/">FullVolumeCharter</a>
+        <a href="../marketplace/">Marketplace</a>
+        <a href="../applyforverifiedcharter/">Become a verified charter</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases" target="_blank" rel="noopener">All releases</a>
+        <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Read up</p>
+        <a href="../community/" aria-current="page">Community</a>
+        <a href="../faq/">All questions</a>
+        <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+        <a href="../yarg-vocals/">YARG vocals</a>
+        <a href="../games-like-singstar/">Like SingStar</a>
+        <a href="../karaoke-at-home/">Karaoke at home</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">The small print</p>
+        <a href="../terms/">Terms of use</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">Report a bug</a>
+        <a href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">Tip jar</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
+    <p>v0.9.2 &middot; beta</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/community.js"></script>
+</body>
+</html>

@@ -1249,9 +1249,16 @@ code {
   .foot__by { text-align: left; }
 }
 
-@media (max-width: 860px) {
+/* The bar carries four top-level items now, plus the SFX pill and the download
+   plate, and that is wider than it used to be. It folds into the burger a
+   little earlier than the rest of the layout breaks, which is why this is its
+   own query rather than part of the one below. */
+@media (max-width: 940px) {
   .nav__links, .nav__cta { display: none; }
   .nav__burger { display: flex; }
+}
+
+@media (max-width: 860px) {
   .hero { min-height: auto; }
   .hero__tagline { max-width: none; }
   .slide { flex-basis: 90vw; }

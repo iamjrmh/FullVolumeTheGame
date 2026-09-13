@@ -168,10 +168,17 @@ def build_rules(version: str, channel: str, size: str | None, charts: int | None
     ]
 
     # Every other page carries the same footer, and there are more of them every
-    # time a guide gets written, so find them rather than listing them.
-    for page in sorted(DOCS.glob("*/index.html")):
+    # time a guide gets written, so find them rather than listing them. 404.html
+    # is not in a folder of its own and so is not caught by the glob, but it
+    # carries the same footer line and would quietly go stale without this.
+    pages = sorted(DOCS.glob("*/index.html"))
+    if (DOCS / "404.html").exists():
+        pages.append(DOCS / "404.html")
+
+    for page in pages:
+        label = page.name if page.parent == DOCS else page.parent.name
         rules.append(
-            (page, f"{page.parent.name} footer",
+            (page, f"{label} footer",
              r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
              rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1))
 

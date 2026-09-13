@@ -1,0 +1,510 @@
+/* ============================================================
+   COMMUNITY - fullvolumethegame.xyz/community/
+
+   Everything here leans on css/style.css: the same palette, the
+   same plates, the same hard offset shadows. What this file adds
+   is the two live things the rest of the site does not have, the
+   server card and the room board, plus the channel map.
+
+   Live numbers are treated as type, not as a dashboard. They are
+   set in the game's display face at a size it can carry, and they
+   never move the layout when they land: the markup ships an
+   en-dash placeholder at the same width so nothing reflows.
+   ============================================================ */
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.com-hero {
+  padding: clamp(96px, 12vw, 150px) 0 clamp(56px, 7vw, 90px);
+  border-bottom: 2px solid var(--ink);
+  background:
+    radial-gradient(1000px 520px at 12% 0%, rgba(216,111,103,.13), transparent 62%),
+    radial-gradient(860px 440px at 92% 88%, rgba(224,184,102,.10), transparent 62%);
+}
+
+.com-hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: center;
+}
+
+.com-hero h1 {
+  font-family: var(--display);
+  font-size: clamp(34px, 5.4vw, 62px);
+  line-height: 1.04;
+  letter-spacing: .01em;
+  color: var(--cream);
+  -webkit-text-stroke: .6px currentColor;
+  max-width: min(100%, 15ch);
+  margin: 0 0 var(--s5);
+  text-wrap: balance;
+}
+
+.com-hero__lead {
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.55;
+  color: rgba(243,238,231,.86);
+  max-width: 54ch;
+  margin: 0 0 var(--s6);
+}
+
+.com-hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s5);
+}
+
+/* The quiet second route, the same one the download panel uses. */
+.com-hero__jump {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--cream-dim);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline-2);
+  text-underline-offset: 5px;
+  transition: color var(--t-hover) var(--ease-out),
+              text-decoration-color var(--t-hover) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .com-hero__jump:hover { color: var(--gold); text-decoration-color: var(--gold); }
+}
+
+/* ============================================================
+   THE SERVER CARD
+   The one piece of Discord's furniture on the site, redrawn in
+   the game's own materials rather than embedded as their iframe.
+   ============================================================ */
+.server {
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s6);
+  box-shadow: 8px 10px 0 rgba(0,0,0,.46), inset 0 1px 0 rgba(243,238,231,.10);
+  border-top: 3px solid var(--coral);
+  display: grid;
+  gap: var(--s5);
+}
+
+.server__top {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+.server__icon {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  border: 2px solid var(--ink);
+  flex: none;
+}
+.server__id { min-width: 0; }
+.server__name {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.server__tag {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* The state light. Green while the numbers are real, amber while they are
+   being fetched, and coral when the read failed and the figures on show are
+   the last ones anybody could stand behind. */
+.server__live {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  color: var(--sage);
+  flex: none;
+}
+.server__dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 3px rgba(130,155,135,.22);
+}
+.server__live[data-pulse-state="live"] .server__dot { animation: server-beat 2.4s ease-in-out infinite; }
+.server__live[data-pulse-state="loading"] { color: var(--muted); }
+.server__live[data-pulse-state="loading"] .server__dot { box-shadow: 0 0 0 3px rgba(138,133,142,.18); }
+.server__live[data-pulse-state="stale"] { color: var(--coral); }
+.server__live[data-pulse-state="stale"] .server__dot { box-shadow: 0 0 0 3px rgba(216,111,103,.2); }
+
+@keyframes server-beat {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(130,155,135,.22); }
+  50%      { box-shadow: 0 0 0 7px rgba(130,155,135,.04); }
+}
+
+.server__blurb {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.server__nums {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s4);
+}
+/* A definition list has to be written label then value, and this wants to be
+   read value then label, the same way the room board below it does. So the
+   markup stays valid and the column is reversed. */
+.snum {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--s1);
+  background: rgba(0,0,0,.22);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: var(--s4);
+}
+.snum__n {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 3.6vw, 44px);
+  line-height: .95;
+  letter-spacing: .02em;
+  color: var(--cream);
+  -webkit-text-stroke: .7px currentColor;
+  paint-order: stroke fill;
+  font-variant-numeric: tabular-nums;
+}
+.snum--online .snum__n { color: var(--sage); }
+.snum__l {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+.server__foot {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ============================================================
+   THE ROOM BOARD
+   ============================================================ */
+.live {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.live__nums {
+  list-style: none;
+  margin: 0 0 var(--s6);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s4);
+}
+.lnum {
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s5) var(--s4);
+  text-align: center;
+  box-shadow: 5px 6px 0 rgba(0,0,0,.4), inset 0 1px 0 rgba(243,238,231,.10);
+  display: grid;
+  gap: var(--s2);
+}
+/* The same half-degree tilt the homepage stat tiles have, so these read as
+   the same family of object rather than as a chart. */
+.lnum:nth-child(odd)  { transform: rotate(-.45deg); }
+.lnum:nth-child(even) { transform: rotate(.35deg); }
+
+.lnum__n {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(38px, 5vw, 60px);
+  line-height: .95;
+  letter-spacing: .02em;
+  color: var(--gold);
+  -webkit-text-stroke: .8px currentColor;
+  paint-order: stroke fill;
+  font-variant-numeric: tabular-nums;
+}
+.lnum--sing  .lnum__n { color: var(--coral); }
+.lnum--seats .lnum__n { color: var(--sage); }
+
+.lnum__l {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+/* ---- one card per room ---- */
+.rooms {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--s4);
+}
+.room {
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  padding: var(--s5);
+  display: grid;
+  gap: var(--s3);
+  box-shadow: 4px 5px 0 rgba(0,0,0,.38);
+}
+.room--busy { border-color: rgba(216,111,103,.42); }
+
+.room__head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s3);
+}
+.room__name {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.room__badge {
+  margin-left: auto;
+  flex: none;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  color: var(--sage);
+}
+.room__badge--busy   { color: var(--coral); }
+.room__badge--full   { color: var(--muted); }
+.room__badge--locked { color: var(--muted); }
+
+/* Seats as pips, because four of something is faster to count than to read. */
+.room__seats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pip {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--hairline-2);
+}
+.pip--taken { background: var(--coral); border-color: var(--coral); }
+
+.room__song {
+  margin: 0;
+  font-size: 13px;
+  color: var(--cream-dim);
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  overflow-wrap: anywhere;
+}
+.room__song::before {
+  content: "";
+  width: 14px; height: 14px;
+  flex: none;
+  background: no-repeat center/14px 14px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D86F67' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18V6l10-2v12'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='16' cy='16' r='3'/%3E%3C/svg%3E");
+}
+
+.live__note {
+  margin: var(--s5) 0 0;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+.live__cta {
+  margin: clamp(40px, 5vw, 64px) 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* ============================================================
+   WHY JOIN - the channel names inside the cards
+   ============================================================ */
+.card p b {
+  font-weight: 600;
+  color: var(--gold);
+  background: rgba(224,184,102,.1);
+  border-radius: 5px;
+  padding: 1px 5px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   THE CHANNEL MAP
+   ============================================================ */
+.map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: var(--s5);
+  align-items: start;
+}
+
+.map__cat {
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s6);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.4);
+}
+.map__cat--bot { border-color: rgba(224,184,102,.34); }
+
+.map__t {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 27px;
+  letter-spacing: .02em;
+  -webkit-text-stroke: 1px currentColor;
+  paint-order: stroke fill;
+  color: var(--cream);
+  margin: 0 0 var(--s5);
+}
+.map__p { margin: 0 0 var(--s5); font-size: 15px; }
+
+.chans, .cmds {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s4);
+}
+.chans li, .cmds li {
+  display: grid;
+  gap: 3px;
+  padding-left: 26px;
+  position: relative;
+}
+.chans b {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream);
+}
+/* The hash is drawn rather than typed, so a screen reader is not made to
+   say "hash" before every channel name. */
+.chans li::before {
+  content: "#";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gold);
+  opacity: .7;
+}
+/* A voice room, a forum and an announcement channel are not hash channels and
+   Discord does not draw them as one. These have to out-specify ".chans li",
+   which is a class and two elements, so they name the li as well as the
+   modifier rather than relying on source order. */
+.chans li.chans--voice::before,
+.chans li.chans--forum::before,
+.chans li.chans--news::before {
+  content: "";
+  width: 16px; height: 16px;
+  top: 2px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  opacity: .85;
+}
+.chans li.chans--voice::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23829B87' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9.5h3.5L12 5.5v13L7.5 14.5H4z'/%3E%3Cpath d='M16.5 9.5a4 4 0 0 1 0 5'/%3E%3C/svg%3E");
+}
+.chans li.chans--forum::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D86F67' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 13a3 3 0 0 1-3 3H9l-4 3.5V6a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3z'/%3E%3C/svg%3E");
+}
+.chans li.chans--news::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E0B866' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9.5v5h3l6 4V5.5l-6 4z'/%3E%3Cpath d='M17 8.5a5 5 0 0 1 0 7'/%3E%3C/svg%3E");
+}
+
+.chans span, .cmds span {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--cream-dim);
+}
+
+.cmds li { padding-left: 0; }
+.cmds code {
+  justify-self: start;
+  font-size: 13.5px;
+  margin-bottom: 2px;
+}
+
+/* ============================================================
+   THE LAST PUSH
+   ============================================================ */
+.join {
+  background: var(--panel);
+  border: 2px solid rgba(224,184,102,.34);
+  border-radius: var(--radius);
+  padding: clamp(32px, 5vw, 56px);
+  text-align: center;
+  box-shadow: 8px 10px 0 rgba(0,0,0,.46), inset 0 1px 0 rgba(243,238,231,.10);
+}
+.join .h2 { margin-bottom: var(--s4); }
+.join__lead {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0 auto var(--s7);
+  /* Centred text with a one-word last line looks like a mistake. */
+  text-wrap: pretty;
+}
+.join .plate { margin-inline: auto; }
+.join__note {
+  margin: var(--s5) 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.join__note a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .join__note a:hover { color: var(--gold); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .com-hero__inner { grid-template-columns: 1fr; }
+  .server { max-width: 460px; }
+}
+
+@media (max-width: 560px) {
+  /* "FullVolumeTheGame" is one word, and at this width the card's padding plus
+     the icon plus the LIVE badge left it too little room, so it broke itself in
+     half. Give the row the space back rather than let the name hyphenate. */
+  .server { padding: var(--s5); }
+  .server__name { font-size: 16px; }
+
+  .live__nums { grid-template-columns: 1fr; }
+  .lnum { display: flex; align-items: baseline; justify-content: center; gap: var(--s3); text-align: left; }
+  .com-hero__cta { flex-direction: column; align-items: stretch; }
+  .com-hero__cta .plate { justify-content: center; width: 100%; }
+}
