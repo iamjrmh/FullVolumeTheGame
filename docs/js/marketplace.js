@@ -27,10 +27,11 @@
    than a file, since that is where the Drive and Dropbox links are
    resolved.
 
-   And FullVolume's own: .fvchart files from the charters' public
-   Google Drive folders, indexed by tools/collect-fvchart.py into
-   data/fvchart.js. Drive answers with CORS open, so these download
-   whole through the same fetch-and-rename as a Chorus chart.
+   And FullVolume's own: .fvchart files from verified charters'
+   public Google Drive folders, served live by /api/community-charts
+   (netlify/functions/community.mjs, refreshed daily and from the
+   admin page). Drive answers with CORS open, so these download whole
+   through the same fetch-and-rename as a Chorus chart.
    ============================================================ */
 (function () {
   "use strict";
@@ -91,7 +92,7 @@
 
   function artSrc(song) {
     if (!song.art) return "";
-    if (song.fv) return "../data/fvcovers/" + song.art + ".jpg";
+    if (song.fv) return "/api/community-cover/" + encodeURIComponent(song.art);
     // Rhythmverse mostly has no artwork of its own - its own pages fall back to
     // a placeholder too - so tools/fill-covers.py lends those rows the cover of
     // the same song on Chorus, marked "ch:". Everything else is a path on
@@ -587,9 +588,22 @@
     });
   }
 
-  function community() {
-    var fv = window.FV_COMMUNITY_CHARTS;
-    return fv && fv.rows ? expand(fv, false, true) : [];
+  // The community listing is live rather than a file in the repo, so a newly
+  // verified charter shows up without a deploy. Opened straight off disk
+  // there is no API to ask, and the other two catalogues carry on without it.
+  function laterCommunity() {
+    if (!window.fetch || location.protocol === "file:") return;
+    fetch("/api/community-charts")
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (fv) {
+        if (!fv || !fv.rows || !fv.rows.length) return;
+        songs = expand(fv, false, true).concat(songs);
+        byIdCache = null;
+        stats();
+        apply(false);
+        reveal();
+      })
+      .catch(function () { /* the Marketplace still works without it */ });
   }
 
   // The Rock Band index is the bigger of the two and most visits never search
@@ -621,13 +635,14 @@
       return;
     }
 
-    songs = community().concat(expand(index, false));
+    songs = expand(index, false);
     restore();
     stats();
     clear.hidden = !query.value;
 
     apply();
     reveal();
+    laterCommunity();
     laterRb3();
   }
 

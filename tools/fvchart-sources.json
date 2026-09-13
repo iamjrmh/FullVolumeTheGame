@@ -1,9 +1,0 @@
-{
-  "_about": "The Google Drive folders the Marketplace lists .fvchart files from. Each entry is one charter's public folder (shared as 'Anyone with the link'); subfolders are walked too. tools/collect-fvchart.py reads this. A single file link works as well as a folder.",
-  "sources": [
-    {
-      "charter": "JURMR",
-      "url": "https://drive.google.com/drive/folders/1KG7P9aFULfZoKFs979BXeuyXgyryQum5?usp=sharing"
-    }
-  ]
-}

@@ -1,0 +1,19 @@
+# The site is the static pages in docs/. The functions are what the
+# verified-charter application form and the admin page talk to.
+#
+# The site's base directory is the repository root, not docs/, so that
+# package.json and netlify/functions sit outside what gets published.
+
+[build]
+  publish = "docs"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# The admin page is a tool, not a page anybody should find.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"

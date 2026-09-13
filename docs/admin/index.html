@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin - FullVolume</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/img/app-icon.png">
+<meta name="theme-color" content="#171719">
+<link rel="preload" href="../assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/charters.css">
+</head>
+<body class="page-admin">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="../index.html" aria-label="FullVolume, home">
+      <img class="nav__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULLVOLUME</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../marketplace/">Marketplace</a>
+      <a href="../applyforverifiedcharter/">Apply page</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="adm">
+  <div class="wrap">
+
+    <p class="adm-loading" id="admLoading">Checking who you are&hellip;</p>
+
+    <!-- Signed out -->
+    <section class="ch-panel adm-gate" id="admGate" hidden>
+      <img src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <h1 class="h2">Admin</h1>
+      <p>Verified charters, applications and the community chart listing. Owner only.</p>
+      <p class="adm-flash" id="admFlash" role="alert" hidden></p>
+      <a class="plate plate--md" href="/api/auth/login">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+        <span class="plate__label">SIGN IN WITH DISCORD</span>
+      </a>
+    </section>
+
+    <!-- Signed in -->
+    <div id="admApp" hidden>
+      <div class="adm-top">
+        <h1 class="h2">Admin</h1>
+        <div class="adm-me">
+          <img id="admAvatar" src="" alt="" width="40" height="40" hidden>
+          <span id="admName"></span>
+          <button class="btn btn--quiet" id="admSignOut" type="button">Sign out</button>
+        </div>
+      </div>
+
+      <ul class="adm-stats" aria-label="At a glance">
+        <li class="ch-panel adm-stat"><b data-stat="pending">-</b><span>Waiting</span></li>
+        <li class="ch-panel adm-stat"><b data-stat="charters">-</b><span>Verified charters</span></li>
+        <li class="ch-panel adm-stat"><b data-stat="charts">-</b><span>Charts listed</span></li>
+        <li class="ch-panel adm-stat"><b data-stat="refreshed">-</b><span>Last refresh</span><small data-stat="refreshedBy"></small></li>
+      </ul>
+
+      <div class="adm-grid">
+        <div class="adm-col">
+          <section class="ch-panel" aria-labelledby="appsTitle">
+            <div class="adm-head">
+              <h2 class="ch-panel__title" id="appsTitle">Applications</h2>
+              <div class="adm-tabs" role="tablist" aria-label="Applications">
+                <button class="adm-tab" role="tab" type="button" id="tabPending" aria-selected="true" aria-controls="appList" data-tab="pending">Waiting <span data-count="pending">0</span></button>
+                <button class="adm-tab" role="tab" type="button" id="tabDecided" aria-selected="false" aria-controls="appList" data-tab="decided">Decided <span data-count="decided">0</span></button>
+              </div>
+            </div>
+            <div class="adm-list" id="appList" role="tabpanel" aria-labelledby="tabPending"></div>
+          </section>
+        </div>
+
+        <div class="adm-col">
+          <section class="ch-panel adm-refresh" aria-labelledby="refreshTitle">
+            <div class="adm-head">
+              <h2 class="ch-panel__title" id="refreshTitle">Community charts</h2>
+            </div>
+            <p>Reads every verified charter's folder and updates the Marketplace. Runs by itself once a day.</p>
+            <div class="adm-track" id="refreshTrack" role="progressbar" aria-labelledby="refreshTitle" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="adm-fill" id="refreshFill"></div>
+            </div>
+            <p class="adm-status" id="refreshStatus" aria-live="polite"></p>
+            <div class="ch-actions">
+              <button class="plate plate--sm" id="refreshGo" type="button"><span class="plate__label">REFRESH NOW</span></button>
+              <a class="adm-link" href="../marketplace/?from=fv" target="_blank" rel="noopener">See it on the Marketplace</a>
+            </div>
+            <details class="adm-issues" id="refreshIssues" hidden>
+              <summary id="refreshIssuesTitle">Problems from the last refresh</summary>
+              <ul id="refreshIssuesList"></ul>
+            </details>
+          </section>
+
+          <section class="ch-panel" aria-labelledby="chartersTitle">
+            <div class="adm-head">
+              <h2 class="ch-panel__title" id="chartersTitle">Verified charters</h2>
+            </div>
+            <div class="adm-charters" id="charterList"></div>
+
+            <form class="adm-add" id="addCharter" novalidate>
+              <p class="ch-kicker">Add one by hand</p>
+              <div class="ch-field" data-field="discord">
+                <label for="aDiscord">Discord username</label>
+                <div class="ch-input"><input id="aDiscord" name="discord" type="text" autocapitalize="none" spellcheck="false" required></div>
+                <p class="ch-help" id="haDiscord"></p>
+              </div>
+              <div class="ch-field" data-field="folder">
+                <label for="aFolder">Drive folder link</label>
+                <div class="ch-input"><input id="aFolder" name="folder" type="url" inputmode="url" spellcheck="false" required></div>
+                <p class="ch-help" id="haFolder"></p>
+              </div>
+              <div><button class="btn btn--go" type="submit">Add charter</button></div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<dialog class="adm-dialog" id="admConfirm" aria-labelledby="confirmTitle">
+  <form method="dialog">
+    <h2 id="confirmTitle"></h2>
+    <p id="confirmText"></p>
+    <menu>
+      <button class="btn btn--quiet" value="cancel" type="submit" autofocus>Cancel</button>
+      <button class="btn btn--danger" value="ok" type="submit" id="confirmOk"></button>
+    </menu>
+  </form>
+</dialog>
+
+<p class="adm-toast" id="admToast" role="status" aria-live="polite"></p>
+
+<footer class="foot">
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. Admin tools, not a public page.</p>
+    <p>v0.9.2 &middot; beta</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>
