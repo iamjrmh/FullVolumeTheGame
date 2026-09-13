@@ -393,19 +393,19 @@ the TeX hyphenation patterns each language's dictionary is built from.
 
 ### AI disclosure
 
-Stated plainly rather than buried, because people reasonably want to know.
+Up front, since people ask.
 
 - **The menu background image was generated with ChatGPT**, and the animated menu loop
-  is that same image put in motion. It is placeholder art and it is on the list to be
-  replaced with something drawn.
-- **A large amount of the code was written with AI assistance** (Anthropic's Claude),
-  directed, reviewed, tested and debugged by me. The design decisions, the architecture
-  and every bug in it are mine.
+  is that same image put in motion. That is the only AI generated art in the game.
+  Everything else on screen is mine.
+- **A lot of the code was written with AI assistance** (Anthropic's Claude), directed,
+  reviewed, tested and debugged by me. The design decisions, the architecture and every
+  bug in it are mine.
 - **No song, chart, lyric, vocal line or piece of audio in FullVolume is AI generated.**
-  Charts come from human charters or from FullVolumeCharter, where a human taps the
-  timing and drags the pitches. FullVolumeCharter's pitch detection is signal processing
+  Charts come from human charters, or from FullVolumeCharter, where a human taps the
+  timing and drags the pitches. The charter's pitch detection is signal processing
   (autocorrelation), not a model, and it never invents a note it cannot hear.
-- Nothing in the game phones an AI service at runtime. There is no model in the build.
+- Nothing in the game talks to an AI service at runtime. There is no model in the build.
 
 ### Not affiliated
 
