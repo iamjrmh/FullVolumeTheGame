@@ -227,7 +227,7 @@ The game plays the vocal part that is already inside a Clone Hero or Rock Band c
 Audio in, `.fvchart` out. It walks a song through seven steps and hands back a single file carrying the words, the timing, the pitches, the album art and the audio. Drop it in a folder the game is watching and it is on the list.
 
 <p align="center">
-  <a href="https://fullvolumethegame.xyz/FullVolumeCharter/">
+  <a href="https://fullvolumethegame.xyz/fullvolumecharter/">
   <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="The FullVolumeCharter pitch roll: a note box per syllable against a piano keyboard, with the sung pitch line read off the recording drawn behind them" width="820">
   </a>
 </p>
@@ -236,7 +236,7 @@ Audio in, `.fvchart` out. It walks a song through seven steps and hands back a s
 
 <a href="https://github.com/iamjrmh/fullVolumeTheGame/releases/latest/download/FullVolumeCharterSetup.exe"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolumeCharter" style="vertical-align: middle;"> **Download FullVolumeCharter →**</a>
 
-<a href="https://fullvolumethegame.xyz/FullVolumeCharter/">**Read the whole thing at fullvolumethegame.xyz →**</a>
+<a href="https://fullvolumethegame.xyz/fullvolumecharter/">**Read the whole thing at fullvolumethegame.xyz →**</a>
 
 </div>
 
