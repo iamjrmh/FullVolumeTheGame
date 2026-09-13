@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FullVolume questions - everything people ask, answered straight</title>
+<meta name="description" content="Every question people ask about FullVolume, the free PC karaoke game that plays your own music library: microphones, song libraries, scoring, online rooms, charting, money and privacy.">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="../assets/img/app-icon.png">
+<link rel="canonical" href="https://fullvolumethegame.xyz/faq/">
+<meta name="theme-color" content="#171719">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FullVolume">
+<meta property="og:url" content="https://fullvolumethegame.xyz/faq/">
+<meta property="og:title" content="FullVolume questions">
+<meta property="og:description" content="Everything people ask about FullVolume, answered straight. Microphones, libraries, scoring, online rooms, charting, money and privacy.">
+<meta property="og:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FullVolume questions">
+<meta name="twitter:description" content="Everything people ask about FullVolume, answered straight.">
+<meta name="twitter:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<link rel="preload" href="../assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+
+<!-- No FAQPage node here on purpose. The homepage already carries one for
+     the ten questions that decide whether somebody downloads it, and two
+     competing FAQPage entities for overlapping questions is worse than one
+     good one. This page is a WebPage in the site's breadcrumb trail. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://fullvolumethegame.xyz/faq/#page",
+      "url": "https://fullvolumethegame.xyz/faq/",
+      "name": "FullVolume questions",
+      "description": "Every question people ask about FullVolume, the free PC karaoke game that plays your own music library.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://fullvolumethegame.xyz/#website" },
+      "about": { "@id": "https://fullvolumethegame.xyz/#game" },
+      "breadcrumb": { "@id": "https://fullvolumethegame.xyz/faq/#crumbs" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://fullvolumethegame.xyz/faq/#crumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "FullVolume", "item": "https://fullvolumethegame.xyz/" },
+        { "@type": "ListItem", "position": 2, "name": "Questions", "item": "https://fullvolumethegame.xyz/faq/" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page-guide">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="../index.html" aria-label="FullVolume, home">
+      <img class="nav__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULLVOLUME</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__top" id="navGame" type="button"
+                aria-expanded="false" aria-haspopup="true" aria-controls="menu-game">
+          The game
+          <svg class="nav__caret" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav__menu" id="menu-game" aria-labelledby="navGame">
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">The game</p>
+            <a href="../index.html#about">What it is</a>
+            <a href="../index.html#features">Features</a>
+            <a href="../index.html#shots">Screens</a>
+            <a href="../index.html#together">Multiplayer</a>
+            <a href="../index.html#library">Your library</a>
+          </div>
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">Read up</p>
+            <a href="../faq/" aria-current="page">All questions</a>
+            <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+            <a href="../yarg-vocals/">YARG vocals</a>
+            <a href="../games-like-singstar/">Like SingStar</a>
+            <a href="../karaoke-at-home/">Karaoke at home</a>
+          </div>
+        </div>
+      </div>
+      <a href="../FullVolumeCharter/">Charter</a>
+      <a href="../marketplace/">Marketplace</a>
+    </nav>
+
+    <button class="sfx-toggle" id="sfxToggle" type="button"
+            aria-pressed="false" title="Play the game's own button sounds">
+      <svg class="sfx-toggle__on" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="sfx-toggle__off" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sfx-toggle__text">SFX</span>
+    </button>
+
+    <a class="plate plate--sm nav__cta" href="../index.html#download">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+
+    <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    <details class="nav__group">
+      <summary>The game</summary>
+      <a href="../index.html#about">What it is</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../index.html#library">Your library</a>
+    </details>
+    <details class="nav__group">
+      <summary>Read up</summary>
+      <a href="../faq/">All questions</a>
+      <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+      <a href="../yarg-vocals/">YARG vocals</a>
+      <a href="../games-like-singstar/">Like SingStar</a>
+      <a href="../karaoke-at-home/">Karaoke at home</a>
+    </details>
+    <a href="../FullVolumeCharter/">FullVolumeCharter</a>
+    <a href="../marketplace/">Marketplace</a>
+    <a class="plate plate--sm plate--block nav__mobile-cta" href="../index.html#download">
+      <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="art-hero">
+  <div class="wrap art-hero__inner">
+    <p class="crumbs"><a href="../index.html">FullVolume</a><span>/</span>Questions</p>
+    <h1>Everything people ask, answered straight.</h1>
+    <p class="art-hero__lead">
+      No account, no song packs, no storefront, and nothing here dressed up. If the answer
+      you need is not on this page, open an issue and it will be next time.
+    </p>
+    <p class="art-hero__meta">
+      <span>Thirty-eight questions</span>
+      <span>Updated 13 September 2026</span>
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <!-- Hidden until the script is here to honour it; without scripting
+         every question is simply on the page, which is the point. -->
+    <div class="faq-find" id="faqFind" hidden>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input type="search" id="faqBox" placeholder="Search the questions"
+             aria-label="Search the questions" autocomplete="off" spellcheck="false">
+    </div>
+
+    <!-- ---------- Getting started ---------- -->
+    <section class="faq-group" data-faq-group>
+      <header class="faq-group__head">
+        <h2 class="faq-group__t">Getting started</h2>
+        <p class="faq-group__n">7 questions</p>
+      </header>
+      <div class="faq">
+
+        <details class="faq__item">
+          <summary class="faq__q">Is it actually free?</summary>
+          <div class="faq__a">
+            <p>Yes, all of it. There is no shop, no song packs, no subscription and no
+               account to make. Download the installer, run it, sing. There is a
+               <a href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">tip
+               jar</a> if it earns you a good night, and that is the whole of it.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">What do I actually need to play?</summary>
+          <div class="faq__a">
+            <p>A Windows PC, a microphone of any description, and some songs on your drive.
+               That is the list. No console, no plastic microphone, no camera, no second
+               screen, no launcher and nothing to sign into.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Does it need admin rights to install?</summary>
+          <div class="faq__a">
+            <p>No. It installs per user into your own profile, so there is no UAC prompt
+               and nothing for IT to approve. Hand the installer to four friends and that is
+               four installs and zero arguments.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Do I need a special microphone?</summary>
+          <div class="faq__a">
+            <p>No. A USB microphone, a gaming headset, a webcam mic or the one built into
+               your laptop will all do. It is listening for the pitch you are singing rather
+               than the quality of the recording, so cheap kit is not a handicap.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Does it need an internet connection?</summary>
+          <div class="faq__a">
+            <p>Only for the online rooms. Singing on your own works with the network
+               unplugged. There is no launcher, no login and nothing phoning home.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Does it run on Mac, Linux or Steam Deck?</summary>
+          <div class="faq__a">
+            <p>Not yet. It is a Windows 10 and 11 build, 64-bit, and at the moment that is
+               the only one there is.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Is it on Steam?</summary>
+          <div class="faq__a">
+            <p>Not at the moment. It comes straight off this site, or from
+               <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
+               if you would rather keep it alongside the rest of your library there.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ---------- Songs and your library ---------- -->
+    <section class="faq-group" data-faq-group>
+      <header class="faq-group__head">
+        <h2 class="faq-group__t">Songs and your library</h2>
+        <p class="faq-group__n">8 questions</p>
+      </header>
+      <div class="faq">
+
+        <details class="faq__item">
+          <summary class="faq__q">Where do the songs come from?</summary>
+          <div class="faq__a">
+            <p>Your own drive. Point it at a <a href="../clone-hero-vocals/">Clone Hero song
+               folder</a>, a pile of <code>.sng</code> archives or your Rock Band
+               <code>_rb3con</code> packages and it reads the lot. Songs with nobody singing
+               on them are quietly left out, so everything on the list has a part to sing.
+               If you have not got a library yet, the <a href="../marketplace/">Marketplace</a>
+               lists thousands of free charts that do.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Can I just point it at my MP3 folder?</summary>
+          <div class="faq__a">
+            <p>No, and this is the one thing people expect that it does not do. A karaoke
+               game needs to know which word lands on which beat at which pitch, and an MP3
+               carries none of that. It needs a chart. What it will read is the charts other
+               rhythm games already use, which is why a Clone Hero library turns into a set
+               list with nothing to convert. For a song that has no chart anywhere, there is
+               <a href="../FullVolumeCharter/">FullVolumeCharter</a>.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Which formats does it read?</summary>
+          <div class="faq__a">
+            <p>Clone Hero song folders exactly as they sit on your drive,
+               <code>.sng</code> archives read straight out of the file, Rock Band
+               <code>_rb3con</code> packages with no unpacking first, UltraStar
+               <code>.txt</code> charts, and its own <code>.fvchart</code> files. Album art
+               comes in with them, so the list looks like your record shelf.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Where do I get charts, then?</summary>
+          <div class="faq__a">
+            <p>The <a href="../marketplace/">Marketplace</a> on this site lists tens of
+               thousands of free charts that have a vocal part, pulled together from the two
+               big community catalogues, and downloads them for you. Nothing is hosted here
+               and nothing is sold: they are other people's charts, linked where they live.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Why is a song missing from my list?</summary>
+          <div class="faq__a">
+            <p>Almost always because the chart has no vocal part in it. A chart written for
+               guitar has nothing to sing, so putting it on the list would only mean picking
+               it and finding out the hard way. Rescan from Settings if you have added
+               folders since; if a song you know has vocals is still missing, that is worth
+               <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">an
+               issue</a>.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">How many songs can it handle?</summary>
+          <div class="faq__a">
+            <p>As many as you have got, across as many folders and drives as you like. It
+               reads through them once, tells you how it is getting on, and then remembers,
+               so it opens on the list rather than on a loading bar from then on.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Can I use my own backgrounds?</summary>
+          <div class="faq__a">
+            <p>Yes. Drop a picture or a video into
+               <code>Documents\Full Volume\Custom\Backgrounds</code> and it turns up in the
+               backdrop carousel. The menus and the song each get their own pick, so you can
+               have one for the lobby and another for the stage.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">What happens to my scores if I uninstall it?</summary>
+          <div class="faq__a">
+            <p>They stay put, along with your profiles, your backdrops and the song folders
+               you added. All of it lives in <code>Documents\Full Volume</code>, which the
+               uninstaller deliberately never touches. Reinstall it later and it picks up
+               where you left off.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ---------- Singing and scoring ---------- -->
+    <section class="faq-group" data-faq-group>
+      <header class="faq-group__head">
+        <h2 class="faq-group__t">Singing and scoring</h2>
+        <p class="faq-group__n">7 questions</p>
+      </header>
+      <div class="faq">
+
+        <details class="faq__item">
+          <summary class="faq__q">Do I have to be any good at singing?</summary>
+          <div class="faq__a">
+            <p>No, and that is rather the point. Sing the whole thing an octave down if that
+               is where your voice lives and it still counts. There is an Easy setting that
+               widens how close you have to be, for when the room has had a few.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Is this like SingStar or LIPS?</summary>
+          <div class="faq__a">
+            <p>Same idea, different source of songs. It is a spiritual successor to
+               <a href="../games-like-singstar/">LIPS on the Xbox 360</a>: hold the note,
+               watch the score climb, hand the mic over. The difference is that nobody sells
+               you the set list. It comes off your own drive.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">How does the scoring work?</summary>
+          <div class="faq__a">
+            <p>By phrase. Hold the notes in a line close enough for long enough and the
+               phrase lands, your streak climbs, and the multiplier goes up with it. Get
+               every phrase in the song and you get a full combo and five stars, every time.
+               Nothing else about how you sang it can take that away.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">I am a bass and the song is by a soprano. Am I stuck?</summary>
+          <div class="faq__a">
+            <p>Not at all. It is listening for the note, not the octave, so singing a line
+               an octave down scores exactly the same as singing it where it was recorded.
+               Nobody has to be a tenor to get a full combo.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Everything feels slightly late. How do I fix it?</summary>
+          <div class="faq__a">
+            <p>That is audio delay, and every PC has a different amount of it. Go to
+               Settings, then Calibration, and press the button: it measures your delay for
+               you in one go. If you would rather do it by hand, tap along for a few bars and
+               let it work you out. Do this once and everything lines up.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">What about rap, or songs that are mostly shouted?</summary>
+          <div class="faq__a">
+            <p>Those notes are talkies, and they are scored on landing in time rather than
+               on pitch. Rap charts and shouted choruses play properly rather than sitting
+               there giving you nothing.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Can I queue songs up before the night starts?</summary>
+          <div class="faq__a">
+            <p>Yes, and it is the feature most people end up using most. Queue songs while
+               somebody else is still singing, so the night runs itself instead of stopping
+               dead between every track while four people argue over a song list.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ---------- Singing together ---------- -->
+    <section class="faq-group" data-faq-group>
+      <header class="faq-group__head">
+        <h2 class="faq-group__t">Singing together</h2>
+        <p class="faq-group__n">6 questions</p>
+      </header>
+      <div class="faq">
+
+        <details class="faq__item">
+          <summary class="faq__q">Can I sing with friends online?</summary>
+          <div class="faq__a">
+            <p>Yes. Host a room from inside the game, put a code on it if you would rather
+               keep it to yourselves, and send it round. Voice chat is built in, everybody's
+               score is on screen at once, and the game says up front if somebody in the room
+               has not got the song that is queued.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Do we all need the same songs?</summary>
+          <div class="faq__a">
+            <p>You need the one that is queued, and the room tells everybody who has not got
+               it before it starts rather than after. The music itself never crosses the
+               network: everyone plays their own copy, in sync, which is why it stays in time
+               and why the scoring is fair.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Can we hear each other while a song is playing?</summary>
+          <div class="faq__a">
+            <p>Only when you hold your key. Microphones are open in the lobby, and once a
+               song starts the room goes push to talk, so four open mics do not send
+               everybody's singing back over the music they are already playing. Hold your
+               key and you are heard; hearing other people is never affected.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">How many people can be in a room?</summary>
+          <div class="faq__a">
+            <p>Up to four. You say how many singers a room takes when you make it, and it
+               holds the door at that.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Do I need to forward a port to host?</summary>
+          <div class="faq__a">
+            <p>Hosting from inside the game means other people are connecting to your
+               machine, so depending on your router you may need to. If that is a nuisance,
+               join one of the listed rooms instead: those run on servers that are already
+               reachable.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Is there local multiplayer on one PC?</summary>
+          <div class="faq__a">
+            <p>Passing one microphone round a room works today, and it is how most people
+               play it. Proper local multiplayer, with a scoreboard for several singers
+               taking turns on one machine, is on the list rather than in the build.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ---------- Making charts ---------- -->
+    <section class="faq-group" data-faq-group>
+      <header class="faq-group__head">
+        <h2 class="faq-group__t">Making your own charts</h2>
+        <p class="faq-group__n">5 questions</p>
+      </header>
+      <div class="faq">
+
+        <details class="faq__item">
+          <summary class="faq__q">What is FullVolumeCharter?</summary>
+          <div class="faq__a">
+            <p>The charting tool for this game. It takes a song's audio and walks it through
+               seven steps - the words, the syllables, the timing, the pitches - and writes
+               one <code>.fvchart</code> file the game plays.
+               <a href="../FullVolumeCharter/">There is a whole page on it.</a></p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">When is it out?</summary>
+          <div class="faq__a">
+            <p>It ships alongside FullVolume 0.9.3. Everything on
+               <a href="../FullVolumeCharter/">its page</a> is the tool as it stands today,
+               screenshots and all.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Will it cost anything?</summary>
+          <div class="faq__a">
+            <p>No. Same as the game: free, no account, nothing to unlock.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Do I need to read music to chart a song?</summary>
+          <div class="faq__a">
+            <p>No. You never type a note name. The tool reads the sung pitch off the
+               recording and draws it, you drag anything that looks wrong, and a guide tone
+               plays what you are dragging so you can check it by ear.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Can I share the charts I make?</summary>
+          <div class="faq__a">
+            <p>They are your files, so that is your call. Bear in mind a
+               <code>.fvchart</code> has the song's audio inside it, so passing one round
+               means passing the recording round. Inside the game, a chart can be handed
+               straight to somebody in your room who has not got it, which is what most
+               people actually want.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ---------- Money, privacy, small print ---------- -->
+    <section class="faq-group" data-faq-group>
+      <header class="faq-group__head">
+        <h2 class="faq-group__t">Money, privacy and the small print</h2>
+        <p class="faq-group__n">5 questions</p>
+      </header>
+      <div class="faq">
+
+        <details class="faq__item">
+          <summary class="faq__q">What is the catch?</summary>
+          <div class="faq__a">
+            <p>There is not one, and that is not a sales line. It is one person's project.
+               There is nothing to sell you because there is no music to sell you, no
+               adverts, no data going anywhere and no account to hang any of that off. If it
+               earns you a good night there is a tip jar, and if it does not, that is fine
+               too.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Does it record me, or send my singing anywhere?</summary>
+          <div class="faq__a">
+            <p>Nothing you sing is written to disk or sent anywhere while you are playing on
+               your own. Your microphone is read to work out the pitch and then thrown away.
+               In an online room your voice is sent to the other people in that room so they
+               can hear you, which is the entire point of voice chat, and the server relays
+               it without ever decoding it. There is
+               <a href="../privacy/">a privacy page</a> that goes through all of it.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Is there any tracking or telemetry?</summary>
+          <div class="faq__a">
+            <p>No analytics, no crash reporter, no identifier and no account. The only thing
+               the game does over the network unprompted is ask GitHub whether there is a
+               newer release, and you can switch that off in Settings.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Is any of this legally my problem?</summary>
+          <div class="faq__a">
+            <p>The songs are. FullVolume ships with no music at all and reads what is
+               already on your machine, so whether you are entitled to have those files is
+               between you and the law where you live. The <a href="../terms/">terms</a>
+               say this in more words.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Something is broken. Where do I say so?</summary>
+          <div class="faq__a">
+            <p>Open an
+               <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">issue
+               on GitHub</a> and say what you were doing, what happened, and which version you
+               are on. If it crashed, the log is at
+               <code>%USERPROFILE%\AppData\LocalLow\JURMR\FullVolume\Player.log</code>;
+               attach it and the problem usually names itself.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <p class="faq-none" id="faqNone" hidden>
+      Nothing matches that. Try a shorter word, or
+      <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">ask it
+      on GitHub</a> and it will be on this page next time.
+    </p>
+
+    <div class="narrow">
+      <div class="art__cta">
+        <h2 class="h2">Still want to try it?</h2>
+        <p>One installer, everything in it. No account, no launcher, no admin rights.</p>
+        <div class="art__cta-row">
+          <a class="plate plate--lg" href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe">
+            <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+            <span class="plate__label">GET IT</span>
+          </a>
+        </div>
+        <p class="art__cta-note">Windows 10 and 11, 64-bit. Free, and it stays free.</p>
+      </div>
+
+      <div class="art__next">
+        <p class="art__next-t">Read next</p>
+        <div class="art__next-grid">
+          <a href="../FullVolumeCharter/">
+            <b>FullVolumeCharter</b>
+            <span>Chart the vocals for a song nobody has charted yet.</span>
+          </a>
+          <a href="../marketplace/">
+            <b>The Marketplace</b>
+            <span>Free charts with a vocal part, from both community catalogues.</span>
+          </a>
+          <a href="../terms/">
+            <b>Terms of use</b>
+            <span>What you are agreeing to, in plain English first.</span>
+          </a>
+          <a href="../privacy/">
+            <b>Privacy</b>
+            <span>What the game and this site do and do not collect.</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <div class="foot__id">
+      <div class="foot__brand">
+        <img class="foot__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+        <div>
+          <p class="foot__name">FULLVOLUME</p>
+          <p class="foot__dom">fullvolumethegame.xyz</p>
+        </div>
+      </div>
+
+      <p class="foot__tag">The karaoke game that plays your own music library. Free, no account, no song packs.</p>
+
+      <div class="foot__by">
+        <img class="foot__weed" src="../assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
+        <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
+      </div>
+    </div>
+
+    <nav class="foot__nav" aria-label="Footer">
+      <div class="foot__col">
+        <p class="foot__col-t">The game</p>
+        <a href="../index.html#about">What it is</a>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#shots">Screens</a>
+        <a href="../index.html#together">Multiplayer</a>
+        <a href="../index.html#library">Your library</a>
+        <a href="../index.html#download">Download</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Songs</p>
+        <a href="../FullVolumeCharter/">FullVolumeCharter</a>
+        <a href="../marketplace/">Marketplace</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases" target="_blank" rel="noopener">All releases</a>
+        <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Read up</p>
+        <a href="../faq/">All questions</a>
+        <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+        <a href="../yarg-vocals/">YARG vocals</a>
+        <a href="../games-like-singstar/">Like SingStar</a>
+        <a href="../karaoke-at-home/">Karaoke at home</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">The small print</p>
+        <a href="../terms/">Terms of use</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">Report a bug</a>
+        <a href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">Tip jar</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
+    <p>v0.9.2 &middot; beta</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 <p align="center">
   <a href="README.md">README</a>
   &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="#-fullvolumecharter">CHARTER</a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="FullVolume.md">ROADMAP</a>
 </p>
 
@@ -21,6 +23,7 @@ A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs al
 [![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest)
 [![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
+[![Charter](https://img.shields.io/badge/charter-0.1.0%20with%200.9.3-829B87)](#-fullvolumecharter)
 
 
 <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume on GitHub →**</a>
@@ -183,6 +186,8 @@ If you've already got a Clone Hero song folder, you've already got a set list. N
 - Clone Hero song folders, exactly as they sit on your drive
 - `.sng` archives, read straight out of the file
 - Rock Band `_rb3con` packages, no unpacking first
+- UltraStar `.txt` charts
+- `.fvchart` files, written by [FullVolumeCharter](#-fullvolumecharter)
 - Album art, so the list looks like your record shelf
 
 Songs with no vocal part are left out of the list on purpose.
@@ -210,6 +215,94 @@ Host a room from inside the game, send it round, and sing together from wherever
 - Anyone can queue a song, and it says up front who hasn't got it
 - Open mics in the lobby, push to talk once a song starts, so nobody's singing comes back at you over the music
 - Everyone stays in time wherever they are, with everybody's score on screen at once
+
+---
+
+## 🎚️ FullVolumeCharter
+
+> **Coming with FullVolume 0.9.3.** Everything below is the tool as it stands today, screenshots and all. The download link is live the moment the release is.
+
+The game plays the vocal part that is already inside a Clone Hero or Rock Band chart. That covers tens of thousands of songs, and it does not cover the one you wanted at half past eleven on a Friday. **FullVolumeCharter** is how that one gets a part to sing.
+
+Audio in, `.fvchart` out. It walks a song through seven steps and hands back a single file carrying the words, the timing, the pitches, the album art and the audio. Drop it in a folder the game is watching and it is on the list.
+
+<p align="center">
+  <a href="https://fullvolumethegame.xyz/FullVolumeCharter/">
+  <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="The FullVolumeCharter pitch roll: a note box per syllable against a piano keyboard, with the sung pitch line read off the recording drawn behind them" width="820">
+  </a>
+</p>
+
+<div align="center">
+
+<a href="https://github.com/iamjrmh/fullVolumeTheGame/releases/latest/download/FullVolumeCharterSetup.exe"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolumeCharter" style="vertical-align: middle;"> **Download FullVolumeCharter →**</a>
+
+<a href="https://fullvolumethegame.xyz/FullVolumeCharter/">**Read the whole thing at fullvolumethegame.xyz →**</a>
+
+</div>
+
+### The seven steps
+
+1. **Load the audio** - one file, or the vocal and the backing as separate stems. Cover art, a backdrop and a timed `.lrc` sitting beside the track come in with it.
+2. **Song info** - title, artist, album, genre, year, language, and your name on it in whatever colours you like. The tempo is worked out from the audio, with halve, double and tap tempo to correct it.
+3. **Lyrics** - paste the words and they are split into the syllables actually sung, by the rules of the language you picked. Fix one by hand and it has learned that word.
+4. **Pitch breaks** - click a word for every extra pitch it passes through while it is held. Each `+` is one more note on the same word.
+5. **Tap the timing** - play the song and tap Enter as each syllable starts. Slow it to 50, 65 or 80 per cent and it *stays in its own key*, so a fast line is still singable while you tap it.
+6. **Pitches** - the sung line is read straight off the recording, a phrase at a time, and you drag anything it got wrong. A guide tone plays the note under the cursor.
+7. **Export** - one `.fvchart` with all of it inside. Open the same file later and it puts you back on whichever step you want.
+
+Everything you enter is saved the moment you enter it, so a song started tonight is picked up tomorrow exactly where you stopped.
+
+<details>
+<summary><h3 align="center">The seven steps, on screen</h3></summary>
+<p align="center">
+  <img src="./docs/assets/img/shots/charter/charter-01.jpg" alt="The start screen: chart a new song, or open one you wrote">
+  <em>Start a new one, or open one you wrote.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-02.jpg" alt="Step one: a vocal stem and a backing stem loaded, each with its waveform and its own volume">
+  <em>Step 1. One file, or a vocal and a backing.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-03.jpg" alt="Step two: the song information form, with the charter name coloured letter by letter">
+  <em>Step 2. Your name on it, in your own colours.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-04.jpg" alt="Step two: the tempo card, with a detected BPM, a confidence bar, halve, double and tap tempo">
+  <em>Step 2. The tempo, heard and correctable.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-05.jpg" alt="Step three: pasted lyrics beside the same lines split into hyphenated sung syllables">
+  <em>Step 3. Pasted words on the left, sung syllables on the right.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-06.jpg" alt="Step three: the how it will sing panel, one box per note, with counts of lines, words, syllables and sections">
+  <em>Step 3. How it will sing, box by box.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-08.jpg" alt="Step four: every syllable as a clickable box, for adding and removing pitch breaks">
+  <em>Step 4. Click a word for every pitch it moves through.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-09.jpg" alt="Step five: the tapping view, with the upcoming syllables, the waveform and the speed buttons">
+  <em>Step 5. One tap per note, at whatever speed you can manage.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-10.jpg" alt="Step five: the whole song listed with a timestamp on every line">
+  <em>Step 5. Jump back to any syllable.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-12.jpg" alt="Step six: the detected pitch line drawn behind the notes, with the read from the recording panel">
+  <em>Step 6. What was sung, drawn behind the notes.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-13.jpg" alt="Step seven: the export summary, listing the song details beside the stems, cover, background and chart about to be packed">
+  <em>Step 7. Everything that is going in.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-14.jpg" alt="Step seven: the chart summary with counts of lines, notes, pitched notes, talkies, percussion and range">
+  <em>Step 7. And what came out.</em>
+</p>
+</details>
+
+| | |
+|---|---|
+| **File** | `FullVolumeCharterSetup.exe` |
+| **Charter version** | 0.1.0 |
+| **Lands with** | FullVolume 0.9.3 |
+| **Runs on** | Windows 10 and 11, 64-bit |
+| **Account** | None |
+| **Writes** | `.fvchart` |
+
+A `.fvchart` carries the song's audio inside it, so passing one around means passing the recording around. Inside the game, a chart can be handed straight to somebody in your room who has not got it, which is usually what you actually want.
 
 ---
 
@@ -244,6 +337,8 @@ Open an [issue](../../issues) and say what you were doing, what happened, and wh
 
 Made by **JURMR**.
 [fullvolumethegame.xyz](https://fullvolumethegame.xyz)
+
+[Terms of use](https://fullvolumethegame.xyz/terms/) &nbsp;•&nbsp; [Privacy](https://fullvolumethegame.xyz/privacy/) &nbsp;•&nbsp; [Questions](https://fullvolumethegame.xyz/faq/)
 
 <sub>© 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, Harmonix or Microsoft.</sub>
 
