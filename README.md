@@ -322,6 +322,99 @@ You bring the songs. A Clone Hero or Rock Band library is all it asks for.
 
 ---
 
+## 🙏 Credits and Third Party Work
+
+FullVolume is closed source for now, and that is exactly why this list matters: you
+cannot read the code to see what is in it, so it is written out here instead. If
+something of yours belongs on this list and is not on it, open an issue and it goes on.
+
+### The charting community
+
+Every song in this game was charted by somebody for nothing. The vocal part FullVolume
+reads is the `PART VOCALS` track that Rock Band charters, Clone Hero charters and
+UltraStar charters wrote by hand, and there would be no game without them. Thanks in
+particular to the people who keep charting vocals when almost nothing plays them.
+
+### Rock Band file formats
+
+FullVolume reads `_rb3con` packages and the `.mogg` audio inside them. Neither format
+is documented by Harmonix. Both are readable today only because the Rock Band modding
+community reverse engineered them over a decade and published what they found.
+
+The mogg decryption in FullVolume is an independent C# implementation, written against
+that published work rather than copied from any one project, and the constant tables it
+uses are Harmonix's own, long since extracted and republished by the people below. No
+source from any of these projects is compiled into FullVolume, and none of them is
+endorsing this. The debt is still theirs:
+
+- **TrojanNemo** for [Nautilus / NautilusFREE](https://github.com/trojannemo/Nautilus),
+  the reference toolkit for Rock Band files and the most complete public treatment of
+  the mogg format there is.
+- **LocalH** for **moggulator**.
+- **Dark** for **themethod3**.
+- The wider **Rock Band modding and Customs Creators community**, whose accumulated
+  documentation of CON packages, `songs.dta` and the mogg versions is the only reason
+  any of this parses.
+
+### Chart catalogues
+
+The in-game **GET SONGS** browser searches and downloads from two community catalogues:
+
+- **[Rhythmverse](https://rhythmverse.co)**, run by Hive. Rhythmverse has no public API,
+  so the game calls the same `songfiles` endpoints the site's own browse page calls, at
+  the site's own pace, and takes each file through the normal
+  `rhythmverse.co/download/<id>` page so the download is counted for the charter who
+  uploaded it. Nothing is mirrored, rehosted or cached anywhere else. If Hive would
+  rather it worked some other way, or not at all, say so and it changes.
+- **[Chorus Encore](https://enchor.us)**, whose public API is used as documented.
+
+Album art, song metadata and files all stay with those sites. FullVolume hosts no music.
+
+### Code in the game
+
+| | |
+|---|---|
+| **[NVorbis](https://github.com/NVorbis/NVorbis)** by Andrew Ward | Ogg Vorbis decoding, MIT. Vendored from 0.10.5 and patched locally for two decode bugs that Rock Band moggs hit. |
+| **[Concentus](https://github.com/lostromb/concentus)** by Logan Stromberg | Opus for voice chat, BSD three clause, after the reference implementation by the Xiph.Org Foundation, Skype Limited, CSIRO and others. |
+| **[LiteNetLib](https://github.com/RevenantX/LiteNetLib)** by RevenantX | Reliable UDP for multiplayer, MIT. |
+| **[Kenney](https://kenney.nl)** | Interface Sounds pack, CC0. |
+| **[Simple Icons](https://github.com/simple-icons/simple-icons)** | The four social marks on the main menu, CC0. |
+| **Unity 6** and **TextMesh Pro** | Engine and text rendering, under the Unity licence. |
+
+Pitch detection uses the **McLeod Pitch Method** (Philip McLeod and Geoff Wyvill, *A
+Smarter Way to Find Pitch*, 2005), implemented from the paper.
+
+### Code in FullVolumeCharter
+
+**[Tauri 2](https://tauri.app)**, **[React](https://react.dev)**,
+**[Vite](https://vite.dev)**, the **[zip](https://crates.io/crates/zip)** crate, and
+**[hyphen](https://github.com/ytiurin/hyphen)** for syllable splitting, which carries
+the TeX hyphenation patterns each language's dictionary is built from.
+
+### AI disclosure
+
+Stated plainly rather than buried, because people reasonably want to know.
+
+- **The menu background image was generated with ChatGPT**, and the animated menu loop
+  is that same image put in motion. It is placeholder art and it is on the list to be
+  replaced with something drawn.
+- **A large amount of the code was written with AI assistance** (Anthropic's Claude),
+  directed, reviewed, tested and debugged by me. The design decisions, the architecture
+  and every bug in it are mine.
+- **No song, chart, lyric, vocal line or piece of audio in FullVolume is AI generated.**
+  Charts come from human charters or from FullVolumeCharter, where a human taps the
+  timing and drags the pitches. FullVolumeCharter's pitch detection is signal processing
+  (autocorrelation), not a model, and it never invents a note it cannot hear.
+- Nothing in the game phones an AI service at runtime. There is no model in the build.
+
+### Not affiliated
+
+FullVolume is not affiliated with, endorsed by or connected to Harmonix, Epic Games,
+Microsoft, Clone Hero, YARG, Rhythmverse, Chorus, UltraStar or any of the projects above.
+All trade marks belong to their owners.
+
+---
+
 ## 🐛 Something Broken?
 
 Open an [issue](../../issues) and say what you were doing, what happened, and which version you're on. If it crashed, the log is at `%USERPROFILE%\AppData\LocalLow\JURMR\FullVolume\Player.log` - attach it and I'll have a far better idea what went wrong.
