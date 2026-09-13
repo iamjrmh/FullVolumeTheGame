@@ -109,10 +109,32 @@
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      <a href="../index.html#about">The game</a>
-      <a href="../index.html#features">Features</a>
-      <a href="../index.html#shots">Screens</a>
-      <a href="../index.html#together">Multiplayer</a>
+      <div class="nav__item">
+        <button class="nav__top" id="navGame" type="button"
+                aria-expanded="false" aria-haspopup="true" aria-controls="menu-game">
+          The game
+          <svg class="nav__caret" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav__menu" id="menu-game" aria-labelledby="navGame">
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">The game</p>
+            <a href="../index.html#about">What it is</a>
+            <a href="../index.html#features">Features</a>
+            <a href="../index.html#shots">Screens</a>
+            <a href="../index.html#together">Multiplayer</a>
+            <a href="../index.html#library">Your library</a>
+          </div>
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">Read up</p>
+            <a href="../faq/">All questions</a>
+            <a href="../clone-hero-vocals/" aria-current="page">Clone Hero vocals</a>
+            <a href="../yarg-vocals/">YARG vocals</a>
+            <a href="../games-like-singstar/">Like SingStar</a>
+            <a href="../karaoke-at-home/">Karaoke at home</a>
+          </div>
+        </div>
+      </div>
+      <a href="../FullVolumeCharter/">Charter</a>
       <a href="../marketplace/">Marketplace</a>
     </nav>
 
@@ -133,10 +155,23 @@
   </div>
 
   <div class="nav__mobile" id="mobile-menu" hidden>
-    <a href="../index.html#about">The game</a>
-    <a href="../index.html#features">Features</a>
-    <a href="../index.html#shots">Screens</a>
-    <a href="../index.html#together">Multiplayer</a>
+    <details class="nav__group">
+      <summary>The game</summary>
+      <a href="../index.html#about">What it is</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../index.html#library">Your library</a>
+    </details>
+    <details class="nav__group">
+      <summary>Read up</summary>
+      <a href="../faq/">All questions</a>
+      <a href="../clone-hero-vocals/" aria-current="page">Clone Hero vocals</a>
+      <a href="../yarg-vocals/">YARG vocals</a>
+      <a href="../games-like-singstar/">Like SingStar</a>
+      <a href="../karaoke-at-home/">Karaoke at home</a>
+    </details>
+    <a href="../FullVolumeCharter/">FullVolumeCharter</a>
     <a href="../marketplace/">Marketplace</a>
     <a class="plate plate--sm plate--block nav__mobile-cta" href="../index.html#download">
       <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
@@ -394,31 +429,56 @@
 <!-- ================= FOOTER ================= -->
 <footer class="foot">
   <div class="wrap foot__inner">
-    <div class="foot__brand">
-      <img class="foot__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
-      <div>
-        <p class="foot__name">FULLVOLUME</p>
-        <p class="foot__dom">fullvolumethegame.xyz</p>
+    <div class="foot__id">
+      <div class="foot__brand">
+        <img class="foot__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+        <div>
+          <p class="foot__name">FULLVOLUME</p>
+          <p class="foot__dom">fullvolumethegame.xyz</p>
+        </div>
+      </div>
+
+      <p class="foot__tag">The karaoke game that plays your own music library. Free, no account, no song packs.</p>
+
+      <div class="foot__by">
+        <img class="foot__weed" src="../assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
+        <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
       </div>
     </div>
 
-    <nav class="foot__links" aria-label="Footer">
-      <a href="../index.html#about">The game</a>
-      <a href="../index.html#features">Features</a>
-      <a href="../index.html#shots">Screens</a>
-      <a href="../index.html#together">Multiplayer</a>
-      <a href="../marketplace/">Marketplace</a>
-      <a href="../clone-hero-vocals/">Clone Hero vocals</a>
-      <a href="../games-like-singstar/">Like SingStar</a>
-      <a href="../yarg-vocals/">YARG vocals</a>
-      <a href="../karaoke-at-home/">Karaoke at home</a>
-      <a href="../index.html#download">Download</a>
+    <nav class="foot__nav" aria-label="Footer">
+      <div class="foot__col">
+        <p class="foot__col-t">The game</p>
+        <a href="../index.html#about">What it is</a>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#shots">Screens</a>
+        <a href="../index.html#together">Multiplayer</a>
+        <a href="../index.html#library">Your library</a>
+        <a href="../index.html#download">Download</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Songs</p>
+        <a href="../FullVolumeCharter/">FullVolumeCharter</a>
+        <a href="../marketplace/">Marketplace</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases" target="_blank" rel="noopener">All releases</a>
+        <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Read up</p>
+        <a href="../faq/">All questions</a>
+        <a href="../clone-hero-vocals/" aria-current="page">Clone Hero vocals</a>
+        <a href="../yarg-vocals/">YARG vocals</a>
+        <a href="../games-like-singstar/">Like SingStar</a>
+        <a href="../karaoke-at-home/">Karaoke at home</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">The small print</p>
+        <a href="../terms/">Terms of use</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">Report a bug</a>
+        <a href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">Tip jar</a>
+      </div>
     </nav>
-
-    <div class="foot__by">
-      <img class="foot__weed" src="../assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
-      <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
-    </div>
   </div>
 
   <div class="wrap foot__rule">

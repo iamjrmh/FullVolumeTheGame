@@ -315,6 +315,11 @@ code {
   padding: 2px 6px;
   border-radius: 5px;
   color: var(--gold);
+  /* A Windows path has no spaces to break at, so a full one
+     (%USERPROFILE%\AppData\LocalLow\JURMR\FullVolume\Player.log) is wider
+     than a phone and was being clipped by the body's overflow-x rather
+     than wrapped. Break it anywhere rather than hide the end of it. */
+  overflow-wrap: anywhere;
 }
 
 .dot {
@@ -2097,4 +2102,673 @@ body::after {
   .art-hero__inner { max-width: none; }
   .art__steps li { grid-template-columns: 32px 1fr; gap: var(--s3); }
   .art__steps li::before { width: 32px; height: 32px; font-size: 16px; }
+}
+
+/* ============================================================
+   NAV MENUS - six links down to three
+
+   The bar carried six section links, the SFX toggle and the download
+   plate, which left about forty pixels of air at 1180px and none at
+   all once a second product existed. The five section links are now
+   folded into one "The game" disclosure alongside the four guide
+   pages, so the bar itself reads Game / Charter / Marketplace and the
+   things that used to be footer-only are one hop from every page.
+   ============================================================ */
+.nav__links { align-items: center; gap: var(--s5); }
+.nav__item { position: relative; }
+
+/* The trigger is a button, not a link - it goes nowhere, it opens
+   something - so it borrows the link's look rather than inheriting it. */
+.nav__top {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--s2) 0;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream-dim);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color var(--t-hover) var(--ease-out);
+}
+.nav__top::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-hover) var(--ease-out);
+}
+.nav__item.is-open .nav__top { color: var(--cream); }
+.nav__item.is-open .nav__top::after,
+.nav__item.is-current .nav__top::after { transform: scaleX(1); }
+.nav__item.is-current .nav__top { color: var(--gold); }
+
+@media (hover: hover) and (pointer: fine) {
+  .nav__top:hover { color: var(--cream); }
+  .nav__top:hover::after { transform: scaleX(1); }
+}
+
+.nav__caret {
+  flex: none;
+  color: var(--gold);
+  opacity: .8;
+  transition: transform var(--t-hover) var(--ease-out);
+}
+.nav__item.is-open .nav__caret { transform: rotate(180deg); }
+
+/* It grows out of the trigger it was opened from, not out of its own
+   middle: transform-origin sits at the trigger's left edge, above the
+   panel's own top. Exit runs at two thirds of the enter, so dismissing
+   it feels immediate and opening it does not. */
+.nav__menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: calc(var(--s5) * -1);
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(168px, max-content));
+  gap: var(--s5) var(--s7);
+  width: max-content;
+  padding: var(--s5) var(--s6);
+  background: var(--panel);
+  background-image: linear-gradient(180deg, rgba(243,238,231,.055), rgba(0,0,0,.14));
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 6px 7px 0 rgba(0,0,0,.45), inset 0 1px 0 rgba(243,238,231,.10);
+  transform-origin: var(--s5) -14px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(.97);
+  transition: opacity 120ms var(--ease-out),
+              transform 120ms var(--ease-out),
+              visibility 0s linear 120ms;
+}
+/* The 14px gap between trigger and panel is a hole the pointer falls
+   through on the way down. This bridges it without moving anything. */
+.nav__menu::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -16px;
+  height: 16px;
+}
+.nav__item.is-open .nav__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 180ms var(--ease-out),
+              transform 180ms var(--ease-out),
+              visibility 0s;
+}
+
+.nav__menu-col { min-width: 0; }
+.nav__menu-t {
+  margin: 0 0 var(--s3);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.nav__menu a {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 2px var(--s3);
+  margin-inline: calc(var(--s3) * -1);
+  border-radius: 9px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--cream-dim);
+  white-space: nowrap;
+  transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out);
+}
+.nav__menu a::after { display: none; }   /* the bar's underline is not wanted in here */
+.nav__menu a.is-active { color: var(--gold); }
+@media (hover: hover) and (pointer: fine) {
+  .nav__menu a:hover { color: var(--cream); background-color: rgba(224,184,102,.10); }
+}
+
+/* A tag on the one row that is new, so it is found rather than scanned past. */
+.nav__new {
+  margin-left: var(--s3);
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--coral);
+  color: var(--ink);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+/* ---- The same thing on a phone -----------------------------------------
+   No hover to open with and no room to fly a panel out beside anything,
+   so the groups are native <details>: they work with scripting off, they
+   are already keyboard operable, and find-in-page reaches inside them. */
+.nav__group { border-bottom: 1px solid var(--hairline); }
+.nav__group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  min-height: 48px;
+  padding: var(--s3) 0;
+  font-weight: 600;
+  color: var(--cream-dim);
+  cursor: pointer;
+  list-style: none;
+}
+.nav__group > summary::-webkit-details-marker { display: none; }
+.nav__group > summary::after {
+  content: "";
+  flex: none;
+  width: 20px; height: 20px;
+  background: no-repeat center / 20px 20px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E0B866' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9.5l6 6 6-6'/%3E%3C/svg%3E");
+  transition: transform var(--t-hover) var(--ease-out);
+}
+.nav__group[open] > summary { color: var(--cream); }
+.nav__group[open] > summary::after { transform: rotate(180deg); }
+.nav__group a {
+  padding-left: var(--s4);
+  border-bottom: 0;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.nav__group a:last-child { padding-bottom: var(--s3); }
+/* the mobile sheet paints its last child gold; inside a group that is wrong */
+.nav__mobile .nav__group a:last-child { color: var(--cream-dim); }
+
+/* ============================================================
+   FOOTER SITEMAP
+
+   One wrapping row of links was fine at six and unreadable at sixteen.
+   It is a column per kind now, with the identity block beside it.
+   ============================================================ */
+.foot__inner { grid-template-columns: minmax(240px, .9fr) 2fr; gap: clamp(40px, 6vw, 88px); align-items: start; }
+.foot__id { display: grid; gap: var(--s5); }
+.foot__id .foot__by { justify-content: flex-start; text-align: left; }
+.foot__tag { margin: 0; font-size: 14px; line-height: 1.55; color: var(--cream-faint); max-width: 30ch; }
+
+.foot__nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+  gap: var(--s5) var(--s6);
+}
+.foot__col { display: grid; align-content: start; gap: 2px; min-width: 0; }
+.foot__col-t {
+  margin: 0 0 var(--s2);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.foot__col a {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  font-size: 14.5px;
+  color: var(--cream-dim);
+  transition: color var(--t-hover) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .foot__col a:hover { color: var(--gold); } }
+
+@media (max-width: 1024px) {
+  .foot__inner { grid-template-columns: 1fr; text-align: left; }
+  .foot__id { justify-items: center; text-align: center; }
+  .foot__tag { max-width: 38ch; }
+}
+@media (max-width: 560px) {
+  .foot__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ============================================================
+   LEGAL PAGES - terms, privacy
+
+   Same reading column as a guide, with the contents pinned beside it
+   so a long document can be entered in the middle. Everything here is
+   an addition to .page-guide, never a replacement.
+   ============================================================ */
+.legal { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.legal__col { max-width: 68ch; }
+.legal__col > * { max-width: 68ch; }
+
+.legal__aside { position: sticky; top: 104px; }
+.toc {
+  padding: var(--s5);
+  background: var(--panel);
+  background-image: linear-gradient(180deg, rgba(243,238,231,.055), rgba(0,0,0,.14));
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.4), inset 0 1px 0 rgba(243,238,231,.10);
+}
+.toc__t {
+  margin: 0 0 var(--s3);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.toc ol { counter-reset: toc; display: grid; gap: 1px; }
+.toc li { counter-increment: toc; }
+.toc a {
+  display: flex;
+  gap: var(--s3);
+  align-items: baseline;
+  padding: 7px var(--s3);
+  margin-inline: calc(var(--s3) * -1);
+  border-radius: 8px;
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: var(--cream-dim);
+  transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out);
+}
+.toc a::before {
+  content: counter(toc);
+  flex: none;
+  width: 1.6em;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--muted);
+}
+@media (hover: hover) and (pointer: fine) {
+  .toc a:hover { color: var(--cream); background-color: rgba(224,184,102,.10); }
+}
+
+/* The plain-English precis that sits above the clauses. It is a summary
+   and says so; the clauses below it are the ones that count. */
+.gist {
+  margin: 0 0 clamp(40px, 5vw, 64px);
+  padding: clamp(24px, 3vw, 36px);
+  border: 2px solid var(--ink);
+  border-left: 5px solid var(--sage);
+  border-radius: var(--radius);
+  background: var(--panel);
+  background-image: linear-gradient(180deg, rgba(243,238,231,.055), rgba(0,0,0,.14));
+  box-shadow: 6px 7px 0 rgba(0,0,0,.42), inset 0 1px 0 rgba(243,238,231,.10);
+}
+.gist__t {
+  margin: 0 0 var(--s4);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+.gist .ticks { margin-top: 0; }
+.gist__foot { margin: var(--s4) 0 0; font-size: 13px; color: var(--cream-faint); }
+
+/* The clause headings.
+
+   The hollow display face is a marketing face - seventeen of them down a
+   contract is a wall of lace nobody reads. So the heading itself is set in
+   the reading face and the display face carries the clause number instead,
+   which keeps the page recognisably this site's without fighting the text.
+   The number is a counter rather than typed in, so the clauses cannot be
+   renumbered by hand into disagreeing with the contents list beside them. */
+.legal__col { counter-reset: clause; }
+.legal__col h2 {
+  counter-increment: clause;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s4);
+  margin: clamp(48px, 6vw, 72px) 0 var(--s4);
+  padding-top: var(--s5);
+  border-top: 2px solid var(--hairline);
+  font-size: clamp(21px, 2.3vw, 26px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--cream);
+  scroll-margin-top: 96px;
+}
+.legal__col h2::before {
+  content: counter(clause);
+  flex: none;
+  min-width: 1.1em;
+  font-family: var(--display);
+  font-size: 30px;
+  line-height: 1;
+  color: var(--gold);
+  -webkit-text-stroke: .95px currentColor;
+  font-variant-numeric: tabular-nums;
+}
+.legal__col h2:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+.legal__updated {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+/* A definition row, for "what is collected / why / how long". */
+.terms-table { margin: 0 0 1.4em; display: grid; gap: var(--s3); }
+.terms-table > div {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) 2fr;
+  gap: var(--s4);
+  padding: var(--s4);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: rgba(23,23,25,.55);
+}
+.terms-table dt { font-weight: 700; color: var(--cream); font-size: 15px; }
+.terms-table dd { margin: 0; font-size: 14.5px; color: var(--cream-dim); line-height: 1.55; }
+
+@media (max-width: 900px) {
+  .legal { grid-template-columns: minmax(0, 1fr); }
+  .legal__aside { position: static; order: -1; }
+  .toc ol { grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); }
+  .terms-table > div { grid-template-columns: minmax(0, 1fr); gap: var(--s2); }
+}
+/* Two columns of contents need two columns' worth of room; below that the
+   second one only squeezes the first into a stack of two-word lines. */
+@media (max-width: 620px) {
+  .toc ol { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ============================================================
+   QUESTIONS PAGE - the FAQ, grouped
+   ============================================================ */
+/* A reading-width column for a block that is not a whole article. The
+   article column would do it, but it also underlines every link inside
+   itself, which is right in prose and wrong in a grid of cards. */
+.narrow { max-width: 860px; margin-inline: auto; }
+
+/* Belt and braces: these cards are a link with a title and a line under
+   it, and an underline through both reads as a mistake wherever the
+   block happens to sit. */
+.art__next-grid a { text-decoration: none; }
+
+/* The homepage keeps the ten that decide whether somebody downloads it;
+   the rest live on their own page, and this is the door to it. */
+.faq__more {
+  max-width: 860px;
+  margin: var(--s6) auto 0;
+  text-align: center;
+  font-size: 15px;
+  color: var(--cream-faint);
+}
+.faq__more a {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+@media (hover: hover) and (pointer: fine) { .faq__more a:hover { color: var(--coral); } }
+
+.faq-group { margin-bottom: clamp(40px, 5vw, 64px); }
+.faq-group:last-child { margin-bottom: 0; }
+.faq-group__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s4);
+  max-width: 860px;
+  margin: 0 auto var(--s5);
+  padding-bottom: var(--s4);
+  border-bottom: 2px solid var(--hairline);
+}
+/* 32px in the hollow face wants about a pixel of stroke to stop it
+   going to lace, the same sliding weight the card titles use. */
+.faq-group__t {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 32px;
+  line-height: 1.15;
+  color: var(--cream);
+  -webkit-text-stroke: 1px currentColor;
+}
+.faq-group__n {
+  margin: 0 0 0 auto;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The search box over the questions. It hides rows, so it also has to
+   be able to say when it has hidden all of them. */
+.faq-find {
+  max-width: 860px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s3) var(--s5);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: rgba(23,23,25,.6);
+  box-shadow: inset 0 2px 14px rgba(0,0,0,.45);
+  transition: border-color var(--t-hover) var(--ease-out);
+}
+.faq-find:focus-within { border-color: rgba(224,184,102,.5); }
+.faq-find svg { flex: none; color: var(--muted); }
+.faq-find input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  border: 0;
+  background: none;
+  color: var(--cream);
+  font: inherit;
+  font-size: 16px;
+}
+.faq-find input::placeholder { color: var(--muted); }
+.faq-find input:focus { outline: none; }
+.faq-none {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--s6);
+  text-align: center;
+  color: var(--cream-faint);
+  border: 2px dashed var(--hairline-2);
+  border-radius: var(--radius);
+}
+
+/* ============================================================
+   FULLVOLUMECHARTER
+
+   The second product, and it has to look like a product rather than a
+   subsection of this one: its own hero, its own colour lead (sage, so
+   it is never mistaken for the game's gold download), the seven steps
+   as the spine of the page.
+   ============================================================ */
+.ch-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(104px, 13vw, 168px) 0 clamp(56px, 7vw, 96px);
+  border-bottom: 2px solid var(--ink);
+}
+.ch-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 560px at 18% 0%, rgba(130,155,135,.16), transparent 62%),
+    radial-gradient(900px 480px at 92% 92%, rgba(224,184,102,.12), transparent 62%);
+}
+.ch-hero > * { position: relative; z-index: 1; }
+
+.ch-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: center;
+}
+.ch-hero h1 {
+  font-family: var(--display);
+  font-size: clamp(36px, 5.2vw, 62px);
+  line-height: 1.03;
+  letter-spacing: .01em;
+  color: var(--cream);
+  -webkit-text-stroke: .55px currentColor;
+  margin: 0 0 var(--s5);
+  text-wrap: balance;
+}
+.ch-hero h1 em { color: var(--sage); font-style: normal; }
+.ch-hero__lead {
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.55;
+  color: rgba(243,238,231,.86);
+  max-width: 52ch;
+  margin: 0 0 var(--s6);
+}
+.ch-hero__cta { display: flex; flex-wrap: wrap; gap: var(--s4); align-items: center; }
+.ch-hero__note { margin: var(--s5) 0 0; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--cream-faint); }
+
+/* A version pill that reads as a release note rather than a badge. */
+.ch-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  margin: 0 0 var(--s5);
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(130,155,135,.42);
+  background: rgba(130,155,135,.12);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+.ch-flag b { color: var(--cream); font-weight: 800; }
+
+/* A <figure> carries 40px of margin either side by default, which quietly
+   ate a tenth of the column this is supposed to fill. */
+.ch-hero__shot { position: relative; margin: 0; }
+.ch-hero__shot img {
+  width: 100%;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 10px 12px 0 rgba(0,0,0,.46),
+              inset 0 1px 0 rgba(243,238,231,.10),
+              0 0 90px rgba(130,155,135,.16);
+}
+
+/* ---- The seven steps, alternating down the page ---- */
+.ch-steps { display: grid; gap: clamp(64px, 8vw, 112px); }
+.ch-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.ch-step:nth-child(even) .ch-step__copy { order: 2; }
+.ch-step__n {
+  display: inline-grid;
+  place-items: center;
+  width: 46px; height: 46px;
+  margin-bottom: var(--s4);
+  border: 2px solid var(--sage);
+  border-radius: 50%;
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--sage);
+  -webkit-text-stroke: .9px currentColor;
+}
+.ch-step__t {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.2vw, 38px);
+  line-height: 1.1;
+  letter-spacing: .01em;
+  color: var(--cream);
+  -webkit-text-stroke: .6px currentColor;
+  margin: 0 0 var(--s4);
+}
+.ch-step__copy p { font-size: 16px; margin: 0 0 1em; }
+.ch-step__copy p:last-child { margin-bottom: 0; }
+.ch-step figure { margin: 0; }
+.ch-step figure img {
+  width: 100%;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 8px 10px 0 rgba(0,0,0,.44), inset 0 1px 0 rgba(243,238,231,.10);
+  background: var(--bg-deep);
+}
+.ch-step figcaption {
+  margin-top: var(--s3);
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---- The strip of plain facts under the hero ---- */
+.ch-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: var(--s4);
+}
+.ch-fact {
+  padding: var(--s5);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--panel);
+  background-image: linear-gradient(180deg, rgba(243,238,231,.055), rgba(0,0,0,.14));
+  box-shadow: 5px 6px 0 rgba(0,0,0,.42), inset 0 1px 0 rgba(243,238,231,.10);
+}
+.ch-fact b {
+  display: block;
+  font-family: var(--display);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--sage);
+  -webkit-text-stroke: .8px currentColor;
+  margin-bottom: var(--s2);
+}
+.ch-fact span { font-size: 14px; line-height: 1.45; color: var(--cream-dim); }
+
+/* ---- The download panel, in the charter's own colour ---- */
+.section--charter .dl {
+  border-color: rgba(130,155,135,.42);
+  background-image: linear-gradient(180deg, rgba(130,155,135,.10), rgba(0,0,0,.28));
+  box-shadow: 10px 12px 0 rgba(0,0,0,.5),
+              inset 0 1px 0 rgba(243,238,231,.14),
+              0 0 100px rgba(130,155,135,.14);
+}
+.section--charter .receipt h3 { color: var(--sage); }
+
+/* Not out yet, and the page must not pretend otherwise. */
+.ch-soon {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s4);
+  margin-top: var(--s5);
+  padding: var(--s4) var(--s5);
+  border-radius: var(--radius);
+  background: rgba(0,0,0,.3);
+  box-shadow: inset 0 0 0 1px rgba(243,238,231,.09), inset 0 2px 14px rgba(0,0,0,.45);
+}
+.ch-soon svg { flex: none; color: var(--gold); margin-top: 2px; }
+.ch-soon p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--cream-dim); }
+.ch-soon b { color: var(--cream); }
+
+@media (max-width: 900px) {
+  .ch-hero__grid { grid-template-columns: minmax(0, 1fr); }
+  .ch-step { grid-template-columns: minmax(0, 1fr); }
+  .ch-step:nth-child(even) .ch-step__copy { order: 0; }
+}
+@media (max-width: 560px) {
+  .ch-hero__cta { flex-direction: column; align-items: stretch; }
+  .ch-hero__cta .plate { width: 100%; justify-content: center; }
 }

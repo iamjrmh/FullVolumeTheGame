@@ -194,11 +194,19 @@
 
     if (!sections.length || !("IntersectionObserver" in window)) return;
 
+    // Most of those links live inside a closed menu now, so marking the link
+    // alone would highlight something nobody can see. The menu's own trigger
+    // takes the mark too, which is the part that is actually on screen.
+    var items = Array.prototype.slice.call(document.querySelectorAll(".nav__item"));
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         links.forEach(function (a) {
           a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id);
+        });
+        items.forEach(function (item) {
+          item.classList.toggle("is-current", !!item.querySelector("a.is-active"));
         });
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
@@ -619,6 +627,162 @@
     window.addEventListener("resize", function () {
       clearTimeout(pending);
       pending = setTimeout(fill, 200);
+    });
+  })();
+
+  /* ----------------------------------------------------------
+     13. NAV MENUS
+     The bar's disclosures. A pointer opens them on hover, with a
+     short grace period on the way out so crossing a corner does not
+     shut the thing you are aiming at; a click or a key opens them
+     outright and that wins over the hover, so tapping the trigger
+     on a hybrid machine does not toggle twice.
+
+     The panel is always in the DOM and is hidden with visibility,
+     so the transition is a retargetable one - a fast second click
+     reverses from wherever it is rather than snapping to zero.
+     ---------------------------------------------------------- */
+  (function navMenus() {
+    var items = Array.prototype.slice.call(document.querySelectorAll(".nav__item"));
+    if (!items.length) return;
+
+    var open = null;
+
+    function shut(item) {
+      if (!item) return;
+      item.classList.remove("is-open");
+      var top = item.querySelector(".nav__top");
+      if (top) top.setAttribute("aria-expanded", "false");
+      if (open === item) open = null;
+    }
+
+    function show(item) {
+      if (open && open !== item) shut(open);
+      item.classList.add("is-open");
+      var top = item.querySelector(".nav__top");
+      if (top) top.setAttribute("aria-expanded", "true");
+      open = item;
+    }
+
+    items.forEach(function (item) {
+      var top = item.querySelector(".nav__top");
+      var menu = item.querySelector(".nav__menu");
+      if (!top || !menu) return;
+
+      var leaving;
+
+      top.addEventListener("click", function () {
+        clearTimeout(leaving);
+        if (item.classList.contains("is-open")) shut(item);
+        else show(item);
+      });
+
+      // Down opens it and lands on the first row; the rest is Tab, which
+      // works because nothing here is ever removed from the document.
+      top.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowDown" && e.key !== "Down") return;
+        e.preventDefault();
+        show(item);
+        var first = menu.querySelector("a");
+        if (first) first.focus();
+      });
+
+      if (finePointer.matches) {
+        item.addEventListener("pointerenter", function (e) {
+          if (e.pointerType === "touch") return;
+          clearTimeout(leaving);
+          show(item);
+        });
+        item.addEventListener("pointerleave", function (e) {
+          if (e.pointerType === "touch") return;
+          clearTimeout(leaving);
+          leaving = setTimeout(function () { shut(item); }, 140);
+        });
+      }
+
+      // Tabbing out of the last row closes it behind you.
+      item.addEventListener("focusout", function (e) {
+        if (e.relatedTarget && item.contains(e.relatedTarget)) return;
+        shut(item);
+      });
+
+      menu.addEventListener("click", function (e) {
+        if (e.target.closest("a")) shut(item);
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" || !open) return;
+      var top = open.querySelector(".nav__top");
+      shut(open);
+      if (top) top.focus();
+    });
+
+    document.addEventListener("pointerdown", function (e) {
+      if (open && !open.contains(e.target)) shut(open);
+    });
+  })();
+
+  /* ----------------------------------------------------------
+     14. FILTERING THE QUESTIONS
+     Twenty-eight <details> is a lot to read through to find one
+     answer. This hides the rows that do not match and says so when
+     nothing does. It is progressive: with scripting off the box is
+     not there at all and every question is simply on the page.
+     ---------------------------------------------------------- */
+  (function faqFilter() {
+    var host = document.getElementById("faqFind");
+    if (!host) return;
+
+    var box = host.querySelector("input");
+    var groups = Array.prototype.slice.call(document.querySelectorAll("[data-faq-group]"));
+    var empty = document.getElementById("faqNone");
+    if (!box || !groups.length) return;
+
+    host.hidden = false;
+
+    var rows = groups.map(function (group) {
+      return {
+        group: group,
+        items: Array.prototype.slice.call(group.querySelectorAll(".faq__item")).map(function (el) {
+          return { el: el, text: (el.textContent || "").toLowerCase() };
+        })
+      };
+    });
+
+    function apply() {
+      var q = box.value.trim().toLowerCase();
+      var hits = 0;
+
+      rows.forEach(function (row) {
+        var shown = 0;
+        row.items.forEach(function (item) {
+          var match = !q || item.text.indexOf(q) !== -1;
+          item.el.hidden = !match;
+          // A search that turned one up should show the answer, not
+          // another thing to click; clearing it folds them back.
+          if (q && match) item.el.setAttribute("open", "");
+          else if (!q) item.el.removeAttribute("open");
+          if (match) shown++;
+        });
+        row.group.hidden = shown === 0;
+        hits += shown;
+      });
+
+      if (empty) empty.hidden = hits !== 0;
+    }
+
+    var pending;
+    box.addEventListener("input", function () {
+      clearTimeout(pending);
+      pending = setTimeout(apply, 90);
+    });
+
+    box.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" || !box.value) return;
+      e.stopPropagation();
+      box.value = "";
+      apply();
     });
   })();
 

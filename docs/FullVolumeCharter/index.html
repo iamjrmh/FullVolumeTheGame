@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FullVolumeCharter - chart the vocals for any song</title>
+<meta name="description" content="The vocal charting tool for FullVolume. Load a song, split the words into the syllables you sing, tap the timing, set the pitches, and write it all out as one .fvchart the game plays. Free, for Windows.">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="../assets/img/app-icon.png">
+<link rel="canonical" href="https://fullvolumethegame.xyz/FullVolumeCharter/">
+<meta name="theme-color" content="#171719">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FullVolume">
+<meta property="og:url" content="https://fullvolumethegame.xyz/FullVolumeCharter/">
+<meta property="og:title" content="FullVolumeCharter - chart the vocals for any song">
+<meta property="og:description" content="Audio in, .fvchart out. Seven steps from a song nobody can sing to one the game plays.">
+<meta property="og:image" content="https://fullvolumethegame.xyz/assets/img/shots/charter/charter-11.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="817">
+<meta property="og:image:alt" content="The FullVolumeCharter pitch roll: the sung line read off the recording, with a note box per syllable laid over a piano keyboard.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FullVolumeCharter - chart the vocals for any song">
+<meta name="twitter:description" content="Audio in, .fvchart out. Seven steps from a song nobody can sing to one the game plays.">
+<meta name="twitter:image" content="https://fullvolumethegame.xyz/assets/img/shots/charter/charter-11.jpg">
+<link rel="preload" href="../assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+
+<!-- The machine-readable version of this page. Every value here is also
+     stated in plain English below; change one and change the other. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://fullvolumethegame.xyz/FullVolumeCharter/#app",
+      "name": "FullVolumeCharter",
+      "url": "https://fullvolumethegame.xyz/FullVolumeCharter/",
+      "description": "The vocal charting tool for FullVolume. It takes a song's audio and walks it through seven steps - load the audio, song info and tempo, lyrics split into sung syllables, pitch breaks, tapping the timing, setting the pitches, and export - producing a single .fvchart file the game plays.",
+      "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Music charting",
+      "operatingSystem": "Windows 10, Windows 11 (64-bit)",
+      "softwareVersion": "0.1.0",
+      "downloadUrl": "https://github.com/iamjrmh/fullVolumeTheGame/releases/latest/download/FullVolumeCharterSetup.exe",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "featureList": [
+        "Loads one mixed file, or a separate vocal and backing stem",
+        "Works the tempo out from the audio, with halve, double and tap tempo to correct it",
+        "Splits pasted lyrics into the syllables actually sung, and learns your corrections",
+        "Reads timed .lrc lyric files sitting beside the track",
+        "Pitch breaks, so one held word can pass through several notes",
+        "Tap the timing with the song slowed to 50, 65 or 80 per cent without dropping its key",
+        "Reads the sung pitch off the recording a phrase at a time, then lets you drag any note",
+        "A guide tone, so you hear the note you are setting",
+        "Exports one .fvchart carrying the audio, the album art, the backdrop and the notes",
+        "Opens a .fvchart it wrote earlier and edits it in place",
+        "Saves as you go, and picks up where you left off"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/PreOrder",
+        "url": "https://fullvolumethegame.xyz/FullVolumeCharter/#get"
+      },
+      "author": { "@id": "https://fullvolumethegame.xyz/#jurmr" },
+      "publisher": { "@id": "https://fullvolumethegame.xyz/#jurmr" },
+      "isRelatedTo": { "@id": "https://fullvolumethegame.xyz/#game" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://fullvolumethegame.xyz/#jurmr",
+      "name": "JURMR",
+      "url": "https://fullvolumethegame.xyz/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://fullvolumethegame.xyz/FullVolumeCharter/#crumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "FullVolume", "item": "https://fullvolumethegame.xyz/" },
+        { "@type": "ListItem", "position": 2, "name": "FullVolumeCharter", "item": "https://fullvolumethegame.xyz/FullVolumeCharter/" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="../index.html" aria-label="FullVolume, home">
+      <img class="nav__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULLVOLUME</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__top" id="navGame" type="button"
+                aria-expanded="false" aria-haspopup="true" aria-controls="menu-game">
+          The game
+          <svg class="nav__caret" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav__menu" id="menu-game" aria-labelledby="navGame">
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">The game</p>
+            <a href="../index.html#about">What it is</a>
+            <a href="../index.html#features">Features</a>
+            <a href="../index.html#shots">Screens</a>
+            <a href="../index.html#together">Multiplayer</a>
+            <a href="../index.html#library">Your library</a>
+          </div>
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">Read up</p>
+            <a href="../faq/">All questions</a>
+            <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+            <a href="../yarg-vocals/">YARG vocals</a>
+            <a href="../games-like-singstar/">Like SingStar</a>
+            <a href="../karaoke-at-home/">Karaoke at home</a>
+          </div>
+        </div>
+      </div>
+      <a href="../FullVolumeCharter/" aria-current="page">Charter</a>
+      <a href="../marketplace/">Marketplace</a>
+    </nav>
+
+    <button class="sfx-toggle" id="sfxToggle" type="button"
+            aria-pressed="false" title="Play the game's own button sounds">
+      <svg class="sfx-toggle__on" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="sfx-toggle__off" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sfx-toggle__text">SFX</span>
+    </button>
+
+    <a class="plate plate--sm nav__cta" href="../index.html#download">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+
+    <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    <details class="nav__group">
+      <summary>The game</summary>
+      <a href="../index.html#about">What it is</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../index.html#library">Your library</a>
+    </details>
+    <details class="nav__group">
+      <summary>Read up</summary>
+      <a href="../faq/">All questions</a>
+      <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+      <a href="../yarg-vocals/">YARG vocals</a>
+      <a href="../games-like-singstar/">Like SingStar</a>
+      <a href="../karaoke-at-home/">Karaoke at home</a>
+    </details>
+    <a href="../FullVolumeCharter/">FullVolumeCharter</a>
+    <a href="../marketplace/">Marketplace</a>
+    <a class="plate plate--sm plate--block nav__mobile-cta" href="../index.html#download">
+      <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="ch-hero">
+  <div class="wrap">
+    <p class="crumbs">
+      <a href="../index.html">FullVolume</a><span>/</span>FullVolumeCharter
+    </p>
+
+    <div class="ch-hero__grid">
+      <div data-reveal>
+        <p class="ch-flag">
+          <span class="dot" aria-hidden="true"></span>
+          Arriving with FullVolume 0.9.3 &middot; <b>v0.1.0</b>
+        </p>
+
+        <h1>Chart the vocals<br>for <em>any song</em>,<br>start to finish.</h1>
+
+        <p class="ch-hero__lead">
+          Audio in, <code>.fvchart</code> out. FullVolumeCharter walks a song through seven
+          steps and hands back one file the game plays: the words, the timing, the pitches,
+          the art and the audio, all of it in there.
+        </p>
+
+        <div class="ch-hero__cta">
+          <a class="plate plate--lg" href="#get">
+            <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+            <span class="plate__label">GET IT</span>
+          </a>
+          <a class="plate plate--md" href="#steps">
+            <img class="plate__icon" src="../assets/img/icons/multiplayer.png" alt="" width="512" height="512">
+            <span class="plate__label">THE SEVEN STEPS</span>
+          </a>
+        </div>
+
+        <p class="ch-hero__note">Windows 10 and 11 &middot; free &middot; no account</p>
+      </div>
+
+      <figure class="ch-hero__shot" data-reveal>
+        <img src="../assets/img/shots/charter/charter-01.jpg"
+             alt="The FullVolumeCharter start screen: the FullVolume logo over the game's own room, the line 'Chart the vocals for a song, start to finish. Audio in, .fvchart out.', and two gold plates reading Chart a new song and Open a chart."
+             width="1280" height="817" fetchpriority="high">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FACTS ================= -->
+<section class="section">
+  <div class="wrap">
+    <ul class="ch-facts" data-reveal>
+      <li class="ch-fact">
+        <b>7</b>
+        <span>steps from a bare audio file to a chart somebody can sing</span>
+      </li>
+      <li class="ch-fact">
+        <b>1</b>
+        <span>file out. The audio, the album art, the backdrop and the notes, all in it</span>
+      </li>
+      <li class="ch-fact">
+        <b>444</b>
+        <span>notes in the chart on this page, tapped by hand in a single pass</span>
+      </li>
+      <li class="ch-fact">
+        <b>$0</b>
+        <span>and nothing to sign up for. Same as the game</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= WHAT IT IS ================= -->
+<section class="section section--panel" id="about">
+  <div class="wrap about">
+    <div class="about__copy" data-reveal>
+      <p class="eyebrow">What it is</p>
+      <h2 class="h2">Songs nobody<br>has charted<br><span class="ink-coral">yet.</span></h2>
+      <p class="lead">
+        FullVolume plays the vocal part that is already inside a Clone Hero or Rock Band
+        chart. That covers tens of thousands of songs, and it does not cover the one you
+        wanted at half past eleven on a Friday. This is how that one gets a part to sing.
+      </p>
+      <p>
+        Point it at the audio, read the words through, tap along, set the notes. Everything
+        you enter is saved the moment you enter it, so a song started tonight is picked up
+        tomorrow exactly where you stopped. There is no project file to keep track of and
+        nothing to reconvert: the last step writes the whole thing as one
+        <code>.fvchart</code>, and opening that file again puts you straight back on the
+        step you left.
+      </p>
+      <p>
+        It is the game's tool, so it wears the game's face. Same drawn plates, same
+        palette, same button sounds, same hollow display face on the headings. Nothing to
+        learn twice.
+      </p>
+    </div>
+
+    <aside class="lib-card" data-reveal>
+      <div class="lib-card__head">
+        <img src="../assets/img/icons/multiplayer.png" alt="" width="512" height="512">
+        <h3>What it hands the game</h3>
+      </div>
+      <ul class="ticks ticks--card">
+        <li>The words, split into the syllables you actually sing</li>
+        <li>A start time for every one of them</li>
+        <li>A pitch for every one of them, or a talkie where there is no tune</li>
+        <li>The vocal and backing stems, or the single mix</li>
+        <li>The album art, and a picture or video backdrop if you want one</li>
+        <li>Title, artist, album, genre, year, language and your name on it</li>
+      </ul>
+      <p class="lib-card__foot">
+        One <code>.fvchart</code> file. Drop it in a folder the game is watching and it is
+        on the list next time you scan.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= THE SEVEN STEPS ================= -->
+<section class="section" id="steps">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">The seven steps</p>
+      <h2 class="h2">It asks one thing<br>at a time.</h2>
+      <p class="lead lead--center">
+        Each step does its own job and hands on to the next. Go back whenever you like.
+      </p>
+    </header>
+
+    <div class="ch-steps">
+
+      <article class="ch-step" data-reveal>
+        <div class="ch-step__copy">
+          <span class="ch-step__n">1</span>
+          <h3 class="ch-step__t">Load the audio</h3>
+          <p>
+            Start with the song. One file is fine. If you have the vocal and the backing as
+            separate stems, use both and everything after this gets easier: you can hear
+            the singer on their own while you work, and the game can lift the vocal out
+            from under the person holding the microphone.
+          </p>
+          <p>
+            Drop two files in at once and it sorts them into the right slots on its own.
+            If there is cover art, a backdrop or a timed <code>.lrc</code> lyric file
+            sitting beside the track, those come in with it.
+          </p>
+        </div>
+        <figure>
+          <img src="../assets/img/shots/charter/charter-02.jpg" loading="lazy"
+               alt="Step one of FullVolumeCharter: a vocal track and a backing track loaded as separate files, each with its waveform, length and sample rate, above a transport with independent vocal and backing volume sliders."
+               width="1280" height="817">
+          <figcaption>One file, or a vocal and a backing</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch-step" data-reveal>
+        <div class="ch-step__copy">
+          <span class="ch-step__n">2</span>
+          <h3 class="ch-step__t">Song info</h3>
+          <p>
+            What the song is, who charted it, and how fast it runs. Title, artist, album,
+            genre, year and the language, which is what decides how the words get split on
+            the next step. Your charter name goes on it in whatever colours you fancy, the
+            same rich text the game uses for player names.
+          </p>
+          <p>
+            The tempo is worked out from the audio. It shows you how confident it is, and
+            when it is wrong you halve it, double it or tap it in yourself. Turn the clicks
+            on and play the song: if they drift off the beat the number is wrong, and if
+            they land on every other beat, press <b>x2</b>.
+          </p>
+        </div>
+        <figure>
+          <img src="../assets/img/shots/charter/charter-03.jpg" loading="lazy"
+               alt="Step two of FullVolumeCharter: the song information form, with title, artist, album, language, genre, year and a charter name field showing the name JURMR coloured letter by letter above a row of palette swatches."
+               width="1280" height="817">
+          <figcaption>Your name on it, in your own colours</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch-step" data-reveal>
+        <div class="ch-step__copy">
+          <span class="ch-step__n">3</span>
+          <h3 class="ch-step__t">Lyrics</h3>
+          <p>
+            Paste the words in. They get split into the syllables that are actually sung
+            rather than the ones a dictionary would print, using the rules of the language
+            you picked, and anything it gets wrong you fix by hand. It remembers your
+            corrections and stops getting that word wrong.
+          </p>
+          <p>
+            The panel underneath shows how the song will sing: one box per note, line by
+            line, with a running count of lines, words, syllables and sections. Green means
+            you taught it that one.
+          </p>
+        </div>
+        <figure>
+          <img src="../assets/img/shots/charter/charter-05.jpg" loading="lazy"
+               alt="Step three of FullVolumeCharter: pasted lyrics on the left and the same lines split into hyphenated syllables on the right, with a toggle to drop bracketed Verse and Chorus markers."
+               width="1280" height="817">
+          <figcaption>Pasted words on the left, sung syllables on the right</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch-step" data-reveal>
+        <div class="ch-step__copy">
+          <span class="ch-step__n">4</span>
+          <h3 class="ch-step__t">Pitch breaks</h3>
+          <p>
+            Some words get held while the pitch moves underneath them. Click a word once
+            for every extra pitch it passes through and it picks up a <b>+</b>. A "so" held
+            up and then back down again is <b>so + +</b>.
+          </p>
+          <p>
+            Each <b>+</b> is simply one more note on the same word: one more tap on the next
+            step, and one more thing to drag on the step after that. Most songs need a
+            handful, on the long held notes.
+          </p>
+        </div>
+        <figure>
+          <img src="../assets/img/shots/charter/charter-08.jpg" loading="lazy"
+               alt="Step four of FullVolumeCharter: every syllable of the song laid out as clickable boxes line by line, with counts of words, syllables and notes above them."
+               width="1280" height="817">
+          <figcaption>Click a word for every pitch it moves through</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch-step" data-reveal>
+        <div class="ch-step__copy">
+          <span class="ch-step__n">5</span>
+          <h3 class="ch-step__t">Tap the timing</h3>
+          <p>
+            Play the song and tap Enter as each syllable starts. One tap per note, and
+            nothing to hold: a note simply runs until the next one is tapped.
+          </p>
+          <p>
+            Fast lines get slowed to 50, 65 or 80 per cent, and the song <em>stays in its own
+            key</em> while they do, so you can still hear where you are instead of a record
+            dragging to a halt. Backspace takes the last tap back. Click any syllable in the
+            list to move the tap there and rewind to it, or nudge every tap in the song 20
+            milliseconds either way if your ears were running ahead all along.
+          </p>
+        </div>
+        <figure>
+          <img src="../assets/img/shots/charter/charter-09.jpg" loading="lazy"
+               alt="Step five of FullVolumeCharter: the tapping view, with the upcoming syllables in a grid, an Enter prompt, the song waveform, an undo button and speed buttons at 50, 65, 80 per cent and full."
+               width="1280" height="817">
+          <figcaption>One tap per note, at whatever speed you can manage</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch-step" data-reveal>
+        <div class="ch-step__copy">
+          <span class="ch-step__n">6</span>
+          <h3 class="ch-step__t">Pitches</h3>
+          <p>
+            Everything is already in time, so all that is left is how high each note goes.
+            It reads the sung line straight off the recording and lays the notes on it, a
+            phrase at a time rather than a note at a time, so nothing lands an octave away
+            from what it is sung next to.
+          </p>
+          <p>
+            Then you drag whatever it got wrong. A guide tone plays the note under the
+            cursor so you can hear what you are setting, with its own volume against the
+            song. Anything too quiet or too ragged to be sure of is listed for you to check
+            by ear rather than quietly guessed at.
+          </p>
+        </div>
+        <figure>
+          <img src="../assets/img/shots/charter/charter-11.jpg" loading="lazy"
+               alt="Step six of FullVolumeCharter: the piano roll, with a note box per syllable laid out against a keyboard down the left, the sung pitch line drawn behind them, and snap, zoom and guide tone controls."
+               width="1280" height="817">
+          <figcaption>The sung line, read off the recording</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch-step" data-reveal>
+        <div class="ch-step__copy">
+          <span class="ch-step__n">7</span>
+          <h3 class="ch-step__t">Export</h3>
+          <p>
+            Everything above goes into one <code>.fvchart</code>: the stems, the cover, the
+            backdrop and the notes as the game plays them. The last screen lays out what is
+            going in and what the chart came to, line by line with the note count and the
+            range on each.
+          </p>
+          <p>
+            Write it out, drop it in a folder the game is watching, and it is on the song
+            list. Open the same file again later and the tool picks it apart and puts you
+            back on whichever step you want.
+          </p>
+        </div>
+        <figure>
+          <img src="../assets/img/shots/charter/charter-13.jpg" loading="lazy"
+               alt="Step seven of FullVolumeCharter: the export summary, listing title, artist, album, charter, genre, year, language, tempo and length beside the vocal stem, backing stem, album cover, background video and chart file about to be packed."
+               width="1280" height="817">
+          <figcaption>One file, with everything in it</figcaption>
+        </figure>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT IT DOES FOR YOU ================= -->
+<section class="section section--panel" id="features">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">The parts that do the work</p>
+      <h2 class="h2">It does the boring<br>half for you.</h2>
+      <p class="lead lead--center">
+        None of it guesses on your behalf. All of it saves you an evening.
+      </p>
+    </header>
+
+    <div class="cards">
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="pitch" aria-hidden="true"></div>
+        <h3 class="card__title">It hears the tune</h3>
+        <p>The sung pitch comes off the recording a phrase at a time, weighing each note
+           against the ones either side of it, the singer's register and the key of the
+           song. A note it cannot hear is left empty rather than filled in with a guess.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="list" aria-hidden="true"></div>
+        <h3 class="card__title">It splits the words</h3>
+        <p>Sung syllables, not typeset ones. "About" breaks after the a, "every" keeps its
+           three, and the slang a lyric sheet is full of is handled on purpose. Correct it
+           once and it has learned that word.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="tune" aria-hidden="true"></div>
+        <h3 class="card__title">It keeps the key</h3>
+        <p>Slowing a song down usually drags it an octave into the floor. This one stretches
+           the time and leaves the pitch where it was, so half speed is still a song you can
+           follow while you tap it.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="folder" aria-hidden="true"></div>
+        <h3 class="card__title">It reads what is lying about</h3>
+        <p>A timed <code>.lrc</code> beside the track brings its own words and line times in,
+           so a song somebody has already synced does not get retyped. Cover art beside the
+           file lands in the right slot too.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="picture" aria-hidden="true"></div>
+        <h3 class="card__title">One file, not a folder</h3>
+        <p>A <code>.fvchart</code> carries the audio, the art, the backdrop and the notes
+           together. Nothing to zip, nothing to keep next to anything else, and it travels
+           between players in one piece.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card__glyph" data-glyph="wifi" aria-hidden="true"></div>
+        <h3 class="card__title">It never loses your evening</h3>
+        <p>Every field, every tap and every note is saved as you enter it. Close it
+           mid-song and the start screen offers it straight back, on the step you were on.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="section" id="shots">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">A closer look</p>
+      <h2 class="h2">Every screen.</h2>
+      <p class="lead lead--center">Straight out of the tool. Nothing here is a mock-up.</p>
+    </header>
+  </div>
+
+  <div class="gallery" data-reveal>
+    <div class="gallery__viewport" id="galleryViewport">
+      <ul class="gallery__track" id="galleryTrack">
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-01.jpg" alt="The FullVolumeCharter start screen, with Chart a new song and Open a chart." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Start a new one, or open one you wrote</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-02.jpg" alt="Step one: a vocal stem and a backing stem loaded, each with its own waveform and volume." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 1: one file, or a vocal and a backing</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-03.jpg" alt="Step two: the song information form with title, artist, album, language, genre, year and a coloured charter name." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 2: what the song is, and who charted it</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-04.jpg" alt="Step two: the tempo card showing a detected BPM, a confidence bar, and halve, double, tap tempo and detect again controls." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 2: the tempo, heard and correctable</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-05.jpg" alt="Step three: pasted lyrics beside the same lines split into hyphenated sung syllables." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 3: the words, split into syllables</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-06.jpg" alt="Step three: the how it will sing panel, one box per note, with counts of lines, words, syllables and sections." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 3: how it will sing, box by box</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-07.jpg" alt="Step four: the pitch breaks explanation, showing that each plus adds another note to the same held word." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 4: a held word that moves pitch</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-08.jpg" alt="Step four: every syllable of the song as clickable boxes, for adding and removing pitch breaks." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 4: click a word to add a break</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-09.jpg" alt="Step five: the tapping view with upcoming syllables, an Enter prompt, the waveform and speed controls." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 5: tap Enter as each syllable starts</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-10.jpg" alt="Step five: the whole song listed with a timestamp on every line, for jumping back to any syllable." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 5: jump back to any syllable</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-11.jpg" alt="Step six: the piano roll, a note box per syllable against a keyboard, with snap, zoom and guide tone controls." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 6: the roll, with the lyric above it</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-12.jpg" alt="Step six: the detected pitch line drawn behind the notes, with a legend and the read from the recording panel." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 6: what was sung, drawn behind the notes</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-13.jpg" alt="Step seven: the export summary listing the song details beside the stems, cover, background and chart about to be packed." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 7: everything that is going in</p>
+        </li>
+        <li class="slide">
+          <img src="../assets/img/shots/charter/charter-14.jpg" alt="Step seven: the chart summary with counts of lines, notes, pitched notes, talkies, percussion and range, and every line listed with its time." loading="lazy" width="1280" height="817">
+          <p class="slide__cap">Step 7: and what came out</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="gallery__ui wrap">
+      <button class="plate plate--icon" id="galleryPrev" type="button" aria-label="Previous screenshot">
+        <img class="plate__icon" src="../assets/img/icons/back.png" alt="" width="512" height="512">
+      </button>
+      <div class="gallery__dots" id="galleryDots" role="tablist" aria-label="Choose a screenshot"></div>
+      <p class="gallery__count" id="galleryCount" aria-hidden="true"><b>1</b> / 1</p>
+      <button class="plate plate--icon is-flipped" id="galleryNext" type="button" aria-label="Next screenshot">
+        <img class="plate__icon" src="../assets/img/icons/back.png" alt="" width="512" height="512">
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUESTIONS ================= -->
+<section class="section section--panel" id="faq">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <p class="eyebrow">Questions</p>
+      <h2 class="h2">Before you<br>chart anything.</h2>
+    </header>
+
+    <div class="faq" data-reveal>
+
+      <details class="faq__item">
+        <summary class="faq__q">How long does a song take?</summary>
+        <div class="faq__a">
+          <p>An evening for your first, well under an hour once you have the hang of it.
+             The tapping is the part that takes real time, and it is the part you can slow
+             down. Everything else is reading through what the tool has already worked out
+             and correcting the bits it got wrong.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Do I need the vocal on its own?</summary>
+        <div class="faq__a">
+          <p>No, one mixed file charts perfectly well. Separate stems make it easier, because
+             you can hear the singer without the band on top while you tap and while the tool
+             reads the pitch, and because the game can then lift the original vocal out from
+             under whoever is holding the microphone. Free stem splitters are easy to come
+             by if you want them.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Do I have to be able to read music?</summary>
+        <div class="faq__a">
+          <p>No. You never type a note name. The tool reads the pitch off the recording and
+             draws it, you drag anything that looks wrong, and the guide tone plays what you
+             are dragging so you can check it by ear. If you can tell when something sounds
+             off, that is the whole skill.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">What if a song is mostly shouted?</summary>
+        <div class="faq__a">
+          <p>Then it is mostly talkies, and that is a real answer rather than a workaround.
+             A note with no tune under it is scored on landing in time rather than on pitch,
+             so rap and shouted choruses chart fine and play fine.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Can I edit a chart after I have written it?</summary>
+        <div class="faq__a">
+          <p>Yes. Open the <code>.fvchart</code> and the tool unpacks it, puts every step
+             back the way you left it and lets you change anything. Exporting again writes
+             over the same file.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Can I share the charts I make?</summary>
+        <div class="faq__a">
+          <p>They are your files, so that is your call. Bear in mind that a
+             <code>.fvchart</code> has the song's audio inside it, so passing one around
+             means passing the recording around, with everything that implies. The game can
+             hand a chart straight to somebody in your room who has not got it, which is
+             what most people actually want.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Does it need FullVolume installed?</summary>
+        <div class="faq__a">
+          <p>No. It is its own program and charts on its own. You will want the game to
+             hear the result, obviously, but you can install them in either order and
+             neither one needs the other to run.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Can it read or write Clone Hero and Rock Band charts?</summary>
+        <div class="faq__a">
+          <p>Not at the moment. It writes <code>.fvchart</code>, which is the format built
+             for this game. The game reads
+             <a href="../clone-hero-vocals/">Clone Hero folders</a>, <code>.sng</code>
+             archives and Rock Band <code>_rb3con</code> packages already, so the charter
+             exists for the songs those do not cover.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= GET IT ================= -->
+<section class="section section--download section--charter" id="get">
+  <div class="wrap">
+    <div class="dl" data-reveal>
+      <div class="dl__left">
+        <p class="eyebrow">Download</p>
+        <h2 class="h2">Chart the one<br>nobody has.</h2>
+        <p class="lead">
+          One installer, per user, no admin rights, same as the game. It lands with
+          FullVolume 0.9.3.
+        </p>
+
+        <div class="dl__cta">
+          <a class="plate plate--lg" data-download
+             href="https://github.com/iamjrmh/fullVolumeTheGame/releases/latest/download/FullVolumeCharterSetup.exe">
+            <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+            <span class="plate__label">GET IT</span>
+          </a>
+        </div>
+
+        <div class="ch-soon">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>
+            <b>Not out yet.</b> FullVolumeCharter ships alongside FullVolume 0.9.3. When it
+            does, this button is the download and the link will not change, so it is worth a
+            bookmark. Everything on this page is the tool as it stands today.
+          </p>
+        </div>
+
+        <a class="dl__alt" href="https://github.com/iamjrmh/FullVolumeTheGame/releases" target="_blank" rel="noopener">
+          <span class="dl__alt-body">
+            <span class="dl__alt-label">Want to know the moment it lands?</span>
+            <span class="dl__alt-name">Watch the releases page</span>
+          </span>
+          <svg class="dl__alt-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor"
+                  stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <aside class="receipt">
+        <div class="receipt__head">
+          <img src="../assets/img/app-icon.png" alt="" width="512" height="512">
+          <h3>What you will be downloading</h3>
+        </div>
+        <dl>
+          <div><dt>File</dt><dd>FullVolumeCharterSetup.exe</dd></div>
+          <div><dt>Version</dt><dd>0.1.0</dd></div>
+          <div><dt>Lands with</dt><dd>FullVolume 0.9.3</dd></div>
+          <div><dt>Runs on</dt><dd>Windows 10 and 11, 64&#8209;bit</dd></div>
+          <div><dt>Account</dt><dd>None</dd></div>
+          <div><dt>Writes</dt><dd>.fvchart</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <div class="reqs" data-reveal>
+      <h3 class="h3 h3--tight reqs__title">What you need</h3>
+      <div class="specs">
+        <section class="spec">
+          <h4 class="spec__tier">To chart a song</h4>
+          <dl class="spec__list">
+            <div><dt>The audio</dt><dd>Any FLAC, WAV, MP3 or M4A of the song</dd></div>
+            <div><dt>The words</dt><dd>A lyric sheet you can paste. A timed .lrc if you have one</dd></div>
+            <div><dt>Your ears</dt><dd>Headphones, ideally. You are listening for note edges</dd></div>
+            <div><dt>Time</dt><dd>An evening for your first one</dd></div>
+          </dl>
+        </section>
+
+        <section class="spec spec--rec">
+          <h4 class="spec__tier">Nice to have</h4>
+          <dl class="spec__list">
+            <div><dt>Stems</dt><dd>The vocal and the backing as separate files</dd></div>
+            <div><dt>Album art</dt><dd>Anything square. It goes in the chart</dd></div>
+            <div><dt>A backdrop</dt><dd>A picture or a video to sing against</dd></div>
+            <div><dt>Patience</dt><dd>The tapping step rewards a second pass</dd></div>
+          </dl>
+        </section>
+      </div>
+      <p class="dl__small">
+        You bring the song. The tool brings everything else.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= READ NEXT ================= -->
+<section class="section">
+  <div class="wrap narrow">
+    <div class="art__next">
+      <p class="art__next-t">Read next</p>
+      <div class="art__next-grid">
+        <a href="../index.html">
+          <b>FullVolume, the game</b>
+          <span>What the charts are for: the karaoke game that plays your own library.</span>
+        </a>
+        <a href="../marketplace/">
+          <b>The Marketplace</b>
+          <span>Thousands of songs that already have a vocal part, free to go and get.</span>
+        </a>
+        <a href="../clone-hero-vocals/">
+          <b>Clone Hero vocals</b>
+          <span>The vocal part already inside the charts on your drive.</span>
+        </a>
+        <a href="../faq/">
+          <b>All the questions</b>
+          <span>Everything people ask about the game and the charter, in one place.</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <div class="foot__id">
+      <div class="foot__brand">
+        <img class="foot__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+        <div>
+          <p class="foot__name">FULLVOLUME</p>
+          <p class="foot__dom">fullvolumethegame.xyz</p>
+        </div>
+      </div>
+
+      <p class="foot__tag">The karaoke game that plays your own music library. Free, no account, no song packs.</p>
+
+      <div class="foot__by">
+        <img class="foot__weed" src="../assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
+        <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
+      </div>
+    </div>
+
+    <nav class="foot__nav" aria-label="Footer">
+      <div class="foot__col">
+        <p class="foot__col-t">The game</p>
+        <a href="../index.html#about">What it is</a>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#shots">Screens</a>
+        <a href="../index.html#together">Multiplayer</a>
+        <a href="../index.html#library">Your library</a>
+        <a href="../index.html#download">Download</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Songs</p>
+        <a href="../FullVolumeCharter/">FullVolumeCharter</a>
+        <a href="../marketplace/">Marketplace</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases" target="_blank" rel="noopener">All releases</a>
+        <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Read up</p>
+        <a href="../faq/">All questions</a>
+        <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+        <a href="../yarg-vocals/">YARG vocals</a>
+        <a href="../games-like-singstar/">Like SingStar</a>
+        <a href="../karaoke-at-home/">Karaoke at home</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">The small print</p>
+        <a href="../terms/">Terms of use</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">Report a bug</a>
+        <a href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">Tip jar</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
+    <p>v0.9.2 &middot; beta</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

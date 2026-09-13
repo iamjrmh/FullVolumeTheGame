@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://fullvolumethegame.xyz/</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -25,38 +25,81 @@
   </url>
 
   <url>
+    <loc>https://fullvolumethegame.xyz/FullVolumeCharter/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://fullvolumethegame.xyz/assets/img/shots/charter/charter-11.jpg</image:loc>
+      <image:title>The FullVolumeCharter pitch roll</image:title>
+      <image:caption>A note box per syllable against a keyboard, with the sung pitch line read off the recording behind them.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fullvolumethegame.xyz/assets/img/shots/charter/charter-09.jpg</image:loc>
+      <image:title>Tapping the timing in FullVolumeCharter</image:title>
+      <image:caption>Tap Enter as each syllable starts, with the song slowed without dropping its key.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fullvolumethegame.xyz/assets/img/shots/charter/charter-05.jpg</image:loc>
+      <image:title>Splitting lyrics into sung syllables</image:title>
+      <image:caption>Pasted words on the left, the same lines split into the syllables actually sung on the right.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
     <loc>https://fullvolumethegame.xyz/marketplace/</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
+    <loc>https://fullvolumethegame.xyz/faq/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://fullvolumethegame.xyz/clone-hero-vocals/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fullvolumethegame.xyz/games-like-singstar/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fullvolumethegame.xyz/karaoke-at-home/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fullvolumethegame.xyz/yarg-vocals/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fullvolumethegame.xyz/terms/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://fullvolumethegame.xyz/privacy/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>
