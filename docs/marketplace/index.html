@@ -312,14 +312,17 @@
       <p>
         Charts made for FullVolume stay in their charter's own Google Drive. Keep one
         shared folder, give every artist a folder inside it, and name each chart after
-        the song and the artist. New charts in there show up here the next time the
-        Marketplace refreshes.
+        the song and the artist. Once you are verified, new charts in there show up
+        here within a day.
       </p>
       <p>
-        Verified charters are being added by hand for now. Make your chart in
+        No charts yet? Make them in
         <a class="song__link" href="../fullvolumecharter/">FullVolumeCharter</a>
-        and export it as a .fvchart to get started.
+        and export each one as a .fvchart.
       </p>
+      <a class="plate plate--sm" href="../applyforverifiedcharter/">
+        <span class="plate__label">BECOME A VERIFIED CHARTER</span>
+      </a>
     </div>
 
     <ul class="mkt-tree" aria-label="Example folder layout">
@@ -368,6 +371,7 @@
         <p class="foot__col-t">Songs</p>
         <a href="../fullvolumecharter/">FullVolumeCharter</a>
         <a href="../marketplace/" aria-current="page">Marketplace</a>
+        <a href="../applyforverifiedcharter/">Become a verified charter</a>
         <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases" target="_blank" rel="noopener">All releases</a>
         <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
       </div>
@@ -457,9 +461,6 @@
      Band index (data/rb3.js, tools/collect-rb3.py) is pulled in afterwards by
      marketplace.js, so it never delays the first paint. -->
 <script src="../data/vocals.js"></script>
-<!-- FullVolume's own .fvchart files from the charters' Drive folders, built by
-     tools/collect-fvchart.py. Small, so it loads up front. -->
-<script src="../data/fvchart.js"></script>
 <script src="../js/marketplace.js"></script>
 </body>
 </html>

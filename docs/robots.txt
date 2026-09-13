@@ -6,4 +6,8 @@ Allow: /
 # crawlers spending their time on the pages instead.
 Disallow: /data/
 
+# The owner's tools and the functions behind them.
+Disallow: /admin/
+Disallow: /api/
+
 Sitemap: https://fullvolumethegame.xyz/sitemap.xml

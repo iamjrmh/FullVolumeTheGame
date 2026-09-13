@@ -10,3 +10,7 @@ tools/deezer-cache.json
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Netlify Functions dependencies and local CLI state
+node_modules/
+.netlify/

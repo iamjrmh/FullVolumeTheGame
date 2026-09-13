@@ -1,0 +1,13 @@
+{
+  "name": "fullvolumethegame-xyz",
+  "private": true,
+  "type": "module",
+  "description": "fullvolumethegame.xyz: the static site in docs/, and the Netlify Functions behind verified charters and the admin page.",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.0.3",
+    "@netlify/functions": "^6.0.0"
+  }
+}

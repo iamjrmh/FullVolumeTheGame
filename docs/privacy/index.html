@@ -173,6 +173,7 @@
           <li><a href="#discord">Discord</a></li>
           <li><a href="#charter">FullVolumeCharter</a></li>
           <li><a href="#site">This website</a></li>
+          <li><a href="#applications">Charter applications</a></li>
           <li><a href="#marketplace">Marketplace downloads</a></li>
           <li><a href="#kofi">The tip jar</a></li>
           <li><a href="#children">Children</a></li>
@@ -193,7 +194,7 @@
           <li>Your microphone is listened to and thrown away. Nothing you sing is recorded.</li>
           <li>Your profiles, scores and settings sit in a folder on your own drive and go nowhere.</li>
           <li>Three things leave the machine: the update check, an online room while you are in one, and Discord rich presence if you leave it on.</li>
-          <li>This website sets no cookies and runs no trackers.</li>
+          <li>This website runs no trackers and sets no cookies for visitors.</li>
         </ul>
         <p class="gist__foot">
           Everything below is the long version of those six lines.
@@ -380,17 +381,47 @@
 
       <h2 id="site">This website</h2>
       <p>
-        fullvolumethegame.xyz is a set of static files. There is no server-side code, no
-        database and nobody logged in.
+        fullvolumethegame.xyz is almost entirely static files. The only server-side code is
+        what takes charter applications and runs the owner's admin page, covered in the next
+        section. Nobody browsing the site is logged in.
       </p>
       <ul class="art__list">
-        <li><strong>No cookies.</strong> The site sets none, first-party or otherwise.</li>
+        <li><strong>No cookies for visitors.</strong> The only cookie on this site belongs to the admin page, and only the owner ever signs in there.</li>
         <li><strong>No analytics and no trackers.</strong> No Google Analytics, no tag manager, no pixels, no third-party scripts of any kind.</li>
         <li><strong>No fonts fetched from anybody.</strong> The typefaces are served from this domain rather than from Google Fonts, so loading a page tells nobody else that you did.</li>
-        <li><strong>One piece of browser storage</strong>, and it is whether you switched the SFX toggle on. It is a single value saved by your own browser under this site's name, it never leaves your device, and clearing site data removes it.</li>
+        <li><strong>Browser storage, kept on your device.</strong> Whether you switched the SFX toggle on, and a half-written charter application so a reload does not lose it (cleared once it is sent). Both are saved by your own browser under this site's name, never leave your device, and clearing site data removes them.</li>
         <li><strong>Hosting logs.</strong> The site is served by Netlify, who like every host see the requests that reach them: IP address, user agent, the page asked for and the time. That is standard access logging for delivering and protecting a website, under <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Netlify's privacy policy</a>. I do not have an analytics product on top of it.</li>
         <li><strong>Downloads come from GitHub.</strong> Clicking the download button sends you to GitHub's release hosting, and GitHub sees that request.</li>
       </ul>
+
+      <h2 id="applications">Charter applications</h2>
+      <p>
+        Applying to become a verified charter is the one place this site asks you for anything.
+        What you send is stored with the site's host, Netlify, and read by the owner:
+      </p>
+      <dl class="terms-table">
+        <div>
+          <dt>Your Discord username</dt>
+          <dd>So you can be told the answer. It is shown on the admin page and nowhere public.</dd>
+        </div>
+        <div>
+          <dt>Your Drive folder link</dt>
+          <dd>Opened when you apply, to check it is shared and count the charts in it. If you are accepted, the charts in it are listed on the Marketplace.</dd>
+        </div>
+        <div>
+          <dt>Why you applied</dt>
+          <dd>Read by the owner, and never published.</dd>
+        </div>
+        <div>
+          <dt>Your IP address</dt>
+          <dd>Never stored as it is. A one-way scrambled form of it is kept for a day to stop the form being flooded.</dd>
+        </div>
+      </dl>
+      <p>
+        To have an application or your verified listing removed, ask on the
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">issue tracker</a>
+        or in the <a href="https://discord.gg/hut9sPRcr2" target="_blank" rel="noopener">FullVolume Discord</a>.
+      </p>
 
       <h2 id="marketplace">Marketplace downloads</h2>
       <p>
@@ -519,6 +550,7 @@
         <p class="foot__col-t">Songs</p>
         <a href="../fullvolumecharter/">FullVolumeCharter</a>
         <a href="../marketplace/">Marketplace</a>
+        <a href="../applyforverifiedcharter/">Become a verified charter</a>
         <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases" target="_blank" rel="noopener">All releases</a>
         <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
       </div>
