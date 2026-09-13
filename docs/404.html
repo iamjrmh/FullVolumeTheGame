@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nothing here - FullVolume</title>
+<meta name="description" content="That page does not exist on fullvolumethegame.xyz. Here is the way back.">
+<meta name="robots" content="noindex, follow">
+
+<!--
+  Every path in this file is absolute on purpose.
+
+  Netlify serves this page's content at whatever URL was missed, so a visitor
+  can be looking at it from /a/b/c/. A relative "../css/style.css" would then
+  resolve against that URL and the page would arrive unstyled, which is the
+  one thing a 404 cannot afford to be.
+-->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="/assets/img/app-icon.png">
+<meta name="theme-color" content="#171719">
+<link rel="preload" href="/assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+  /* Small enough to live here rather than load a stylesheet nobody else
+     uses, and a 404 should draw in one round trip. */
+  /* Flex, not grid. An auto grid track sizes to its content's max-content
+     width, and the h1 unwrapped is wider than a phone, so a centred grid
+     pushed the whole page off the right edge. A flex item shrinks. */
+  .lost {
+    min-height: calc(100svh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(56px, 9vw, 120px) 0;
+    background:
+      radial-gradient(900px 460px at 50% 0%, rgba(216,111,103,.13), transparent 64%),
+      radial-gradient(760px 400px at 80% 100%, rgba(224,184,102,.09), transparent 62%);
+  }
+  .lost__inner { text-align: center; max-width: 720px; min-width: 0; }
+
+  /* The display face is hollow outlines, so at this size it needs no stroke
+     at all: it is the one place on the site the face gets to be itself. */
+  .lost__num {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(110px, 22vw, 240px);
+    line-height: .82;
+    letter-spacing: .04em;
+    color: var(--coral);
+    margin: 0;
+    display: block;
+  }
+
+  /* The needle skipping: a hairline that runs the width of the number and
+     stops short, once, when the page arrives. */
+  .lost__skip {
+    width: min(320px, 70%);
+    height: 2px;
+    margin: var(--s5) auto var(--s6);
+    background: linear-gradient(90deg, transparent, var(--hairline-2) 18%, var(--gold) 50%, var(--hairline-2) 82%, transparent);
+    transform-origin: center;
+    animation: lost-skip 900ms var(--ease-out) both;
+  }
+  @keyframes lost-skip {
+    from { transform: scaleX(0); opacity: 0; }
+    to   { transform: scaleX(1); opacity: 1; }
+  }
+
+  .lost h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(30px, 5vw, 52px);
+    line-height: 1.06;
+    letter-spacing: .02em;
+    -webkit-text-stroke: .6px currentColor;
+    paint-order: stroke fill;
+    color: var(--cream);
+    margin: 0 0 var(--s5);
+    text-wrap: balance;
+  }
+  .lost__lead {
+    font-size: clamp(16px, 2vw, 19px);
+    line-height: 1.6;
+    color: rgba(243,238,231,.86);
+    max-width: 52ch;
+    margin: 0 auto var(--s7);
+  }
+  .lost__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s5);
+    align-items: center;
+    justify-content: center;
+  }
+  .lost__jump {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--cream-dim);
+    text-decoration: underline;
+    text-decoration-color: var(--hairline-2);
+    text-underline-offset: 5px;
+    transition: color var(--t-hover) var(--ease-out),
+                text-decoration-color var(--t-hover) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .lost__jump:hover { color: var(--gold); text-decoration-color: var(--gold); }
+  }
+
+  /* There is no burger on this page, so the one nav action has to survive the
+     width at which the rest of the bar folds away. */
+  @media (max-width: 940px) {
+    .nav__cta { display: inline-flex; }
+  }
+
+  .lost__next {
+    border-top: 1px solid var(--hairline);
+    margin-top: clamp(48px, 7vw, 80px);
+    padding-top: var(--s6);
+    text-align: left;
+  }
+  .lost__next-t {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 var(--s5);
+    text-align: center;
+  }
+
+  @media (max-width: 560px) {
+    .lost__cta { flex-direction: column; align-items: stretch; }
+    .lost__cta .plate { justify-content: center; width: 100%; }
+  }
+</style>
+</head>
+<body class="page-guide">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NAV =================
+     Cut to the brand and one way out. The full disclosure menu is more
+     machinery than a dead end needs, and the routes are on the page. -->
+<header class="nav is-stuck" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="/" aria-label="FullVolume, home">
+      <img class="nav__mark" src="/assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULLVOLUME</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/fullvolumecharter/">Charter</a>
+      <a href="/marketplace/">Marketplace</a>
+      <a href="/community/">Community</a>
+      <a href="/faq/">Questions</a>
+    </nav>
+
+    <a class="plate plate--sm nav__cta" href="/#download">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="lost">
+    <div class="wrap lost__inner">
+
+      <p class="lost__num" aria-hidden="true">404</p>
+      <div class="lost__skip" aria-hidden="true"></div>
+
+      <h1>That one is not in the setlist.</h1>
+      <p class="lost__lead">
+        The page you asked for either moved or never existed. Nothing is broken on
+        your end, and the game is still free, so let us call it even.
+      </p>
+
+      <!-- One loud way out and one quiet one, the same arrangement the download
+           panel uses. Two gold plates side by side just argue with each other. -->
+      <div class="lost__cta">
+        <a class="plate plate--lg" href="/">
+          <img class="plate__icon" src="/assets/img/icons/back.png" alt="" width="512" height="512">
+          <span class="plate__label">BACK TO THE START</span>
+        </a>
+        <a class="lost__jump" href="/#download">Or go straight to the download</a>
+      </div>
+
+      <div class="lost__next">
+        <p class="lost__next-t">Or try one of these</p>
+        <div class="art__next-grid">
+          <a href="/marketplace/">
+            <b>The Marketplace</b>
+            <span>Free charts with a vocal part, from both community catalogues.</span>
+          </a>
+          <a href="/community/">
+            <b>Community</b>
+            <span>Who is online and which rooms are open, right now.</span>
+          </a>
+          <a href="/fullvolumecharter/">
+            <b>FullVolumeCharter</b>
+            <span>Chart the vocals for a song nobody has charted yet.</span>
+          </a>
+          <a href="/faq/">
+            <b>All the questions</b>
+            <span>Thirty-eight of them, answered straight.</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
+    <p>v0.9.2 &middot; beta</p>
+  </div>
+</footer>
+
+</body>
+</html>
