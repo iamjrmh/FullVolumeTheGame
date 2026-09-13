@@ -1,7 +1,7 @@
 <p align="center">
   <a href="README.md">README</a>
   &nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="#-fullvolumecharter">CHARTER</a>
+  <a href="https://fullvolumethegame.xyz/fullvolumecharter">CHARTER</a>
   &nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="FullVolume.md">ROADMAP</a>
 </p>
