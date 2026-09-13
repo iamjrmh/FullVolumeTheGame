@@ -26,12 +26,18 @@
    and from rhythmverse.co/download/<id>, which is a page rather
    than a file, since that is where the Drive and Dropbox links are
    resolved.
+
+   And FullVolume's own: .fvchart files from the charters' public
+   Google Drive folders, indexed by tools/collect-fvchart.py into
+   data/fvchart.js. Drive answers with CORS open, so these download
+   whole through the same fetch-and-rename as a Chorus chart.
    ============================================================ */
 (function () {
   "use strict";
 
   var FILES = "https://files.enchor.us";        // Chorus Encore's file host
   var RV = "https://rhythmverse.co";             // Rhythmverse
+  var DRIVE = "https://drive.usercontent.google.com/download?export=download&confirm=t&id=";
   var PAGE = 40;
 
   var list = document.getElementById("mktList");
@@ -40,6 +46,7 @@
   var query   = document.getElementById("mktQuery");
   var clear   = document.getElementById("mktClear");
   var fLyrics = document.getElementById("fLyrics");
+  var fFrom   = document.getElementById("fFrom");
   var fSort   = document.getElementById("fSort");
   var countEl = document.getElementById("mktCount");
   var resetEl = document.getElementById("mktReset");
@@ -78,11 +85,13 @@
   // Chorus hands over the file; Rhythmverse hands over a page, because that
   // is where a chart parked on Drive or Dropbox gets resolved.
   function chartUrl(song) {
+    if (song.fv) return DRIVE + encodeURIComponent(song.id);
     return song.rb ? RV + "/download/" + song.id : FILES + "/" + song.id + ".sng";
   }
 
   function artSrc(song) {
     if (!song.art) return "";
+    if (song.fv) return "../data/fvcovers/" + song.art + ".jpg";
     // Rhythmverse mostly has no artwork of its own - its own pages fall back to
     // a placeholder too - so tools/fill-covers.py lends those rows the cover of
     // the same song on Chorus, marked "ch:". Everything else is a path on
@@ -136,7 +145,7 @@
   function fileNameFor(song) {
     var title = safeName(song.title) || "song";
     var artist = safeName(song.artist);
-    return (artist ? title + " - " + artist : title) + ".sng";
+    return (artist ? title + " - " + artist : title) + (song.fv ? ".fvchart" : ".sng");
   }
 
   function save(blob, name) {
@@ -228,9 +237,25 @@
   // Which of the three the game will find it as. It reads all of them, so this
   // is a label rather than a choice to make.
   function formatTag(song) {
+    if (song.fv) {
+      return '<span class="tag tag--fv" title="Made for FullVolume in FullVolumeCharter">.FVCHART</span>';
+    }
     return song.rb
       ? '<span class="tag tag--ext" title="Rock Band custom, from Rhythmverse">.RB3CON</span>'
       : '<span class="tag tag--fmt" title="One file, from Chorus Encore">.SNG</span>';
+  }
+
+  // A .fvchart carries the charter's name colour, the same one the game prints
+  // it in. Shown as a swatch beside the name, since a dark colour set as the
+  // text itself would vanish into the page.
+  function charterHtml(song) {
+    var name = esc(song.charter || "unknown charter");
+    if (!song.color || !/^#[0-9A-F]{6}$/i.test(song.color)) return name;
+    return '<i class="song__swatch" style="background:' + song.color + '" aria-hidden="true"></i>' + name;
+  }
+
+  function megabytes(bytes) {
+    return bytes ? Math.round(bytes / 1048576) + " MB" : "-";
   }
 
   function rowHtml(song) {
@@ -246,7 +271,7 @@
           '</span>' +
 
           '<span class="song__c-meta song__charter">' +
-            '<span class="song__c-hide-inline">' + esc(song.charter || "unknown charter") + '</span>' +
+            '<span class="song__c-hide-inline">' + charterHtml(song) + '</span>' +
           '</span>' +
 
           '<span class="song__c-hide song__c-parts">' + vocalTag(song) + '</span>' +
@@ -278,7 +303,12 @@
       ["Length", duration(song.length)]
     ];
 
-    if (song.rb) {
+    if (song.fv) {
+      rows.push(["Notes", song.notes ? song.notes.toLocaleString() : "-"]);
+      rows.push(["Size", megabytes(song.size)]);
+      rows.push(["Format", ".fvchart, the whole song in one file"]);
+      rows.push(["From", "FullVolume community"]);
+    } else if (song.rb) {
       rows.push(["Vocal parts", song.parts > 1 ? song.parts + " (harmonies)" : "1"]);
       rows.push(["Downloads", song.downloads ? song.downloads.toLocaleString() : "-"]);
       rows.push(["Format", ".rb3con, Rock Band custom"]);
@@ -303,11 +333,13 @@
             (song.rb ? ' target="_blank" rel="noopener"' : ' download') + '>' +
             '<span class="plate__label">DOWNLOAD</span>' +
           '</a>' +
-          '<a class="song__link" href="' + esc(song.rb
+          '<a class="song__link" href="' + esc(song.fv
+              ? "https://drive.google.com/file/d/" + encodeURIComponent(song.id) + "/view"
+              : song.rb
               ? RV + "/songfile/" + song.id
               : "https://www.enchor.us/?name=" + encodeURIComponent(song.title)) +
             '" target="_blank" rel="noopener">View it on ' +
-            (song.rb ? "Rhythmverse" : "Chorus Encore") + '</a>' +
+            (song.fv ? "Google Drive" : song.rb ? "Rhythmverse" : "Chorus Encore") + '</a>' +
         '</div>' +
       '</div>';
   }
@@ -353,7 +385,7 @@
   }
 
   function isFiltered() {
-    return !!(query.value.trim() || fLyrics.value);
+    return !!(query.value.trim() || fLyrics.value || fFrom.value);
   }
 
   /* ---------- filter / sort ---------- */
@@ -362,8 +394,10 @@
     var q = fold(query.value.trim());
     var terms = q ? q.split(/\s+/) : [];
     var lyrics = fLyrics.value;
+    var from = fFrom.value;
 
     shown = songs.filter(function (s) {
+      if (from === "fv" && !s.fv) return false;
       if (lyrics === "yes" && !s.lyrics) return false;
       if (lyrics === "no" && s.lyrics) return false;
 
@@ -406,6 +440,7 @@
     var p = new URLSearchParams();
     if (query.value.trim()) p.set("q", query.value.trim());
     if (fLyrics.value) p.set("lyrics", fLyrics.value);
+    if (fFrom.value) p.set("from", fFrom.value);
     if (fSort.value !== "added") p.set("sort", fSort.value);
     if (openId) p.set("song", openId);
     var qs = p.toString();
@@ -416,6 +451,7 @@
     var p = new URLSearchParams(location.search);
     if (p.get("q")) query.value = p.get("q");
     if (p.get("lyrics")) fLyrics.value = p.get("lyrics");
+    if (p.get("from")) fFrom.value = p.get("from");
     if (p.get("sort")) fSort.value = p.get("sort");
     openId = p.get("song") || null;
   }
@@ -464,13 +500,14 @@
 
   barEl.addEventListener("submit", function (e) { e.preventDefault(); });
 
-  [fLyrics, fSort].forEach(function (el) {
+  [fLyrics, fFrom, fSort].forEach(function (el) {
     el.addEventListener("change", function () { apply(); });
   });
 
   resetEl.addEventListener("click", function () {
     query.value = ""; clear.hidden = true;
     fLyrics.value = "";
+    fFrom.value = "";
     apply();
   });
 
@@ -537,16 +574,22 @@
 
   // Rows arrive as arrays in the order named by cols, which is a third of the
   // size of ten thousand repeated key names. Expanded once, here.
-  function expand(index, isRb) {
+  function expand(index, isRb, isFv) {
     var cols = index.cols || [];
     return (index.rows || []).map(function (r) {
-      var o = { rb: isRb };
+      var o = { rb: !!isRb, fv: !!isFv };
       for (var i = 0; i < cols.length; i++) o[cols[i]] = r[i];
-      // A Rock Band vocal part always carries its words, so those rows answer
-      // the lyrics question the same way every time.
-      if (isRb) o.lyrics = 1;
+      // A Rock Band vocal part always carries its words, and a .fvchart is
+      // built from a lyric sheet, so those rows answer the lyrics question
+      // the same way every time.
+      if (isRb || isFv) o.lyrics = 1;
       return o;
     });
+  }
+
+  function community() {
+    var fv = window.FV_COMMUNITY_CHARTS;
+    return fv && fv.rows ? expand(fv, false, true) : [];
   }
 
   // The Rock Band index is the bigger of the two and most visits never search
@@ -578,7 +621,7 @@
       return;
     }
 
-    songs = expand(index, false);
+    songs = community().concat(expand(index, false));
     restore();
     stats();
     clear.hidden = !query.value;
