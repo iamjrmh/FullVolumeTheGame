@@ -297,6 +297,18 @@
 .tag--harm  { background: rgba(224,184,102,.18); color: var(--gold); }
 .tag--fmt   { background: rgba(243,238,231,.10); color: var(--cream-dim); }
 .tag--ext   { background: rgba(216,111,103,.18); color: var(--coral); }
+/* FullVolume's own format gets the one solid tag, so a community chart is
+   picked out of forty thousand rows at a glance. */
+.tag--fv    { background: var(--gold); color: var(--ink); }
+
+.song__swatch {
+  display: inline-block;
+  width: 9px; height: 9px;
+  margin-right: 7px;
+  border-radius: 50%;
+  vertical-align: 1px;
+  box-shadow: 0 0 0 1.5px rgba(243,238,231,.28);
+}
 
 .song__get { justify-self: end; }
 .song__get .plate { --plate-h: 40px; padding: 0 18px; }
@@ -383,10 +395,36 @@
 /* ---- Formats and steps -------------------------------------------------- */
 .mkt-formats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--s5);
   margin-bottom: var(--s7);
 }
+.mkt-format--fv { border-color: var(--gold); }
+
+/* How a charter lays out a Drive folder: a tiny file tree. */
+.mkt-share {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s7);
+  align-items: center;
+}
+.mkt-share .h2 { margin-bottom: var(--s4); }
+.mkt-share p { color: var(--cream-dim); }
+.mkt-tree {
+  margin: 0;
+  padding: var(--s6);
+  list-style: none;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: rgba(0,0,0,.28);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.4), inset 0 1px 0 rgba(243,238,231,.08);
+  font-size: 15px;
+  overflow-x: auto;
+}
+.mkt-tree li { padding: 5px 0; white-space: nowrap; color: var(--cream-dim); }
+.mkt-tree .d1 { padding-left: 26px; }
+.mkt-tree .d2 { padding-left: 52px; color: var(--gold); font-weight: 600; }
+.mkt-tree small { margin-left: var(--s3); color: var(--cream-faint); font-size: 13px; }
 .mkt-format {
   padding: var(--s6);
   border: 2px solid var(--ink);
@@ -453,6 +491,8 @@
   .song__c-hide   { display: none; }
 
   .song__detail { padding-left: var(--s5); }
+  .mkt-formats { grid-template-columns: repeat(2, 1fr); }
+  .mkt-share { grid-template-columns: 1fr; gap: var(--s5); }
 }
 
 @media (max-width: 620px) {
