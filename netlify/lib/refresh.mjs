@@ -9,6 +9,7 @@
 // Only one pass runs at a time. The lock is a create-only blob that expires,
 // so a pass that dies mid-way cannot wedge refreshing for good.
 
+import { randomUUID } from "node:crypto";
 import { purgeCache } from "@netlify/functions";
 import { COLS, chartSize, folderUrl, layoutProblem, listCharts, openChart } from "./fvchart.mjs";
 import { allJson, charters, community } from "./stores.mjs";
@@ -26,17 +27,58 @@ export async function readIndex() {
   return (await community().get(INDEX_KEY, { type: "json" })) || null;
 }
 
+// The lock says who is sweeping, not merely that somebody is.
+//
+// It used to say only "taken until", and that let two passes write over each
+// other: the lock expires while a pass is still working, a second pass picks it
+// up, reads the state blob as it was before the first pass started, and whichever
+// finishes last publishes its own idea of the listing. The loser's work is not
+// lost noisily - it is lost silently, as an index with fewer charts in it than
+// the same sweep's own folder count, and no error anywhere. That is exactly what
+// happened on 2026-09-14: perCharter said 2, rows had 1, errors was empty.
+//
+// So a holder now stamps the lock with a token nobody else can guess, keeps it
+// alive while it works, and checks the lock is still its own before every write.
+// A pass that has lost the lock throws its work away rather than publishing it;
+// the sweep is resumable, so the next pass simply does that part again.
 async function takeLock() {
   const store = community();
-  const mine = { until: Date.now() + LOCK_MS };
-  if ((await store.setJSON(LOCK_KEY, mine, { onlyIfNew: true })).modified) return true;
+  const token = randomUUID();
+  const mine = { token, until: Date.now() + LOCK_MS };
+
+  if ((await store.setJSON(LOCK_KEY, mine, { onlyIfNew: true })).modified) return token;
+
   const held = await store.get(LOCK_KEY, { type: "json" });
-  if (held && held.until > Date.now()) return false;
+  if (held && held.until > Date.now()) return null;
+
   await store.delete(LOCK_KEY);
-  return (await store.setJSON(LOCK_KEY, mine, { onlyIfNew: true })).modified;
+  return (await store.setJSON(LOCK_KEY, mine, { onlyIfNew: true })).modified ? token : null;
 }
 
-const releaseLock = () => community().delete(LOCK_KEY);
+/** Pushes our lock's expiry back, so working for a while cannot lose it. */
+async function keepLock(token) {
+  const store = community();
+  const held = await store.get(LOCK_KEY, { type: "json" });
+  if (!held || held.token !== token) return false;
+
+  await store.setJSON(LOCK_KEY, { token, until: Date.now() + LOCK_MS });
+  return true;
+}
+
+/** Whether the lock is still ours, which is what makes a write safe. */
+async function stillOurs(token) {
+  const held = await community().get(LOCK_KEY, { type: "json" });
+  return !!held && held.token === token;
+}
+
+async function releaseLock(token) {
+  const store = community();
+  const held = await store.get(LOCK_KEY, { type: "json" });
+
+  // Only ever our own. Deleting a lock somebody else now holds would invite the
+  // very overwrite this is here to stop.
+  if (held && held.token === token) await store.delete(LOCK_KEY);
+}
 
 async function newSweep(trigger) {
   const list = await allJson(charters());
@@ -85,7 +127,8 @@ export async function currentProgress() {
  */
 export async function refreshPass({ budgetMs = 20_000, start = false, trigger = "admin" } = {}) {
   const deadline = Date.now() + budgetMs;
-  if (!(await takeLock())) return { busy: true };
+  const token = await takeLock();
+  if (!token) return { busy: true };
 
   try {
     const store = community();
@@ -131,6 +174,10 @@ export async function refreshPass({ budgetMs = 20_000, start = false, trigger = 
     // A chart takes a few seconds to open, so a batch only starts with room
     // left to finish inside the function's 30 second limit.
     while (!state.toList.length && state.queue.length && Date.now() < deadline - 8000) {
+      // Opening a batch is the slow part, so the lock is pushed back before each
+      // one rather than being left to run out while charts are being read.
+      if (!(await keepLock(token))) return { busy: true };
+
       const batch = state.queue.splice(0, PARALLEL);
       await Promise.all(batch.map(async (chart) => {
         try {
@@ -150,6 +197,11 @@ export async function refreshPass({ budgetMs = 20_000, start = false, trigger = 
         }
       }));
     }
+
+    // Nothing below here may be written by a pass that no longer holds the lock:
+    // somebody else has been working from the state as it was before this pass
+    // started, and saving over them is how a sweep loses charts silently.
+    if (!(await stillOurs(token))) return { busy: true };
 
     if (state.toList.length || state.queue.length) {
       await store.setJSON(STATE_KEY, state);
@@ -184,13 +236,37 @@ export async function refreshPass({ budgetMs = 20_000, start = false, trigger = 
     }
     return { ...progressOf(state, true), done: true, count: rows.length };
   } finally {
-    await releaseLock();
+    await releaseLock(token);
   }
 }
 
 /** Drop a removed charter's charts from the listing straight away. */
 export async function dropCharter(charterId) {
   const store = community();
+
+  // Under the lock, because this reads the listing, edits it and writes it back -
+  // exactly the read-modify-write a sweep publishing at the same moment would
+  // undo, or be undone by. Removing somebody is rare and a few seconds' wait for
+  // the lock costs nothing; getting it wrong puts a removed charter's songs back
+  // on the Marketplace.
+  let token = null;
+  for (let attempt = 0; attempt < 6 && !token; attempt++) {
+    token = await takeLock();
+    if (!token) await new Promise((settle) => setTimeout(settle, 1500));
+  }
+
+  // Still nothing: the charter is already out of the store, so the next sweep
+  // leaves their charts out anyway. Better late than written over a good listing.
+  if (!token) return;
+
+  try {
+    await removeRowsOwnedBy(store, charterId);
+  } finally {
+    await releaseLock(token);
+  }
+}
+
+async function removeRowsOwnedBy(store, charterId) {
   const index = await readIndex();
   if (!index) return;
   const gone = new Set(Object.entries(index.owner || {}).filter(([, o]) => o === charterId).map(([f]) => f));

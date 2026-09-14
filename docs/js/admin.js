@@ -20,6 +20,14 @@
 
   /* ---------- helpers ---------- */
 
+  // A charter is identified by their Discord user ID, which is what stays put
+  // when somebody renames themselves. Older records hold a username instead, so
+  // both are drawn: an ID as the bare number, a username with its @.
+  function who(d) {
+    var s = String(d == null ? "" : d);
+    return /^\d{17,20}$/.test(s) ? s : "@" + s;
+  }
+
   function esc(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -162,7 +170,7 @@
     return '' +
       '<article class="adm-app" data-id="' + esc(a.id) + '">' +
         '<div class="adm-app__top">' +
-          '<h3 class="adm-app__who">@' + esc(a.discord) + '</h3>' +
+          '<h3 class="adm-app__who">' + esc(who(a.discord)) + '</h3>' +
           '<span class="adm-app__when" title="' + esc(new Date(a.submittedAt).toLocaleString()) + '">Applied ' + esc(ago(a.submittedAt)) + '</span>' +
         '</div>' +
         '<div class="adm-chips">' + chips(a) + '</div>' +
@@ -192,10 +200,10 @@
       ? state.charters.map(function (c) {
           var charts = c.charts == null ? "not refreshed yet" : c.charts + " chart" + (c.charts === 1 ? "" : "s");
           return '<div class="adm-charter" data-id="' + esc(c.id) + '">' +
-            '<div><b>@' + esc(c.discord) + '</b>' +
+            '<div><b>' + esc(who(c.discord)) + '</b>' +
             '<small>' + esc(charts) + ' &middot; since ' + esc(new Date(c.addedAt).toLocaleDateString()) +
             ' &middot; <a href="' + esc(c.folderUrl) + '" target="_blank" rel="noopener">folder</a></small></div>' +
-            '<button class="btn btn--danger" type="button" data-act="remove" aria-label="Remove @' + esc(c.discord) + '">Remove</button>' +
+            '<button class="btn btn--danger" type="button" data-act="remove" aria-label="Remove ' + esc(who(c.discord)) + '">Remove</button>' +
           '</div>';
         }).join("")
       : '<p class="adm-empty">No verified charters yet.</p>';
@@ -264,7 +272,7 @@
       api("POST", "applications/" + id + "/recount").then(function (r) {
         Object.assign(a, r.application);
         card.querySelector(".adm-chips").innerHTML = chips(a);
-        toast("@" + a.discord + " has " + a.charts + " chart" + (a.charts === 1 ? "" : "s") + ".");
+        toast(who(a.discord) + " has " + a.charts + " chart" + (a.charts === 1 ? "" : "s") + ".");
       }).catch(function (err) { toast(err.message, true); })
         .finally(function () { button.disabled = false; button.textContent = "Count charts again"; });
       return;
@@ -287,7 +295,7 @@
           if (act === "accept") {
             state.charters.push({ id: a.folderId, discord: a.discord, folderUrl: a.folderUrl, addedAt: a.decidedAt, charts: null });
             state.charters.sort(function (x, y) { return x.discord.localeCompare(y.discord); });
-            toast("@" + a.discord + " is verified. Reading their charts now...");
+            toast(who(a.discord) + " is verified. Reading their charts now...");
             startRefresh();
           } else if (act === "decline") {
             toast("Declined @" + a.discord + ".");
@@ -346,7 +354,7 @@
         addForm.reset();
         paintStats();
         paintCharters();
-        toast("@" + r.charter.discord + " is verified. Reading their charts now...");
+        toast(who(r.charter.discord) + " is verified. Reading their charts now...");
         startRefresh();
       })
       .catch(function (err) {
