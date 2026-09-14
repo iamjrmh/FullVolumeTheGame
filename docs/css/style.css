@@ -1671,6 +1671,74 @@ body::after {
 .dl__cta .plate--lg .plate__label { font-size: 32px; }
 .dl__cta .plate--lg .plate__icon { --icon: 30px; }
 
+/* The download tally sits beside GET IT: a display-face number in the panel's
+   own accent, with a small live dot so it reads as a counter, not a claim.
+   js/downloads.js fills it and unhides it; until then it takes no room. The
+   number stays above the ~28px the display face turns to lace at. */
+.tally {
+  --tally-accent: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding-left: var(--s2);
+  color: var(--cream-dim);
+}
+.tally[hidden] { display: none; }
+.section--charter .tally { --tally-accent: var(--sage); }
+
+.tally__num {
+  font-family: var(--display);
+  font-size: 40px;
+  line-height: 1;
+  color: var(--tally-accent);
+  -webkit-text-stroke: .8px var(--tally-accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  min-width: 2ch;
+}
+.tally__label {
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: var(--cream-faint);
+  max-width: 11em;
+}
+.tally__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--cream-dim);
+  font-weight: 600;
+}
+.tally__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tally-accent);
+  box-shadow: 0 0 0 0 var(--tally-accent);
+  animation: tally-pulse 2.4s var(--ease-out) infinite;
+}
+@keyframes tally-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(224,184,102,.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(224,184,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(224,184,102,0); }
+}
+.section--charter .tally__dot { animation-name: tally-pulse-sage; }
+@keyframes tally-pulse-sage {
+  0%   { box-shadow: 0 0 0 0 rgba(130,155,135,.6); }
+  70%  { box-shadow: 0 0 0 7px rgba(130,155,135,0); }
+  100% { box-shadow: 0 0 0 0 rgba(130,155,135,0); }
+}
+/* A small hop when the number goes up while someone is watching. */
+.tally.is-bumped .tally__num { animation: tally-bump 480ms var(--ease-out); }
+@keyframes tally-bump {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tally__dot, .tally.is-bumped .tally__num { animation: none; }
+}
+
 /* The second route stays quiet on purpose: a sunken strip in the panel's own
    tones rather than another plate, so it cannot compete with GET IT. */
 .dl__alt {
