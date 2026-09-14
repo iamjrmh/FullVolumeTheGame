@@ -2755,21 +2755,6 @@ body::after {
 }
 .section--charter .receipt h3 { color: var(--sage); }
 
-/* Not out yet, and the page must not pretend otherwise. */
-.ch-soon {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--s4);
-  margin-top: var(--s5);
-  padding: var(--s4) var(--s5);
-  border-radius: var(--radius);
-  background: rgba(0,0,0,.3);
-  box-shadow: inset 0 0 0 1px rgba(243,238,231,.09), inset 0 2px 14px rgba(0,0,0,.45);
-}
-.ch-soon svg { flex: none; color: var(--gold); margin-top: 2px; }
-.ch-soon p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--cream-dim); }
-.ch-soon b { color: var(--cream); }
-
 @media (max-width: 900px) {
   .ch-hero__grid { grid-template-columns: minmax(0, 1fr); }
   .ch-step { grid-template-columns: minmax(0, 1fr); }

@@ -42,6 +42,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
 INDEX = ROOT / "docs" / "index.html"
+CHARTER = ROOT / "docs" / "fullvolumecharter" / "index.html"
 SITEMAP = ROOT / "docs" / "sitemap.xml"
 DOCS = ROOT / "docs"
 DATA = ROOT / "docs" / "data"
@@ -165,6 +166,29 @@ def build_rules(version: str, channel: str, size: str | None, charts: int | None
          r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
          rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1),
 
+        # FullVolumeCharter carries the game's own number, by the user's rule, so
+        # the charter page is driven from the same source rather than by hand. It
+        # quotes the bare version with no channel - the charter is not "beta"
+        # separately from the game it ships inside.
+        (CHARTER, "charter JSON-LD softwareVersion",
+         r'("softwareVersion":\s*")\d+\.\d+\.\d+(")',
+         rf"\g<1>{version}\g<2>", 1),
+
+        (CHARTER, "charter hero flag",
+         r"(Shipping with FullVolume )\d+\.\d+\.\d+( &middot; <b>v)\d+\.\d+\.\d+(</b>)",
+         rf"\g<1>{version}\g<2>{version}\g<3>", 1),
+
+        (CHARTER, "charter download lead",
+         r"(Out now, alongside\s+FullVolume )\d+\.\d+\.\d+",
+         rf"\g<1>{version}", 1),
+
+        (CHARTER, "charter receipt version",
+         r"(<dt>Version</dt><dd>)\d+\.\d+\.\d+(</dd>)",
+         rf"\g<1>{version}\g<2>", 1),
+
+        (CHARTER, "charter receipt ships with",
+         r"(<dt>Ships with</dt><dd>FullVolume )\d+\.\d+\.\d+(</dd>)",
+         rf"\g<1>{version}\g<2>", 1),
     ]
 
     # Every other page carries the same footer, and there are more of them every
