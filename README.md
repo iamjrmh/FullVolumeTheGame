@@ -19,11 +19,11 @@
 A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs already sitting on your drive and sing any of them - on your own, or in a room online with your buddies.
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043)](#-system-requirements)
-[![Version](https://img.shields.io/badge/version-0.9.3%20beta-ff6b6b)](../../releases)
-[![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest)
+[![Version](https://img.shields.io/badge/version-0.9.4%20beta-ff6b6b)](../../releases)
+[![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest) 
 [![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
-[![Charter](https://img.shields.io/badge/charter-0.9.3-829B87)](#-fullvolumecharter)
+[![Charter](https://img.shields.io/badge/charter-0.9.4-829B87)](#-fullvolumecharter)
 
 
 <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume on GitHub →**</a>
@@ -47,12 +47,13 @@ Every karaoke game wants to sell you the music. FullVolume hasn't got any to sel
 - **Scored like a rhythm game should be** - land a phrase and it pays in full, drop one and you're paid for what you sang, and a full combo is five stars every single time. Gold phrases fill an overdrive meter you let out in the gaps
 - **Line up a set list** - queue songs while somebody else is still singing, so the night runs itself instead of stopping dead between every track
 - **Online, with voices** - name a room, send it to your buddies, and sing together from wherever you are. Voice chat is part of the game, not something you bolt on beside it
-- **Make it your room** - every last bit of it is hand drawn, and if you don't fancy the room, drop in a picture or a video of your own and that's your stage instead
+- **Make it your room** - every last bit of it is hand drawn, and if you don't fancy the room, drop in a picture or a video of your own and that's your stage instead. A song that brought a backdrop of its own still shows it, and yours fills in the rest of the night
 - **Make it yours, too** - your own note and lyric colors, your own name in your own colors, your own track speed, all saved per singer
 - **Chart the one it hasn't got** - [FullVolumeCharter](#-fullvolumecharter) turns any song you own into something to sing
 - **Tuned to your gear** - one button and it sorts out your audio delay on its own, or tap along for a few bars and let it work you out
+- **It keeps itself up to date** - it notices when there is a newer one, tells you what changed, and installs it over itself in one click. So does FullVolumeCharter
 
-> **What's new in 0.9.3:** the needle no longer plunges mid-word, a full combo is always five stars, overdrive works, UltraStar and `.fvchart` songs play, and FullVolumeCharter ships alongside. The [release notes](../../releases/latest) have the detail.
+> **What's new in 0.9.4:** your own backdrop no longer covers up the songs that brought one of their own, FullVolumeCharter's export screen is fixed, and the charter keeps itself up to date the way the game does. The [release notes](../../releases/latest) have the detail.
 
 ---
 
@@ -171,7 +172,7 @@ Uninstall it whenever you like. Profiles, scores, backdrops and song folders liv
 |---|---|
 | **File** | `FullVolumeSetup.exe` |
 | **Size** | 107 MB to download, about 200 MB installed |
-| **Version** | 0.9.3 beta |
+| **Version** | 0.9.4 beta |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | Local. Nothing to sign up for |
 | **Songs included** | None. You bring those |
@@ -205,6 +206,8 @@ Every PC has a different audio delay. **Settings → Calibration** measures it f
 
 Drop a picture or a video into `Documents\Full Volume\Custom\Backgrounds` and it turns up in the backdrop carousel. Menus and gameplay each get their own pick, so you can have one for the lobby and another for the stage.
 
+Your pick answers for the songs that did not bring anything of their own. A song that ships a dedicated backdrop shows that instead: the art the charter chose for it wins, every time. Album art is not a backdrop, so a chart carrying nothing but a cover still gets your picture.
+
 ### Where your stuff lives
 
 Everything you make is in **`Documents\Full Volume`** - profiles, scores, your backdrops, and the list of song folders you added. The uninstaller deliberately never touches it.
@@ -225,7 +228,7 @@ Host a room from inside the game, send it round, and sing together from wherever
 
 ## 🎚️ FullVolumeCharter
 
-> **Shipping now, with FullVolume 0.9.3.** It is a separate download and carries the same version number as the game it ships beside, so 0.9.3 of one goes with 0.9.3 of the other.
+> **Shipping now, with FullVolume 0.9.4.** It is a separate download and carries the same version number as the game it ships beside, so 0.9.4 of one goes with 0.9.4 of the other.
 
 The game plays the vocal part that is already inside a Clone Hero or Rock Band chart. That covers tens of thousands of songs, and it does not cover the one you wanted at half past eleven on a Friday. **FullVolumeCharter** is how that one gets a part to sing.
 
@@ -266,6 +269,7 @@ Everything you enter is saved the moment you enter it, so a song started tonight
 - **It reads the pitches a whole phrase at a time**, weighing each note against the ones either side of it rather than guessing at each one alone, which is what stops a note landing in the right pitch class an octave from where you sang it. A note it cannot hear is left empty rather than filled in with a guess.
 - **Timed `.lrc` lyrics beside your track come in on their own**, along with the cover art, the title and the artist, so a song that is already in sync is not retyped or retapped.
 - **Your name goes on it**, colored letter by letter, and it is remembered for every chart you write afterwards.
+- **It keeps itself up to date**, the same way the game does, so the installer below is the last one you fetch by hand.
 
 <details>
 <summary><h3 align="center">The seven steps, on screen</h3></summary>
@@ -315,8 +319,8 @@ Everything you enter is saved the moment you enter it, so a song started tonight
 |---|---|
 | **File** | `FullVolumeCharterSetup.exe` |
 | **Size** | 222 MB. Offline installer, nothing else needed |
-| **Charter version** | 0.9.3 |
-| **Released with** | FullVolume 0.9.3 |
+| **Charter version** | 0.9.4 |
+| **Released with** | FullVolume 0.9.4 |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | None |
 | **Writes** | `.fvchart` |
