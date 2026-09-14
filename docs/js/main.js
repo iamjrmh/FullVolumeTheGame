@@ -763,4 +763,12 @@
     });
   })();
 
+  /* ----------------------------------------------------------
+     NO RIGHT-CLICK
+     The context menu is off across the whole site. Every page loads
+     this file, so one listener at the document covers all of them
+     (404.html has no scripts and carries its own copy of this line).
+     ---------------------------------------------------------- */
+  document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+
 })();
