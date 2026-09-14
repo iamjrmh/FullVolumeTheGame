@@ -322,7 +322,9 @@
 .adm-gate img { width: 72px; height: 72px; }
 .adm-gate .h2 { margin: 0; }
 .adm-gate p { margin: 0; color: var(--cream-dim); }
-.adm-gate .plate svg { width: 22px; height: 22px; flex: none; translate: 0 1px; }
+/* No nudge: the plate art is centred on its own box in style.css now, so
+   anything flex-centred inside it already lands on the button. */
+.adm-gate .plate svg { width: 22px; height: 22px; flex: none; }
 .adm-flash {
   width: 100%;
   margin: 0;
