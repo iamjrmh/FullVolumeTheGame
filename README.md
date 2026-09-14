@@ -19,11 +19,11 @@
 A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs already sitting on your drive and sing any of them - on your own, or in a room online with your buddies.
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043)](#-system-requirements)
-[![Version](https://img.shields.io/badge/version-0.9.2%20beta-ff6b6b)](../../releases)
+[![Version](https://img.shields.io/badge/version-0.9.3%20beta-ff6b6b)](../../releases)
 [![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest)
 [![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
-[![Charter](https://img.shields.io/badge/charter-0.1.0%20with%200.9.3-829B87)](#-fullvolumecharter)
+[![Charter](https://img.shields.io/badge/charter-0.9.3-829B87)](#-fullvolumecharter)
 
 
 <a href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume on GitHub →**</a>
@@ -43,11 +43,16 @@ A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs al
 Every karaoke game wants to sell you the music. FullVolume hasn't got any to sell. It reads the songs already on your drive and turns them into a proper karaoke night: lyrics, pitch, scoring, stars, the lot.
 
 - **It actually hears you** - land the note and it knows, nail it dead centre and it *really* knows. Sing it an octave down if that's where your voice lives, it still counts
-- **Your library, not a store** - point it at your Clone Hero or Rock Band folders and it takes it from there. Songs nobody sings on are quietly left out, so you never pick a track and find there's nothing to sing
+- **Your library, not a store** - point it at your Clone Hero, Rock Band or UltraStar folders and it takes it from there. Songs nobody sings on are quietly left out, so you never pick a track and find there's nothing to sing
+- **Scored like a rhythm game should be** - land a phrase and it pays in full, drop one and you're paid for what you sang, and a full combo is five stars every single time. Gold phrases fill an overdrive meter you let out in the gaps
 - **Line up a set list** - queue songs while somebody else is still singing, so the night runs itself instead of stopping dead between every track
 - **Online, with voices** - name a room, send it to your buddies, and sing together from wherever you are. Voice chat is part of the game, not something you bolt on beside it
 - **Make it your room** - every last bit of it is hand drawn, and if you don't fancy the room, drop in a picture or a video of your own and that's your stage instead
+- **Make it yours, too** - your own note and lyric colours, your own name in your own colours, your own track speed, all saved per singer
+- **Chart the one it hasn't got** - [FullVolumeCharter](#-fullvolumecharter) turns any song you own into something to sing
 - **Tuned to your gear** - one button and it sorts out your audio delay on its own, or tap along for a few bars and let it work you out
+
+> **What's new in 0.9.3:** the needle no longer plunges mid-word, a full combo is always five stars, overdrive works, UltraStar and `.fvchart` songs play, and FullVolumeCharter ships alongside. The [release notes](../../releases/latest) have the detail.
 
 ---
 
@@ -165,8 +170,8 @@ Uninstall it whenever you like. Profiles, scores, backdrops and song folders liv
 | | |
 |---|---|
 | **File** | `FullVolumeSetup.exe` |
-| **Size** | 250 MB |
-| **Version** | 0.9.2 beta |
+| **Size** | 107 MB to download, about 200 MB installed |
+| **Version** | 0.9.3 beta |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | Local. Nothing to sign up for |
 | **Songs included** | None. You bring those |
@@ -220,15 +225,17 @@ Host a room from inside the game, send it round, and sing together from wherever
 
 ## 🎚️ FullVolumeCharter
 
-> **Coming with FullVolume 0.9.3.** Everything below is the tool as it stands today, screenshots and all. The download link is live the moment the release is.
+> **Shipping now, with FullVolume 0.9.3.** It is a separate download and carries the same version number as the game it ships beside, so 0.9.3 of one goes with 0.9.3 of the other.
 
 The game plays the vocal part that is already inside a Clone Hero or Rock Band chart. That covers tens of thousands of songs, and it does not cover the one you wanted at half past eleven on a Friday. **FullVolumeCharter** is how that one gets a part to sing.
 
-Audio in, `.fvchart` out. It walks a song through seven steps and hands back a single file carrying the words, the timing, the pitches, the album art and the audio. Drop it in a folder the game is watching and it is on the list.
+Audio in, `.fvchart` out. It walks a song through seven steps and hands back a single file carrying the words, the timing, the pitches, the overdrive, the album art and the audio. Drop it in a folder the game is watching and it is on the list, exactly like everything else.
+
+It is a real desktop app, not a web page in a wrapper: no account, no upload, no server, nothing leaves your machine.
 
 <p align="center">
   <a href="https://fullvolumethegame.xyz/fullvolumecharter/">
-  <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="The FullVolumeCharter pitch roll: a note box per syllable against a piano keyboard, with the sung pitch line read off the recording drawn behind them" width="820">
+  <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="Step six of FullVolumeCharter: the pitch roll, a note box per syllable laid against a piano keyboard, with the song's waveform above it" width="820">
   </a>
 </p>
 
@@ -247,10 +254,18 @@ Audio in, `.fvchart` out. It walks a song through seven steps and hands back a s
 3. **Lyrics** - paste the words and they are split into the syllables actually sung, by the rules of the language you picked. Fix one by hand and it has learned that word.
 4. **Pitch breaks** - click a word for every extra pitch it passes through while it is held. Each `+` is one more note on the same word.
 5. **Tap the timing** - play the song and tap Enter as each syllable starts. Slow it to 50, 65 or 80 per cent and it *stays in its own key*, so a fast line is still singable while you tap it.
-6. **Pitches** - the sung line is read straight off the recording, a phrase at a time, and you drag anything it got wrong. A guide tone plays the note under the cursor.
+6. **Pitches** - the sung line is read straight off the recording, a phrase at a time, and you drag anything it got wrong. A guide tone plays the note under the cursor, and a strip above the roll is where you mark your overdrive phrases and pick the moments they can be let out.
 7. **Export** - one `.fvchart` with all of it inside. Open the same file later and it puts you back on whichever step you want.
 
 Everything you enter is saved the moment you enter it, so a song started tonight is picked up tomorrow exactly where you stopped.
+
+### A few things worth knowing
+
+- **The slow-down is a real time-stretch, not a pitched-down tape.** That is what makes tapping a fast line syllable by syllable possible at all, which is why step 5 asks for one tap per syllable rather than dividing a word up evenly and hoping.
+- **It can pull the vocals out of a finished mix.** Opt in on the audio step and it separates the song into a voice and an instrumental on your graphics card, in about three seconds for a three minute song, using [UVR](https://github.com/Anjok07/ultimatevocalremovergui)'s karaoke model. Nothing waits on it - every step works from the mix alone, the stems just make the later ones better.
+- **It reads the pitches a whole phrase at a time**, weighing each note against the ones either side of it rather than guessing at each one alone, which is what stops a note landing in the right pitch class an octave from where you sang it. A note it cannot hear is left empty rather than filled in with a guess.
+- **Timed `.lrc` lyrics beside your track come in on their own**, along with the cover art, the title and the artist, so a song that is already in sync is not retyped or retapped.
+- **Your name goes on it**, coloured letter by letter, and it is remembered for every chart you write afterwards.
 
 <details>
 <summary><h3 align="center">The seven steps, on screen</h3></summary>
@@ -272,6 +287,9 @@ Everything you enter is saved the moment you enter it, so a song started tonight
   <br><br>
   <img src="./docs/assets/img/shots/charter/charter-06.jpg" alt="Step three: the how it will sing panel, one box per note, with counts of lines, words, syllables and sections">
   <em>Step 3. How it will sing, box by box.</em>
+  <br><br>
+  <img src="./docs/assets/img/shots/charter/charter-07.jpg" alt="Step four: the how it works panel explaining pitch breaks, above the words of the song">
+  <em>Step 4. What a pitch break is, before you place any.</em>
   <br><br>
   <img src="./docs/assets/img/shots/charter/charter-08.jpg" alt="Step four: every syllable as a clickable box, for adding and removing pitch breaks">
   <em>Step 4. Click a word for every pitch it moves through.</em>
@@ -296,8 +314,9 @@ Everything you enter is saved the moment you enter it, so a song started tonight
 | | |
 |---|---|
 | **File** | `FullVolumeCharterSetup.exe` |
-| **Charter version** | 0.1.0 |
-| **Lands with** | FullVolume 0.9.3 |
+| **Size** | 222 MB. Offline installer, nothing else needed |
+| **Charter version** | 0.9.3 |
+| **Ships with** | FullVolume 0.9.3 |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | None |
 | **Writes** | `.fvchart` |
