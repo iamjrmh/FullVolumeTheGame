@@ -215,6 +215,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 [hidden] { display: none !important; }
 p { margin: 0 0 1em; }
 
+/* Nothing on the site highlights: no accidental drag-selects over the copy, so
+   it looks the same for a visitor as it does in a screenshot. Only the fields
+   people type into stay selectable, or the search box and the application form
+   would be unusable. js/main.js turns the right-click menu off to match. */
+body { -webkit-user-select: none; user-select: none; }
+input, textarea, select, [contenteditable] { -webkit-user-select: text; user-select: text; }
 ::selection { background: var(--gold); color: var(--ink); }
 
 :focus-visible {
