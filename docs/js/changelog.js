@@ -245,6 +245,21 @@
     rail.classList.add("has-current");
   }
 
+  // Centre a chip inside the strip's own scroll box, clamped to its ends so
+  // the first and last chips sit flush rather than half off.
+  function centreChip(a) {
+    var max = railList.scrollWidth - railList.clientWidth;
+    if (max <= 0) return;
+    var want = a.offsetLeft - (railList.clientWidth - a.offsetWidth) / 2;
+    var left = Math.max(0, Math.min(want, max));
+    if (Math.abs(left - railList.scrollLeft) < 1) return;
+    if (railList.scrollTo) {
+      railList.scrollTo({ left: left, behavior: reduceMotion.matches ? "auto" : "smooth" });
+    } else {
+      railList.scrollLeft = left;
+    }
+  }
+
   function setCurrent(id) {
     railLinks.forEach(function (a) {
       var on = a.getAttribute("href") === "#" + id;
@@ -253,8 +268,12 @@
         a.setAttribute("aria-current", "true");
         moveMarker(a);
         // On a phone the rail is a strip; keep the current chip in view.
-        if (window.matchMedia("(max-width: 900px)").matches && a.scrollIntoView) {
-          a.scrollIntoView({ block: "nearest", inline: "center", behavior: reduceMotion.matches ? "auto" : "smooth" });
+        // Not scrollIntoView: that walks every scrollable ancestor, and the
+        // strip sits at the top of the page here, so once it has scrolled
+        // out of view "block: nearest" drags the whole page back up to it
+        // as you read. Scroll the strip itself and nothing else moves.
+        if (window.matchMedia("(max-width: 900px)").matches && railList) {
+          centreChip(a);
         }
       } else {
         a.removeAttribute("aria-current");
