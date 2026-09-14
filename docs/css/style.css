@@ -379,12 +379,28 @@ code {
 }
 
 /* The plate art is a single drawing, so it is stretched, not nine-sliced -
-   its own rounded ends are wide enough that this reads cleanly at any width. */
+   its own rounded ends are wide enough that this reads cleanly at any width.
+
+   The drawing does not fill its own canvas. In the 534x128 sprite the flat
+   top of the button - the part a label sits on - is x 21..504, y 36..113: the
+   rows above it are the empty band the hover sprite fills with sparkles, and
+   the rows below are the outline, the lip and the shadow it casts. Its centre
+   is (49.16%, 58.20%) of the canvas, not (50%, 50%), so centring the label on
+   the element box put it high on the button every time, by about a tenth of
+   the button's height. The art is therefore slid until the face's centre IS
+   the box's centre, and flex centring then lands the label on the button at
+   every size with no per-size nudging. These insets move the art; they do not
+   stretch it, so nothing about how it is drawn changes.
+
+   The same inset serves both sprites because the artist drew them on one
+   rect: the coral plate's face measures (49.25%, 58.20%), within a pixel of
+   the gold one. The game swaps them inside a single RectTransform for the
+   same reason. */
 .plate::before,
 .plate::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -9.4% -.8% 9.4% .8%;
   z-index: -1;
   background-position: center;
   background-size: 100% 100%;
@@ -393,39 +409,56 @@ code {
 .plate::before { background-image: url("../assets/img/plate.png"); }
 .plate::after  { background-image: url("../assets/img/plate-hover.png"); opacity: 0; }
 
+/* letter-spacing puts its space after every letter, the last one included, so
+   a centred label hangs half a space left of where it looks centred. Taking
+   that space back off the end is the difference between measuring centred and
+   looking centred. */
 .plate__label {
   font-size: 21px;
   letter-spacing: .06em;
+  margin-inline-end: -.06em;
   line-height: 1;
   -webkit-text-stroke: .7px var(--ink);
-  translate: 0 1px;   /* the drawn plate's optical centre sits a hair high */
 }
 .plate__icon {
-  width: 20px; height: 20px;
+  --icon: 20px;
+  width: var(--icon); height: var(--icon);
   filter: brightness(0);   /* the icons are drawn white; the plate is gold */
-  translate: 0 1px;
   flex: none;
 }
+
+/* play.png is drawn with 27% of its square empty to the left of the triangle.
+   That dead space is invisible but it is still laid out, so it pushed every
+   icon-and-label pair right of centre by half its width - 3px on the big
+   download plate. Taking the same amount off the icon's leading edge moves
+   the pair, gap and all, back onto the middle of the button. The other icons
+   are drawn tight enough not to need it. */
+.plate__icon[src$="play.png"] { margin-inline-start: calc(var(--icon) * -.27); }
 
 /* FvTheme's three sizes */
 .plate--lg { --plate-h: 78px; }
 .plate--lg .plate__label { font-size: 28px; }
-.plate--lg .plate__icon { width: 26px; height: 26px; }
+.plate--lg .plate__icon { --icon: 26px; }
 
 .plate--md { --plate-h: 64px; }
 
 .plate--sm { --plate-h: 48px; padding: 0 24px; }
 .plate--sm .plate__label { font-size: 16px; }
-.plate--sm .plate__icon { width: 17px; height: 17px; }
+.plate--sm .plate__icon { --icon: 17px; }
 
 /* Icon-only, for the gallery arrows.
    The full plate art is 534x128 with an empty band along the top that the
    hover sprite fills with three gold sparkles. Squashed into a square that
    band turns to slivers, so these use the plate cropped to its own drawing. */
 .plate--icon { padding: 0; width: 58px; }
+/* This sprite is the plate already cropped to its own drawing, so its face
+   sits high rather than low: centre (50.68%, 44.85%), and the correction
+   above would push it the wrong way. */
+.plate--icon::before,
+.plate--icon::after { inset: 4.4% .73% -4.4% -.73%; }
 .plate--icon::before { background-image: url("../assets/img/plate-icon.png"); }
 .plate--icon::after  { background-image: url("../assets/img/plate-icon-hover.png"); }
-.plate--icon .plate__icon { width: 22px; height: 22px; translate: 0 0; }
+.plate--icon .plate__icon { --icon: 22px; }
 .plate--icon.is-flipped .plate__icon { scale: -1 1; }
 
 .plate--block { display: flex; width: 100%; }
@@ -1636,7 +1669,7 @@ body::after {
 /* One button, given the room to be the loudest thing in the section. */
 .dl__cta .plate--lg { --plate-h: 92px; }
 .dl__cta .plate--lg .plate__label { font-size: 32px; }
-.dl__cta .plate--lg .plate__icon { width: 30px; height: 30px; }
+.dl__cta .plate--lg .plate__icon { --icon: 30px; }
 
 /* The second route stays quiet on purpose: a sunken strip in the panel's own
    tones rather than another plate, so it cannot compete with GET IT. */
@@ -1754,7 +1787,7 @@ body::after {
               transform 120ms var(--ease-out);
 }
 .tipjar__launch.is-in { opacity: 1; translate: 0 0; }
-.tipjar__icon { width: 18px; height: 18px; flex: none; translate: 0 1px; }
+.tipjar__icon { width: 18px; height: 18px; flex: none; }
 
 /* ---- Panel ------------------------------------------------------------- */
 .tipjar__panel {
