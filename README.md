@@ -48,7 +48,7 @@ Every karaoke game wants to sell you the music. FullVolume hasn't got any to sel
 - **Line up a set list** - queue songs while somebody else is still singing, so the night runs itself instead of stopping dead between every track
 - **Online, with voices** - name a room, send it to your buddies, and sing together from wherever you are. Voice chat is part of the game, not something you bolt on beside it
 - **Make it your room** - every last bit of it is hand drawn, and if you don't fancy the room, drop in a picture or a video of your own and that's your stage instead
-- **Make it yours, too** - your own note and lyric colours, your own name in your own colours, your own track speed, all saved per singer
+- **Make it yours, too** - your own note and lyric colors, your own name in your own colors, your own track speed, all saved per singer
 - **Chart the one it hasn't got** - [FullVolumeCharter](#-fullvolumecharter) turns any song you own into something to sing
 - **Tuned to your gear** - one button and it sorts out your audio delay on its own, or tap along for a few bars and let it work you out
 
@@ -235,7 +235,7 @@ It is a real desktop app, not a web page in a wrapper: no account, no upload, no
 
 <p align="center">
   <a href="https://fullvolumethegame.xyz/fullvolumecharter/">
-  <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="Step six of FullVolumeCharter: the pitch roll, a note box per syllable laid against a piano keyboard, with the song's waveform above it" width="820">
+  <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="Step six of FullVolumeCharter: the pitch roll against a piano keyboard, the song's waveform above it, and the overdrive strip between the two reading 12 overdrive and 3 activation moments" width="820">
   </a>
 </p>
 
@@ -250,7 +250,7 @@ It is a real desktop app, not a web page in a wrapper: no account, no upload, no
 ### The seven steps
 
 1. **Load the audio** - one file, or the vocal and the backing as separate stems. Cover art, a backdrop and a timed `.lrc` sitting beside the track come in with it.
-2. **Song info** - title, artist, album, genre, year, language, and your name on it in whatever colours you like. The tempo is worked out from the audio, with halve, double and tap tempo to correct it.
+2. **Song info** - title, artist, album, genre, year, language, and your name on it in whatever colors you like. The tempo is worked out from the audio, with halve, double and tap tempo to correct it.
 3. **Lyrics** - paste the words and they are split into the syllables actually sung, by the rules of the language you picked. Fix one by hand and it has learned that word.
 4. **Pitch breaks** - click a word for every extra pitch it passes through while it is held. Each `+` is one more note on the same word.
 5. **Tap the timing** - play the song and tap Enter as each syllable starts. Slow it to 50, 65 or 80 per cent and it *stays in its own key*, so a fast line is still singable while you tap it.
@@ -265,7 +265,7 @@ Everything you enter is saved the moment you enter it, so a song started tonight
 - **It can pull the vocals out of a finished mix.** Opt in on the audio step and it separates the song into a voice and an instrumental on your graphics card, in about three seconds for a three minute song, using [UVR](https://github.com/Anjok07/ultimatevocalremovergui)'s karaoke model. Nothing waits on it - every step works from the mix alone, the stems just make the later ones better.
 - **It reads the pitches a whole phrase at a time**, weighing each note against the ones either side of it rather than guessing at each one alone, which is what stops a note landing in the right pitch class an octave from where you sang it. A note it cannot hear is left empty rather than filled in with a guess.
 - **Timed `.lrc` lyrics beside your track come in on their own**, along with the cover art, the title and the artist, so a song that is already in sync is not retyped or retapped.
-- **Your name goes on it**, coloured letter by letter, and it is remembered for every chart you write afterwards.
+- **Your name goes on it**, colored letter by letter, and it is remembered for every chart you write afterwards.
 
 <details>
 <summary><h3 align="center">The seven steps, on screen</h3></summary>
@@ -276,8 +276,8 @@ Everything you enter is saved the moment you enter it, so a song started tonight
   <img src="./docs/assets/img/shots/charter/charter-02.jpg" alt="Step one: a vocal stem and a backing stem loaded, each with its waveform and its own volume">
   <em>Step 1. One file, or a vocal and a backing.</em>
   <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-03.jpg" alt="Step two: the song information form, with the charter name coloured letter by letter">
-  <em>Step 2. Your name on it, in your own colours.</em>
+  <img src="./docs/assets/img/shots/charter/charter-03.jpg" alt="Step two: the song information form, with the charter name colored letter by letter">
+  <em>Step 2. Your name on it, in your own colors.</em>
   <br><br>
   <img src="./docs/assets/img/shots/charter/charter-04.jpg" alt="Step two: the tempo card, with a detected BPM, a confidence bar, halve, double and tap tempo">
   <em>Step 2. The tempo, heard and correctable.</em>
@@ -316,7 +316,7 @@ Everything you enter is saved the moment you enter it, so a song started tonight
 | **File** | `FullVolumeCharterSetup.exe` |
 | **Size** | 222 MB. Offline installer, nothing else needed |
 | **Charter version** | 0.9.3 |
-| **Ships with** | FullVolume 0.9.3 |
+| **Released with** | FullVolume 0.9.3 |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | None |
 | **Writes** | `.fvchart` |
