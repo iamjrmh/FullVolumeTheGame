@@ -235,7 +235,7 @@ It is a real desktop app, not a web page in a wrapper: no account, no upload, no
 
 <p align="center">
   <a href="https://fullvolumethegame.xyz/fullvolumecharter/">
-  <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="Step six of FullVolumeCharter: the overdrive strip above the pitch roll, marked phrases in gold and hatched activation windows across it, reading 12 overdrive and 3 activation moments" width="820">
+  <img src="/shots/Charter/shot-01.png" alt="https://fullvolumethegame.xyz/fullvolumecharter" width="820">
   </a>
 </p>
 
