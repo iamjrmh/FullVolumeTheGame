@@ -38,15 +38,62 @@
 
   // What to call somebody. The username where there is one, because an ID is not
   // something you can say to a person; the ID only when that is all there is.
+  // A record filed under an ID alone borrows the name off the Discord profile
+  // once that has been read, so "970401206730125342" only ever shows while the
+  // lookup is still in the air.
   function who(x) {
     var p = personOf(x);
-    return p.name ? "@" + p.name : p.id;
+    if (p.name) return "@" + p.name;
+    var known = faces[p.id];
+    if (known && (known.username || known.globalName)) return "@" + (known.username || known.globalName);
+    return p.id;
   }
 
   /** The ID to print beside the name, or "" when the name already is the ID. */
   function idOf(x) {
     var p = personOf(x);
     return p.name && p.id ? p.id : "";
+  }
+
+  /* ---------- discord profiles ---------- */
+
+  // Every record here is filed under eighteen digits, and eighteen digits are
+  // not a person. The face, the display name, the badges and the account's age
+  // come from Discord through /api/admin/discord - see netlify/lib/discord.mjs
+  // for why that has to be a server call. Profiles land in here once and stay,
+  // so a repaint draws the right face immediately instead of flickering.
+  var faces = {};
+
+  var DISCORD_EPOCH = 1420070400000;
+
+  // A snowflake carries the moment it was minted in its top bits, so the
+  // account's age is known before anybody has answered the question.
+  function createdFrom(id) {
+    try {
+      return new Date(Number(BigInt(id) >> 22n) + DISCORD_EPOCH).toISOString();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // The grey avatar Discord draws for an account that has never set one. Worked
+  // out from the ID so a row is never empty and never pops: a plausible face is
+  // simply replaced by the real one when it lands.
+  function defaultFace(id) {
+    var index = 0;
+    try { index = Number((BigInt(id) >> 22n) % 6n); } catch (e) { index = 0; }
+    return "https://cdn.discordapp.com/embed/avatars/" + index + ".png";
+  }
+
+  function nameOf(p) { return (p && (p.globalName || p.username)) || ""; }
+
+  function accountAge(iso) {
+    if (!iso) return "";
+    var days = Math.floor((Date.now() - Date.parse(iso)) / 86400000);
+    if (days < 1) return "made today";
+    if (days < 60) return days + " day" + (days === 1 ? "" : "s") + " old";
+    if (days < 730) return Math.floor(days / 30.44) + " months old";
+    return Math.floor(days / 365.25) + " years old";
   }
 
   function esc(s) {
@@ -170,6 +217,59 @@
     app.querySelector('[data-count="decided"]').textContent = state.applications.length - pending;
   }
 
+  /** The avatar beside a name, and the button that opens the whole profile. */
+  function faceHtml(x) {
+    var p = personOf(x);
+    if (!p.id) return '<span class="adm-face adm-face--none" title="This record predates user IDs">?</span>';
+    var known = faces[p.id];
+    return '<button class="adm-face" type="button" data-face="' + esc(p.id) + '" ' +
+      'aria-label="Discord profile for ' + esc(who(x)) + '">' +
+      '<img src="' + esc(known ? known.avatar : defaultFace(p.id)) + '" alt="" width="44" height="44">' +
+      '</button>';
+  }
+
+  /** Swap the placeholder faces for the real ones, in place, without a repaint. */
+  function paintFaces() {
+    app.querySelectorAll("button[data-face]").forEach(function (b) {
+      var p = faces[b.getAttribute("data-face")];
+      if (!p) return;
+      var img = b.querySelector("img");
+      if (img.getAttribute("src") !== p.avatar) img.setAttribute("src", p.avatar);
+      b.classList.toggle("is-missing", p.known === false);
+    });
+    // A record filed under an ID alone now has a name to show.
+    app.querySelectorAll("[data-who]").forEach(function (el) {
+      var card = el.closest("[data-id]");
+      if (!card) return;
+      var id = card.getAttribute("data-id");
+      var rec = state.applications.find(function (a) { return a.id === id; }) ||
+        state.charters.find(function (c) { return c.id === id; });
+      if (rec) el.textContent = who(rec);
+    });
+  }
+
+  /**
+   * One request for every face on the page. Discord has no bulk user route, so
+   * asking per card would be a dozen round trips on a page that already knows
+   * every ID it needs before it draws anything.
+   */
+  function fillFaces() {
+    var wanted = [];
+    state.applications.concat(state.charters).forEach(function (x) {
+      var id = personOf(x).id;
+      if (id && !faces[id] && wanted.indexOf(id) < 0) wanted.push(id);
+    });
+    if (!wanted.length) { paintFaces(); return Promise.resolve(); }
+    return api("POST", "discord", { ids: wanted })
+      .then(function (r) {
+        Object.keys(r.profiles || {}).forEach(function (id) { faces[id] = r.profiles[id]; });
+        paintFaces();
+      })
+      .catch(function () {
+        // A face that will not load is not worth a red toast over the page.
+      });
+  }
+
   function chips(a) {
     var out = [];
     var charts = a.charts + (a.countComplete === false ? "+" : "");
@@ -194,7 +294,9 @@
     return '' +
       '<article class="adm-app" data-id="' + esc(a.id) + '">' +
         '<div class="adm-app__top">' +
-          '<h3 class="adm-app__who">' + esc(who(a)) + '</h3>' +
+          '<div class="adm-who">' + faceHtml(a) +
+            '<h3 class="adm-app__who" data-who>' + esc(who(a)) + '</h3>' +
+          '</div>' +
           '<span class="adm-app__when" title="' + esc(new Date(a.submittedAt).toLocaleString()) + '">Applied ' + esc(ago(a.submittedAt)) + '</span>' +
         '</div>' +
         '<div class="adm-chips">' + chips(a) + '</div>' +
@@ -224,10 +326,11 @@
       ? state.charters.map(function (c) {
           var charts = c.charts == null ? "not refreshed yet" : c.charts + " chart" + (c.charts === 1 ? "" : "s");
           return '<div class="adm-charter" data-id="' + esc(c.id) + '">' +
-            '<div><b>' + esc(who(c)) + '</b>' +
+            '<div class="adm-who">' + faceHtml(c) + '<div>' +
+            '<b data-who>' + esc(who(c)) + '</b>' +
             '<small>' + esc(charts) + ' &middot; since ' + esc(new Date(c.addedAt).toLocaleDateString()) +
             (idOf(c) ? ' &middot; ID ' + esc(idOf(c)) : "") +
-            ' &middot; <a href="' + esc(c.folderUrl) + '" target="_blank" rel="noopener">folder</a></small></div>' +
+            ' &middot; <a href="' + esc(c.folderUrl) + '" target="_blank" rel="noopener">folder</a></small></div></div>' +
             '<button class="btn btn--danger" type="button" data-act="remove" aria-label="Remove ' + esc(who(c)) + '">Remove</button>' +
           '</div>';
         }).join("")
@@ -267,6 +370,7 @@
       state.index = data.index;
       state.refresh = data.refresh;
       paintAll();
+      fillFaces();
       if (data.refresh && data.refresh.running && !refreshing) {
         $("refreshStatus").textContent = "A refresh was left part way through. Press refresh to finish it.";
       }
@@ -382,6 +486,7 @@
         state.charters.push(Object.assign({ charts: null }, r.charter));
         state.charters.sort(function (x, y) { return x.discord.localeCompare(y.discord); });
         addForm.reset();
+        showPeek(null);
         paintStats();
         paintCharters();
         toast(who(r.charter) + " is verified. Reading their charts now...");
@@ -394,6 +499,145 @@
       })
       .finally(function () { submit.disabled = false; });
   });
+
+  /* ---------- the profile card ---------- */
+
+  var profileBox = $("admProfile");
+
+  function drawProfile(p) {
+    var banner = $("profBanner");
+    banner.style.backgroundImage = p.banner ? 'url("' + p.banner + '")' : "";
+    banner.style.backgroundColor = p.banner ? "" : (p.accentColor || "");
+    banner.classList.toggle("is-plain", !p.banner);
+
+    $("profAvatar").src = p.avatar || defaultFace(p.id);
+    var deco = $("profDeco");
+    deco.hidden = !p.decoration;
+    if (p.decoration) deco.src = p.decoration;
+
+    $("profName").textContent = nameOf(p) || (p.known === false ? "Unknown account" : "Reading Discord…");
+    $("profHandle").textContent = p.tag || (p.username ? "@" + p.username : p.id);
+
+    var badges = (p.badges || []).map(function (b) {
+      return '<span class="adm-chip' + (b.tone ? " adm-chip--" + b.tone : "") + '">' + esc(b.label) + "</span>";
+    });
+    if (p.guildTag) {
+      badges.unshift('<span class="adm-chip adm-chip--tag" title="Server tag">' +
+        (p.guildTag.badge ? '<img src="' + esc(p.guildTag.badge) + '" alt="" width="16" height="16">' : "") +
+        esc(p.guildTag.text) + "</span>");
+    }
+    if (p.bot) badges.unshift('<span class="adm-chip adm-chip--sage">Bot</span>');
+    $("profBadges").innerHTML = badges.join("");
+    $("profBadges").hidden = !badges.length;
+
+    var made = p.createdAt || createdFrom(p.id);
+    $("profCreated").textContent = made
+      ? new Date(made).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }) +
+        " · " + accountAge(made)
+      : "unknown";
+    $("profId").textContent = p.id;
+
+    // Only ever say why the card is thin, never leave it silently thin.
+    var note = {
+      "no-token": "DISCORD_BOT_TOKEN is not set on Netlify, so this is only what the ID itself carries.",
+      "bad-token": "Discord refused the bot token. Check DISCORD_BOT_TOKEN.",
+      missing: "Discord has no account with this ID.",
+      "rate-limited": "Discord asked us to slow down. Try again in a moment.",
+      unreachable: "Discord did not answer.",
+      failed: "Discord did not answer."
+    }[p.reason] || "";
+    if (!note && p.stale && p.fetchedAt) note = "Discord did not answer just now. Last read " + ago(p.fetchedAt) + ".";
+    $("profNote").textContent = note;
+    $("profNote").hidden = !note;
+
+    $("profOpen").href = "https://discord.com/users/" + encodeURIComponent(p.id);
+  }
+
+  function openProfile(id) {
+    profileBox.setAttribute("data-id", id);
+    drawProfile(faces[id] || { id: id, avatar: defaultFace(id), badges: [] });
+    if (!profileBox.showModal) { window.open("https://discord.com/users/" + id, "_blank", "noopener"); return; }
+    profileBox.showModal();
+    if (!faces[id]) loadProfile(id, false);
+  }
+
+  function loadProfile(id, fresh) {
+    var button = $("profRefresh");
+    button.disabled = true;
+    return api("GET", "discord/" + encodeURIComponent(id) + (fresh ? "/fresh" : ""))
+      .then(function (r) {
+        faces[id] = r.profile;
+        if (profileBox.getAttribute("data-id") === id) drawProfile(r.profile);
+        paintFaces();
+      })
+      .catch(function (err) { if (err.message !== "signed out") toast(err.message, true); })
+      .finally(function () { button.disabled = false; });
+  }
+
+  // One listener for every face on the page: the cards are redrawn constantly
+  // and a per-card listener would have to be reattached each time.
+  app.addEventListener("click", function (e) {
+    var face = e.target.closest("button[data-face]");
+    if (face) openProfile(face.getAttribute("data-face"));
+  });
+
+  $("profDone").addEventListener("click", function () { profileBox.close(); });
+  $("profClose").addEventListener("click", function () { profileBox.close(); });
+  $("profRefresh").addEventListener("click", function () {
+    loadProfile(profileBox.getAttribute("data-id"), true);
+  });
+  $("profCopy").addEventListener("click", function () {
+    var id = profileBox.getAttribute("data-id");
+    var done = function () { toast("Copied " + id + "."); };
+    if (navigator.clipboard) navigator.clipboard.writeText(id).then(done, function () { toast("Could not copy.", true); });
+    else done();
+  });
+
+  /* ---------- who is this, while you type ---------- */
+
+  // Adding a charter by hand means pasting eighteen digits and hoping. This
+  // reads the account as soon as the field holds a whole ID, so the wrong
+  // person is caught before the folder is ever attached to them.
+  var peekTimer, peekFor = "";
+
+  function showPeek(p) {
+    var box = $("addPeek");
+    box.hidden = !p;
+    if (!p) return;
+    box.classList.toggle("is-missing", p.known === false);
+    $("addPeekFace").src = p.avatar || defaultFace(p.id);
+    $("addPeekName").textContent = p.known === false
+      ? "No Discord account with that ID"
+      : (nameOf(p) || p.id) + (p.username && nameOf(p) !== p.username ? " (@" + p.username + ")" : "");
+    var made = p.createdAt || createdFrom(p.id);
+    $("addPeekAge").textContent = p.known === false ? "" : accountAge(made);
+  }
+
+  addForm.elements.discord.addEventListener("input", function () {
+    var id = this.value.trim();
+    clearTimeout(peekTimer);
+    peekFor = "";
+    if (!IS_ID.test(id)) { showPeek(null); return; }
+    if (faces[id]) { showPeek(faces[id]); fillUsername(faces[id]); return; }
+    peekFor = id;
+    peekTimer = setTimeout(function () {
+      api("GET", "discord/" + encodeURIComponent(id))
+        .then(function (r) {
+          faces[id] = r.profile;
+          if (peekFor !== id) return;
+          showPeek(r.profile);
+          fillUsername(r.profile);
+        })
+        .catch(function () { if (peekFor === id) showPeek(null); });
+    }, 450);
+  });
+
+  // Discord usernames are lowercase, and the field says so; a bot's record can
+  // still carry capitals from before that rule existed.
+  function fillUsername(p) {
+    var field = addForm.elements.username;
+    if (!field.value && p.username) field.value = p.username.toLowerCase();
+  }
 
   /* ---------- refresh ---------- */
 

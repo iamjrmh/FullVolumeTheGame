@@ -479,6 +479,8 @@
 .adm-chip--gold { background: rgba(224,184,102,.18); color: var(--gold); }
 .adm-chip--sage { background: rgba(130,155,135,.2); color: #B9CEBC; }
 .adm-chip--coral { background: rgba(216,111,103,.18); color: #F0948D; }
+.adm-chip--tag { gap: 5px; color: var(--cream); text-transform: none; letter-spacing: .02em; }
+.adm-chip--tag img { width: 16px; height: 16px; }
 .adm-link {
   justify-self: start;
   font-size: 14px;
@@ -518,6 +520,150 @@
 .adm-add { display: grid; gap: var(--s3); margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--hairline); }
 .adm-add .ch-input { min-height: 46px; }
 .adm-add .ch-input input { height: 44px; font-size: 15px; }
+
+/* ---- Faces --------------------------------------------------------------
+   A user ID is eighteen digits and tells you nothing. The avatar sits next to
+   every name and opens the whole Discord profile.
+   ------------------------------------------------------------------------ */
+.adm-who { display: flex; align-items: center; gap: var(--s3); min-width: 0; }
+/* Centred rather than baseline-aligned, now that the first thing on the row is
+   a 44px circle and not a line of text. */
+.adm-app__top { align-items: center; }
+
+.adm-face {
+  flex: none;
+  display: block;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--panel);
+  box-shadow: 0 0 0 2px var(--hairline-2);
+  cursor: pointer;
+  overflow: hidden;
+  transition: box-shadow var(--t-field) ease, transform var(--t-field) var(--ease-out);
+}
+.adm-face img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (hover: hover) and (pointer: fine) {
+  .adm-face:hover { box-shadow: 0 0 0 2px var(--gold); transform: scale(1.06); }
+}
+.adm-face:focus-visible { box-shadow: 0 0 0 2px var(--gold); }
+.adm-face.is-missing { box-shadow: 0 0 0 2px rgba(216,111,103,.7); }
+.adm-face.is-missing img { opacity: .45; }
+/* The charter list is the narrow column, and a 44px face there costs the row
+   its second line. */
+.adm-charter .adm-face, .adm-charter .adm-face--none { width: 36px; height: 36px; }
+.adm-face--none {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px dashed var(--hairline-2);
+  color: var(--cream-faint);
+  font-weight: 700;
+}
+
+/* Who the ID in the add form belongs to, while it is being typed. */
+.adm-peek {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-top: var(--s2);
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(130,155,135,.12);
+  box-shadow: inset 0 0 0 1px rgba(130,155,135,.35);
+}
+.adm-peek.is-missing { background: rgba(216,111,103,.12); box-shadow: inset 0 0 0 1px rgba(216,111,103,.4); }
+.adm-peek img { width: 36px; height: 36px; border-radius: 50%; background: var(--panel); }
+.adm-peek b { display: block; font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.adm-peek small { font-size: 12px; color: var(--cream-faint); }
+
+/* ---- The profile card ---------------------------------------------------- */
+.adm-profile { overflow: hidden; }
+.adm-profile__banner {
+  height: 104px;
+  background: center / cover no-repeat;
+}
+.adm-profile__banner.is-plain { background-color: var(--raised); background-image: none; }
+.adm-profile__face {
+  position: relative;
+  display: block;
+  width: 88px;
+  margin: -46px 0 0 var(--s5);
+}
+.adm-profile__face img {
+  display: block;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--panel);
+  box-shadow: 0 0 0 5px var(--panel);
+}
+.adm-profile__deco {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 112px;
+  height: 112px;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+.adm-profile__body { display: grid; gap: var(--s3); padding: var(--s4) var(--s5) var(--s5); }
+.adm-profile__body h2 { overflow-wrap: anywhere; }
+.adm-profile__handle { margin: -8px 0 0; font-size: 14px; color: var(--cream-faint); overflow-wrap: anywhere; }
+.adm-profile__facts { display: grid; gap: var(--s2); margin: 0; font-size: 14px; }
+.adm-profile__facts div { display: flex; flex-wrap: wrap; align-items: center; gap: 4px var(--s3); }
+.adm-profile__facts dt {
+  min-width: 118px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+.adm-profile__facts dd { margin: 0; display: flex; align-items: center; gap: var(--s2); color: var(--cream); }
+.adm-profile__facts code {
+  padding: 3px 8px;
+  border-radius: 7px;
+  background: rgba(0,0,0,.32);
+  font-size: 13px;
+  color: var(--cream-dim);
+  font-variant-numeric: tabular-nums;
+}
+.adm-profile__facts .btn { min-height: 30px; padding: 0 10px; font-size: 12px; }
+.adm-profile__note {
+  margin: 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--coral);
+  border-radius: 0 8px 8px 0;
+  background: rgba(216,111,103,.12);
+  font-size: 13px;
+}
+.adm-profile menu { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--s2); margin: 0; padding: 0; }
+.adm-profile__x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(8,8,9,.55);
+  color: var(--cream);
+  cursor: pointer;
+}
+.adm-profile__x svg { width: 18px; height: 18px; }
+@media (hover: hover) and (pointer: fine) {
+  .adm-profile__x:hover { background: rgba(8,8,9,.8); }
+}
 
 /* Confirm */
 .adm-dialog {
@@ -577,6 +723,8 @@
   @starting-style { .ch-error { transform: none; } }
   .adm-app.is-leaving, .adm-app.is-leaving.to-left, .adm-charter.is-leaving { transform: none; }
   .adm-toast, .adm-toast.is-shown { transform: translate(-50%, 0); }
+  .adm-face { transition-property: box-shadow; }
+  .adm-face:hover { transform: none; }
   .ch-sent.is-in, .adm-dialog[open] { animation-name: chFadeIn; }
   .is-nudged { animation: none; }
   .ch-check circle, .ch-check path { stroke-dashoffset: 0; animation: none !important; }

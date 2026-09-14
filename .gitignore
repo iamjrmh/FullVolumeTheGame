@@ -14,3 +14,8 @@ desktop.ini
 # Netlify Functions dependencies and local CLI state
 node_modules/
 .netlify/
+
+# Local secrets for `netlify dev`. The real ones live in Netlify's own
+# environment; nothing in this repo is allowed to carry a token.
+.env
+.env.*
