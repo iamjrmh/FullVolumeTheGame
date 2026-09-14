@@ -22,6 +22,9 @@ import { allJson, applications, charters } from "../lib/stores.mjs";
 // is deliberately loose at the top.
 const USER_ID = /^\d{17,20}$/;
 
+/** The username kept alongside the ID, so there is a name to type at somebody. */
+const USERNAME = /^(?!.*\.\.)[a-z0-9_.]{2,32}$/;
+
 async function overview(admin) {
   const [apps, verified, index, progress] = await Promise.all([
     allJson(applications()), allJson(charters()), readIndex(), currentProgress(),
@@ -65,9 +68,14 @@ async function decide(id, action, admin) {
   app.decidedBy = admin.name;
 
   if (action === "accept") {
+    // Keyed by the user ID where the application carried one, with the username
+    // kept beside it: the ID is what still identifies them after a rename, the
+    // username is what you actually type to talk to them. Applications sent
+    // before the ID was asked for have only the username, and stay as they were.
     const charter = {
       id: app.folderId,
-      discord: app.discord,
+      discord: app.discordId || app.discord,
+      username: app.discordId ? app.discord : "",
       folderUrl: app.folderUrl,
       addedAt: app.decidedAt,
       applicationId: app.id,
@@ -81,8 +89,12 @@ async function decide(id, action, admin) {
 async function addCharter(req) {
   const body = await readJson(req);
   const discord = String(body?.discord ?? "").trim().replace(/^@/, "");
+  const username = String(body?.username ?? "").trim().replace(/^@/, "").toLowerCase();
   const link = parseDriveLink(body?.folder);
   if (!USER_ID.test(discord)) return problem("That is not a Discord user ID.", 422, { fields: { discord: "17 to 20 digits. In Discord, right-click the person and Copy User ID." } });
+  if (username && !USERNAME.test(username)) {
+    return problem("That is not a Discord username.", 422, { fields: { username: "2 to 32 lowercase letters, numbers, dots or underscores. Leave it empty if you do not know it." } });
+  }
   if (!link || link.kind !== "folder") return problem("That is not a Drive folder link.", 422, { fields: { folder: "Paste a https://drive.google.com/drive/folders/ link." } });
 
   const store = charters();
@@ -92,7 +104,7 @@ async function addCharter(req) {
   } catch {
     return problem("That folder is not shared publicly.", 422, { fields: { folder: "Drive would not show this folder. It needs \"Anyone with the link\"." } });
   }
-  const charter = { id: link.id, discord, folderUrl: folderUrl(link.id), addedAt: new Date().toISOString(), applicationId: null };
+  const charter = { id: link.id, discord, username, folderUrl: folderUrl(link.id), addedAt: new Date().toISOString(), applicationId: null };
   await store.setJSON(charter.id, charter);
   return json({ charter });
 }

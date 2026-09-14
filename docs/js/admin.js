@@ -20,12 +20,33 @@
 
   /* ---------- helpers ---------- */
 
-  // A charter is identified by their Discord user ID, which is what stays put
-  // when somebody renames themselves. Older records hold a username instead, so
-  // both are drawn: an ID as the bare number, a username with its @.
-  function who(d) {
-    var s = String(d == null ? "" : d);
-    return /^\d{17,20}$/.test(s) ? s : "@" + s;
+  var IS_ID = /^\d{17,20}$/;
+
+  // The two records name the same person the other way round: an application
+  // carries the username in `discord` and the ID in `discordId`, while a charter
+  // is filed under the ID in `discord` with the username beside it. Both are
+  // read through here so nothing else has to remember which is which. Records
+  // made before the ID was asked for carry only a username, and still work.
+  function personOf(x) {
+    if (x && "discordId" in x) {
+      return { id: String(x.discordId || ""), name: String(x.discordId ? x.discord : x.discord || "") };
+    }
+    var d = String((x && x.discord) || "");
+    var u = String((x && x.username) || "");
+    return IS_ID.test(d) ? { id: d, name: u } : { id: "", name: d };
+  }
+
+  // What to call somebody. The username where there is one, because an ID is not
+  // something you can say to a person; the ID only when that is all there is.
+  function who(x) {
+    var p = personOf(x);
+    return p.name ? "@" + p.name : p.id;
+  }
+
+  /** The ID to print beside the name, or "" when the name already is the ID. */
+  function idOf(x) {
+    var p = personOf(x);
+    return p.name && p.id ? p.id : "";
   }
 
   function esc(s) {
@@ -154,6 +175,9 @@
     var charts = a.charts + (a.countComplete === false ? "+" : "");
     out.push('<span class="adm-chip ' + (a.charts ? "adm-chip--gold" : "adm-chip--coral") + '">' + esc(charts) + " chart" + (a.charts === 1 ? "" : "s") + "</span>");
     out.push('<span class="adm-chip">' + esc(a.folders) + " folder" + (a.folders === 1 ? "" : "s") + "</span>");
+    // The ID is shown as well as the name, because the name is the half that can
+    // change and the ID is the half you need when it has.
+    if (idOf(a)) out.push('<span class="adm-chip" title="Discord user ID">ID ' + esc(idOf(a)) + "</span>");
     if (a.layoutProblems) out.push('<span class="adm-chip adm-chip--coral">' + esc(a.layoutProblems) + " misnamed</span>");
     if (a.status === "accepted") out.push('<span class="adm-chip adm-chip--sage">Accepted ' + esc(ago(a.decidedAt)) + "</span>");
     if (a.status === "declined") out.push('<span class="adm-chip adm-chip--coral">Declined ' + esc(ago(a.decidedAt)) + "</span>");
@@ -170,7 +194,7 @@
     return '' +
       '<article class="adm-app" data-id="' + esc(a.id) + '">' +
         '<div class="adm-app__top">' +
-          '<h3 class="adm-app__who">' + esc(who(a.discord)) + '</h3>' +
+          '<h3 class="adm-app__who">' + esc(who(a)) + '</h3>' +
           '<span class="adm-app__when" title="' + esc(new Date(a.submittedAt).toLocaleString()) + '">Applied ' + esc(ago(a.submittedAt)) + '</span>' +
         '</div>' +
         '<div class="adm-chips">' + chips(a) + '</div>' +
@@ -200,10 +224,11 @@
       ? state.charters.map(function (c) {
           var charts = c.charts == null ? "not refreshed yet" : c.charts + " chart" + (c.charts === 1 ? "" : "s");
           return '<div class="adm-charter" data-id="' + esc(c.id) + '">' +
-            '<div><b>' + esc(who(c.discord)) + '</b>' +
+            '<div><b>' + esc(who(c)) + '</b>' +
             '<small>' + esc(charts) + ' &middot; since ' + esc(new Date(c.addedAt).toLocaleDateString()) +
+            (idOf(c) ? ' &middot; ID ' + esc(idOf(c)) : "") +
             ' &middot; <a href="' + esc(c.folderUrl) + '" target="_blank" rel="noopener">folder</a></small></div>' +
-            '<button class="btn btn--danger" type="button" data-act="remove" aria-label="Remove ' + esc(who(c.discord)) + '">Remove</button>' +
+            '<button class="btn btn--danger" type="button" data-act="remove" aria-label="Remove ' + esc(who(c)) + '">Remove</button>' +
           '</div>';
         }).join("")
       : '<p class="adm-empty">No verified charters yet.</p>';
@@ -272,7 +297,7 @@
       api("POST", "applications/" + id + "/recount").then(function (r) {
         Object.assign(a, r.application);
         card.querySelector(".adm-chips").innerHTML = chips(a);
-        toast(who(a.discord) + " has " + a.charts + " chart" + (a.charts === 1 ? "" : "s") + ".");
+        toast(who(a) + " has " + a.charts + " chart" + (a.charts === 1 ? "" : "s") + ".");
       }).catch(function (err) { toast(err.message, true); })
         .finally(function () { button.disabled = false; button.textContent = "Count charts again"; });
       return;
@@ -295,7 +320,7 @@
           if (act === "accept") {
             state.charters.push({ id: a.folderId, discord: a.discord, folderUrl: a.folderUrl, addedAt: a.decidedAt, charts: null });
             state.charters.sort(function (x, y) { return x.discord.localeCompare(y.discord); });
-            toast(who(a.discord) + " is verified. Reading their charts now...");
+            toast(who(a) + " is verified. Reading their charts now...");
             startRefresh();
           } else if (act === "decline") {
             toast("Declined @" + a.discord + ".");
@@ -344,17 +369,22 @@
   addForm.addEventListener("submit", function (e) {
     e.preventDefault();
     addFieldError("discord", "");
+    addFieldError("username", "");
     addFieldError("folder", "");
     var submit = addForm.querySelector('button[type="submit"]');
     submit.disabled = true;
-    api("POST", "charters", { discord: addForm.elements.discord.value, folder: addForm.elements.folder.value })
+    api("POST", "charters", {
+      discord: addForm.elements.discord.value,
+      username: addForm.elements.username.value,
+      folder: addForm.elements.folder.value
+    })
       .then(function (r) {
         state.charters.push(Object.assign({ charts: null }, r.charter));
         state.charters.sort(function (x, y) { return x.discord.localeCompare(y.discord); });
         addForm.reset();
         paintStats();
         paintCharters();
-        toast(who(r.charter.discord) + " is verified. Reading their charts now...");
+        toast(who(r.charter) + " is verified. Reading their charts now...");
         startRefresh();
       })
       .catch(function (err) {

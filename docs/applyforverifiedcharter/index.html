@@ -254,6 +254,17 @@
             <p class="ch-help" id="hDiscord">Your username, not your display name. Find it under your name in Discord.</p>
           </div>
 
+          <div class="ch-field" data-field="discordId">
+            <label for="fDiscordId">Discord user ID<span class="req" aria-hidden="true">*</span></label>
+            <div class="ch-input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="11" r="2.4"/><path d="M5.8 17.2a3.6 3.6 0 0 1 6.4 0M14.5 9.5h4M14.5 13.5h4" stroke-linecap="round"/></svg>
+              <input id="fDiscordId" name="discordId" type="text" required maxlength="20"
+                     inputmode="numeric" autocapitalize="none" spellcheck="false"
+                     placeholder="970401206730125342" aria-describedby="hDiscordId">
+            </div>
+            <p class="ch-help" id="hDiscordId">A long number that never changes, so we can still reach you if you rename yourself. In Discord, right-click your name and choose <b>Copy User ID</b>. If you do not see it, turn on Settings &gt; Advanced &gt; Developer Mode first.</p>
+          </div>
+
           <div class="ch-field" data-field="folder">
             <label for="fFolder">Google Drive folder<span class="req" aria-hidden="true">*</span></label>
             <div class="ch-input">
