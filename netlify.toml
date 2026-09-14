@@ -7,6 +7,10 @@
 [build]
   publish = "docs"
   functions = "netlify/functions"
+  # Re-reads the release notes off GitHub into docs/changelog/releases.js on every
+  # deploy, so /changelog/ is current before its first visitor asks the
+  # function. --soft keeps the committed copy if GitHub cannot be reached.
+  command = "node tools/bake-changelog.mjs --soft"
 
 [functions]
   node_bundler = "esbuild"

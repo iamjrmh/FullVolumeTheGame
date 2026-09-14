@@ -1,0 +1,463 @@
+/* ============================================================
+   CHANGELOG - /changelog/
+
+   An addition to .page-guide, never a replacement. The same panel,
+   plate and hairline vocabulary as the rest of the site, arranged
+   as a timeline: a rail of versions that stays put on the left, and
+   one card per release running down a line on the right.
+
+   Motion here follows the house rules in style.css - transform and
+   opacity only, strong ease-out curves, one-shot reveals - and adds
+   three things of its own:
+     - the change items inside a card cascade in 40ms apart once the
+       card itself has arrived (decorative, never blocks reading)
+     - the rail marker slides to whichever release is under the
+       reader, so the page always says where you are
+     - the newest node on the line breathes, slowly, because that is
+       the one thing on the page worth drawing the eye to
+   ============================================================ */
+
+.changelog {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+.changelog-section { padding-top: clamp(40px, 5vw, 64px); }
+.changelog__col { max-width: 760px; min-width: 0; }
+.changelog__aside { position: sticky; top: 104px; }
+
+/* ---------- The version rail ---------- */
+.rail {
+  position: relative;
+  padding: var(--s5) var(--s5) var(--s4);
+  background: var(--panel);
+  background-image: linear-gradient(180deg, rgba(243,238,231,.055), rgba(0,0,0,.14));
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.4), inset 0 1px 0 rgba(243,238,231,.10);
+}
+.rail__t {
+  margin: 0 0 var(--s3);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.rail__list { display: grid; gap: 2px; position: relative; }
+.rail__list a {
+  --row: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  height: var(--row);
+  padding: 0 var(--s3);
+  margin-inline: calc(var(--s3) * -1);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--cream-dim);
+  white-space: nowrap;
+  transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out);
+}
+.rail__list a b {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.rail__list a span {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.rail__list a.is-current { color: var(--cream); }
+.rail__list a.is-current span { color: var(--cream-dim); }
+@media (hover: hover) and (pointer: fine) {
+  .rail__list a:hover { color: var(--cream); background-color: rgba(224,184,102,.10); }
+}
+
+/* The marker is one row tall and only ever moves by transform. Its resting
+   place is set by the script as a translateY in px; the transition does the
+   travel, and because it is a transition rather than keyframes a fast scroll
+   retargets it mid-flight instead of snapping it back. */
+.rail__marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 40px;
+  border-radius: 0 3px 3px 0;
+  background: var(--gold);
+  opacity: 0;
+  transform: translateY(var(--y, 0px));
+  transition: transform 260ms var(--ease-out), opacity 200ms var(--ease-out);
+  will-change: transform;
+}
+.rail.has-current .rail__marker { opacity: 1; }
+.rail__foot {
+  margin: var(--s4) 0 0;
+  padding-top: var(--s4);
+  border-top: 2px solid var(--hairline);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--cream-faint);
+}
+.rail__foot a { color: var(--cream-dim); text-decoration: underline; text-underline-offset: 3px; }
+.rail__foot a:hover { color: var(--gold); }
+
+/* ---------- The line and its nodes ---------- */
+.log {
+  position: relative;
+  display: grid;
+  gap: clamp(40px, 5vw, 64px);
+  padding-left: 40px;
+}
+.log::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold) 0, var(--hairline-2) 120px, var(--hairline-2) calc(100% - 80px), transparent 100%);
+}
+.rel { position: relative; }
+.rel__node {
+  position: absolute;
+  left: -40px;
+  top: 30px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  box-shadow: 0 0 0 2px var(--hairline-2);
+}
+.rel__node::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--cream-dim);
+}
+.rel--latest .rel__node::before { background: var(--gold); }
+.rel--launch .rel__node::before { background: var(--sage); }
+
+/* A slow breath on the newest node only. Opacity and scale, 2.8s, and
+   the reduced-motion block in style.css stops it dead. */
+.rel--latest .rel__node::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  opacity: 0;
+  animation: rel-breathe 2.8s var(--ease-out) infinite;
+}
+@keyframes rel-breathe {
+  0%   { opacity: .8; transform: scale(.7); }
+  70%  { opacity: 0;  transform: scale(1.9); }
+  100% { opacity: 0;  transform: scale(1.9); }
+}
+
+/* ---------- One release ---------- */
+.rel__card {
+  padding: clamp(24px, 3.2vw, 40px);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--panel);
+  background-image: linear-gradient(180deg, rgba(243,238,231,.055), rgba(0,0,0,.14));
+  box-shadow: 6px 7px 0 rgba(0,0,0,.42), inset 0 1px 0 rgba(243,238,231,.10);
+}
+.rel--latest .rel__card { border-color: rgba(224,184,102,.55); }
+
+.rel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3) var(--s4);
+  margin-bottom: var(--s3);
+}
+/* The version is the heading and the biggest thing on the card. At 44px
+   the hollow face wants most of a pixel of stroke. */
+.rel__v {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(36px, 4.2vw, 46px);
+  line-height: 1;
+  letter-spacing: .01em;
+  color: var(--cream);
+  -webkit-text-stroke: .85px currentColor;
+  font-variant-numeric: tabular-nums;
+}
+.rel__v a { color: inherit; }
+.rel__chips { display: inline-flex; gap: var(--s2); flex-wrap: wrap; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  color: var(--cream-dim);
+  border-color: var(--hairline-2);
+}
+.chip--latest { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.chip--launch { background: rgba(130,155,135,.18); color: var(--sage); border-color: rgba(130,155,135,.5); }
+
+.rel__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s4);
+  margin: 0 0 var(--s4);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.rel__meta time { color: var(--cream-dim); }
+.rel__tagline {
+  margin: 0 0 var(--s5);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--cream-dim);
+  max-width: 60ch;
+}
+
+/* ---------- The changes ---------- */
+.rel__sec + .rel__sec,
+.rel__changes + .rel__sec,
+.rel__sec + .rel__changes {
+  margin-top: clamp(24px, 3vw, 36px);
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 2px solid var(--hairline);
+}
+.rel__sec-t {
+  margin: 0 0 var(--s4);
+  font-family: var(--display);
+  font-size: 27px;
+  line-height: 1.15;
+  letter-spacing: .01em;
+  color: var(--cream);
+  -webkit-text-stroke: 1.05px currentColor;
+}
+.rel__sec p { margin: 0 0 var(--s4); font-size: 15.5px; color: var(--cream-dim); }
+.rel__sec p:last-child { margin-bottom: 0; }
+.rel__sec .ticks { margin: 0 0 var(--s4); }
+.rel__sec .ticks li { font-size: 15px; }
+.rel__sec pre {
+  margin: 0 0 var(--s4);
+  padding: var(--s3) var(--s4);
+  overflow-x: auto;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: rgba(23,23,25,.6);
+  font: 13.5px/1.5 ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color: var(--cream);
+}
+.rel__img {
+  margin: 0 0 var(--s5);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: 4px 5px 0 rgba(0,0,0,.4);
+  aspect-ratio: 16 / 9;
+}
+.rel__img img { width: 100%; height: 100%; object-fit: cover; }
+
+.rel__changes { display: grid; gap: var(--s4); }
+.change {
+  position: relative;
+  padding-left: 26px;
+}
+.change::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 9px; height: 9px;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  background: var(--gold);
+}
+.change__t {
+  margin: 0 0 var(--s1);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--cream);
+}
+.change__b {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--cream-dim);
+}
+.change__b + .change__b { margin-top: var(--s2); }
+
+.rel code, .change code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: rgba(243,238,231,.08);
+  font: 0.92em ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color: var(--cream);
+}
+.rel a:not(.plate) {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+@media (hover: hover) and (pointer: fine) { .rel a:not(.plate):hover { color: var(--coral); } }
+
+/* Cascade. The card arrives via [data-reveal]; the items inside follow it,
+   one every 40ms from 120ms in, capped by the script at eight steps. */
+.rel[data-reveal] .change {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  transition-delay: calc(120ms + var(--i, 0) * 40ms);
+}
+.rel[data-reveal].is-in .change { opacity: 1; transform: none; }
+
+/* ---------- The launch build's long tail ---------- */
+.rel__launch {
+  margin-top: clamp(24px, 3vw, 36px);
+  border-top: 2px solid var(--hairline);
+}
+.rel__launch summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding: var(--s4) 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--cream);
+  transition: color var(--t-hover) var(--ease-out);
+}
+.rel__launch summary::-webkit-details-marker { display: none; }
+.rel__launch summary::after {
+  content: "";
+  flex: none;
+  width: 18px; height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E0B866' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9.5l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 200ms var(--ease-out);
+}
+.rel__launch[open] summary::after { transform: rotate(180deg); }
+@media (hover: hover) and (pointer: fine) { .rel__launch summary:hover { color: var(--gold); } }
+.rel__launch-body { padding-bottom: var(--s2); }
+/* Opening a disclosure cannot animate its height without laying out every
+   frame, so the body fades in instead and the height simply happens. */
+.rel__launch[open] .rel__launch-body { animation: rel-fade 240ms var(--ease-out) both; }
+@keyframes rel-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Get it ---------- */
+.rel__get {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3) var(--s4);
+  margin-top: clamp(24px, 3vw, 36px);
+  padding-top: clamp(20px, 2.6vw, 28px);
+  border-top: 2px solid var(--hairline);
+}
+.rel__get .plate--sm { padding: 0 20px; }
+.rel__get .plate__label { font-size: 14px; }
+.rel__get .plate__label small {
+  font-size: .78em;
+  font-weight: 700;
+  opacity: .72;
+  margin-left: .4em;
+}
+.rel__more {
+  margin-left: auto;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--cream-dim) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Live status, empty state, tail ---------- */
+.changelog__live {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  margin: 0 0 var(--s5) 40px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
+}
+.changelog__live.is-shown { opacity: 1; transform: none; }
+.changelog__live::before {
+  content: "";
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--sage);
+}
+.changelog__none {
+  padding: var(--s6);
+  text-align: center;
+  color: var(--cream-faint);
+  border: 2px dashed var(--hairline-2);
+  border-radius: var(--radius);
+}
+.changelog__none p { margin: 0 0 var(--s5); }
+.changelog__tail {
+  margin: clamp(48px, 6vw, 72px) 0 0 40px;
+  max-width: 60ch;
+  font-size: 15px;
+  color: var(--cream-faint);
+}
+.changelog__tail a { color: var(--cream-dim); text-decoration: underline; text-underline-offset: 3px; }
+.changelog__tail a:hover { color: var(--gold); }
+
+/* ---------- Narrow ---------- */
+@media (max-width: 900px) {
+  .changelog { grid-template-columns: 1fr; gap: var(--s6); }
+  .changelog__aside { position: static; }
+  .rail { padding: var(--s4) var(--s5); }
+  .rail__t { margin-bottom: var(--s2); }
+  .rail__list {
+    display: flex;
+    gap: var(--s1);
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(var(--s5) * -1);
+    padding-inline: var(--s5);
+  }
+  .rail__list::-webkit-scrollbar { display: none; }
+  .rail__list a { flex: none; margin-inline: 0; padding: 0 var(--s3); gap: var(--s2); }
+  .rail__list a.is-current { background-color: rgba(224,184,102,.12); }
+  .rail__marker, .rail__foot { display: none; }
+}
+@media (max-width: 640px) {
+  .log { padding-left: 28px; }
+  .log::before { left: 6px; }
+  .rel__node { left: -28px; width: 16px; height: 16px; top: 28px; }
+  .rel__node::before { inset: 3px; }
+  .rel__v { font-size: 34px; -webkit-text-stroke: .9px currentColor; }
+  .rel__more { margin-left: 0; }
+  .changelog__live, .changelog__tail { margin-left: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rel[data-reveal] .change { transform: none !important; transition: opacity 200ms linear !important; transition-delay: 0ms !important; }
+  .rail__marker { transition: opacity 200ms linear !important; }
+  .rel--latest .rel__node::after { animation: none !important; display: none; }
+  .changelog__live { transform: none !important; }
+}
