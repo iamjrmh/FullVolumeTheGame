@@ -111,6 +111,10 @@
                 <label for="aDiscord">Discord user ID</label>
                 <div class="ch-input"><input id="aDiscord" name="discord" type="text" inputmode="numeric" autocapitalize="none" spellcheck="false" placeholder="970401206730125342" required></div>
                 <p class="ch-help" id="haDiscord">The ID is what they are filed under: a username can change, the ID cannot. Discord &gt; right-click the person &gt; Copy User ID.</p>
+                <div class="adm-peek" id="addPeek" hidden>
+                  <img id="addPeekFace" src="" alt="" width="36" height="36">
+                  <span><b id="addPeekName"></b><small id="addPeekAge"></small></span>
+                </div>
               </div>
               <div class="ch-field" data-field="username">
                 <label for="aUsername">Discord username <span class="ch-optional">optional</span></label>
@@ -141,6 +145,33 @@
       <button class="btn btn--danger" value="ok" type="submit" id="confirmOk"></button>
     </menu>
   </form>
+</dialog>
+
+<!-- Who a user ID actually belongs to: read live from Discord. -->
+<dialog class="adm-dialog adm-profile" id="admProfile" aria-labelledby="profName">
+  <button class="adm-profile__x" id="profClose" type="button" aria-label="Close">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+  </button>
+  <div class="adm-profile__banner is-plain" id="profBanner"></div>
+  <span class="adm-profile__face">
+    <img id="profAvatar" src="" alt="" width="88" height="88">
+    <img class="adm-profile__deco" id="profDeco" src="" alt="" width="112" height="112" hidden>
+  </span>
+  <div class="adm-profile__body">
+    <h2 id="profName"></h2>
+    <p class="adm-profile__handle" id="profHandle"></p>
+    <div class="adm-chips" id="profBadges" hidden></div>
+    <dl class="adm-profile__facts">
+      <div><dt>Account created</dt><dd id="profCreated"></dd></div>
+      <div><dt>User ID</dt><dd><code id="profId"></code><button class="btn btn--quiet" id="profCopy" type="button">Copy</button></dd></div>
+    </dl>
+    <p class="adm-profile__note" id="profNote" hidden></p>
+    <menu>
+      <a class="btn btn--quiet" id="profOpen" href="https://discord.com/users/" target="_blank" rel="noopener">Open in Discord</a>
+      <button class="btn btn--quiet" id="profRefresh" type="button">Read again</button>
+      <button class="btn btn--go" id="profDone" type="button">Done</button>
+    </menu>
+  </div>
 </dialog>
 
 <p class="adm-toast" id="admToast" role="status" aria-live="polite"></p>

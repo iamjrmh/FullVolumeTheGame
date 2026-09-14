@@ -6,6 +6,7 @@
 //                         refresh         a sweep in progress, if any
 //                         cover/<file id> album art cut out of a chart
 //   rate-limits           apply/<ip hash>/<day>
+//   discord-profiles      <user id>       a Discord account as last read
 //
 // Strong consistency throughout: an admin accepts a charter and presses
 // refresh a second later, and that refresh has to see the charter.
@@ -18,6 +19,7 @@ export const applications = () => open("charter-applications");
 export const charters = () => open("verified-charters");
 export const community = () => open("community-charts");
 export const rateLimits = () => open("rate-limits");
+export const discordProfiles = () => open("discord-profiles");
 
 /** Every JSON document in a store, in no particular order. */
 export async function allJson(store) {

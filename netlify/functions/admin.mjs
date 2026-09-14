@@ -8,7 +8,10 @@
 //   POST   /api/admin/charters                      add one by hand { discord, folder }
 //   DELETE /api/admin/charters/:folderId
 //   POST   /api/admin/refresh                       one refresh pass { start }
+//   POST   /api/admin/discord                       who these ids are { ids }
+//   GET    /api/admin/discord/:id[/fresh]           one profile, cache or not
 
+import { profileFor, profilesFor } from "../lib/discord.mjs";
 import { folderUrl, listCharts, parseDriveLink } from "../lib/fvchart.mjs";
 import { json, problem, readJson } from "../lib/http.mjs";
 import { currentProgress, dropCharter, readIndex, refreshPass } from "../lib/refresh.mjs";
@@ -131,6 +134,18 @@ async function route(req, context, admin) {
       await charters().delete(id);
       await dropCharter(id);
       return json({ ok: true });
+    }
+  }
+
+  // Reading a Discord account is a read, but it goes through the admin gate
+  // like everything else here: it spends the site's bot token, and nobody but
+  // an admin has any business pointing it at an arbitrary ID.
+  if (section === "discord") {
+    if (req.method === "GET" && id) return json({ profile: await profileFor(id, { fresh: action === "fresh" }) });
+    if (req.method === "POST" && !id) {
+      const body = await readJson(req);
+      const ids = Array.isArray(body?.ids) ? body.ids.slice(0, 60) : [];
+      return json({ profiles: await profilesFor(ids) });
     }
   }
 
