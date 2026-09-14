@@ -622,6 +622,15 @@ code {
   padding: var(--s3) var(--s5) var(--s5);
   display: flex;
   flex-direction: column;
+  /* the sheet lives inside the sticky bar, and with both groups open it is
+     ~900px tall - taller than a phone. It scrolls itself under the bar so
+     the close button stays put and the DOWNLOAD plate at the bottom is
+     reachable in landscape; 72px is .nav__inner's height */
+  max-height: calc(100vh - 72px);
+  max-height: calc(100dvh - 72px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 .nav__mobile a {
   padding: var(--s3) 0;
@@ -1625,7 +1634,18 @@ body::after {
 }
 
 @media (max-width: 980px) {
-  .section--download .dl { grid-template-columns: 1fr; }
+  /* minmax(0, ...) so the column can go narrower than its longest word;
+     a bare 1fr floors at min-content and the installer filename pushed
+     the whole panel past a 320px screen */
+  .section--download .dl { grid-template-columns: minmax(0, 1fr); }
+  /* a row that cannot hold label and filename side by side wraps the value
+     under the label, and only splits the filename mid-word if even a full
+     row is too narrow. It has to be "anywhere" rather than "break-word":
+     break-word still reports the whole word as the min-content width, so
+     the grid floors at it and the rows spill out of the card's padding. */
+  .receipt dl, .receipt dl > div { min-width: 0; }
+  .receipt dl > div { flex-wrap: wrap; }
+  .receipt dl > div dd { min-width: 0; overflow-wrap: anywhere; }
   .receipt {
     border-left: 0;
     border-top: 2px solid var(--hairline);
@@ -1846,6 +1866,16 @@ body::after {
   pointer-events: none;
 }
 .tipjar > * { pointer-events: auto; }
+
+/* The tip jar is the one thing above the nav, which is right everywhere
+   except with the phone menu open: it sits on the sheet's bottom rows.
+   It stands down while the burger is expanded. */
+body:has(#burger[aria-expanded="true"]) .tipjar {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 140ms var(--ease-out), visibility 0s linear 140ms;
+}
 
 /* ---- Launcher ---------------------------------------------------------- */
 .tipjar__launch {
@@ -2442,6 +2472,14 @@ body::after {
 @media (max-width: 560px) {
   .foot__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* A finger needs 44px where a mouse was happy with 32. Touch screens only,
+   so the desktop footer keeps its pitch. The legal pages' contents list gets
+   the same treatment further down, after its own rules. */
+@media (pointer: coarse) {
+  .foot__col { gap: 0; }
+  .foot__col a { min-height: 44px; }
+  .lost__jump, .com-hero__jump, .rel__more { padding-block: 10px; }
+}
 
 /* ============================================================
    LEGAL PAGES - terms, privacy
@@ -2593,6 +2631,10 @@ body::after {
    second one only squeezes the first into a stack of two-word lines. */
 @media (max-width: 620px) {
   .toc ol { grid-template-columns: minmax(0, 1fr); }
+}
+/* 44px rows for a finger; after the base rule so the padding wins */
+@media (pointer: coarse) {
+  .toc a { padding-block: 13px; }
 }
 
 /* ============================================================
@@ -2870,4 +2912,8 @@ body::after {
 @media (max-width: 560px) {
   .ch-hero__cta { flex-direction: column; align-items: stretch; }
   .ch-hero__cta .plate { width: 100%; justify-content: center; }
+  /* the flag's sentence is one flex item, so on a phone it wrapped mid-phrase
+     and stranded the separator; tighter tracking keeps it to one line at 390,
+     and wrapping the row (not the text) is what happens under that */
+  .ch-flag { flex-wrap: wrap; row-gap: 2px; font-size: 11px; letter-spacing: .06em; }
 }

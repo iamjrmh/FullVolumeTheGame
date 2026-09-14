@@ -194,13 +194,17 @@
 .ch-field.is-invalid .ch-input { box-shadow: inset 0 0 0 2px var(--coral); }
 
 .ch-help {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s3);
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
   color: var(--cream-faint);
+}
+/* only the help line that carries a counter is a row; flex on every
+   help line turned an inline <b> into a third column of the sentence */
+.ch-help:has(.ch-count) {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
 }
 .ch-count { flex: none; font-variant-numeric: tabular-nums; }
 .ch-count.is-over { color: var(--coral); }
@@ -716,6 +720,12 @@
 }
 @media (max-width: 680px) {
   .ch-next { grid-template-columns: 1fr; }
+  /* a chart name is longer than a phone is wide; wrap it rather than
+     hide it behind a scrollbar nobody can see inside a card */
+  .ch-tree li { white-space: normal; align-items: flex-start; padding-block: 6px; min-height: 0; line-height: 1.35; overflow-wrap: anywhere; }
+  .ch-tree svg { margin-top: 1px; }
+  .ch-tree .d1 { padding-left: 20px; }
+  .ch-tree .d2 { padding-left: 40px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

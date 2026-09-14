@@ -492,8 +492,11 @@
    ============================================================ */
 
 @media (max-width: 900px) {
-  .com-hero__inner { grid-template-columns: 1fr; }
+  /* minmax(0, ...) or the column floors at the server card's min-content,
+     which is two number tiles side by side and wider than a 320px phone */
+  .com-hero__inner { grid-template-columns: minmax(0, 1fr); }
   .server { max-width: 460px; }
+  .server__nums { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 560px) {
@@ -507,4 +510,13 @@
   .lnum { display: flex; align-items: baseline; justify-content: center; gap: var(--s3); text-align: left; }
   .com-hero__cta { flex-direction: column; align-items: stretch; }
   .com-hero__cta .plate { justify-content: center; width: 100%; }
+}
+@media (max-width: 360px) {
+  /* Below this the row cannot hold icon, name and LIVE at once even with
+     the padding trimmed, so the light drops to a third line under the tag,
+     aligned with the name column (icon width plus the row's gap). */
+  .server__top { flex-wrap: wrap; }
+  /* the indent is padding, not margin: a flex-basis of 100% measures the
+     border box, so a margin on top of it would push the row off-screen */
+  .server__live { flex-basis: 100%; padding-left: calc(46px + var(--s3)); margin-top: -2px; }
 }

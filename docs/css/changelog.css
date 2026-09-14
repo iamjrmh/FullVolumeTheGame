@@ -25,7 +25,7 @@
 }
 .changelog-section { padding-top: clamp(40px, 5vw, 64px); }
 .changelog__col { max-width: 760px; min-width: 0; }
-.changelog__aside { position: sticky; top: 104px; }
+.changelog__aside { position: sticky; top: 104px; min-width: 0; }
 
 /* ---------- The version rail ---------- */
 .rail {
