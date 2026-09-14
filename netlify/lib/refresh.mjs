@@ -182,7 +182,9 @@ export async function refreshPass({ budgetMs = 20_000, start = false, trigger = 
       await Promise.all(batch.map(async (chart) => {
         try {
           const old = oldRows.get(chart.fileId);
-          if (old && (await chartSize(chart.fileId)) === old[SIZE]) {
+          // A row written before a column was added is opened again once, or a
+          // chart that never changes would never gain the new column.
+          if (old && old.length === COLS.length && (await chartSize(chart.fileId)) === old[SIZE]) {
             state.rows.push(old);
             state.reused++;
           } else {

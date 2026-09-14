@@ -23,8 +23,10 @@ const MAX_FOLDER_DEPTH = 4;
 const MAX_COVER_BYTES = 3 * 1024 * 1024;
 const REQUEST_TIMEOUT_MS = 15000;
 
+// "voices" is the lead plus its harmony parts. Last, so a row cached before it
+// existed is simply one column short, which the game reads as one voice.
 export const COLS = ["id", "title", "artist", "album", "charter", "genre", "year",
-  "length", "art", "added", "size", "notes", "color", "name"];
+  "length", "art", "added", "size", "notes", "color", "name", "voices"];
 
 // ---------------------------------------------------------------- the veil
 
@@ -295,6 +297,15 @@ function yearOf(text) {
   return year >= 1900 && year <= new Date().getUTCFullYear() + 1 ? year : null;
 }
 
+// The lead and every harmony part with a note in it, which is what the game counts.
+// A chart from before the charter wrote harmonies has no array and is one voice.
+function voicesOf(manifest) {
+  const parts = Array.isArray(manifest.harmonies) ? manifest.harmonies.slice(0, 3) : [];
+  const sung = parts.filter((part) =>
+    Array.isArray(part?.phrases) && part.phrases.some((phrase) => Array.isArray(phrase?.notes) && phrase.notes.length > 0));
+  return 1 + sung.length;
+}
+
 function coverType(bytes) {
   if (bytes[0] === 0xff && bytes[1] === 0xd8) return "image/jpeg";
   if (bytes[0] === 0x89 && bytes[1] === 0x50) return "image/png";
@@ -342,6 +353,7 @@ export async function openChart({ fileId, name }, fallbackCharter) {
     Number(manifest.counts?.notes) || 0,
     charter.color,
     chart.fileName || name || "",
+    voicesOf(manifest),
   ];
   return { row, cover };
 }
