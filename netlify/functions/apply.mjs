@@ -12,6 +12,12 @@ import { env, json, problem, readJson, sameOrigin } from "../lib/http.mjs";
 import { allJson, applications, charters, rateLimits } from "../lib/stores.mjs";
 
 const USERNAME = /^(?!.*\.\.)[a-z0-9_.]{2,32}$/;
+
+// Both are asked for, and they do different jobs. The username is how a person
+// is addressed and found in the server; the user ID is what still identifies
+// them after they rename themselves, which a username cannot survive. The ID is
+// what a verified charter is keyed by once they are accepted.
+const USER_ID = /^\d{17,20}$/;
 const REASON_MIN = 20;
 const REASON_MAX = 1500;
 // Counted per attempt that gets as far as walking Drive, so somebody fixing
@@ -27,6 +33,12 @@ function validate(body) {
     fields.discord = "That is not a Discord username. It is 2 to 32 lowercase letters, numbers, dots or underscores, like jurmr or sing_along.";
   }
 
+  const discordId = String(body?.discordId ?? "").trim();
+  if (!discordId) fields.discordId = "Enter your Discord user ID.";
+  else if (!USER_ID.test(discordId)) {
+    fields.discordId = "That is not a Discord user ID. It is 17 to 20 digits, like 970401206730125342. Right-click your name in Discord and choose Copy User ID.";
+  }
+
   const link = parseDriveLink(body?.folder);
   if (!String(body?.folder ?? "").trim()) fields.folder = "Paste the link to your shared Google Drive folder.";
   else if (!link) fields.folder = "That is not a Google Drive link. It should start with https://drive.google.com/drive/folders/";
@@ -36,7 +48,7 @@ function validate(body) {
   if (reason.length < REASON_MIN) fields.reason = `Tell us a little more, at least ${REASON_MIN} characters.`;
   else if (reason.length > REASON_MAX) fields.reason = `Keep it under ${REASON_MAX} characters.`;
 
-  return { fields, discord, folderId: link?.id, reason };
+  return { fields, discord, discordId, folderId: link?.id, reason };
 }
 
 async function underRateLimit(req, context) {
@@ -59,7 +71,7 @@ export default async (req, context) => {
   // told everything went fine so it has no reason to try again.
   if (body?.website) return json({ ok: true });
 
-  const { fields, discord, folderId, reason } = validate(body);
+  const { fields, discord, discordId, folderId, reason } = validate(body);
   if (Object.keys(fields).length) return problem("Some of that needs fixing.", 422, { fields });
 
   const [pending, verified] = await Promise.all([allJson(applications()), charters().get(folderId, { type: "json" })]);
@@ -72,6 +84,11 @@ export default async (req, context) => {
   }
   if (waiting.some((a) => a.discord === discord)) {
     return problem("There is already an application from that username.", 409, { fields: { discord: "We already have an application from this username, and it is still being looked at." } });
+  }
+  // Caught on the ID as well as the username, or renaming yourself is a way to
+  // apply twice over.
+  if (waiting.some((a) => a.discordId && a.discordId === discordId)) {
+    return problem("There is already an application from that account.", 409, { fields: { discordId: "We already have an application from this Discord account, and it is still being looked at." } });
   }
 
   if (!(await underRateLimit(req, context))) {
@@ -96,6 +113,7 @@ export default async (req, context) => {
     id: randomUUID(),
     status: "pending",
     discord,
+    discordId,
     folderId,
     folderUrl: folderUrl(folderId),
     reason,

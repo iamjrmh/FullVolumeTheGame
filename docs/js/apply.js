@@ -23,6 +23,9 @@
   var REASON_MIN = 20;
   var REASON_MAX = 1500;
   var USERNAME = /^(?!.*\.\.)[a-z0-9_.]{2,32}$/;
+  // A Discord snowflake. Both are asked for: the username is how we talk to
+  // somebody, the ID is what still finds them after they rename themselves.
+  var USER_ID = /^\d{17,20}$/;
   var FOLDER = /^https:\/\/(drive|docs)\.google\.com\/.*\/folders\/[\w-]{10,}/i;
   var DRAFT_KEY = "fv-apply-draft";
 
@@ -33,6 +36,12 @@
       v = v.trim().replace(/^@/, "").toLowerCase();
       if (!v) return "Enter your Discord username.";
       if (!USERNAME.test(v)) return "That is not a Discord username. It is 2 to 32 lowercase letters, numbers, dots or underscores.";
+      return "";
+    },
+    discordId: function (v) {
+      v = v.trim();
+      if (!v) return "Enter your Discord user ID.";
+      if (!USER_ID.test(v)) return "That is not a Discord user ID. It is 17 to 20 digits, like 970401206730125342.";
       return "";
     },
     folder: function (v) {
@@ -111,7 +120,7 @@
   function saveDraft() {
     try {
       localStorage.setItem(DRAFT_KEY, JSON.stringify({
-        discord: inputOf("discord").value, folder: inputOf("folder").value, reason: reason.value
+        discord: inputOf("discord").value, discordId: inputOf("discordId").value, folder: inputOf("folder").value, reason: reason.value
       }));
     } catch (e) { /* storage blocked: nothing to remember it in */ }
   }
@@ -120,6 +129,7 @@
       var d = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null");
       if (!d) return;
       inputOf("discord").value = d.discord || "";
+      inputOf("discordId").value = d.discordId || "";
       inputOf("folder").value = d.folder || "";
       reason.value = d.reason || "";
     } catch (e) { /* storage blocked or garbled: start empty */ }
@@ -168,6 +178,7 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         discord: inputOf("discord").value,
+        discordId: inputOf("discordId").value,
         folder: inputOf("folder").value,
         reason: reason.value,
         website: inputOf("website").value

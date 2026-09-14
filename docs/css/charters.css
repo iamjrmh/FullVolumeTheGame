@@ -148,6 +148,18 @@
 }
 .ch-field label .req { color: var(--gold); margin-left: 2px; }
 
+/* The counterpart to .req, for a field that may be left empty. Quieter than the
+   label it sits beside, so it reads as a note about the field and not as part
+   of its name. */
+.ch-field label .ch-optional {
+  margin-left: var(--s2, 6px);
+  font-size: 0.78em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  font-weight: 400;
+}
+
 .ch-input {
   display: flex;
   align-items: center;
