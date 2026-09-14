@@ -235,7 +235,7 @@ It is a real desktop app, not a web page in a wrapper: no account, no upload, no
 
 <p align="center">
   <a href="https://fullvolumethegame.xyz/fullvolumecharter/">
-  <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="Step six of FullVolumeCharter: the pitch roll against a piano keyboard, the song's waveform above it, and the overdrive strip between the two reading 12 overdrive and 3 activation moments" width="820">
+  <img src="./docs/assets/img/shots/charter/charter-11.jpg" alt="Step six of FullVolumeCharter: the overdrive strip above the pitch roll, marked phrases in gold and hatched activation windows across it, reading 12 overdrive and 3 activation moments" width="820">
   </a>
 </p>
 
@@ -300,8 +300,8 @@ Everything you enter is saved the moment you enter it, so a song started tonight
   <img src="./docs/assets/img/shots/charter/charter-10.jpg" alt="Step five: the whole song listed with a timestamp on every line">
   <em>Step 5. Jump back to any syllable.</em>
   <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-12.jpg" alt="Step six: the detected pitch line drawn behind the notes, with the read from the recording panel">
-  <em>Step 6. What was sung, drawn behind the notes.</em>
+  <img src="./docs/assets/img/shots/charter/charter-12.jpg" alt="Step six: the pitch roll filled with a note box per syllable against a piano keyboard, over the color key and the read from the recording panel">
+  <em>Step 6. A note box per syllable, and the panel that reads them off the recording.</em>
   <br><br>
   <img src="./docs/assets/img/shots/charter/charter-13.jpg" alt="Step seven: the export summary, listing the song details beside the stems, cover, background and chart about to be packed">
   <em>Step 7. Everything that is going in.</em>
