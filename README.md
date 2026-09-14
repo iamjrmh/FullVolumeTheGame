@@ -20,7 +20,7 @@ A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs al
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043)](#-system-requirements)
 [![Version](https://img.shields.io/badge/version-0.9.3%20beta-ff6b6b)](../../releases)
-[![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest)
+[![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest) 
 [![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
 [![Charter](https://img.shields.io/badge/charter-0.9.3-829B87)](#-fullvolumecharter)
