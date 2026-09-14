@@ -6,10 +6,72 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-09-14T03:28:54.900Z",
+ "generated": "2026-09-14T13:07:36.463Z",
  "repo": "iamjrmh/FullVolumeTheGame",
- "latest": "0.9.3",
+ "latest": "0.9.4",
  "releases": [
+  {
+   "tag": "v0.9.4",
+   "version": "0.9.4",
+   "channel": "beta",
+   "name": "FullVolume / FullVolumeCharter v0.9.4 beta",
+   "date": "2026-09-14",
+   "prerelease": false,
+   "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/tag/v0.9.4",
+   "tagline": "The karaoke game that plays your own music library. It keeps itself up to date.",
+   "first": false,
+   "sections": [
+    {
+     "kind": "news",
+     "emoji": "🆕",
+     "title": "New in 0.9.4",
+     "image": null,
+     "blocks": [
+      {
+       "type": "text",
+       "body": "A hotfix, with one thing added."
+      },
+      {
+       "type": "item",
+       "title": "Your own backdrop, without losing the song's",
+       "body": "Putting one of your own pictures or loops behind gameplay used to mean you saw it and nothing else, even on a song that shipped artwork of its own. Now the two get along: yours plays behind every song that has none, and a song that brought a dedicated backdrop shows that instead. The song's own art wins, every time, and yours is what fills in the rest of the night."
+      },
+      {
+       "type": "item",
+       "title": "Songs packed in a <code>.sng</code> no longer black out the stage",
+       "body": "With the backdrop set to SONG, a chart living inside a <code>.sng</code> archive - which is most of them - could bring the karaoke screen up black: no picture, no track, no words. The game was failing to read the chart's own artwork and taking the whole screen down with it. It reads it now, and a picture that will not load can no longer take the song with it either."
+      },
+      {
+       "type": "item",
+       "title": "FullVolumeCharter: the export screen is fixed",
+       "body": "A <code>+</code> pitch break pushed every line after it onto the wrong notes, so a chart came out with its words running across the line endings, and on a short last line the export screen went black instead of drawing at all. Both are gone. <strong>If you have charted a song with any pitch breaks in it, open it and export it again</strong> - the file already on your drive carries the mistake, and re-exporting is the whole of the fix."
+      },
+      {
+       "type": "item",
+       "title": "FullVolumeCharter keeps itself up to date",
+       "body": "The same as the game does: it notices when there is a newer one, shows you what changed, and installs it over itself in one click. The version in the corner of its start screen checks on demand if you would rather ask."
+      }
+     ]
+    }
+   ],
+   "assets": [
+    {
+     "name": "FullVolumeSetup.exe",
+     "label": "FullVolume",
+     "size": "107 MB",
+     "downloads": 1,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.4/FullVolumeSetup.exe"
+    },
+    {
+     "name": "FullVolumeCharterSetup.exe",
+     "label": "FullVolumeCharter",
+     "size": "222 MB",
+     "downloads": 0,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.4/FullVolumeCharterSetup.exe"
+    }
+   ],
+   "downloads": 1
+  },
   {
    "tag": "v0.9.3",
    "version": "0.9.3",
@@ -119,18 +181,18 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 1,
+     "downloads": 3,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.3/FullVolumeSetup.exe"
     },
     {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "222 MB",
-     "downloads": 5,
+     "downloads": 9,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.3/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 6
+   "downloads": 12
   },
   {
    "tag": "v0.9.2",
