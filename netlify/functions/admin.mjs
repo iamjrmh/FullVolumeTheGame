@@ -15,7 +15,12 @@ import { currentProgress, dropCharter, readIndex, refreshPass } from "../lib/ref
 import { adminOnly } from "../lib/session.mjs";
 import { allJson, applications, charters } from "../lib/stores.mjs";
 
-const USERNAME = /^(?!.*\.\.)[a-z0-9_.]{2,32}$/;
+// A Discord user ID, not a username. A username can be changed by its owner at
+// any time, and once it has been there is no way left to reach the person whose
+// charts are on the Marketplace. The ID never changes and always resolves.
+// Discord snowflakes are 17 to 20 digits today and grow with time, so the range
+// is deliberately loose at the top.
+const USER_ID = /^\d{17,20}$/;
 
 async function overview(admin) {
   const [apps, verified, index, progress] = await Promise.all([
@@ -75,9 +80,9 @@ async function decide(id, action, admin) {
 
 async function addCharter(req) {
   const body = await readJson(req);
-  const discord = String(body?.discord ?? "").trim().replace(/^@/, "").toLowerCase();
+  const discord = String(body?.discord ?? "").trim().replace(/^@/, "");
   const link = parseDriveLink(body?.folder);
-  if (!USERNAME.test(discord)) return problem("That is not a Discord username.", 422, { fields: { discord: "2 to 32 lowercase letters, numbers, dots or underscores." } });
+  if (!USER_ID.test(discord)) return problem("That is not a Discord user ID.", 422, { fields: { discord: "17 to 20 digits. In Discord, right-click the person and Copy User ID." } });
   if (!link || link.kind !== "folder") return problem("That is not a Drive folder link.", 422, { fields: { folder: "Paste a https://drive.google.com/drive/folders/ link." } });
 
   const store = charters();
