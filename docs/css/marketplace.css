@@ -514,6 +514,14 @@
 
   .mkt-formats, .mkt-steps { grid-template-columns: 1fr; }
   .mkt-stats { gap: var(--s5); }
+
+  /* the folder tree wraps on a phone rather than scrolling sideways inside
+     its card, where the scrollbar is invisible and the text just looks cut */
+  .mkt-tree { padding: var(--s5); }
+  .mkt-tree li { white-space: normal; overflow-wrap: anywhere; line-height: 1.4; }
+  .mkt-tree .d1 { padding-left: 18px; }
+  .mkt-tree .d2 { padding-left: 36px; }
+  .mkt-tree small { display: block; margin-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
