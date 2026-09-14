@@ -287,7 +287,8 @@
           if (act === "accept") {
             state.charters.push({ id: a.folderId, discord: a.discord, folderUrl: a.folderUrl, addedAt: a.decidedAt, charts: null });
             state.charters.sort(function (x, y) { return x.discord.localeCompare(y.discord); });
-            toast("@" + a.discord + " is verified. Refresh to list their charts.");
+            toast("@" + a.discord + " is verified. Reading their charts now...");
+            startRefresh();
           } else if (act === "decline") {
             toast("Declined @" + a.discord + ".");
           }
@@ -345,7 +346,8 @@
         addForm.reset();
         paintStats();
         paintCharters();
-        toast("@" + r.charter.discord + " is verified. Refresh to list their charts.");
+        toast("@" + r.charter.discord + " is verified. Reading their charts now...");
+        startRefresh();
       })
       .catch(function (err) {
         var fields = (err.data && err.data.fields) || {};
@@ -397,15 +399,22 @@
     });
   }
 
-  goButton.addEventListener("click", function () {
-    if (refreshing) return;
+  // Starting a sweep, from the button or from having just verified somebody.
+  //
+  // A new charter's charts are not on the Marketplace until a sweep has read
+  // their folder, and the game reads that same listing - so leaving this to the
+  // next scheduled sweep means up to twelve hours where the site and the game
+  // both say a verified charter has nothing. Accepting somebody is exactly the
+  // moment their charts should appear, so accepting starts the sweep itself.
+  function startRefresh() {
+    if (refreshing) return Promise.resolve();
     refreshing = true;
     goButton.disabled = true;
     goLabel.textContent = "REFRESHING...";
     $("refreshTrack").classList.add("is-busy");
     $("refreshStatus").textContent = "Reading folders...";
     $("refreshFill").style.transform = "scaleX(0.04)";
-    pass(true)
+    return pass(true)
       .then(function (r) {
         refreshing = false;
         return load().then(function () {
@@ -421,7 +430,9 @@
         goLabel.textContent = "REFRESH NOW";
         $("refreshTrack").classList.remove("is-busy");
       });
-  });
+  }
+
+  goButton.addEventListener("click", startRefresh);
 
   load().catch(function (err) {
     if (err.message === "signed out") return;
