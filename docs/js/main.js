@@ -557,30 +557,7 @@
   })();
 
   /* ----------------------------------------------------------
-     11. DOWNLOAD PLACEHOLDER
-     There is no build hosted yet - say so plainly rather than
-     handing someone a dead link.
-     ---------------------------------------------------------- */
-  (function download() {
-    document.querySelectorAll("[data-download]").forEach(function (el) {
-      el.addEventListener("click", function (e) {
-        e.preventDefault();
-        var label = el.querySelector(".plate__label");
-        if (!label || el.dataset.busy) return;
-        el.dataset.busy = "1";
-        var was = label.textContent;
-        label.textContent = "COMING SOON";
-        setTimeout(function () {
-          label.textContent = was;
-          delete el.dataset.busy;
-        }, 1600);
-      });
-    });
-  })();
-
-
-  /* ----------------------------------------------------------
-     12. MARQUEE
+     11. MARQUEE
      The CSS slides the track by half its own width, which only
      reads as a loop if each half is wider than the screen. Two
      hard-coded copies were not, so the tail ran out mid-screen
@@ -631,7 +608,7 @@
   })();
 
   /* ----------------------------------------------------------
-     13. NAV MENUS
+     12. NAV MENUS
      The bar's disclosures. A pointer opens them on hover, with a
      short grace period on the way out so crossing a corner does not
      shut the thing you are aiming at; a click or a key opens them
@@ -724,7 +701,7 @@
   })();
 
   /* ----------------------------------------------------------
-     14. FILTERING THE QUESTIONS
+     13. FILTERING THE QUESTIONS
      Twenty-eight <details> is a lot to read through to find one
      answer. This hides the rows that do not match and says so when
      nothing does. It is progressive: with scripting off the box is

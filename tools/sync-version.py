@@ -8,7 +8,8 @@ figures that had quietly stopped being right:
                  drifted two releases behind, and it is in the page's
                  structured data now, so stale means a wrong machine-readable
                  fact rather than just wrong text.
-  installer size the latest GitHub release, the only place it is recorded.
+  installer sizes the latest GitHub release, the only place they are recorded.
+                 Both the game's installer and the charter's ship from it.
   chart count    docs/data/*.js, counted off the rows the Marketplace loads.
                  The weekly refresh moves this, and the site said 5,000+ when
                  both catalogues together held 40,488.
@@ -49,6 +50,7 @@ DATA = ROOT / "docs" / "data"
 
 RELEASES_API = "https://api.github.com/repos/iamjrmh/FullVolumeTheGame/releases/latest"
 INSTALLER = "FullVolumeSetup.exe"
+CHARTER_INSTALLER = "FullVolumeCharterSetup.exe"
 
 
 def read(path: Path) -> str:
@@ -99,8 +101,13 @@ def read_readme_version() -> tuple[str, str]:
     return version, channel
 
 
-def fetch_installer_size() -> str | None:
-    """Size of the installer on the latest release, as "107 MB". None if unknown."""
+def fetch_installer_sizes() -> dict[str, str]:
+    """Sizes of the installers on the latest release, as {name: "107 MB"}.
+
+    Both the game and the charter ship from the same release, so one request
+    covers both. A name that is missing is simply absent from the dict, and the
+    rules that quote it are skipped rather than the run failing.
+    """
     headers = {"Accept": "application/vnd.github+json"}
     # Unauthenticated the API allows 60 requests an hour per IP, and CI runners
     # share addresses, so use the workflow token when there is one.
@@ -113,15 +120,19 @@ def fetch_installer_size() -> str | None:
         with urllib.request.urlopen(req, timeout=20) as resp:
             data = json.load(resp)
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, OSError) as err:
-        print(f"  installer size: skipped, could not reach the releases API ({err})")
-        return None
+        print(f"  installer sizes: skipped, could not reach the releases API ({err})")
+        return {}
 
+    sizes = {}
     for asset in data.get("assets", []):
-        if asset.get("name") == INSTALLER:
-            return f"{round(asset['size'] / 1024 / 1024)} MB"
+        if asset.get("name") in (INSTALLER, CHARTER_INSTALLER):
+            sizes[asset["name"]] = f"{round(asset['size'] / 1024 / 1024)} MB"
 
-    print(f"  installer size: skipped, no {INSTALLER} on {data.get('tag_name')}")
-    return None
+    for name in (INSTALLER, CHARTER_INSTALLER):
+        if name not in sizes:
+            print(f"  installer size: skipped, no {name} on {data.get('tag_name')}")
+
+    return sizes
 
 
 def count_charts() -> int | None:
@@ -145,7 +156,7 @@ def headline_charts(total: int) -> tuple[int, str]:
     return floored, f"{floored:,}"
 
 
-def build_rules(version: str, channel: str, size: str | None, charts: int | None):
+def build_rules(version: str, channel: str, sizes: dict[str, str], charts: int | None):
     """(file, what, pattern, replacement, expected matches)."""
     labelled = f"{version} {channel}".strip()
 
@@ -175,7 +186,7 @@ def build_rules(version: str, channel: str, size: str | None, charts: int | None
          rf"\g<1>{version}\g<2>", 1),
 
         (CHARTER, "charter hero flag",
-         r"(Shipping with FullVolume )\d+\.\d+\.\d+( &middot; <b>v)\d+\.\d+\.\d+(</b>)",
+         r"(Out now with FullVolume )\d+\.\d+\.\d+( &middot; <b>v)\d+\.\d+\.\d+(</b>)",
          rf"\g<1>{version}\g<2>{version}\g<3>", 1),
 
         (CHARTER, "charter download lead",
@@ -206,16 +217,22 @@ def build_rules(version: str, channel: str, size: str | None, charts: int | None
              r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
              rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1))
 
-    if size:
+    if sizes.get(INSTALLER):
         rules += [
             (INDEX, "JSON-LD fileSize",
              r'("fileSize":\s*")[^"]*(")',
-             rf"\g<1>{size}\g<2>", 1),
+             rf"\g<1>{sizes[INSTALLER]}\g<2>", 1),
 
             (INDEX, "download receipt size",
              r"(<dt>Size</dt><dd>)[^<]*(</dd>)",
-             rf"\g<1>{size}\g<2>", 1),
+             rf"\g<1>{sizes[INSTALLER]}\g<2>", 1),
         ]
+
+    if sizes.get(CHARTER_INSTALLER):
+        rules.append(
+            (CHARTER, "charter receipt size",
+             r"(<dt>Size</dt><dd>)[^<]*(</dd>)",
+             rf"\g<1>{sizes[CHARTER_INSTALLER]}\g<2>", 1))
 
     if charts:
         floored, pretty = headline_charts(charts)
@@ -245,9 +262,9 @@ def main() -> int:
     version, channel = read_readme_version()
     print(f"README says v{version}{' ' + channel if channel else ''}")
 
-    size = None if args.no_size else fetch_installer_size()
-    if size:
-        print(f"Latest release ships {INSTALLER} at {size}")
+    sizes = {} if args.no_size else fetch_installer_sizes()
+    for name, size in sizes.items():
+        print(f"Latest release ships {name} at {size}")
 
     charts = count_charts()
     if charts:
@@ -257,7 +274,7 @@ def main() -> int:
     pending: dict[Path, str] = {}
     changes: list[str] = []
 
-    for path, what, pattern, repl, expected in build_rules(version, channel, size, charts):
+    for path, what, pattern, repl, expected in build_rules(version, channel, sizes, charts):
         text = pending.get(path) or read(path)
         new, n = re.subn(pattern, repl, text)
         if n != expected:
