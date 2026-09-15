@@ -6,10 +6,110 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-09-14T13:07:36.463Z",
+ "generated": "2026-09-15T11:57:03.938Z",
  "repo": "iamjrmh/FullVolumeTheGame",
- "latest": "0.9.4",
+ "latest": "0.9.5",
  "releases": [
+  {
+   "tag": "v0.9.5",
+   "version": "0.9.5",
+   "channel": "beta",
+   "name": "FullVolume + FullVolumeCharter v0.9.5 beta",
+   "date": "2026-09-14",
+   "prerelease": false,
+   "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/tag/v0.9.5",
+   "tagline": "The karaoke game that plays your own music library. It keeps itself up to date.",
+   "first": false,
+   "sections": [
+    {
+     "kind": "news",
+     "emoji": "🆕",
+     "title": "New in 0.9.5",
+     "image": null,
+     "blocks": [
+      {
+       "type": "text",
+       "body": "The two of them go their own way."
+      },
+      {
+       "type": "item",
+       "title": "FullVolume and FullVolumeCharter are separate downloads from here on",
+       "body": "They have shared a release, and a version number, since the charter existed: one tag, both installers, the same number on both whether or not either had changed. That meant a fix to the charting tool sat waiting for the game to be ready, and the other way round. They each have their own number and their own release now, and go out whenever the one that changed is done."
+      },
+      {
+       "type": "text",
+       "body": "This release is the last one with both in it - they are both 0.9.5 because the numbers happened to line up one final time."
+      },
+      {
+       "type": "item",
+       "title": "Nothing changes for you",
+       "body": "Both of them still notice a new version themselves, show you what changed, and install it over themselves in one click. They just do it on their own schedules now, so you may well see one update without the other. Neither has to be a matched pair with the other to work: charts written by any version of the charter play in any version of the game."
+      },
+      {
+       "type": "item",
+       "title": "Both update checks were rebuilt to make that safe",
+       "body": "Each one used to ask GitHub for \"the newest release\" and take whatever came back, which was fine while there was only ever one kind. With two, the newest release is regularly the <em>other</em> product's - so each now looks for the newest release actually carrying its own installer, and reads past anything that is not its own. Left as it was, the game would have quietly stopped finding its own updates the first time the charter shipped on its own."
+      }
+     ]
+    },
+    {
+     "kind": "extra",
+     "emoji": "🎚️",
+     "title": "FullVolumeCharter, a separate download",
+     "image": {
+      "src": "https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/main/docs/assets/img/shots/charter/charter-11.jpg",
+      "alt": "The FullVolumeCharter pitch roll: a note box per syllable against a piano keyboard, with the sung pitch line read off the recording drawn behind them"
+     },
+     "blocks": [
+      {
+       "type": "text",
+       "body": "The game plays the vocal part already inside a Clone Hero or Rock Band chart. That is tens of thousands of songs, and it is not the one you wanted at half past eleven on a Friday. <strong>FullVolumeCharter</strong> is how that one gets a part to sing."
+      },
+      {
+       "type": "text",
+       "body": "Audio in, <code>.fvchart</code> out. Seven steps, and it hands back one file carrying the words, the timing, the pitches, the album art and the audio. Drop it in a folder the game is watching and it is on the list, exactly like everything else."
+      },
+      {
+       "type": "list",
+       "items": [
+        "<strong>Load a song</strong>, one file or a vocal and a backing separately, and it picks up the cover art and a timed <code>.lrc</code> sitting beside it without being asked",
+        "<strong>It works out the tempo</strong> from the audio, with halve, double and tap tempo if it is wrong",
+        "<strong>Paste the lyrics</strong> and they are split into the syllables actually sung, in the language you picked. Correct one and it has learned that word",
+        "<strong>Tap the timing</strong> at 50, 65 or 80 per cent speed, and the song <em>stays in its own key</em> at every one of them, so a fast line is still singable while you tap it",
+        "<strong>The pitches are read off the recording</strong> a whole phrase at a time, and you drag whatever it got wrong. It leaves a note it cannot hear alone rather than guessing at it",
+        "<strong>Mark your overdrive phrases</strong> on a strip above the roll, and pick the exact moments in the rests where it can be let out",
+        "<strong>Optionally pull the vocals out of a finished mix</strong> on the graphics card, in about three seconds for a three minute song, using UVR's karaoke model"
+       ]
+      },
+      {
+       "type": "text",
+       "body": "Everything is saved as you type it, so a song started tonight is picked up tomorrow exactly where you stopped. It keeps itself current the same way the game does, and on its own release schedule, so this is the last time you go and fetch it."
+      },
+      {
+       "type": "text",
+       "body": "<strong><a href=\"https://fullvolumethegame.xyz/api/download/charter\">Download FullVolumeCharter →</a></strong> &nbsp;·&nbsp; <strong><a href=\"https://fullvolumethegame.xyz/fullvolumecharter/\">Read the whole thing →</a></strong>"
+      }
+     ]
+    }
+   ],
+   "assets": [
+    {
+     "name": "FullVolumeSetup.exe",
+     "label": "FullVolume",
+     "size": "107 MB",
+     "downloads": 3,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.5/FullVolumeSetup.exe"
+    },
+    {
+     "name": "FullVolumeCharterSetup.exe",
+     "label": "FullVolumeCharter",
+     "size": "222 MB",
+     "downloads": 3,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.5/FullVolumeCharterSetup.exe"
+    }
+   ],
+   "downloads": 6
+  },
   {
    "tag": "v0.9.4",
    "version": "0.9.4",
@@ -59,18 +159,18 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 1,
+     "downloads": 5,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.4/FullVolumeSetup.exe"
     },
     {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "222 MB",
-     "downloads": 0,
+     "downloads": 3,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.4/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 1
+   "downloads": 8
   },
   {
    "tag": "v0.9.3",
