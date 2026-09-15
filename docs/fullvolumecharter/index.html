@@ -29,6 +29,8 @@
 <link rel="preload" href="../assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/charter-video.css">
+<link rel="preconnect" href="https://i.ytimg.com">
 
 <!-- The machine-readable version of this page. Every value here is also
      stated in plain English below; change one and change the other. -->
@@ -732,6 +734,96 @@
   </div>
 </section>
 
+<!-- ================= THE GUIDE =================
+     Which video plays is chosen in /admin and read from /api/video; data-video
+     is only what plays if that cannot be reached. js/charter-video.js builds
+     both players once the section is close to the screen. -->
+<section class="section" id="guide" data-video="xz3xTRKMnO8" aria-labelledby="guideTitle">
+  <div class="wrap">
+    <div class="vg-hero" id="vgHero" data-reveal>
+      <div class="vg-hero__media" id="vgLoopMedia" aria-hidden="true">
+        <div class="vg-stage" id="vgLoopStage"><div id="vgLoopPlayer"></div></div>
+      </div>
+      <div class="vg-hero__shade"></div>
+      <div class="vg-hero__copy">
+        <p class="eyebrow">Watch one get made</p>
+        <h2 class="h2" id="guideTitle">From a bare song<br>to a <span class="ink-coral">chart.</span></h2>
+        <p class="lead">
+          Every step, start to finish, on a real song. Skip straight to the part you are
+          stuck on, or sit back and watch it come together.
+        </p>
+        <div class="vg-hero__cta">
+          <a class="plate plate--md" id="vgWatch" href="#vgPlayer">
+            <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+            <span class="plate__label">WATCH THE GUIDE</span>
+          </a>
+          <a class="plate plate--md" href="#get">
+            <span class="plate__label">GET IT</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="vg-watch" data-reveal>
+      <div class="vg-ambient is-paused" id="vgAmbient">
+        <div class="vg-glow" aria-hidden="true"><div class="vg-glow__layer"></div><div class="vg-glow__layer"></div></div>
+        <div class="vg-frame">
+          <div class="vg-player" id="vgPlayer" tabindex="0"
+               aria-label="Video player. Space plays or pauses, the arrow keys skip, M mutes, F goes fullscreen.">
+            <div class="vg-screen" id="vgScreen">
+              <div class="vg-stage" id="vgMainStage"><div id="vgMainPlayer"></div></div>
+              <div class="vg-shield" id="vgShield"></div>
+              <button class="vg-poster" id="vgPoster" type="button" aria-label="Play the guide">
+                <span class="vg-poster__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                <span class="vg-poster__label" id="vgPosterLabel"></span>
+              </button>
+              <noscript>
+                <a class="vg-poster" href="https://www.youtube.com/watch?v=xz3xTRKMnO8" target="_blank" rel="noopener"
+                   style="background-image:url('https://i.ytimg.com/vi/xz3xTRKMnO8/maxresdefault.jpg')">
+                  <span class="vg-poster__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span class="vg-poster__label">Watch the guide on YouTube</span>
+                </a>
+              </noscript>
+            </div>
+            <div class="vg-ctl">
+              <div class="vg-qmenu" id="vgQualityMenu" role="menu" aria-label="Quality" hidden></div>
+              <div class="vg-seek" id="vgSeek" role="slider" tabindex="0" aria-label="Seek"
+                   aria-valuemin="0" aria-valuemax="0" aria-valuenow="0">
+                <div class="vg-seek__track" id="vgSeekTrack">
+                  <div class="vg-seek__hover" id="vgSeekHover"></div>
+                  <div class="vg-seek__fill" id="vgSeekFill"></div>
+                </div>
+                <div class="vg-seek__thumb" id="vgSeekThumb"></div>
+                <div class="vg-seek__tip" id="vgSeekTip"></div>
+              </div>
+              <div class="vg-row">
+                <button id="vgPlay" type="button" aria-label="Play"></button>
+                <button id="vgMute" type="button" aria-label="Mute"></button>
+                <input class="vg-vol" id="vgVolume" type="range" min="0" max="100" value="100" aria-label="Volume">
+                <span class="vg-time" id="vgTime">0:00 / 0:00</span>
+                <span class="vg-now" id="vgNow"></span>
+                <span class="vg-spacer"></span>
+                <button class="vg-rate" id="vgRate" type="button" aria-label="Playback speed">1x</button>
+                <button class="vg-qbtn" id="vgQuality" type="button" aria-haspopup="menu" aria-expanded="false"
+                        aria-controls="vgQualityMenu" aria-label="Quality"><span id="vgQualityLabel">Best</span></button>
+                <button id="vgFullscreen" type="button" aria-label="Fullscreen"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="vg-caption"><b id="vgTitle">The FullVolumeCharter guide</b><span id="vgLength"></span></div>
+      </div>
+
+      <aside class="vg-chapters" aria-labelledby="vgChaptersTitle">
+        <div class="vg-chapters__scroll" id="vgChapterScroll">
+          <div class="vg-chapters__head"><h3 id="vgChaptersTitle">In this video</h3><span id="vgChapterCount"></span></div>
+          <ol class="vg-chapter-list" id="vgChapterList"></ol>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- ================= GET IT ================= -->
 <section class="section section--download section--charter" id="get">
   <div class="wrap">
@@ -911,6 +1003,7 @@
 </footer>
 
 <script src="../js/downloads.js"></script>
+<script src="../js/charter-video.js"></script>
 <script src="../js/main.js"></script>
 </body>
 </html>

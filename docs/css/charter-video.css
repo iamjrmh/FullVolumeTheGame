@@ -1,0 +1,272 @@
+/* ============================================================
+   FULLVOLUME - The charter page's video guide
+   A muted loop of the video behind the section's heading, then the
+   player itself beside its chapter list. The player is YouTube's,
+   with its own controls hidden and these drawn over it. See
+   js/charter-video.js for why each part works the way it does.
+   ============================================================ */
+
+/* The glow is scaled past the player's edges, and a transform counts towards
+   the page's width: on a phone that made the whole page scroll sideways.
+   Clipped at the section, which is already the width of the screen. */
+#guide { overflow-x: clip; }
+
+/* ---------- the loop behind the heading ---------- */
+.vg-hero {
+  position: relative;
+  container-type: size;
+  height: clamp(420px, 66vh, 620px);
+  border-radius: 22px;
+  overflow: hidden;
+  background: #000 center / cover no-repeat;
+  border: 2px solid var(--ink);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .45);
+}
+.vg-hero__media {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out);
+}
+.vg-hero__media.is-live { opacity: 1; }
+.vg-hero__shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(16,16,17,.94) 0%, rgba(16,16,17,.66) 52%, rgba(16,16,17,.3) 100%),
+    linear-gradient(0deg, rgba(16,16,17,.7) 0%, rgba(16,16,17,0) 34%);
+}
+.vg-hero__copy {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(24px, 5vw, 64px);
+  max-width: 680px;
+}
+.vg-hero__copy .h2 { margin-bottom: var(--s4); }
+.vg-hero__copy .lead { margin-bottom: var(--s6); max-width: 44ch; }
+.vg-hero__cta { display: flex; flex-wrap: wrap; gap: var(--s4); align-items: center; }
+
+/* The player renders at the chosen quality's own resolution and is scaled to
+   fit its box. YouTube picks the stream from the iframe's pixel size, so this is
+   what makes it start at full quality instead of guessing low. */
+.vg-stage { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-origin: 0 0; }
+.vg-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vg-hero .vg-stage { pointer-events: none; }
+
+/* ---------- player beside chapters ---------- */
+.vg-watch {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 36px);
+  margin-top: clamp(48px, 6vw, 76px);
+  align-items: stretch;
+}
+@media (max-width: 900px) { .vg-watch { grid-template-columns: minmax(0, 1fr); } }
+
+/* The glow is the video's own colours, from YouTube's seek-preview frames,
+   blurred out behind the player. */
+.vg-ambient { position: relative; }
+.vg-glow {
+  position: absolute; inset: -2%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(60px) saturate(1.9) brightness(1.35);
+  transform: scale(1.12);
+  transition: opacity 800ms var(--ease-out);
+}
+.vg-ambient.is-paused .vg-glow { opacity: .7; }
+.vg-glow__layer {
+  position: absolute; inset: 0;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+  opacity: 0;
+  transition: opacity 1200ms ease;
+}
+.vg-glow__layer.is-on { opacity: 1; }
+
+.vg-frame {
+  position: relative; z-index: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0d0c0e;
+  border: 1px solid var(--hairline);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+}
+.vg-caption {
+  position: relative; z-index: 1;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px;
+  padding: var(--s4) 4px 0;
+  font-size: 14px;
+}
+.vg-caption b { color: var(--cream); font-weight: 600; }
+.vg-caption span { color: var(--cream-dim); font-variant-numeric: tabular-nums; }
+
+.vg-player { position: relative; outline: none; }
+.vg-player:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
+.vg-screen { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+.vg-shield { position: absolute; inset: 0; z-index: 1; cursor: pointer; }
+.vg-poster {
+  position: absolute; inset: 0; z-index: 2;
+  width: 100%; padding: 0; border: 0;
+  cursor: pointer;
+  background: #000 center / cover no-repeat;
+}
+.vg-poster::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.6));
+}
+.vg-poster__play {
+  position: absolute; z-index: 1; left: 50%; top: 50%;
+  width: 88px; height: 88px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--coral);
+  display: grid; place-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  transition: transform var(--t-hover) var(--ease-out);
+}
+.vg-poster:hover .vg-poster__play { transform: translate(-50%, -50%) scale(1.07); }
+.vg-poster:active .vg-poster__play { transform: translate(-50%, -50%) scale(.96); }
+.vg-poster__play svg { width: 36px; height: 36px; fill: var(--cream); margin-left: 5px; }
+.vg-poster__label {
+  position: absolute; z-index: 1; left: 18px; right: 18px; bottom: 14px;
+  text-align: left; color: var(--cream); font-weight: 600; font-size: 15px;
+  text-shadow: 0 2px 8px rgba(0,0,0,.7);
+}
+.vg-player:fullscreen { display: flex; flex-direction: column; background: #000; }
+.vg-player:fullscreen .vg-screen { flex: 1; aspect-ratio: auto; }
+
+/* ---------- the control bar ---------- */
+.vg-ctl { position: relative; padding: 8px 12px 10px; background: #121113; }
+.vg-seek { position: relative; height: 22px; cursor: pointer; touch-action: none; display: flex; align-items: center; }
+.vg-seek:focus-visible { outline-offset: 2px; }
+.vg-seek__track { position: relative; width: 100%; height: 5px; border-radius: 3px; background: rgba(243,238,231,.18); transition: height var(--t-press) var(--ease-out); }
+.vg-seek:hover .vg-seek__track, .vg-seek.is-dragging .vg-seek__track { height: 8px; }
+.vg-seek__hover { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 3px; background: rgba(243,238,231,.22); }
+.vg-seek__fill { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--coral), var(--gold)); }
+.vg-seek__tick { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; background: #121113; }
+.vg-seek__thumb {
+  position: absolute; top: 50%;
+  width: 14px; height: 14px; margin: -7px 0 0 -7px;
+  border-radius: 50%; background: var(--gold);
+  transform: scale(0); transition: transform var(--t-press) var(--ease-out);
+  pointer-events: none;
+}
+.vg-seek:hover .vg-seek__thumb, .vg-seek.is-dragging .vg-seek__thumb, .vg-seek:focus-visible .vg-seek__thumb { transform: scale(1); }
+.vg-seek__tip {
+  position: absolute; bottom: 26px; transform: translateX(-50%);
+  max-width: 260px; padding: 5px 9px;
+  border-radius: 8px; border: 1px solid var(--hairline);
+  background: rgba(16,16,17,.95); color: var(--cream);
+  font-size: 12px; line-height: 1.35; text-align: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  pointer-events: none; opacity: 0; transition: opacity var(--t-press);
+}
+.vg-seek:hover .vg-seek__tip, .vg-seek.is-dragging .vg-seek__tip { opacity: 1; }
+.vg-seek__tip b { display: block; color: var(--gold); font-variant-numeric: tabular-nums; }
+
+.vg-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.vg-row button {
+  min-width: 44px; min-height: 44px;
+  display: inline-grid; place-items: center;
+  border: 0; border-radius: 10px;
+  background: transparent; color: var(--cream);
+  cursor: pointer;
+  transition: background var(--t-press);
+}
+.vg-row button:hover { background: rgba(243,238,231,.1); }
+.vg-row button:active { transform: scale(.96); }
+.vg-row svg { width: 22px; height: 22px; fill: currentColor; }
+.vg-vol { width: 80px; accent-color: var(--gold); }
+.vg-time { margin-left: 6px; font-size: 14px; color: var(--cream-dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vg-now { flex: 1; min-width: 0; padding-left: 4px; font-size: 14px; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vg-now:not(:empty)::before { content: "\2022"; color: var(--coral); margin-right: 8px; }
+.vg-rate, .vg-qbtn { padding: 0 10px !important; font-weight: 700; font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vg-qbtn { display: inline-flex !important; align-items: center; gap: 3px; }
+.vg-hd {
+  font-size: 9px; font-weight: 700; line-height: 1;
+  padding: 2px 3px; border-radius: 3px;
+  background: var(--coral); color: var(--cream);
+  transform: translateY(-5px);
+}
+@media (max-width: 560px) {
+  .vg-vol, .vg-now { display: none; }
+  .vg-row .vg-spacer { flex: 1; }
+}
+
+.vg-qmenu {
+  position: absolute; right: 12px; bottom: calc(100% - 4px); z-index: 5;
+  min-width: 210px; padding: 6px;
+  border-radius: 14px; border: 1px solid var(--hairline);
+  background: rgba(18,17,19,.97);
+  box-shadow: 0 16px 40px rgba(0,0,0,.55);
+  transform-origin: bottom right;
+  animation: vg-menu-in 160ms var(--ease-out);
+}
+@keyframes vg-menu-in { from { opacity: 0; transform: translateY(6px) scale(.97); } }
+.vg-qmenu__title {
+  display: flex; justify-content: space-between; gap: 12px;
+  margin-bottom: 4px; padding: 6px 10px 8px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 12px; color: var(--cream-faint);
+}
+.vg-qmenu__title b { color: var(--cream-dim); font-weight: 600; }
+.vg-qmenu button {
+  width: 100%; min-height: 40px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 10px; border: 0; border-radius: 9px;
+  background: transparent; color: var(--cream);
+  font: inherit; font-size: 14px; font-variant-numeric: tabular-nums; text-align: left;
+  cursor: pointer;
+}
+.vg-qmenu button:hover, .vg-qmenu button:focus-visible { background: rgba(243,238,231,.08); outline: none; }
+.vg-qmenu__check { width: 16px; height: 16px; display: grid; place-items: center; color: var(--gold); visibility: hidden; }
+.vg-qmenu__check svg { width: 16px; height: 16px; }
+.vg-qmenu [aria-checked="true"] .vg-qmenu__check { visibility: visible; }
+.vg-qmenu__hint { margin-left: auto; font-size: 12px; color: var(--cream-faint); }
+
+/* ---------- chapters ---------- */
+.vg-chapters { position: relative; min-height: 320px; background: var(--bg-deep); border: 1px solid var(--hairline); border-radius: 18px; }
+.vg-chapters__scroll {
+  position: absolute; inset: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: 18px 14px 14px;
+  scrollbar-width: thin; scrollbar-color: var(--raised) transparent;
+}
+@media (max-width: 900px) {
+  .vg-chapters { min-height: 0; }
+  .vg-chapters__scroll { position: static; }
+}
+.vg-chapters__head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 6px 10px; }
+.vg-chapters__head h3 { margin: 0; font-family: var(--body); font-size: 17px; font-weight: 700; color: var(--cream); }
+.vg-chapters__head span { font-size: 13px; color: var(--cream-faint); }
+.vg-chapter-list { display: grid; gap: 4px; }
+.vg-chapter {
+  position: relative;
+  width: 100%;
+  display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: center;
+  padding: 8px;
+  border: 0; border-radius: 12px;
+  background: transparent; color: var(--cream-dim);
+  font: inherit; text-align: left;
+  cursor: pointer; overflow: hidden;
+  transition: background 180ms var(--ease-out), color 180ms;
+}
+.vg-chapter:hover { background: rgba(243,238,231,.06); color: var(--cream); }
+.vg-chapter__n {
+  height: 34px; border-radius: 9px;
+  display: grid; place-items: center;
+  background: var(--panel); color: var(--gold);
+  font-family: var(--display); font-size: 17px; -webkit-text-stroke: .6px currentColor;
+  transition: background 180ms, color 180ms;
+}
+.vg-chapter__text { min-width: 0; font-size: 14px; line-height: 1.35; }
+.vg-chapter__text b { display: block; font-size: 12px; font-weight: 600; color: var(--cream-faint); font-variant-numeric: tabular-nums; }
+.vg-chapter__progress { position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--coral), var(--gold)); }
+.vg-chapter[aria-current="true"] { background: rgba(216,111,103,.14); color: var(--cream); }
+.vg-chapter[aria-current="true"] .vg-chapter__n { background: var(--coral); color: var(--cream); }
+.vg-chapters__empty { padding: 6px; font-size: 14px; color: var(--cream-faint); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vg-hero__media, .vg-glow, .vg-glow__layer, .vg-seek__track, .vg-seek__thumb,
+  .vg-poster__play, .vg-chapter { transition: none; }
+  .vg-qmenu { animation: none; }
+}

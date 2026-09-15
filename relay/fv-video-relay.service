@@ -1,0 +1,33 @@
+# The home relay for YouTube video details (see video-relay.mjs).
+# Installed to /etc/systemd/system/ on the home server; code at /opt/fv-video-relay/,
+# secret in /etc/fv-video-relay/env (RELAY_SECRET=..., root:fvrelay 0640).
+
+[Unit]
+Description=FullVolume video relay (YouTube details for fullvolumethegame.xyz)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=fvrelay
+Group=fvrelay
+WorkingDirectory=/opt/fv-video-relay
+EnvironmentFile=/etc/fv-video-relay/env
+ExecStart=/usr/bin/node /opt/fv-video-relay/relay/video-relay.mjs
+Restart=on-failure
+RestartSec=5
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

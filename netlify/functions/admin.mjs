@@ -10,13 +10,19 @@
 //   POST   /api/admin/refresh                       one refresh pass { start }
 //   POST   /api/admin/discord                       who these ids are { ids }
 //   GET    /api/admin/discord/:id[/fresh]           one profile, cache or not
+//   GET    /api/admin/video                         the charter page's video, as kept
+//   POST   /api/admin/video/look                    read a video before choosing it { link }
+//   POST   /api/admin/video                         play this one on the charter page { link }
+//   POST   /api/admin/video/reread                  read the chosen video again from scratch
 
 import { profileFor, profilesFor } from "../lib/discord.mjs";
 import { folderUrl, listCharts, parseDriveLink } from "../lib/fvchart.mjs";
-import { json, problem, readJson } from "../lib/http.mjs";
+import { env, json, problem, readJson } from "../lib/http.mjs";
 import { currentProgress, dropCharter, readIndex, refreshPass } from "../lib/refresh.mjs";
 import { adminOnly } from "../lib/session.mjs";
 import { allJson, applications, charters } from "../lib/stores.mjs";
+import { currentCharterVideo, keptVideoMeta, purgeVideoCache, refreshVideoMeta, setCharterVideo } from "../lib/videometa.mjs";
+import { parseYouTubeId } from "../lib/youtube.mjs";
 
 // A Discord user ID, not a username. A username can be changed by its owner at
 // any time, and once it has been there is no way left to reach the person whose
@@ -112,6 +118,57 @@ async function addCharter(req) {
   return json({ charter });
 }
 
+const relayConfigured = () => Boolean(env("VIDEO_RELAY_URL") && env("VIDEO_RELAY_SECRET"));
+
+async function videoOverview() {
+  const chosen = await currentCharterVideo();
+  return json({ chosen, meta: await keptVideoMeta(chosen.id), relay: relayConfigured() });
+}
+
+/** A YouTube id out of the request body's link, or a 422 naming the field. */
+async function linkedVideo(req) {
+  const body = await readJson(req);
+  const id = parseYouTubeId(body?.link);
+  if (!id) return { error: problem("That is not a YouTube link.", 422, { fields: { link: "Paste a youtube.com or youtu.be link to one video." } }) };
+  return { id };
+}
+
+async function readVideo(id, options) {
+  try {
+    return { meta: (await refreshVideoMeta(id, undefined, options)).meta };
+  } catch (err) {
+    return { error: problem(`YouTube would not describe that video: ${err.message}`, 422, { fields: { link: "Is it public, and does it allow embedding?" } }) };
+  }
+}
+
+async function videoRoute(req, action, admin) {
+  if (req.method === "GET" && !action) return videoOverview();
+  if (req.method !== "POST") return null;
+
+  if (action === "reread") {
+    const chosen = await currentCharterVideo();
+    const { meta, error } = await readVideo(chosen.id, { reread: true });
+    if (error) return error;
+    await purgeVideoCache(chosen.id);
+    return json({ chosen, meta, relay: relayConfigured() });
+  }
+
+  const { id, error } = await linkedVideo(req);
+  if (error) return error;
+  const read = await readVideo(id);
+  if (read.error) return read.error;
+
+  if (action === "look") return json({ meta: read.meta, relay: relayConfigured() });
+  if (!action) {
+    const previous = await currentCharterVideo();
+    const chosen = await setCharterVideo(id, admin);
+    await purgeVideoCache(id);
+    if (previous.id !== id) await purgeVideoCache(previous.id);
+    return json({ chosen, meta: read.meta, relay: relayConfigured() });
+  }
+  return null;
+}
+
 async function route(req, context, admin) {
   const parts = new URL(req.url).pathname.replace(/^\/api\/admin\/?/, "").split("/").filter(Boolean);
   const [section, id, action] = parts;
@@ -147,6 +204,11 @@ async function route(req, context, admin) {
       const ids = Array.isArray(body?.ids) ? body.ids.slice(0, 60) : [];
       return json({ profiles: await profilesFor(ids) });
     }
+  }
+
+  if (section === "video") {
+    const answer = await videoRoute(req, id, admin);
+    if (answer) return answer;
   }
 
   if (section === "refresh" && req.method === "POST") {

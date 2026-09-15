@@ -80,6 +80,40 @@
         </div>
 
         <div class="adm-col">
+          <section class="ch-panel adm-video" aria-labelledby="videoTitle">
+            <div class="adm-head">
+              <h2 class="ch-panel__title" id="videoTitle">Charter page video</h2>
+            </div>
+            <p>The guide above the download on the charter page. Paste any YouTube link: its chapters, the glow and the quality list are read off YouTube for you.</p>
+
+            <div class="adm-vcard" id="videoCurrent" aria-live="polite">
+              <p class="adm-status">Reading the current video&hellip;</p>
+            </div>
+
+            <form class="adm-vform" id="videoForm" novalidate>
+              <p class="ch-kicker">Play a different one</p>
+              <div class="ch-field" data-field="link">
+                <label for="vLink">YouTube link</label>
+                <div class="ch-input"><input id="vLink" name="link" type="url" inputmode="url" spellcheck="false" autocomplete="off" placeholder="https://www.youtube.com/watch?v=..." required></div>
+                <p class="ch-help" id="hvLink">A watch, youtu.be, shorts or embed link. Look it up first to see what the page will get.</p>
+              </div>
+              <div class="adm-vcard adm-vcard--preview" id="videoPreview" hidden></div>
+              <div class="ch-actions">
+                <button class="btn" type="button" id="videoLook">Look it up</button>
+                <button class="plate plate--sm" type="submit" id="videoUse"><span class="plate__label">USE THIS VIDEO</span></button>
+              </div>
+            </form>
+
+            <div class="ch-actions adm-vfoot">
+              <button class="btn btn--quiet" type="button" id="videoReread">Read it again from YouTube</button>
+              <a class="adm-link" href="../fullvolumecharter/#guide" target="_blank" rel="noopener">See it on the charter page</a>
+            </div>
+            <details class="adm-issues" id="videoIssues" hidden>
+              <summary id="videoIssuesTitle">Notes from the last read</summary>
+              <ul id="videoIssuesList"></ul>
+            </details>
+          </section>
+
           <section class="ch-panel adm-refresh" aria-labelledby="refreshTitle">
             <div class="adm-head">
               <h2 class="ch-panel__title" id="refreshTitle">Community charts</h2>

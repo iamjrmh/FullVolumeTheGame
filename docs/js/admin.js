@@ -716,7 +716,130 @@
 
   goButton.addEventListener("click", startRefresh);
 
-  load().catch(function (err) {
+  /* ---------- charter page video ---------- */
+
+  // The server reads YouTube (through the home relay when it is up), copies the
+  // storyboard onto the site and keeps the result; this only shows what came
+  // back, so a video that will play without its glow says so before it is used.
+  var videoForm = $("videoForm");
+  var videoRelay = false;
+
+  function fmtLength(s) {
+    s = Math.max(0, Math.floor(s || 0));
+    var m = Math.floor(s / 60), r = s % 60;
+    return m + ":" + (r < 10 ? "0" : "") + r;
+  }
+
+  function videoCardHtml(meta, chosen) {
+    var q = meta.qualities || [];
+    var chips = [];
+    if (meta.lengthSeconds) chips.push('<span class="adm-chip">' + esc(fmtLength(meta.lengthSeconds)) + "</span>");
+    chips.push(meta.chapters && meta.chapters.length
+      ? '<span class="adm-chip adm-chip--gold">' + meta.chapters.length + " chapters</span>"
+      : '<span class="adm-chip adm-chip--coral" title="Add timestamps to the YouTube description">No chapters</span>');
+    chips.push(meta.storyboard
+      ? '<span class="adm-chip adm-chip--sage" title="The glow follows the video">Glow follows the video</span>'
+      : '<span class="adm-chip adm-chip--coral" title="YouTube held the storyboard back; the glow uses three still frames">Glow from stills</span>');
+    chips.push(q.length
+      ? '<span class="adm-chip adm-chip--sage">Up to ' + esc(q[0].label) + "</span>"
+      : '<span class="adm-chip adm-chip--coral" title="The player will list qualities without frame rates">No quality list</span>');
+    if (meta.via) chips.push('<span class="adm-chip" title="How YouTube was reached">' + (meta.via.indexOf("relay") === 0 ? "Via home relay" : "Via Netlify") + "</span>");
+    if (meta.stale) chips.push('<span class="adm-chip adm-chip--coral">YouTube did not answer, showing the kept copy</span>');
+
+    var byline = chosen && chosen.setAt ? "Chosen by " + chosen.setBy + " " + ago(chosen.setAt) : chosen ? "The default guide" : "";
+    return '<img src="https://i.ytimg.com/vi/' + esc(meta.id) + '/hqdefault.jpg" alt="" width="148" height="83">' +
+      '<div class="adm-vcard__body">' +
+        '<p class="adm-vcard__title">' + esc(meta.title || meta.id) + "</p>" +
+        '<p class="adm-vcard__meta">' + esc([meta.author, byline].filter(Boolean).join(" · ")) +
+          ' · <a class="adm-link" href="https://www.youtube.com/watch?v=' + esc(meta.id) + '" target="_blank" rel="noopener">YouTube</a></p>' +
+        '<div class="adm-chips">' + chips.join("") + "</div>" +
+      "</div>";
+  }
+
+  function paintVideoIssues(meta) {
+    var notes = (meta && meta.warnings) || [];
+    $("videoIssues").hidden = !notes.length;
+    $("videoIssuesTitle").textContent = notes.length + " note" + (notes.length === 1 ? "" : "s") + " from the last read" + (videoRelay ? "" : " (no home relay configured)");
+    $("videoIssuesList").innerHTML = notes.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("");
+  }
+
+  function paintVideo(data) {
+    videoRelay = !!data.relay;
+    var box = $("videoCurrent");
+    box.innerHTML = data.meta
+      ? videoCardHtml(data.meta, data.chosen)
+      : '<p class="adm-status">Plays ' + esc(data.chosen.id) + ". Nothing read about it yet: it fills in the first time somebody opens the charter page, or press Read it again.</p>";
+    paintVideoIssues(data.meta);
+  }
+
+  function loadVideo() {
+    return api("GET", "video").then(paintVideo).catch(function (err) {
+      if (err.message !== "signed out") $("videoCurrent").innerHTML = '<p class="adm-status">Could not read the video: ' + esc(err.message) + "</p>";
+    });
+  }
+
+  function videoFieldError(message) {
+    var field = videoForm.querySelector('.ch-field[data-field="link"]');
+    field.classList.toggle("is-invalid", !!message);
+    $("hvLink").textContent = message || "A watch, youtu.be, shorts or embed link. Look it up first to see what the page will get.";
+  }
+
+  function busy(buttons, on) {
+    buttons.forEach(function (b) { b.disabled = on; });
+  }
+
+  $("videoLook").addEventListener("click", function () {
+    var look = this;
+    videoFieldError("");
+    busy([look, $("videoUse")], true);
+    look.textContent = "Reading YouTube...";
+    api("POST", "video/look", { link: videoForm.elements.link.value })
+      .then(function (r) {
+        $("videoPreview").innerHTML = videoCardHtml(r.meta, null);
+        $("videoPreview").hidden = false;
+      })
+      .catch(function (err) {
+        $("videoPreview").hidden = true;
+        var fields = (err.data && err.data.fields) || {};
+        if (err.message !== "signed out") videoFieldError(fields.link ? err.message + " " + fields.link : err.message);
+      })
+      .finally(function () { busy([look, $("videoUse")], false); look.textContent = "Look it up"; });
+  });
+
+  videoForm.elements.link.addEventListener("input", function () { $("videoPreview").hidden = true; });
+
+  videoForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    videoFieldError("");
+    var use = $("videoUse");
+    var label = use.querySelector(".plate__label");
+    busy([use, $("videoLook")], true);
+    label.textContent = "SWITCHING...";
+    api("POST", "video", { link: videoForm.elements.link.value })
+      .then(function (r) {
+        paintVideo(r);
+        videoForm.reset();
+        $("videoPreview").hidden = true;
+        toast("The charter page now plays " + (r.meta.title || r.chosen.id) + ".");
+      })
+      .catch(function (err) {
+        var fields = (err.data && err.data.fields) || {};
+        if (err.message !== "signed out") videoFieldError(fields.link ? err.message + " " + fields.link : err.message);
+      })
+      .finally(function () { busy([use, $("videoLook")], false); label.textContent = "USE THIS VIDEO"; });
+  });
+
+  $("videoReread").addEventListener("click", function () {
+    var button = this;
+    button.disabled = true;
+    button.textContent = "Reading YouTube...";
+    api("POST", "video/reread")
+      .then(function (r) { paintVideo(r); toast("Read it again. The charter page has the new copy."); })
+      .catch(function (err) { if (err.message !== "signed out") toast(err.message, true); })
+      .finally(function () { button.disabled = false; button.textContent = "Read it again from YouTube"; });
+  });
+
+  load().then(loadVideo).catch(function (err) {
     if (err.message === "signed out") return;
     loading.textContent = "Could not load the admin page: " + err.message;
   });
