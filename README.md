@@ -19,14 +19,14 @@
 A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs already sitting on your drive and sing any of them - on your own, or in a room online with your buddies.
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043)](#-system-requirements)
-[![Version](https://img.shields.io/badge/version-0.9.4%20beta-ff6b6b)](../../releases)
-[![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest)
+[![Version](https://img.shields.io/badge/version-0.9.5%20beta-ff6b6b)](../../releases)
+[![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest) 
 [![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
-[![Charter](https://img.shields.io/badge/charter-0.9.4-829B87)](#-fullvolumecharter)
+[![Charter](https://img.shields.io/badge/charter-0.9.5-829B87)](#-fullvolumecharter)
 
 
-<a href="https://github.com/iamjrmh/FullVolumeTheGame/releases/latest/download/FullVolumeSetup.exe"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume on GitHub →**</a>
+<a href="https://fullvolumethegame.xyz/api/download/game"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume →**</a>
 
 <a href="https://jurmr.itch.io/fullvolume"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume on itch.io →**</a>
 
@@ -161,7 +161,7 @@ Straight out of the game. Nothing here is a mock-up.
 
 ## 📥 Installing
 
-1. Grab **`FullVolumeSetup.exe`** from the [latest release](../../releases/latest).
+1. Grab **`FullVolumeSetup.exe`** from [the latest FullVolume release](https://fullvolumethegame.xyz/api/download/game), or off [the releases page](../../releases).
 2. Run it. It installs **per user**, so there is no UAC prompt and no admin rights needed - hand it to four friends and that's four installs and zero arguments with IT.
 3. It lands in `%USERPROFILE%\Program Files\Full Volume`, with shortcuts on the Start menu and desktop.
 4. Launch it, plug a microphone in, and pick it under **Settings → Audio**.
@@ -172,7 +172,7 @@ Uninstall it whenever you like. Profiles, scores, backdrops and song folders liv
 |---|---|
 | **File** | `FullVolumeSetup.exe` |
 | **Size** | 107 MB to download, about 200 MB installed |
-| **Version** | 0.9.4 beta |
+| **Version** | 0.9.5 beta |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | Local. Nothing to sign up for |
 | **Songs included** | None. You bring those |
@@ -244,7 +244,7 @@ It is a real desktop app, not a web page in a wrapper: no account, no upload, no
 
 <div align="center">
 
-<a href="https://github.com/iamjrmh/fullVolumeTheGame/releases/latest/download/FullVolumeCharterSetup.exe"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolumeCharter" style="vertical-align: middle;"> **Download FullVolumeCharter →**</a>
+<a href="https://fullvolumethegame.xyz/api/download/charter"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolumeCharter" style="vertical-align: middle;"> **Download FullVolumeCharter →**</a>
 
 <a href="https://fullvolumethegame.xyz/fullvolumecharter/">**Read the whole thing at fullvolumethegame.xyz →**</a>
 
@@ -319,8 +319,8 @@ Everything you enter is saved the moment you enter it, so a song started tonight
 |---|---|
 | **File** | `FullVolumeCharterSetup.exe` |
 | **Size** | 222 MB. Offline installer, nothing else needed |
-| **Charter version** | 0.9.4 |
-| **Released with** | FullVolume 0.9.4 |
+| **Charter version** | 0.9.5 |
+| **Built for** | FullVolume 0.9.5 |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | None |
 | **Writes** | `.fvchart` |

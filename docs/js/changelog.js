@@ -57,6 +57,28 @@
     return w.charAt(0).toUpperCase() + w.slice(1);
   }
 
+  /* ---------- Two products in one list ----------
+
+     FullVolume and FullVolumeCharter are released separately, so this list is
+     two timelines interleaved by date. Nothing is filtered out - a reader
+     scrolling the page wants to see everything that happened in order - but
+     every row has to say which of the two it is, and "Latest" has to mean the
+     latest of its own kind. */
+
+  var shown = { releases: [] };   // the doc currently painted
+
+  function firstOf(product) {
+    for (var i = 0; i < shown.releases.length; i++) {
+      if ((shown.releases[i].product || "game") === product) return i;
+    }
+    return -1;
+  }
+
+  /* The heading. Older baked copies have no label on them, so fall back. */
+  function titleOf(r) {
+    return r.label || ((r.product === "charter" ? "Charter v" : "v") + r.version);
+  }
+
   /* ---------- Rendering one release ---------- */
 
   function renderBlocks(blocks) {
@@ -127,18 +149,30 @@
     return el("div", { "class": "rel__get" }, kids);
   }
 
-  function renderRelease(r, index) {
-    var id = "v" + r.version;
-    var latest = index === 0;
+  /* The game and the charter are released separately now, so two releases can
+     carry the same number. The tag is what is unique, so the tag is the anchor
+     - and because the game's tags are still "v0.9.4", every link anybody has
+     already shared still lands where it did. */
+  function anchorOf(r) { return (r.tag || "v" + r.version).replace(/[^\w.-]/g, ""); }
 
+  function renderRelease(r, index) {
+    var id = anchorOf(r);
+    var charter = r.product === "charter";
+    // "Latest" means the newest of its own product, not the newest row.
+    var latest = index === firstOf(charter ? "charter" : "game");
+
+    // No "Charter" chip: the heading already says Charter, and the card wears
+    // sage instead of gold. Three ways of saying it would be two too many.
     var chips = [];
     if (latest) chips.push(el("span", { "class": "chip chip--latest", text: "Latest" }));
     if (r.first) chips.push(el("span", { "class": "chip chip--launch", text: "Launch" }));
     if (r.channel) chips.push(el("span", { "class": "chip", text: r.channel }));
 
     var metaBits = [el("time", { datetime: r.date, text: fmtDate(r.date, LONG) })];
-    var game = r.assets.filter(function (a) { return a.name === "FullVolumeSetup.exe"; })[0];
-    if (game) metaBits.push(el("span", { text: game.size + " installer" }));
+    var own = r.assets.filter(function (a) {
+      return a.name === (charter ? "FullVolumeCharterSetup.exe" : "FullVolumeSetup.exe");
+    })[0];
+    if (own) metaBits.push(el("span", { text: own.size + " installer" }));
 
     var body = [];
     var news = r.sections.filter(function (s) { return s.kind === "news"; });
@@ -160,14 +194,15 @@
 
     var card = el("article", { "class": "rel__card", "aria-labelledby": id + "-h" }, [
       el("header", { "class": "rel__head" }, [
-        el("h2", { "class": "rel__v", id: id + "-h" }, [el("a", { href: "#" + id, text: "v" + r.version })]),
+        el("h2", { "class": "rel__v", id: id + "-h" }, [el("a", { href: "#" + id, text: titleOf(r) })]),
         chips.length ? el("span", { "class": "rel__chips" }, chips) : null
       ]),
       el("p", { "class": "rel__meta" }, metaBits),
       r.tagline ? el("p", { "class": "rel__tagline", text: r.tagline }) : null
     ].concat(body, [renderAssets(r)]));
 
-    var cls = "rel" + (latest ? " rel--latest" : "") + (r.first ? " rel--launch" : "");
+    var cls = "rel" + (latest ? " rel--latest" : "") + (r.first ? " rel--launch" : "") +
+      (charter ? " rel--charter" : "");
     return el("li", { "class": cls, id: id, "data-reveal": true }, [
       el("span", { "class": "rel__node", "aria-hidden": "true" }),
       card
@@ -182,7 +217,7 @@
 
   function fingerprint(doc) {
     return doc.releases.map(function (r) {
-      return r.tag + "|" + r.date + "|" + JSON.stringify(r.sections) + "|" +
+      return r.tag + "|" + r.product + "|" + r.date + "|" + JSON.stringify(r.sections) + "|" +
         r.assets.map(function (a) { return a.name + a.size; }).join(",");
     }).join("\n");
   }
@@ -191,11 +226,14 @@
     if (!meta) return;
     var n = doc.releases.length;
     var top = doc.releases[0];
+    var game = doc.releases[firstOf("game")];
     var count = meta.querySelector("[data-meta=count]");
     var latest = meta.querySelector("[data-meta=latest]");
     var date = meta.querySelector("[data-meta=date]");
     if (count) count.textContent = countWord(n) + (n === 1 ? " release" : " releases");
-    if (latest && top) { latest.textContent = "Latest v" + top.version; latest.hidden = false; }
+    // The game's number, not the newest row's: a charter release is news, but
+    // it is not what somebody means by "what version is FullVolume on".
+    if (latest && game) { latest.textContent = "Latest v" + game.version; latest.hidden = false; }
     if (date && top) { date.textContent = "Updated " + fmtDate(top.date, LONG); date.hidden = false; }
   }
 
@@ -203,8 +241,8 @@
     if (!rail || !railList) return;
     railList.textContent = "";
     railLinks = doc.releases.map(function (r) {
-      var a = el("a", { href: "#v" + r.version }, [
-        el("b", { text: "v" + r.version }),
+      var a = el("a", { href: "#" + anchorOf(r), "class": r.product === "charter" ? "is-charter" : null }, [
+        el("b", { text: (r.product === "charter" ? "C " : "") + "v" + r.version }),
         el("span", { text: fmtDate(r.date, SHORT) })
       ]);
       railList.appendChild(el("li", null, [a]));
@@ -217,6 +255,10 @@
   }
 
   function paint(doc, settled) {
+    // Set before rendering: renderRelease asks firstOf() which row is the
+    // latest of its own product.
+    shown = doc;
+
     var frag = document.createDocumentFragment();
     doc.releases.forEach(function (r, i) { frag.appendChild(renderRelease(r, i)); });
     log.textContent = "";

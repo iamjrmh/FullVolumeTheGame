@@ -14,7 +14,10 @@ on:
     paths:
       - "README.md"
       - "tools/sync-version.py"
-  # A release changes the installer size, which the README does not carry.
+  # A release changes an installer size, which the README does not carry. Either
+  # product's release is worth running for: each size comes off the newest
+  # release carrying that product's installer, and since FullVolume and
+  # FullVolumeCharter are released separately those are two different releases.
   release:
     types: [published]
   workflow_dispatch:

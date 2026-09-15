@@ -73,6 +73,8 @@
 }
 .rail__list a.is-current { color: var(--cream); }
 .rail__list a.is-current span { color: var(--cream-dim); }
+/* "C v0.9.5" - a charter release, in the charter's own colour. */
+.rail__list a.is-charter b { color: var(--sage); }
 @media (hover: hover) and (pointer: fine) {
   .rail__list a:hover { color: var(--cream); background-color: rgba(224,184,102,.10); }
 }
@@ -142,6 +144,16 @@
 }
 .rel--latest .rel__node::before { background: var(--gold); }
 .rel--launch .rel__node::before { background: var(--sage); }
+
+/* FullVolume and FullVolumeCharter are released separately, so this timeline
+   carries both. The charter's own page is sage where the game's is gold, so
+   its rows are sage here too and the two runs are told apart by colour before
+   anybody reads a word. */
+.rel--charter { --accent: var(--sage); }
+.rel--charter.rel--latest .rel__node::before { background: var(--sage); }
+.rel--charter.rel--latest .rel__node::after { border-color: var(--sage); }
+.rel--charter.rel--latest .rel__card { border-color: rgba(130,155,135,.55); }
+.rel--charter .chip--latest { background: var(--sage); border-color: var(--sage); }
 
 /* A slow breath on the newest node only. Opacity and scale, 2.8s, and
    the reduced-motion block in style.css stops it dead. */

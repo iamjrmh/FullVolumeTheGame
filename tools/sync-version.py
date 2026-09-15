@@ -4,12 +4,14 @@
 Three of them, each with a different source, because the site kept quoting
 figures that had quietly stopped being right:
 
-  version        README.md, which is where it really gets updated. It had
-                 drifted two releases behind, and it is in the page's
-                 structured data now, so stale means a wrong machine-readable
-                 fact rather than just wrong text.
-  installer sizes the latest GitHub release, the only place they are recorded.
-                 Both the game's installer and the charter's ship from it.
+  versions       README.md, which is where they really get updated. FullVolume
+                 and FullVolumeCharter carry their own numbers now - the game's
+                 is the version badge, the charter's is the charter badge - and
+                 they are in the pages' structured data, so stale means a wrong
+                 machine-readable fact rather than just wrong text.
+  installer sizes GitHub, the only place they are recorded. Each product's size
+                 comes off the newest release carrying that product's
+                 installer, which is no longer the same release for both.
   chart count    docs/data/*.js, counted off the rows the Marketplace loads.
                  The weekly refresh moves this, and the site said 5,000+ when
                  both catalogues together held 40,488.
@@ -48,7 +50,12 @@ SITEMAP = ROOT / "docs" / "sitemap.xml"
 DOCS = ROOT / "docs"
 DATA = ROOT / "docs" / "data"
 
-RELEASES_API = "https://api.github.com/repos/iamjrmh/FullVolumeTheGame/releases/latest"
+# Deliberately the releases LIST, not /releases/latest. The game and the
+# charter are released separately, so GitHub's "latest" is whichever of the two
+# went out last and would have no installer for the other one on it. Same rule
+# as netlify/lib/releasenotes.mjs and both updaters: find the newest release
+# that actually carries the asset being asked about.
+RELEASES_API = "https://api.github.com/repos/iamjrmh/FullVolumeTheGame/releases?per_page=100"
 INSTALLER = "FullVolumeSetup.exe"
 CHARTER_INSTALLER = "FullVolumeCharterSetup.exe"
 
@@ -68,13 +75,18 @@ def write(path: Path, text: str) -> None:
         fh.write(text)
 
 
-def read_readme_version() -> tuple[str, str]:
-    """Pull "0.9.2" and "beta" out of README.md.
+def read_readme_version() -> tuple[str, str, str]:
+    """Pull the game's "0.9.2"/"beta" and the charter's "0.9.4" out of README.md.
 
-    The shields badge near the top is the source of truth. The spec table near
-    the bottom carries the same number, so it is read as a cross-check: if the
-    two disagree, the README itself was half updated and syncing either one to
-    the site would just spread the mistake.
+    The shields badges near the top are the source of truth. The spec tables
+    near the bottom carry the same numbers, so they are read as a cross-check:
+    if a pair disagrees, the README itself was half updated and syncing either
+    one to the site would just spread the mistake.
+
+    Two badges rather than one because the two products are versioned and
+    released separately. They were the same number until 2026-09-14, which is
+    why the charter badge was there all along - it just never said anything the
+    version badge did not.
     """
     text = read(README)
 
@@ -98,15 +110,33 @@ def read_readme_version() -> tuple[str, str]:
                 f"  Fix README.md first, then run this again."
             )
 
-    return version, channel
+    charter_badge = re.search(r"badge/charter-(\d+\.\d+\.\d+)-", text)
+    if not charter_badge:
+        sys.exit(
+            "README.md: could not find the charter badge.\n"
+            "  Expected something like "
+            "[![Charter](https://img.shields.io/badge/charter-0.9.4-829B87)]"
+        )
+    charter = charter_badge.group(1)
+
+    charter_table = re.search(r"\|\s*\*\*Charter version\*\*\s*\|\s*(\d+\.\d+\.\d+)\s*\|", text)
+    if charter_table and charter_table.group(1) != charter:
+        sys.exit(
+            f"README.md disagrees with itself: the charter badge says "
+            f"'{charter}' and the charter table says '{charter_table.group(1)}'.\n"
+            f"  Fix README.md first, then run this again."
+        )
+
+    return version, channel, charter
 
 
 def fetch_installer_sizes() -> dict[str, str]:
-    """Sizes of the installers on the latest release, as {name: "107 MB"}.
+    """Sizes of the two installers, as {name: "107 MB"}.
 
-    Both the game and the charter ship from the same release, so one request
-    covers both. A name that is missing is simply absent from the dict, and the
-    rules that quote it are skipped rather than the run failing.
+    Each one comes off the newest release that actually carries it, which since
+    the split is not the same release for both, and is not necessarily the
+    newest release either. A name that is nowhere is simply absent from the
+    dict, and the rules that quote it are skipped rather than the run failing.
     """
     headers = {"Accept": "application/vnd.github+json"}
     # Unauthenticated the API allows 60 requests an hour per IP, and CI runners
@@ -123,14 +153,28 @@ def fetch_installer_sizes() -> dict[str, str]:
         print(f"  installer sizes: skipped, could not reach the releases API ({err})")
         return {}
 
-    sizes = {}
-    for asset in data.get("assets", []):
-        if asset.get("name") in (INSTALLER, CHARTER_INSTALLER):
-            sizes[asset["name"]] = f"{round(asset['size'] / 1024 / 1024)} MB"
+    if not isinstance(data, list):
+        print("  installer sizes: skipped, the releases API did not return a list")
+        return {}
 
+    # Newest first by publication date, so the first release carrying an asset
+    # is the one being handed out.
+    releases = sorted(
+        (r for r in data if not r.get("draft") and r.get("tag_name")),
+        key=lambda r: str(r.get("published_at") or r.get("created_at") or ""),
+        reverse=True,
+    )
+
+    sizes = {}
     for name in (INSTALLER, CHARTER_INSTALLER):
-        if name not in sizes:
-            print(f"  installer size: skipped, no {name} on {data.get('tag_name')}")
+        for release in releases:
+            asset = next((a for a in release.get("assets", []) if a.get("name") == name), None)
+            if asset:
+                sizes[name] = f"{round(asset['size'] / 1024 / 1024)} MB"
+                print(f"  {name}: {sizes[name]}, off {release['tag_name']}")
+                break
+        else:
+            print(f"  installer size: skipped, no {name} on any release")
 
     return sizes
 
@@ -156,8 +200,15 @@ def headline_charts(total: int) -> tuple[int, str]:
     return floored, f"{floored:,}"
 
 
-def build_rules(version: str, channel: str, sizes: dict[str, str], charts: int | None):
-    """(file, what, pattern, replacement, expected matches)."""
+def build_rules(version: str, channel: str, charter: str,
+                sizes: dict[str, str], charts: int | None):
+    """(file, what, pattern, replacement, expected matches).
+
+    `version` is FullVolume's and `charter` is FullVolumeCharter's, and which
+    of the two a rule carries is the whole point of this function since the
+    split: the charter page quotes its own number for itself and the game's
+    only where it names the game.
+    """
     labelled = f"{version} {channel}".strip()
 
     rules = [
@@ -177,28 +228,29 @@ def build_rules(version: str, channel: str, sizes: dict[str, str], charts: int |
          r"(<p>v)\d+\.\d+\.\d+( &middot; )\w+(</p>)",
          rf"\g<1>{version}\g<2>{channel or 'beta'}\g<3>", 1),
 
-        # FullVolumeCharter carries the game's own number, by the user's rule, so
-        # the charter page is driven from the same source rather than by hand. It
-        # quotes the bare version with no channel - the charter is not "beta"
-        # separately from the game it ships inside.
+        # The charter has its own release line as of 2026-09-14, so it quotes
+        # its OWN number for itself and the game's only where it names the game
+        # ("built for FullVolume x.y.z" - the version it was written against).
+        # It still has no channel of its own: the charter is not separately
+        # "beta" from the game it charts for.
         (CHARTER, "charter JSON-LD softwareVersion",
          r'("softwareVersion":\s*")\d+\.\d+\.\d+(")',
-         rf"\g<1>{version}\g<2>", 1),
+         rf"\g<1>{charter}\g<2>", 1),
 
         (CHARTER, "charter hero flag",
-         r"(Out now with FullVolume )\d+\.\d+\.\d+( &middot; <b>v)\d+\.\d+\.\d+(</b>)",
-         rf"\g<1>{version}\g<2>{version}\g<3>", 1),
+         r"(Built for FullVolume )\d+\.\d+\.\d+( &middot; <b>v)\d+\.\d+\.\d+(</b>)",
+         rf"\g<1>{version}\g<2>{charter}\g<3>", 1),
 
         (CHARTER, "charter download lead",
-         r"(Out now, alongside\s+FullVolume )\d+\.\d+\.\d+",
-         rf"\g<1>{version}", 1),
+         r"(Built for FullVolume )\d+\.\d+\.\d+\.",
+         rf"\g<1>{version}.", 1),
 
         (CHARTER, "charter receipt version",
          r"(<dt>Version</dt><dd>)\d+\.\d+\.\d+(</dd>)",
-         rf"\g<1>{version}\g<2>", 1),
+         rf"\g<1>{charter}\g<2>", 1),
 
-        (CHARTER, "charter receipt ships with",
-         r"(<dt>Ships with</dt><dd>FullVolume )\d+\.\d+\.\d+(</dd>)",
+        (CHARTER, "charter receipt built for",
+         r"(<dt>Built for</dt><dd>FullVolume )\d+\.\d+\.\d+(</dd>)",
          rf"\g<1>{version}\g<2>", 1),
     ]
 
@@ -259,12 +311,11 @@ def main() -> int:
                     help="sync the version only, skipping the releases API")
     args = ap.parse_args()
 
-    version, channel = read_readme_version()
-    print(f"README says v{version}{' ' + channel if channel else ''}")
+    version, channel, charter = read_readme_version()
+    print(f"README says FullVolume v{version}{' ' + channel if channel else ''}, "
+          f"FullVolumeCharter v{charter}")
 
     sizes = {} if args.no_size else fetch_installer_sizes()
-    for name, size in sizes.items():
-        print(f"Latest release ships {name} at {size}")
 
     charts = count_charts()
     if charts:
@@ -274,7 +325,7 @@ def main() -> int:
     pending: dict[Path, str] = {}
     changes: list[str] = []
 
-    for path, what, pattern, repl, expected in build_rules(version, channel, sizes, charts):
+    for path, what, pattern, repl, expected in build_rules(version, channel, charter, sizes, charts):
         text = pending.get(path) or read(path)
         new, n = re.subn(pattern, repl, text)
         if n != expected:

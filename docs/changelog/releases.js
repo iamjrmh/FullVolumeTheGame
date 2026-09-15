@@ -6,12 +6,22 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-09-15T11:57:03.938Z",
+ "generated": "2026-09-15T21:36:02.710Z",
  "repo": "iamjrmh/FullVolumeTheGame",
  "latest": "0.9.5",
+ "latestByProduct": {
+  "game": "0.9.5",
+  "charter": "0.9.5"
+ },
  "releases": [
   {
    "tag": "v0.9.5",
+   "product": "game",
+   "products": [
+    "game",
+    "charter"
+   ],
+   "label": "v0.9.5",
    "version": "0.9.5",
    "channel": "beta",
    "name": "FullVolume + FullVolumeCharter v0.9.5 beta",
@@ -97,7 +107,7 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 3,
+     "downloads": 4,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.5/FullVolumeSetup.exe"
     },
     {
@@ -108,10 +118,16 @@ window.FV_CHANGELOG = {
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.5/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 6
+   "downloads": 7
   },
   {
    "tag": "v0.9.4",
+   "product": "game",
+   "products": [
+    "game",
+    "charter"
+   ],
+   "label": "v0.9.4",
    "version": "0.9.4",
    "channel": "beta",
    "name": "FullVolume / FullVolumeCharter v0.9.4 beta",
@@ -174,6 +190,12 @@ window.FV_CHANGELOG = {
   },
   {
    "tag": "v0.9.3",
+   "product": "game",
+   "products": [
+    "game",
+    "charter"
+   ],
+   "label": "v0.9.3",
    "version": "0.9.3",
    "channel": "beta",
    "name": "FullVolume v0.9.3 beta",
@@ -296,6 +318,11 @@ window.FV_CHANGELOG = {
   },
   {
    "tag": "v0.9.2",
+   "product": "game",
+   "products": [
+    "game"
+   ],
+   "label": "v0.9.2",
    "version": "0.9.2",
    "channel": "beta",
    "name": "FullVolume v0.9.2 beta",
@@ -377,6 +404,11 @@ window.FV_CHANGELOG = {
   },
   {
    "tag": "v0.9.1",
+   "product": "game",
+   "products": [
+    "game"
+   ],
+   "label": "v0.9.1",
    "version": "0.9.1",
    "channel": "beta",
    "name": "FullVolume v0.9.1 beta",
@@ -426,6 +458,11 @@ window.FV_CHANGELOG = {
   },
   {
    "tag": "v0.9.0",
+   "product": "game",
+   "products": [
+    "game"
+   ],
+   "label": "v0.9.0",
    "version": "0.9.0",
    "channel": "beta",
    "name": "FullVolume v0.9.0 beta",
