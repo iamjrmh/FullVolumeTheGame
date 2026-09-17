@@ -6,14 +6,189 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-09-16T11:52:43.340Z",
+ "generated": "2026-09-17T11:55:29.006Z",
  "repo": "iamjrmh/FullVolumeTheGame",
- "latest": "0.9.5",
+ "latest": "0.9.6",
  "latestByProduct": {
-  "game": "0.9.5",
-  "charter": "0.9.5"
+  "game": "0.9.6",
+  "charter": "0.9.7"
  },
  "releases": [
+  {
+   "tag": "FVC-v0.9.7",
+   "product": "charter",
+   "products": [
+    "charter"
+   ],
+   "label": "Charter v0.9.7",
+   "version": "0.9.7",
+   "channel": "",
+   "name": "FullVolumeCharter v0.9.7",
+   "date": "2026-09-17",
+   "prerelease": false,
+   "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/tag/FVC-v0.9.7",
+   "tagline": "The vocal charting tool for FullVolume. Audio in, .fvchart out. It keeps itself up to date.",
+   "first": false,
+   "sections": [
+    {
+     "kind": "news",
+     "emoji": "🆕",
+     "title": "New in 0.9.7",
+     "image": null,
+     "blocks": [
+      {
+       "type": "item",
+       "title": "Two installers now: a small one, and one for a PC with no internet",
+       "body": "The charter used to come as a single 222 MB installer, because it carried Microsoft's whole WebView2 runtime inside it - the part of Windows that draws the charter's window. Almost every PC already has WebView2 (Windows 11 always does), so for nearly everybody those megabytes were never used. The normal installer is now about 18 MB, and there is a separate offline installer for the PC that really does have neither. The charter itself is identical in both. See <strong>Online or offline</strong> below for exactly what each one connects to."
+      },
+      {
+       "type": "item",
+       "title": "Every dropdown is the charter's own",
+       "body": "The language and genre pickers used to be drawn by Windows, and looked like it. They now match the rest of the app, work from the keyboard (arrows, Home, End, Enter, Escape) and get a search box once a list is long."
+      },
+      {
+       "type": "item",
+       "title": "A real genre list",
+       "body": "Genre is now a proper list: a main genre and one layer of subgenres under it, from Pop Punk to Phonk, and you can pick either. What is saved is exactly the one you picked, so the game's genre filter shows it as its own shelf. Type something that is not on the list and it is still offered, so a genre nobody thought of still works."
+      }
+     ]
+    }
+   ],
+   "assets": [
+    {
+     "name": "FullVolumeCharterSetup.exe",
+     "label": "FullVolumeCharter",
+     "size": "18 MB",
+     "downloads": 1,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FVC-v0.9.7/FullVolumeCharterSetup.exe"
+    }
+   ],
+   "downloads": 1
+  },
+  {
+   "tag": "v0.9.6",
+   "product": "game",
+   "products": [
+    "game",
+    "charter"
+   ],
+   "label": "v0.9.6",
+   "version": "0.9.6",
+   "channel": "beta",
+   "name": "FullVolume + FullVolumeCharter v0.9.6 beta",
+   "date": "2026-09-16",
+   "prerelease": false,
+   "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/tag/v0.9.6",
+   "tagline": "The karaoke game that plays your own music library. It keeps itself up to date.",
+   "first": false,
+   "sections": [
+    {
+     "kind": "news",
+     "emoji": "🆕",
+     "title": "New in 0.9.6",
+     "image": null,
+     "blocks": [
+      {
+       "type": "item",
+       "title": "The song playing behind the library is the part somebody chose",
+       "body": "A <code>.fvchart</code> can now name the exact stretch to preview, anywhere from fifteen to thirty seconds, and the game plays that and nothing else. Until now it took a starting point at best and worked the length out for itself, which lands on a verse about as often as a chorus. Charts written in FullVolumeCharter from here on carry one; every older chart, and every Clone Hero or Rock Band song, previews exactly as it always has."
+      },
+      {
+       "type": "item",
+       "title": "Your library is read through once more on the first launch after this update",
+       "body": "The preview window is recorded per song while the library is scanned, so the songs already on the list have to be looked at again to pick it up. It happens by itself, once, and nothing is lost."
+      },
+      {
+       "type": "item",
+       "title": "A chart can carry harmonies, up to three parts",
+       "body": "One person sings the lead and the others sing the notes underneath it, dealt out around the room automatically, with every lane drawing the other parts faintly behind its own so you can see where you sit against everybody else. A part that fills the meter fills it for the person singing it. Songs with harmonies say how many voices they want on the song list, so you know before you pick one."
+      },
+      {
+       "type": "item",
+       "title": "Anything you write in brackets is a harmony now",
+       "body": "Every lyric sheet on the internet writes the backing vocal the same way: the lead's line runs on and the answer to it sits in round brackets, like <code>I can't stop (can't stop)</code>. FullVolumeCharter reads them as exactly that. Those words leave the lead's part, because the lead does not sing them, and become a harmony with its own syllables, its own timing and its own pitches. It used to copy the lead's notes wholesale and call that a harmony, which is not what a backing vocal is."
+      },
+      {
+       "type": "item",
+       "title": "The harmonies have a tab of their own",
+       "body": "Charting one is a second pass over the same song rather than one more step at the end of the first, so the charter is split in two: the lead and the export on one tab, everything about the harmonies on the other. The words are still written once, in one place, with the rest of the song's words. Most songs have no harmonies at all and never need the second tab."
+      },
+      {
+       "type": "item",
+       "title": "A harmony can only be tapped where it was written",
+       "body": "Once the lead has its timing, each bracketed line is held to the stretch of song between the line it was written on and the next one, so there is no hunting through a four minute song for the two seconds a backing vocal lands in. The waveform dims everything outside it, Play jumps straight to it, and a tap somewhere else is refused rather than quietly written into the wrong verse."
+      },
+      {
+       "type": "item",
+       "title": "A held note can change pitch on any syllable, not just the last one",
+       "body": "A pitch break used to go on the end of whatever word it was in, which is only right when the syllable being held happens to be the final one. It usually is not: <code>ho-o-old on</code> holds its first, and the break was landing a word away from what is actually sung. Every syllable is its own button now, in both the pitch-break step and the tapping."
+      },
+      {
+       "type": "item",
+       "title": "Numbers in the lyrics are written out the way they are sung",
+       "body": "Paste a sheet with <code>17</code> in it and it becomes <code>seventeen</code>, <code>1999</code> becomes <code>nineteen ninety nine</code>, <code>1st</code> becomes <code>first</code>. Digits cannot be split into syllables, so a number left as digits used to arrive at the tapping step as a single note no matter how many you actually sing. Anything that is not being counted is left alone for you to see, so <code>mp3</code> and <code>3D</code> stay as they are."
+      }
+     ]
+    },
+    {
+     "kind": "extra",
+     "emoji": "🎚️",
+     "title": "FullVolumeCharter, in this release too",
+     "image": {
+      "src": "https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/main/docs/assets/img/shots/charter/charter-11.jpg",
+      "alt": "The FullVolumeCharter pitch roll: a note box per syllable against a piano keyboard, with the sung pitch line read off the recording drawn behind them"
+     },
+     "blocks": [
+      {
+       "type": "text",
+       "body": "The game plays the vocal part already inside a Clone Hero or Rock Band chart. That is tens of thousands of songs, and it is not the one you wanted at half past eleven on a Friday. <strong>FullVolumeCharter</strong> is how that one gets a part to sing."
+      },
+      {
+       "type": "text",
+       "body": "Audio in, <code>.fvchart</code> out. Seven steps, and it hands back one file carrying the words, the timing, the pitches, the album art and the audio. Drop it in a folder the game is watching and it is on the list, exactly like everything else."
+      },
+      {
+       "type": "list",
+       "items": [
+        "<strong>Load a song</strong>, one file or a vocal and a backing separately, and it picks up the cover art and a timed <code>.lrc</code> sitting beside it without being asked",
+        "<strong>It works out the tempo</strong> from the audio, with halve, double and tap tempo if it is wrong",
+        "<strong>Paste the lyrics</strong> and they are split into the syllables actually sung, in the language you picked. Correct one and it has learned that word",
+        "<strong>Tap the timing</strong> at 50, 65 or 80 per cent speed, and the song <em>stays in its own key</em> at every one of them, so a fast line is still singable while you tap it",
+        "<strong>The pitches are read off the recording</strong> a whole phrase at a time, and you drag whatever it got wrong. It leaves a note it cannot hear alone rather than guessing at it",
+        "<strong>Mark your overdrive phrases</strong> on a strip above the roll, and pick the exact moments in the rests where it can be let out",
+        "<strong>Write the harmonies</strong> by putting the backing vocals in brackets, then tap and pitch them on a tab of their own. Up to three parts",
+        "<strong>Optionally pull the vocals out of a finished mix</strong> on the graphics card, in about three seconds for a three minute song, using UVR's karaoke model"
+       ]
+      },
+      {
+       "type": "text",
+       "body": "Everything is saved as you type it, so a song started tonight is picked up tomorrow exactly where you stopped. It keeps itself current the same way the game does, on its own release schedule, so this is the last time you go and fetch it: the two of them happen to share a number this time, and will not always."
+      },
+      {
+       "type": "text",
+       "body": "<strong><a href=\"https://fullvolumethegame.xyz/api/download/charter\">Download FullVolumeCharter →</a></strong> &nbsp;·&nbsp; <strong><a href=\"https://fullvolumethegame.xyz/fullvolumecharter/\">Read the whole thing →</a></strong>"
+      }
+     ]
+    }
+   ],
+   "assets": [
+    {
+     "name": "FullVolumeSetup.exe",
+     "label": "FullVolume",
+     "size": "107 MB",
+     "downloads": 3,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.6/FullVolumeSetup.exe"
+    },
+    {
+     "name": "FullVolumeCharterSetup.exe",
+     "label": "FullVolumeCharter",
+     "size": "222 MB",
+     "downloads": 2,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.6/FullVolumeCharterSetup.exe"
+    }
+   ],
+   "downloads": 5
+  },
   {
    "tag": "v0.9.5",
    "product": "game",
@@ -107,7 +282,7 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 8,
+     "downloads": 10,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.5/FullVolumeSetup.exe"
     },
     {
@@ -118,7 +293,7 @@ window.FV_CHANGELOG = {
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.5/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 13
+   "downloads": 15
   },
   {
    "tag": "v0.9.4",
