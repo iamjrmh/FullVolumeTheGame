@@ -19,11 +19,11 @@
 A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs already sitting on your drive and sing any of them - on your own, or in a room online with your buddies.
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043)](#-system-requirements)
-[![Version](https://img.shields.io/badge/version-0.9.5%20beta-ff6b6b)](../../releases)
+[![Version](https://img.shields.io/badge/version-0.9.6%20beta-ff6b6b)](../../releases)
 [![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest) 
 [![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
-[![Charter](https://img.shields.io/badge/charter-0.9.5-829B87)](#-fullvolumecharter)
+[![Charter](https://img.shields.io/badge/charter-0.9.7-829B87)](#-fullvolumecharter)
 
 
 <a href="https://fullvolumethegame.xyz/api/download/game"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume →**</a>
@@ -47,13 +47,14 @@ Every karaoke game wants to sell you the music. FullVolume hasn't got any to sel
 - **Scored like a rhythm game should be** - land a phrase and it pays in full, drop one and you're paid for what you sang, and a full combo is five stars every single time. Gold phrases fill an overdrive meter you let out in the gaps
 - **Line up a set list** - queue songs while somebody else is still singing, so the night runs itself instead of stopping dead between every track
 - **Online, with voices** - name a room, send it to your buddies, and sing together from wherever you are. Voice chat is part of the game, not something you bolt on beside it
+- **Sing in harmony** - a chart can carry up to three harmony parts, dealt out around the room so you are all singing different notes at once
 - **Make it your room** - every last bit of it is hand drawn, and if you don't fancy the room, drop in a picture or a video of your own and that's your stage instead. A song that brought a backdrop of its own still shows it, and yours fills in the rest of the night
 - **Make it yours, too** - your own note and lyric colors, your own name in your own colors, your own track speed, all saved per singer
 - **Chart the one it hasn't got** - [FullVolumeCharter](#-fullvolumecharter) turns any song you own into something to sing
 - **Tuned to your gear** - one button and it sorts out your audio delay on its own, or tap along for a few bars and let it work you out
 - **It keeps itself up to date** - it notices when there is a newer one, tells you what changed, and installs it over itself in one click. So does FullVolumeCharter
 
-> **What's new in 0.9.4:** your own backdrop no longer covers up the songs that brought one of their own, FullVolumeCharter's export screen is fixed, and the charter keeps itself up to date the way the game does. The [release notes](../../releases/latest) have the detail.
+> **What's new in 0.9.6:** a chart can name the exact stretch of song the library previews, and it can carry harmonies for up to three people to sing at once. In FullVolumeCharter, anything you write in brackets becomes a harmony part of its own, a held note can change pitch on any syllable, and numbers in the lyrics are written out the way they are sung. The [release notes](../../releases/latest) have the detail.
 
 ---
 
@@ -172,7 +173,7 @@ Uninstall it whenever you like. Profiles, scores, backdrops and song folders liv
 |---|---|
 | **File** | `FullVolumeSetup.exe` |
 | **Size** | 107 MB to download, about 200 MB installed |
-| **Version** | 0.9.5 beta |
+| **Version** | 0.9.6 beta |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | Local. Nothing to sign up for |
 | **Songs included** | None. You bring those |
@@ -222,13 +223,14 @@ Host a room from inside the game, send it round, and sing together from wherever
 - Say how many singers it takes and it holds the door at that
 - Anyone can queue a song, and it says up front who hasn't got it
 - Open mics in the lobby, push to talk once a song starts, so nobody's singing comes back at you over the music
+- **A song with harmonies deals them out**: one of you sings the lead and the others sing the parts underneath it, up to three, with every lane drawing the others faintly behind its own so you can see where you sit against everybody else
 - Everyone stays in time wherever they are, with everybody's score on screen at once
 
 ---
 
 ## 🎚️ FullVolumeCharter
 
-> **Shipping now, with FullVolume 0.9.4.** It is a separate download and carries the same version number as the game it ships beside, so 0.9.4 of one goes with 0.9.4 of the other.
+> **Shipping now, on its own release.** It is a separate download with its own version number and its own schedule, so you will often see one of the two update without the other. Neither has to match the other: charts written by any version of the charter play in any version of the game.
 
 The game plays the vocal part that is already inside a Clone Hero or Rock Band chart. That covers tens of thousands of songs, and it does not cover the one you wanted at half past eleven on a Friday. **FullVolumeCharter** is how that one gets a part to sing.
 
@@ -254,13 +256,24 @@ It is a real desktop app, not a web page in a wrapper: no account, no upload, no
 
 1. **Load the audio** - one file, or the vocal and the backing as separate stems. Cover art, a backdrop and a timed `.lrc` sitting beside the track come in with it.
 2. **Song info** - title, artist, album, genre, year, language, and your name on it in whatever colors you like. The tempo is worked out from the audio, with halve, double and tap tempo to correct it.
-3. **Lyrics** - paste the words and they are split into the syllables actually sung, by the rules of the language you picked. Fix one by hand and it has learned that word.
-4. **Pitch breaks** - click a word for every extra pitch it passes through while it is held. Each `+` is one more note on the same word.
+3. **Lyrics** - paste the words and they are split into the syllables actually sung, by the rules of the language you picked. Fix one by hand and it has learned that word. Numbers are written out the way they are sung, and anything you put in `(brackets)` is taken as a backing vocal and split off into the harmonies.
+4. **Pitch breaks** - click a *syllable* for every extra pitch it passes through while it is held. Each `+` is one more note on that syllable, wherever in the word it sits.
 5. **Tap the timing** - play the song and tap Enter as each syllable starts. Slow it to 50, 65 or 80 per cent and it *stays in its own key*, so a fast line is still singable while you tap it.
 6. **Pitches** - the sung line is read straight off the recording, a phrase at a time, and you drag anything it got wrong. A guide tone plays the note under the cursor, and a strip above the roll is where you mark your overdrive phrases and pick the moments they can be let out.
 7. **Export** - one `.fvchart` with all of it inside. Open the same file later and it puts you back on whichever step you want.
 
 Everything you enter is saved the moment you enter it, so a song started tonight is picked up tomorrow exactly where you stopped.
+
+### The harmonies, on a tab of their own
+
+Most songs have none, so the seven steps above never mention them and the export never waits on them. When a song does have them, they are a second pass rather than an eighth step, and they start from something you have already typed: **the backing vocals you wrote in brackets**.
+
+`I can't stop (can't stop)` is how every lyric sheet on the internet writes one. Those words leave the lead's part, because the lead does not sing them, and become a harmony with its own syllables, its own timing and its own pitches. Up to three parts on a chart, and the game deals them out around the room so two or three people sing different notes at once.
+
+- **Their words are still written once**, on step 3 with the rest of the song's words. The tab is the breaks, the tapping and the pitches: the part a harmony cannot borrow from the lead, because it is not sung at the lead's moments.
+- **A harmony can only be tapped where it was written.** Once the lead has its timing, each bracketed line is held to the stretch between the line it was written on and the next one, so there is no hunting through a four minute song for the two seconds a backing vocal lands in. A tap somewhere else is refused rather than quietly written into the wrong verse.
+- **A part starts in unison with the lead** and the arrow keys move it away, skipping the one or two semitones almost no song harmonises at. Any pitch that does land that close has to be confirmed, so a stray one cannot slip through.
+- **The lead is drawn faintly behind**, along with the other parts, because a harmony is only ever a pitch relative to what else is sounding. Guide tones play the lead and every part together, each one switchable on its own.
 
 ### A few things worth knowing
 
@@ -269,6 +282,8 @@ Everything you enter is saved the moment you enter it, so a song started tonight
 - **It reads the pitches a whole phrase at a time**, weighing each note against the ones either side of it rather than guessing at each one alone, which is what stops a note landing in the right pitch class an octave from where you sang it. A note it cannot hear is left empty rather than filled in with a guess.
 - **Timed `.lrc` lyrics beside your track come in on their own**, along with the cover art, the title and the artist, so a song that is already in sync is not retyped or retapped.
 - **Your name goes on it**, colored letter by letter, and it is remembered for every chart you write afterwards.
+- **Brackets are read as brackets.** Anything you paste in `(round brackets)` is a backing vocal, which is how every lyric sheet writes one, so it is taken out of the lead's part and charted as a harmony instead of being sung by somebody who never sang it.
+- **Numbers are written out the way they are sung.** `17` becomes `seventeen` and `1999` becomes `nineteen ninety nine`, because digits cannot be split into syllables and a number left as digits is one note no matter how many you actually sing. Anything that is not being counted is left alone, so `mp3` stays as it is.
 - **It keeps itself up to date**, the same way the game does, so the installer below is the last one you fetch by hand.
 
 <details>
@@ -296,7 +311,7 @@ Everything you enter is saved the moment you enter it, so a song started tonight
   <em>Step 4. What a pitch break is, before you place any.</em>
   <br><br>
   <img src="./docs/assets/img/shots/charter/charter-08.jpg" alt="Step four: every syllable as a clickable box, for adding and removing pitch breaks">
-  <em>Step 4. Click a word for every pitch it moves through.</em>
+  <em>Step 4. Click a syllable for every pitch it moves through.</em>
   <br><br>
   <img src="./docs/assets/img/shots/charter/charter-09.jpg" alt="Step five: the tapping view, with the upcoming syllables, the waveform and the speed buttons">
   <em>Step 5. One tap per note, at whatever speed you can manage.</em>
@@ -319,8 +334,8 @@ Everything you enter is saved the moment you enter it, so a song started tonight
 |---|---|
 | **File** | `FullVolumeCharterSetup.exe` |
 | **Size** | 222 MB. Offline installer, nothing else needed |
-| **Charter version** | 0.9.5 |
-| **Built for** | FullVolume 0.9.5 |
+| **Charter version** | 0.9.7 |
+| **Built for** | FullVolume 0.9.6 |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | None |
 | **Writes** | `.fvchart` |
