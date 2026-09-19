@@ -134,7 +134,20 @@
     el.classList.toggle("is-bad", !!bad);
     el.classList.add("is-shown");
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { el.classList.remove("is-shown"); }, 4000);
+    toastTimer = setTimeout(function () { el.classList.remove("is-shown"); }, Math.max(4000, text.length * 60));
+  }
+
+  // What happened to the Verified Charters role in the Discord server, as the
+  // tail of a toast. Being outside the server is fine: the bot gives it on join.
+  function roleNote(role) {
+    return {
+      granted: " Verified Charters role given.",
+      revoked: " Verified Charters role taken back.",
+      kept: " They keep the role for their other folder.",
+      "not-in-server": " Not in the Discord yet; the bot gives them the role when they join.",
+      "no-token": " The role was not touched: the site has no bot token.",
+      failed: " Could not change their Discord role; the bot's hourly sweep will retry."
+    }[role] || "";
   }
 
   function confirmThen(title, text, okLabel) {
@@ -422,9 +435,9 @@
           if (act === "forget") state.applications = state.applications.filter(function (x) { return x.id !== id; });
           else Object.assign(a, r.application);
           if (act === "accept") {
-            state.charters.push({ id: a.folderId, discord: a.discord, folderUrl: a.folderUrl, addedAt: a.decidedAt, charts: null });
+            state.charters.push(Object.assign({ charts: null }, r.charter));
             state.charters.sort(function (x, y) { return x.discord.localeCompare(y.discord); });
-            toast(who(a) + " is verified. Reading their charts now...");
+            toast(who(a) + " is verified." + roleNote(r.role) + " Reading their charts now...");
             startRefresh();
           } else if (act === "decline") {
             toast("Declined @" + a.discord + ".");
@@ -452,13 +465,13 @@
       .then(function (yes) {
         if (!yes) return;
         button.disabled = true;
-        return api("DELETE", "charters/" + encodeURIComponent(id)).then(function () {
+        return api("DELETE", "charters/" + encodeURIComponent(id)).then(function (r) {
           return leave(row, true).then(function () {
             state.charters = state.charters.filter(function (x) { return x.id !== id; });
             if (state.index && c.charts) state.index.count = Math.max(0, state.index.count - c.charts);
             paintStats();
             if (!state.charters.length) paintCharters();
-            toast("Removed @" + c.discord + ".");
+            toast("Removed " + who(c) + "." + roleNote(r.role));
           });
         }).catch(function (err) { button.disabled = false; toast(err.message, true); });
       });
@@ -489,7 +502,7 @@
         showPeek(null);
         paintStats();
         paintCharters();
-        toast(who(r.charter) + " is verified. Reading their charts now...");
+        toast(who(r.charter) + " is verified." + roleNote(r.role) + " Reading their charts now...");
         startRefresh();
       })
       .catch(function (err) {

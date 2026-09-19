@@ -15,7 +15,7 @@
 //   POST   /api/admin/video                         play this one on the charter page { link }
 //   POST   /api/admin/video/reread                  read the chosen video again from scratch
 
-import { profileFor, profilesFor } from "../lib/discord.mjs";
+import { profileFor, profilesFor, setVerifiedRole } from "../lib/discord.mjs";
 import { folderUrl, listCharts, parseDriveLink } from "../lib/fvchart.mjs";
 import { env, json, problem, readJson } from "../lib/http.mjs";
 import { currentProgress, dropCharter, readIndex, refreshPass } from "../lib/refresh.mjs";
@@ -90,12 +90,15 @@ async function decide(id, action, admin) {
       applicationId: app.id,
     };
     await charters().setJSON(charter.id, charter);
+    await store.setJSON(id, app);
+    const role = await setVerifiedRole(charter.discord, true, `Verified charter, accepted by ${admin.name}`);
+    return json({ application: app, charter, role });
   }
   await store.setJSON(id, app);
   return json({ application: app });
 }
 
-async function addCharter(req) {
+async function addCharter(req, admin) {
   const body = await readJson(req);
   const discord = String(body?.discord ?? "").trim().replace(/^@/, "");
   const username = String(body?.username ?? "").trim().replace(/^@/, "").toLowerCase();
@@ -115,7 +118,23 @@ async function addCharter(req) {
   }
   const charter = { id: link.id, discord, username, folderUrl: folderUrl(link.id), addedAt: new Date().toISOString(), applicationId: null };
   await store.setJSON(charter.id, charter);
-  return json({ charter });
+  const role = await setVerifiedRole(discord, true, `Verified charter, added by ${admin.name}`);
+  return json({ charter, role });
+}
+
+/**
+ * Takes a folder off the list, and the role with it unless the same person still
+ * has another verified folder: the role belongs to the person, not the folder.
+ */
+async function removeCharter(id, admin) {
+  const store = charters();
+  const gone = await store.get(id, { type: "json" });
+  await store.delete(id);
+  await dropCharter(id);
+  if (!gone?.discord) return json({ ok: true, role: "not-an-id" });
+  const others = (await allJson(store)).some((c) => c.discord === gone.discord);
+  const role = others ? "kept" : await setVerifiedRole(gone.discord, false, `Removed from verified charters by ${admin.name}`);
+  return json({ ok: true, role });
 }
 
 const relayConfigured = () => Boolean(env("VIDEO_RELAY_URL") && env("VIDEO_RELAY_SECRET"));
@@ -186,12 +205,8 @@ async function route(req, context, admin) {
   }
 
   if (section === "charters") {
-    if (req.method === "POST" && !id) return addCharter(req);
-    if (req.method === "DELETE" && id) {
-      await charters().delete(id);
-      await dropCharter(id);
-      return json({ ok: true });
-    }
+    if (req.method === "POST" && !id) return addCharter(req, admin);
+    if (req.method === "DELETE" && id) return removeCharter(id, admin);
   }
 
   // Reading a Discord account is a read, but it goes through the admin gate

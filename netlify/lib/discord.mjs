@@ -202,3 +202,44 @@ export async function profilesFor(ids, { fresh = false } = {}) {
   }
   return out;
 }
+
+// The Verified Charters role in the FullVolume server. Not secrets, so they sit
+// here with an env override, the same way the bot pins its own role ids.
+const GUILD_ID = () => env("DISCORD_GUILD_ID") || "1547333347234160702";
+const VERIFIED_ROLE_ID = () => env("VERIFIED_CHARTER_ROLE_ID") || "1548651160997470358";
+
+/**
+ * Gives or takes the Verified Charters role. Somebody who is not in the server
+ * yet is not a failure: the bot hands them the role the moment they join, off
+ * the list /api/charter-roles gives it. Answers with what happened, never throws,
+ * because the charter is verified either way and the role is the lesser half.
+ *
+ *   "granted" | "revoked" | "not-in-server" | "no-token" | "not-an-id" | "failed"
+ */
+export async function setVerifiedRole(id, on, reason) {
+  if (!IS_USER_ID.test(String(id))) return "not-an-id";
+  const token = env("DISCORD_BOT_TOKEN");
+  if (!token) return "no-token";
+
+  let res;
+  try {
+    res = await fetch(`${API}/guilds/${GUILD_ID()}/members/${id}/roles/${VERIFIED_ROLE_ID()}`, {
+      method: on ? "PUT" : "DELETE",
+      headers: {
+        Authorization: `Bot ${token}`,
+        "User-Agent": AGENT,
+        "X-Audit-Log-Reason": encodeURIComponent(reason || (on ? "Verified charter" : "No longer a verified charter")),
+      },
+    });
+  } catch (err) {
+    console.warn("discord role change unreachable", id, err.message);
+    return "failed";
+  }
+  if (res.ok) return on ? "granted" : "revoked";
+
+  // 10007 Unknown Member: they have not joined. Anything else is worth a log line.
+  const body = await res.json().catch(() => ({}));
+  if (res.status === 404 && body.code === 10007) return "not-in-server";
+  console.warn("discord role change failed", id, res.status, body.code, body.message);
+  return "failed";
+}
