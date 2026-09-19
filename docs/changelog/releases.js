@@ -6,7 +6,7 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-09-18T11:33:37.351Z",
+ "generated": "2026-09-19T11:16:39.587Z",
  "repo": "iamjrmh/FullVolumeTheGame",
  "latest": "0.9.6",
  "latestByProduct": {
@@ -59,11 +59,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "18 MB",
-     "downloads": 1,
+     "downloads": 2,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FVC-v0.9.7/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 1
+   "downloads": 2
   },
   {
    "tag": "v0.9.6",
