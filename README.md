@@ -19,7 +19,7 @@
 A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs already sitting on your drive and sing any of them - on your own, or in a room online with your buddies.
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043)](#-system-requirements)
-[![Version](https://img.shields.io/badge/version-0.9.6%20beta-ff6b6b)](../../releases)
+[![Version](https://img.shields.io/badge/version-0.9.7%20beta-ff6b6b)](../../releases)
 [![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest) 
 [![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
@@ -173,7 +173,7 @@ Uninstall it whenever you like. Profiles, scores, backdrops and song folders liv
 |---|---|
 | **File** | `FullVolumeSetup.exe` |
 | **Size** | 107 MB to download, about 200 MB installed |
-| **Version** | 0.9.6 beta |
+| **Version** | 0.9.7 beta |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | Local. Nothing to sign up for |
 | **Songs included** | None. You bring those |
@@ -333,9 +333,9 @@ Most songs have none, so the seven steps above never mention them and the export
 | | |
 |---|---|
 | **File** | `FullVolumeCharterSetup.exe` |
-| **Size** | 222 MB. Offline installer, nothing else needed |
+| **Size** | 18 MB, or 222 MB for `FullVolumeCharterSetup-Offline.exe`, which carries WebView2 for a PC with no internet |
 | **Charter version** | 0.9.7 |
-| **Built for** | FullVolume 0.9.6 |
+| **Built for** | FullVolume 0.9.7 |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Account** | None |
 | **Writes** | `.fvchart` |
