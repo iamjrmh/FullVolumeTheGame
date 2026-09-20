@@ -6,14 +6,70 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-09-19T11:16:39.587Z",
+ "generated": "2026-09-20T11:39:36.106Z",
  "repo": "iamjrmh/FullVolumeTheGame",
- "latest": "0.9.6",
+ "latest": "0.9.7",
  "latestByProduct": {
-  "game": "0.9.6",
+  "game": "0.9.7",
   "charter": "0.9.7"
  },
  "releases": [
+  {
+   "tag": "FV-v0.9.7",
+   "product": "game",
+   "products": [
+    "game"
+   ],
+   "label": "v0.9.7",
+   "version": "0.9.7",
+   "channel": "beta",
+   "name": "FullVolume v0.9.7-beta",
+   "date": "2026-09-19",
+   "prerelease": false,
+   "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/tag/FV-v0.9.7",
+   "tagline": "The karaoke game that plays your own music library. It keeps itself up to date.",
+   "first": false,
+   "sections": [
+    {
+     "kind": "news",
+     "emoji": "🆕",
+     "title": "New in 0.9.7",
+     "image": null,
+     "blocks": [
+      {
+       "type": "item",
+       "title": "The public rooms now live on a proper server",
+       "body": "The five JURMR Karaoke rooms, and the list the game reads them from, have moved off a PC in a house and onto a machine that is on all day, every day, with nothing else running on it. Voice runs the same low-delay path it always did, only now from somewhere with a wired connection. <strong>This is the update that keeps the room list working</strong>: the old address is being switched off, so a copy of the game from 0.9.6 or earlier will soon open OPEN ROOMS and find nothing there. Hosting from inside the game is unaffected either way."
+      },
+      {
+       "type": "item",
+       "title": "The cover on a song is the cover of that song, even mid-search",
+       "body": "Type into the library search and the rows under your cursor change with every letter, but the artwork being fetched for the previous letter did not know that, so it would land on whichever song now sat in that slot. A search for one artist could leave half the list wearing somebody else's album. Each row now checks the picture arriving is the one it asked for, and drops it if not."
+      },
+      {
+       "type": "item",
+       "title": "Room for a library of tens of thousands",
+       "body": "With the marketplace past forty thousand charts and growing, the way the game files away what it unpacks from a <code>.sng</code> or a Rock Band package was going to start handing two different songs the same drawer somewhere in the tens of thousands, and their covers and audio with it. It now uses a name long enough that this cannot happen at any size a library will reach. Your existing unpacked folders are cleared out in the background on the first launch and rebuilt on demand, so the first scroll through the library after this update is a shade slower than usual, once."
+      },
+      {
+       "type": "item",
+       "title": "Boom bap, crunk, drill, horrorcore and phonk count as rap",
+       "body": "A chart with no pitched notes is kept only when its genre says it is rapped or spoken rather than sung, and those five subgenres did not, so a chart filed under any of them by FullVolumeCharter was quietly left off the list. They are recognised now, and any such chart already in a watched folder shows up on the next scan."
+      }
+     ]
+    }
+   ],
+   "assets": [
+    {
+     "name": "FullVolumeSetup.exe",
+     "label": "FullVolume",
+     "size": "107 MB",
+     "downloads": 3,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.7/FullVolumeSetup.exe"
+    }
+   ],
+   "downloads": 3
+  },
   {
    "tag": "FVC-v0.9.7",
    "product": "charter",
@@ -59,11 +115,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "18 MB",
-     "downloads": 2,
+     "downloads": 3,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FVC-v0.9.7/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 2
+   "downloads": 3
   },
   {
    "tag": "v0.9.6",
