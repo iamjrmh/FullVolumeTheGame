@@ -2869,6 +2869,24 @@ body:has(#burger[aria-expanded="true"]) .tipjar {
   color: var(--muted);
 }
 
+/* The harmonies. Deliberately not an eighth numbered step - most songs have
+   none and the export never waits on them - so it reads as a note after the
+   seven rather than another one to get through. One column, no screenshot,
+   set in from the edges so it cannot be mistaken for a step. */
+.ch-aside {
+  max-width: 72ch;
+  margin: clamp(64px, 8vw, 112px) auto 0;
+  padding: clamp(28px, 4vw, 44px);
+  border: 2px solid var(--ink);
+  border-left: 6px solid var(--sage);
+  border-radius: var(--radius);
+  background: var(--bg-deep);
+  box-shadow: 8px 10px 0 rgba(0, 0, 0, .44), inset 0 1px 0 rgba(243, 238, 231, .10);
+}
+.ch-aside p { font-size: 16px; margin: 0 0 1em; }
+.ch-aside p:last-child { margin-bottom: 0; }
+.ch-aside b { color: var(--gold); }
+
 /* ---- The strip of plain facts under the hero ---- */
 .ch-facts {
   display: grid;

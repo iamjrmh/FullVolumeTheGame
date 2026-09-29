@@ -55,11 +55,14 @@
         "Loads one mixed file, or a separate vocal and backing stem",
         "Works the tempo out from the audio, with halve, double and tap tempo to correct it",
         "Splits pasted lyrics into the syllables actually sung, and learns your corrections",
+        "Writes numbers in the lyrics out the way they are sung, so 17 becomes seventeen",
         "Reads timed .lrc lyric files sitting beside the track",
-        "Pitch breaks, so one held word can pass through several notes",
+        "Pitch breaks on any syllable, so one held syllable can pass through several notes",
         "Tap the timing with the song slowed to 50, 65 or 80 per cent without dropping its key",
         "Reads the sung pitch off the recording a phrase at a time, then lets you drag any note",
         "A guide tone, so you hear the note you are setting",
+        "Turns the backing vocals you wrote in brackets into harmony parts, up to three, with their own words, timing and pitches",
+        "Holds each harmony line to the stretch of song between the lead line it was written on and the next",
         "Marks overdrive phrases and the moments they can be let out, on a strip above the roll",
         "Exports one .fvchart carrying the audio, the album art, the backdrop and the notes",
         "Opens a .fvchart it wrote earlier and edits it in place",
@@ -391,12 +394,13 @@
           <span class="ch-step__n">4</span>
           <h3 class="ch-step__t">Pitch breaks</h3>
           <p>
-            Some words get held while the pitch moves underneath them. Click a word once
-            for every extra pitch it passes through and it picks up a <b>+</b>. A "so" held
-            up and then back down again is <b>so + +</b>.
+            Some syllables get held while the pitch moves underneath them. Click the
+            syllable that is held, once for every extra pitch it passes through, and it
+            picks up a <b>+</b>. A "so" held up and then back down again is <b>so + +</b>,
+            and a "hold" held on its first syllable is <b>ho+-old</b>.
           </p>
           <p>
-            Each <b>+</b> is simply one more note on the same word: one more tap on the next
+            Each <b>+</b> is simply one more note on that syllable: one more tap on the next
             step, and one more thing to drag on the step after that. Most songs need a
             handful, on the long held notes.
           </p>
@@ -405,7 +409,7 @@
           <img src="../assets/img/shots/charter/charter-08.jpg" loading="lazy"
                alt="Step four of FullVolumeCharter: every syllable of the song laid out as clickable boxes line by line, with counts of words, syllables and notes above them."
                width="1280" height="817">
-          <figcaption>Click a word for every pitch it moves through</figcaption>
+          <figcaption>Click the held syllable for every pitch it moves through</figcaption>
         </figure>
       </article>
 
@@ -490,6 +494,36 @@
       </article>
 
     </div>
+
+    <!-- Not an eighth step: most songs have none, and the export never waits on
+         them. A second pass over the same song, on its own tab. -->
+    <aside class="ch-aside" data-reveal>
+      <h3 class="ch-step__t">And the harmonies, on a tab of their own</h3>
+      <p>
+        <b>I can't stop (can't stop)</b> is how every lyric sheet on the internet writes a
+        backing vocal. FullVolumeCharter reads them as exactly that: the words in brackets
+        leave the lead's part, because the lead does not sing them, and become a harmony
+        with its own syllables, its own timing and its own pitches. Up to three parts, and
+        the game deals them out around a room so two or three people sing different notes
+        at once.
+      </p>
+      <p>
+        Their words are still written once, on step 3, with the rest of the song's words.
+        The tab is the part a harmony cannot borrow from the lead: the pitch breaks, the
+        tapping and the pitches, because a backing vocal is not sung at the lead's moments.
+      </p>
+      <p>
+        And you do not go looking for it. Once the lead has its timing, <b>each bracketed
+        line is held to the stretch of song between the line it was written on and the next
+        one</b>, so there is no hunting through four minutes for the two seconds a backing
+        vocal lands in. A part starts in unison with the lead and the arrow keys move it
+        away, skipping the one or two semitones almost no song harmonises at.
+      </p>
+      <p>
+        Most songs have none, the seven steps above never mention them, and the export
+        never waits on them.
+      </p>
+    </aside>
   </div>
 </section>
 
@@ -598,7 +632,7 @@
         </li>
         <li class="slide">
           <img src="../assets/img/shots/charter/charter-08.jpg" alt="Step four: every syllable of the song as clickable boxes, for adding and removing pitch breaks." loading="lazy" width="1280" height="817">
-          <p class="slide__cap">Step 4: click a word to add a break</p>
+          <p class="slide__cap">Step 4: click a syllable to add a break</p>
         </li>
         <li class="slide">
           <img src="../assets/img/shots/charter/charter-09.jpg" alt="Step five: the tapping view with upcoming syllables, an Enter prompt, the waveform and speed controls." loading="lazy" width="1280" height="817">
@@ -870,7 +904,7 @@
         </div>
         <dl>
           <div><dt>File</dt><dd>FullVolumeCharterSetup.exe</dd></div>
-          <div><dt>Size</dt><dd>18 MB</dd></div>
+          <div><dt>Size</dt><dd>222 MB</dd></div>
           <div><dt>Version</dt><dd>0.9.7</dd></div>
           <div><dt>Built for</dt><dd>FullVolume 0.9.7</dd></div>
           <div><dt>Runs on</dt><dd>Windows 10 and 11, 64&#8209;bit</dd></div>
