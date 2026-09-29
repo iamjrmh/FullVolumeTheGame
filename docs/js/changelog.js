@@ -16,6 +16,8 @@
 
   var ENDPOINT = "/api/releases";
   var log = document.getElementById("log");
+  // An ad slot after every this-many releases, never after the last one.
+  var RELEASES_PER_AD = 3;
   if (!log) return;
 
   var meta = document.getElementById("logMeta");
@@ -260,9 +262,19 @@
     shown = doc;
 
     var frag = document.createDocumentFragment();
-    doc.releases.forEach(function (r, i) { frag.appendChild(renderRelease(r, i)); });
+    var feedAds = [];
+    doc.releases.forEach(function (r, i) {
+      frag.appendChild(renderRelease(r, i));
+      if ((i + 1) % RELEASES_PER_AD === 0 && i < doc.releases.length - 1) {
+        var ad = el("aside", { "class": "ad-slot ad-slot--inline", "data-ad": "changelogFeed", "aria-label": "Advertisement" });
+        feedAds.push(ad);
+        frag.appendChild(el("li", { "class": "log__ad" }, [ad]));
+      }
+    });
     log.textContent = "";
     log.appendChild(frag);
+    // ads.js may not have run yet on the first paint; it picks these up itself then.
+    if (window.FvAds) feedAds.forEach(window.FvAds.fill);
 
     // A repaint after the first is a content swap, not an arrival, so
     // nothing gets to animate in a second time.

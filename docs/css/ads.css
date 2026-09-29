@@ -1,0 +1,98 @@
+/* ============================================================================
+   ads.css - ad slots (see js/ads.js)
+   Slots are fully collapsed until ads.js fills them, so an unconfigured slot,
+   an iframe or the apps never see an empty box. Dressed like the site's own
+   panels - ground, ink border, hard shadow - so an ad reads as a framed
+   interruption rather than part of the page.
+   ============================================================================ */
+
+.ad-slot { display: none; }
+
+.ad-slot.is-live {
+  display: block;
+  width: min(970px, calc(100% - 32px));
+  margin: clamp(40px, 6vw, 72px) auto;
+  padding: 10px 14px 14px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--bg-deep);
+  box-shadow: 6px 8px 0 rgba(0, 0, 0, .38), inset 0 1px 0 rgba(243, 238, 231, .08);
+  animation: ad-fade-in .5s ease both;
+}
+
+/* Inside an article or legal column: take the column's width, not the page's */
+.ad-slot--inline.is-live { width: 100%; margin: 40px 0; }
+
+.ad-slot__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+.ad-slot .ad-slot__head a {
+  color: var(--muted);
+  letter-spacing: .04em;
+  text-transform: none;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+.ad-slot .ad-slot__head a:hover { color: var(--gold); }
+
+.ad-slot ins.adsbygoogle {
+  display: block;
+  min-height: 100px; /* reserve the ad's height up front so nothing below jumps */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* AdSense marks slots it had nothing for; fold those away entirely */
+.ad-slot:has(ins[data-ad-status="unfilled"]) { display: none; }
+
+@keyframes ad-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ad-slot.is-live { animation: none; }
+}
+
+/* Localhost-only stand-in for a real creative (see IS_LOCAL_PREVIEW in ads.js).
+   Deliberately bright, like most real ads, so the preview is honest. */
+.ad-mock {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 100px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #f4f4f5;
+  color: #18181b;
+  font-family: Arial, sans-serif;
+}
+.ad-mock__img {
+  flex: 0 0 76px;
+  height: 76px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #60a5fa, #34d399);
+}
+.ad-mock__text { flex: 1; display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: #52525b; }
+.ad-mock__text strong { font-size: 15px; color: #18181b; }
+.ad-mock__cta {
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+@media (max-width: 520px) {
+  .ad-mock__img { flex-basis: 52px; height: 52px; }
+  .ad-mock__cta { display: none; }
+}
