@@ -15,7 +15,10 @@
   FullVolume is karaoke for the songs you already own, a spiritual successor to Xbox 360 <i>LIPS</i>. Point it at your Clone Hero, Rock Band or UltraStar folders and sing any of them, on your own or in an online room with your friends.<br>
   Runs on Windows 10 and 11.
 
-  <br>
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043?style=flat-square)](#download)
+[![Version](https://img.shields.io/badge/version-0.9.7%20beta-D86F67?style=flat-square)](../../releases)
+[![Charter](https://img.shields.io/badge/charter-0.9.7-829B87?style=flat-square)](#fullvolumecharter)
+[![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-E0B866?style=flat-square)](https://fullvolumethegame.xyz)
 
   [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R2M426SKPE)
 
@@ -42,9 +45,11 @@
 
 Grab the latest installer from [fullvolumethegame.xyz](https://fullvolumethegame.xyz/api/download/game), the [Releases page](../../releases/latest) or [itch.io](https://jurmr.itch.io/fullvolume).
 
-| Platform | Formats |
-|----------|---------|
-| Windows 10 / 11 (64-bit) | `.exe` installer (per user, no admin) |
+| | |
+|---|---|
+| **Version** | 0.9.7 beta |
+| **Runs on** | Windows 10 and 11, 64-bit |
+| **Installer** | `FullVolumeSetup.exe`, per user, no admin |
 
 FullVolume updates itself after that. It ships with no songs: add your folders under **Settings → Library**, pick your mic under **Settings → Audio**, and run **Settings → Calibration** once. This repository is the download page and issue tracker; the game itself is closed source.
 
@@ -74,6 +79,11 @@ The song you want isn't charted? **FullVolumeCharter** turns any song you own in
 [**Download FullVolumeCharter**](https://fullvolumethegame.xyz/api/download/charter) &nbsp;•&nbsp; [More about it](https://fullvolumethegame.xyz/fullvolumecharter/)
 
 </div>
+
+| | |
+|---|---|
+| **Charter version** | 0.9.7 |
+| **Built for** | FullVolume 0.9.7 |
 
 The charter has its own version and release schedule. A chart made with any version plays in any version of the game.
 
