@@ -1,476 +1,93 @@
 <p align="center">
-  <a href="README.md">README</a>
-  &nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="https://fullvolumethegame.xyz/fullvolumecharter">CHARTER</a>
-  &nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="FullVolume.md">ROADMAP</a>
-</p>
-
-<p align="center">
-  <a href="https://fullvolumethegame.xyz">
-    <img src="./logo.png" alt="FullVolume" width="420">
+  <a href="https://fullvolumethegame.xyz/api/download/game">
+    <img src="./readme-banner.png" alt="FullVolume: karaoke for the songs you own" width="100%">
   </a>
 </p>
 
 <div align="center">
 
-### The karaoke game that plays *your own* music library.
-
-A spiritual successor to Xbox 360 *LIPS*, built for PC. Point it at the songs already sitting on your drive and sing any of them - on your own, or in a room online with your buddies.
-
-[![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043)](#-system-requirements)
-[![Version](https://img.shields.io/badge/version-0.9.7%20beta-ff6b6b)](../../releases)
-[![Price](https://img.shields.io/badge/price-free-gold)](../../releases/latest) 
-[![Install](https://img.shields.io/badge/install-per--user%2C%20no%20admin-8a63d2)](#-installing)
-[![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-00b0ff)](https://fullvolumethegame.xyz)
-[![Charter](https://img.shields.io/badge/charter-0.9.7-829B87)](#-fullvolumecharter)
-
-
-<a href="https://fullvolumethegame.xyz/api/download/game"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume →**</a>
-
-<a href="https://jurmr.itch.io/fullvolume"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolume" style="vertical-align: middle;"> **Download FullVolume on itch.io →**</a>
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R2M426SKPE)
+# FullVolume
 
 </div>
 
-> This repository is the **download and issue tracker** for FullVolume. The game itself is closed source, so there is no game code here - just the installer, the release notes, and somewhere to shout at me when it breaks.
+<div align="center">
 
----
+  FullVolume is karaoke for the songs you already own, a spiritual successor to Xbox 360 <i>LIPS</i>. Point it at your Clone Hero, Rock Band or UltraStar folders and sing any of them, on your own or in an online room with your friends.<br>
+  Runs on Windows 10 and 11.
 
-## 🎤 What It Is
+  <br>
 
-Every karaoke game wants to sell you the music. FullVolume hasn't got any to sell. It reads the songs already on your drive and turns them into a proper karaoke night: lyrics, pitch, scoring, stars, the lot.
+  [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R2M426SKPE)
 
-- **It actually hears you** - land the note and it knows, nail it dead centre and it *really* knows. Sing it an octave down if that's where your voice lives, it still counts
-- **Your library, not a store** - point it at your Clone Hero, Rock Band or UltraStar folders and it takes it from there. Songs nobody sings on are quietly left out, so you never pick a track and find there's nothing to sing
-- **Scored like a rhythm game should be** - land a phrase and it pays in full, drop one and you're paid for what you sang, and a full combo is five stars every single time. Gold phrases fill an overdrive meter you let out in the gaps
-- **Line up a set list** - queue songs while somebody else is still singing, so the night runs itself instead of stopping dead between every track
-- **Online, with voices** - name a room, send it to your buddies, and sing together from wherever you are. Voice chat is part of the game, not something you bolt on beside it
-- **Sing in harmony** - a chart can carry up to three harmony parts, dealt out around the room so you are all singing different notes at once
-- **Make it your room** - every last bit of it is hand drawn, and if you don't fancy the room, drop in a picture or a video of your own and that's your stage instead. A song that brought a backdrop of its own still shows it, and yours fills in the rest of the night
-- **Make it yours, too** - your own note and lyric colors, your own name in your own colors, your own track speed, all saved per singer
-- **Chart the one it hasn't got** - [FullVolumeCharter](#-fullvolumecharter) turns any song you own into something to sing
-- **Tuned to your gear** - one button and it sorts out your audio delay on its own, or tap along for a few bars and let it work you out
-- **It keeps itself up to date** - it notices when there is a newer one, tells you what changed, and installs it over itself in one click. So does FullVolumeCharter
+</div>
 
-> **What's new in 0.9.6:** a chart can name the exact stretch of song the library previews, and it can carry harmonies for up to three people to sing at once. In FullVolumeCharter, anything you write in brackets becomes a harmony part of its own, a held note can change pitch on any syllable, and numbers in the lyrics are written out the way they are sung. The [release notes](../../releases/latest) have the detail.
-
----
-
-## 🖥️ Screenshots
-
-Straight out of the game. Nothing here is a mock-up.
+## Screenshots
 
 <p align="center">
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-15.png" alt="Gameplay: the vocal track across the screen, cover art and progress top left, score and five stars top right" width="820">
-  </a>
+  <img src="./shots/shot-15.png" alt="FullVolume - gameplay" width="100%">
 </p>
-
-<details>
-<summary><h3 align="center">The menus</h3></summary>
-<p align="center">
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-01.png" alt="The title screen">
-  </a>
-  <em>Press start.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-02.png" alt="The WHO IS SINGING panel">
-  </a>
-  <em>Sign in, play as a guest, or make a profile.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-03.png" alt="The main menu: Play, Multiplayer, Settings and Quit">
-  </a>
-  <em>Play, Multiplayer, Settings, Quit.</em>
-</p>
-</details>
-
-<details>
-<summary><h3 align="center">Your library</h3></summary>
-<p align="center">
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-04.png" alt="The song browser with album art, an A to Z rail and a detail panel">
-  </a>
-  <em>Your library, with your best score on every row.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-14.png" alt="The song browser with the queue overlay open">
-  </a>
-  <em>Queue up a set list before anyone argues.</em>
-</p>
-</details>
-
-<details>
-<summary><h3 align="center">Singing</h3></summary>
-<p align="center">
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-10.png" alt="The song intro card">
-  </a>
-  <em>The intro card, while the chart loads.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-11.png" alt="The vocal track in gameplay">
-  </a>
-  <em>The vocal track, waiting for the first phrase.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-12.png" alt="The pause menu">
-  </a>
-  <em>Pause, with the settings you can change mid-song.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-13.png" alt="The results screen with five stars and a FULL COMBO banner">
-  </a>
-  <em>Stars, streak, and how close to perfect you got.</em>
-</p>
-</details>
-
-<details>
-<summary><h3 align="center">Multiplayer</h3></summary>
-<p align="center">
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-05.png" alt="The Sing Together screen showing open rooms">
-  </a>
-  <em>Public rooms, listed and joinable.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-06.png" alt="The Host a Room form">
-  </a>
-  <em>Host one: name it, lock it, cap it.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-07.png" alt="The Join by Name form">
-  </a>
-  <em>Or join with a name and a code.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-08.png" alt="The room lobby with a voice meter and chat panel">
-  </a>
-  <em>The lobby, with live voice and chat.</em>
-  <br><br>
-  <a href="https://fullvolumethegame.xyz">
-  <img src="./shots/shot-09.png" alt="The lobby with a song queued, marked IN YOUR LIBRARY">
-  </a>
-  <em>It checks everyone actually has the song.</em>
-</p>
-</details>
-
----
-
-## 📥 Installing
-
-1. Grab **`FullVolumeSetup.exe`** from [the latest FullVolume release](https://fullvolumethegame.xyz/api/download/game), or off [the releases page](../../releases).
-2. Run it. It installs **per user**, so there is no UAC prompt and no admin rights needed - hand it to four friends and that's four installs and zero arguments with IT.
-3. It lands in `%USERPROFILE%\Program Files\Full Volume`, with shortcuts on the Start menu and desktop.
-4. Launch it, plug a microphone in, and pick it under **Settings → Audio**.
-
-Uninstall it whenever you like. Profiles, scores, backdrops and song folders live outside the install and are never touched.
 
 | | |
-|---|---|
-| **File** | `FullVolumeSetup.exe` |
-| **Size** | 107 MB to download, about 200 MB installed |
-| **Version** | 0.9.7 beta |
-| **Runs on** | Windows 10 and 11, 64-bit |
-| **Account** | Local. Nothing to sign up for |
-| **Songs included** | None. You bring those |
+|:---:|:---:|
+| ![Title screen](./shots/shot-01.png) | ![Main menu](./shots/shot-03.png) |
+| Title screen | Main menu |
+| ![Song library](./shots/shot-04.png) | ![Queue](./shots/shot-14.png) |
+| Your library, with your best score on every song | Queue up a set list |
+| ![Online rooms](./shots/shot-05.png) | ![Room lobby](./shots/shot-08.png) |
+| Public rooms | The lobby, with voice and chat |
+| ![Results](./shots/shot-13.png) | ![Pause menu](./shots/shot-12.png) |
+| Results | Pause menu |
 
----
+## Download
 
-## 🎵 Setting Up Your Songs
+Grab the latest installer from [fullvolumethegame.xyz](https://fullvolumethegame.xyz/api/download/game), the [Releases page](../../releases/latest) or [itch.io](https://jurmr.itch.io/fullvolume).
 
-If you've already got a Clone Hero song folder, you've already got a set list. Nothing to convert, nothing to import, nothing to buy.
+| Platform | Formats |
+|----------|---------|
+| Windows 10 / 11 (64-bit) | `.exe` installer (per user, no admin) |
 
-1. **Point it at your songs** - **Settings → Library → Add Folder**. Add as many as you've got, on as many drives as you like.
-2. **Put the kettle on** - it reads through them once, tells you how it's getting on, and then remembers. You'll not wait on it again.
-3. **Sing** - search it, sort it, pick something, and go. It opens on the list, not on a loading bar.
+FullVolume updates itself after that. It ships with no songs: add your folders under **Settings → Library**, pick your mic under **Settings → Audio**, and run **Settings → Calibration** once. This repository is the download page and issue tracker; the game itself is closed source.
 
-**What it reads:**
+## Features
 
-- Clone Hero song folders, exactly as they sit on your drive
-- `.sng` archives, read straight out of the file
-- Rock Band `_rb3con` packages, no unpacking first
-- UltraStar `.txt` charts
-- `.fvchart` files, written by [FullVolumeCharter](#-fullvolumecharter)
-- Album art, so the list looks like your record shelf
+- Reads Clone Hero folders, `.sng` archives, Rock Band `_rb3con` packages, UltraStar `.txt` and `.fvchart`, straight off your drives
+- Phrase-based pitch scoring that accepts any octave, with overdrive, streaks and five stars for a full combo
+- Harmonies, up to three parts dealt out around the room
+- Online rooms with built-in voice chat, public or code-locked, and a check that everyone has the song
+- A set list queue, so the night doesn't stop between songs
+- **GET SONGS**: search and download charts from Rhythmverse and Chorus Encore in-game
+- Per-singer profiles with your own note, lyric and name colours
+- Custom backdrops: drop a picture or video in `Documents\Full Volume\Custom\Backgrounds`
+- One-button audio calibration
+- Auto-updates
 
-Songs with no vocal part are left out of the list on purpose.
+## FullVolumeCharter
 
-### Getting the timing right
-
-Every PC has a different audio delay. **Settings → Calibration** measures it for you in one button press, or you can tap along for a few bars and let it work you out. Do this once and everything lines up.
-
-### Your own backdrops
-
-Drop a picture or a video into `Documents\Full Volume\Custom\Backgrounds` and it turns up in the backdrop carousel. Menus and gameplay each get their own pick, so you can have one for the lobby and another for the stage.
-
-Your pick answers for the songs that did not bring anything of their own. A song that ships a dedicated backdrop shows that instead: the art the charter chose for it wins, every time. Album art is not a backdrop, so a chart carrying nothing but a cover still gets your picture.
-
-### Where your stuff lives
-
-Everything you make is in **`Documents\Full Volume`** - profiles, scores, your backdrops, and the list of song folders you added. The uninstaller deliberately never touches it.
-
----
-
-## 🌐 Multiplayer
-
-Host a room from inside the game, send it round, and sing together from wherever you all are.
-
-- Public rooms are listed in the game and joinable in one click, or put a code on one and keep it to yourselves
-- Say how many singers it takes and it holds the door at that
-- Anyone can queue a song, and it says up front who hasn't got it
-- Open mics in the lobby, push to talk once a song starts, so nobody's singing comes back at you over the music
-- **A song with harmonies deals them out**: one of you sings the lead and the others sing the parts underneath it, up to three, with every lane drawing the others faintly behind its own so you can see where you sit against everybody else
-- Everyone stays in time wherever they are, with everybody's score on screen at once
-
----
-
-## 🎚️ FullVolumeCharter
-
-> **Shipping now, on its own release.** It is a separate download with its own version number and its own schedule, so you will often see one of the two update without the other. Neither has to match the other: charts written by any version of the charter play in any version of the game.
-
-The game plays the vocal part that is already inside a Clone Hero or Rock Band chart. That covers tens of thousands of songs, and it does not cover the one you wanted at half past eleven on a Friday. **FullVolumeCharter** is how that one gets a part to sing.
-
-Audio in, `.fvchart` out. It walks a song through seven steps and hands back a single file carrying the words, the timing, the pitches, the overdrive, the album art and the audio. Drop it in a folder the game is watching and it is on the list, exactly like everything else.
-
-It is a real desktop app, not a web page in a wrapper: no account, no upload, no server, nothing leaves your machine.
+The song you want isn't charted? **FullVolumeCharter** turns any song you own into a `.fvchart`: load the audio, paste the lyrics, tap the timing, fix the pitches and export. It can split the vocals out of a full mix on your GPU, slows the song down without changing its key while you tap, and turns bracketed backing vocals into harmony parts. Everything stays on your PC.
 
 <p align="center">
-  <a href="https://fullvolumethegame.xyz/fullvolumecharter/">
-  <img src="/shots/Charter/shot-01.png" alt="https://fullvolumethegame.xyz/fullvolumecharter" width="820">
-  </a>
+  <img src="./shots/Charter/shot-01.png" alt="FullVolumeCharter" width="100%">
 </p>
 
 <div align="center">
 
-<a href="https://fullvolumethegame.xyz/api/download/charter"><img src="https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/refs/heads/main/app-icon.png" width="25" height="25" alt="FullVolumeCharter" style="vertical-align: middle;"> **Download FullVolumeCharter →**</a>
-
-<a href="https://fullvolumethegame.xyz/fullvolumecharter/">**Read the whole thing at fullvolumethegame.xyz →**</a>
+[**Download FullVolumeCharter**](https://fullvolumethegame.xyz/api/download/charter) &nbsp;•&nbsp; [More about it](https://fullvolumethegame.xyz/fullvolumecharter/)
 
 </div>
 
-### The seven steps
+The charter has its own version and release schedule. A chart made with any version plays in any version of the game.
 
-1. **Load the audio** - one file, or the vocal and the backing as separate stems. Cover art, a backdrop and a timed `.lrc` sitting beside the track come in with it.
-2. **Song info** - title, artist, album, genre, year, language, and your name on it in whatever colors you like. The tempo is worked out from the audio, with halve, double and tap tempo to correct it.
-3. **Lyrics** - paste the words and they are split into the syllables actually sung, by the rules of the language you picked. Fix one by hand and it has learned that word. Numbers are written out the way they are sung, and anything you put in `(brackets)` is taken as a backing vocal and split off into the harmonies.
-4. **Pitch breaks** - click a *syllable* for every extra pitch it passes through while it is held. Each `+` is one more note on that syllable, wherever in the word it sits.
-5. **Tap the timing** - play the song and tap Enter as each syllable starts. Slow it to 50, 65 or 80 per cent and it *stays in its own key*, so a fast line is still singable while you tap it.
-6. **Pitches** - the sung line is read straight off the recording, a phrase at a time, and you drag anything it got wrong. A guide tone plays the note under the cursor, and a strip above the roll is where you mark your overdrive phrases and pick the moments they can be let out.
-7. **Export** - one `.fvchart` with all of it inside. Open the same file later and it puts you back on whichever step you want.
+## Bugs
 
-Everything you enter is saved the moment you enter it, so a song started tonight is picked up tomorrow exactly where you stopped.
+Open an [issue](../../issues) with what you were doing, what happened, and your version. If it crashed, attach `%USERPROFILE%\AppData\LocalLow\JURMR\FullVolume\Player.log`.
 
-### The harmonies, on a tab of their own
+## Credits
 
-Most songs have none, so the seven steps above never mention them and the export never waits on them. When a song does have them, they are a second pass rather than an eighth step, and they start from something you have already typed: **the backing vocals you wrote in brackets**.
+- **The charting community.** Every vocal part FullVolume plays was charted by hand, for free, by Rock Band, Clone Hero and UltraStar charters.
+- **The Rock Band modding community**, especially **TrojanNemo** ([Nautilus](https://github.com/trojannemo/Nautilus)), **LocalH** (moggulator) and **Dark** (themethod3), whose reverse engineering of CON and mogg files is the only reason they can be read. FullVolume's mogg support is its own C# implementation of that published work; no code from these projects is included.
+- **[Rhythmverse](https://rhythmverse.co)** and **[Chorus Encore](https://enchor.us)** for the chart catalogues behind GET SONGS. Downloads go through their own pages, and nothing is mirrored.
+- Built on **Unity 6**, [NVorbis](https://github.com/NVorbis/NVorbis), [Concentus](https://github.com/lostromb/concentus), [LiteNetLib](https://github.com/RevenantX/LiteNetLib), [Kenney](https://kenney.nl) sounds and [Simple Icons](https://github.com/simple-icons/simple-icons). Pitch detection is the McLeod Pitch Method. The charter uses [Tauri 2](https://tauri.app), [React](https://react.dev), [hyphen](https://github.com/ytiurin/hyphen) and [UVR](https://github.com/Anjok07/ultimatevocalremovergui)'s karaoke model.
 
-`I can't stop (can't stop)` is how every lyric sheet on the internet writes one. Those words leave the lead's part, because the lead does not sing them, and become a harmony with its own syllables, its own timing and its own pitches. Up to three parts on a chart, and the game deals them out around the room so two or three people sing different notes at once.
+The menu background was generated with ChatGPT; that is the only AI art in the game. Much of the code was written with AI assistance (Anthropic's Claude), directed, reviewed and tested by me. No song, chart, lyric or audio is AI generated, and nothing in the game talks to an AI service.
 
-- **Their words are still written once**, on step 3 with the rest of the song's words. The tab is the breaks, the tapping and the pitches: the part a harmony cannot borrow from the lead, because it is not sung at the lead's moments.
-- **A harmony can only be tapped where it was written.** Once the lead has its timing, each bracketed line is held to the stretch between the line it was written on and the next one, so there is no hunting through a four minute song for the two seconds a backing vocal lands in. A tap somewhere else is refused rather than quietly written into the wrong verse.
-- **A part starts in unison with the lead** and the arrow keys move it away, skipping the one or two semitones almost no song harmonises at. Any pitch that does land that close has to be confirmed, so a stray one cannot slip through.
-- **The lead is drawn faintly behind**, along with the other parts, because a harmony is only ever a pitch relative to what else is sounding. Guide tones play the lead and every part together, each one switchable on its own.
-
-### A few things worth knowing
-
-- **The slow-down is a real time-stretch, not a pitched-down tape.** That is what makes tapping a fast line syllable by syllable possible at all, which is why step 5 asks for one tap per syllable rather than dividing a word up evenly and hoping.
-- **It can pull the vocals out of a finished mix.** Opt in on the audio step and it separates the song into a voice and an instrumental on your graphics card, in about three seconds for a three minute song, using [UVR](https://github.com/Anjok07/ultimatevocalremovergui)'s karaoke model. Nothing waits on it - every step works from the mix alone, the stems just make the later ones better.
-- **It reads the pitches a whole phrase at a time**, weighing each note against the ones either side of it rather than guessing at each one alone, which is what stops a note landing in the right pitch class an octave from where you sang it. A note it cannot hear is left empty rather than filled in with a guess.
-- **Timed `.lrc` lyrics beside your track come in on their own**, along with the cover art, the title and the artist, so a song that is already in sync is not retyped or retapped.
-- **Your name goes on it**, colored letter by letter, and it is remembered for every chart you write afterwards.
-- **Brackets are read as brackets.** Anything you paste in `(round brackets)` is a backing vocal, which is how every lyric sheet writes one, so it is taken out of the lead's part and charted as a harmony instead of being sung by somebody who never sang it.
-- **Numbers are written out the way they are sung.** `17` becomes `seventeen` and `1999` becomes `nineteen ninety nine`, because digits cannot be split into syllables and a number left as digits is one note no matter how many you actually sing. Anything that is not being counted is left alone, so `mp3` stays as it is.
-- **It keeps itself up to date**, the same way the game does, so the installer below is the last one you fetch by hand.
-
-<details>
-<summary><h3 align="center">The seven steps, on screen</h3></summary>
-<p align="center">
-  <img src="./docs/assets/img/shots/charter/charter-01.jpg" alt="The start screen: chart a new song, or open one you wrote">
-  <em>Start a new one, or open one you wrote.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-02.jpg" alt="Step one: a vocal stem and a backing stem loaded, each with its waveform and its own volume">
-  <em>Step 1. One file, or a vocal and a backing.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-03.jpg" alt="Step two: the song information form, with the charter name colored letter by letter">
-  <em>Step 2. Your name on it, in your own colors.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-04.jpg" alt="Step two: the tempo card, with a detected BPM, a confidence bar, halve, double and tap tempo">
-  <em>Step 2. The tempo, heard and correctable.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-05.jpg" alt="Step three: pasted lyrics beside the same lines split into hyphenated sung syllables">
-  <em>Step 3. Pasted words on the left, sung syllables on the right.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-06.jpg" alt="Step three: the how it will sing panel, one box per note, with counts of lines, words, syllables and sections">
-  <em>Step 3. How it will sing, box by box.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-07.jpg" alt="Step four: the how it works panel explaining pitch breaks, above the words of the song">
-  <em>Step 4. What a pitch break is, before you place any.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-08.jpg" alt="Step four: every syllable as a clickable box, for adding and removing pitch breaks">
-  <em>Step 4. Click a syllable for every pitch it moves through.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-09.jpg" alt="Step five: the tapping view, with the upcoming syllables, the waveform and the speed buttons">
-  <em>Step 5. One tap per note, at whatever speed you can manage.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-10.jpg" alt="Step five: the whole song listed with a timestamp on every line">
-  <em>Step 5. Jump back to any syllable.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-12.jpg" alt="Step six: the pitch roll filled with a note box per syllable against a piano keyboard, over the color key and the read from the recording panel">
-  <em>Step 6. A note box per syllable, and the panel that reads them off the recording.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-13.jpg" alt="Step seven: the export summary, listing the song details beside the stems, cover, background and chart about to be packed">
-  <em>Step 7. Everything that is going in.</em>
-  <br><br>
-  <img src="./docs/assets/img/shots/charter/charter-14.jpg" alt="Step seven: the chart summary with counts of lines, notes, pitched notes, talkies, percussion and range">
-  <em>Step 7. And what came out.</em>
-</p>
-</details>
-
-| | |
-|---|---|
-| **File** | `FullVolumeCharterSetup.exe` |
-| **Size** | 18 MB, or 222 MB for `FullVolumeCharterSetup-Offline.exe`, which carries WebView2 for a PC with no internet |
-| **Charter version** | 0.9.7 |
-| **Built for** | FullVolume 0.9.7 |
-| **Runs on** | Windows 10 and 11, 64-bit |
-| **Account** | None |
-| **Writes** | `.fvchart` |
-
-A `.fvchart` carries the song's audio inside it, so passing one around means passing the recording around. Inside the game, a chart can be handed straight to somebody in your room who has not got it, which is usually what you actually want.
-
----
-
-## 🧰 System Requirements
-
-<table>
-<tr><th></th><th>Minimum</th><th>Recommended</th></tr>
-<tr><td><b>OS</b></td><td>Windows 10, 64-bit</td><td>Windows 11, 64-bit</td></tr>
-<tr><td><b>Processor</b></td><td>Any dual core from the last ten years</td><td>Any quad core</td></tr>
-<tr><td><b>Memory</b></td><td>4 GB RAM</td><td>8 GB RAM</td></tr>
-<tr><td><b>Graphics</b></td><td>Anything that does DirectX 11</td><td>DirectX 12 or Vulkan</td></tr>
-<tr><td><b>Storage</b></td><td>200 MB available space</td><td>200 MB, plus room for your songs</td></tr>
-<tr><td><b>Sound</b></td><td>A microphone. Any microphone.</td><td>A headset or USB microphone</td></tr>
-</table>
-
-You bring the songs. A Clone Hero or Rock Band library is all it asks for.
-
----
-
-## 🙏 Credits and Third Party Work
-
-FullVolume is closed source for now, and that is exactly why this list matters: you
-cannot read the code to see what is in it, so it is written out here instead. If
-something of yours belongs on this list and is not on it, open an issue and it goes on.
-
-### The charting community
-
-Every song in this game was charted by somebody for nothing. The vocal part FullVolume
-reads is the `PART VOCALS` track that Rock Band charters, Clone Hero charters and
-UltraStar charters wrote by hand, and there would be no game without them. Thanks in
-particular to the people who keep charting vocals when almost nothing plays them.
-
-### Rock Band file formats
-
-FullVolume reads `_rb3con` packages and the `.mogg` audio inside them. Neither format
-is documented by Harmonix. Both are readable today only because the Rock Band modding
-community reverse engineered them over a decade and published what they found.
-
-The mogg decryption in FullVolume is an independent C# implementation, written against
-that published work rather than copied from any one project, and the constant tables it
-uses are Harmonix's own, long since extracted and republished by the people below. No
-source from any of these projects is compiled into FullVolume, and none of them is
-endorsing this. The debt is still theirs:
-
-- **TrojanNemo** for [Nautilus / NautilusFREE](https://github.com/trojannemo/Nautilus),
-  the reference toolkit for Rock Band files and the most complete public treatment of
-  the mogg format there is.
-- **LocalH** for **moggulator**.
-- **Dark** for **themethod3**.
-- The wider **Rock Band modding and Customs Creators community**, whose accumulated
-  documentation of CON packages, `songs.dta` and the mogg versions is the only reason
-  any of this parses.
-
-### Chart catalogues
-
-The in-game **GET SONGS** browser searches and downloads from two community catalogues:
-
-- **[Rhythmverse](https://rhythmverse.co)**, run by Hive. Rhythmverse has no public API,
-  so the game calls the same `songfiles` endpoints the site's own browse page calls, at
-  the site's own pace, and takes each file through the normal
-  `rhythmverse.co/download/<id>` page so the download is counted for the charter who
-  uploaded it. Nothing is mirrored, rehosted or cached anywhere else. If Hive would
-  rather it worked some other way, or not at all, say so and it changes.
-- **[Chorus Encore](https://enchor.us)**, whose public API is used as documented.
-
-Album art, song metadata and files all stay with those sites. FullVolume hosts no music.
-
-### Code in the game
-
-| | |
-|---|---|
-| **[NVorbis](https://github.com/NVorbis/NVorbis)** by Andrew Ward | Ogg Vorbis decoding, MIT. Vendored from 0.10.5 and patched locally for two decode bugs that Rock Band moggs hit. |
-| **[Concentus](https://github.com/lostromb/concentus)** by Logan Stromberg | Opus for voice chat, BSD three clause, after the reference implementation by the Xiph.Org Foundation, Skype Limited, CSIRO and others. |
-| **[LiteNetLib](https://github.com/RevenantX/LiteNetLib)** by RevenantX | Reliable UDP for multiplayer, MIT. |
-| **[Kenney](https://kenney.nl)** | Interface Sounds pack, CC0. |
-| **[Simple Icons](https://github.com/simple-icons/simple-icons)** | The four social marks on the main menu, CC0. |
-| **Unity 6** and **TextMesh Pro** | Engine and text rendering, under the Unity licence. |
-
-Pitch detection uses the **McLeod Pitch Method** (Philip McLeod and Geoff Wyvill, *A
-Smarter Way to Find Pitch*, 2005), implemented from the paper.
-
-### Code in FullVolumeCharter
-
-**[Tauri 2](https://tauri.app)**, **[React](https://react.dev)**,
-**[Vite](https://vite.dev)**, the **[zip](https://crates.io/crates/zip)** crate, and
-**[hyphen](https://github.com/ytiurin/hyphen)** for syllable splitting, which carries
-the TeX hyphenation patterns each language's dictionary is built from.
-
-### AI disclosure
-
-Up front, since people ask.
-
-- **The menu background image was generated with ChatGPT**, and the animated menu loop
-  is that same image put in motion. That is the only AI generated art in the game.
-  Everything else on screen is mine.
-- **A lot of the code was written with AI assistance** (Anthropic's Claude), directed,
-  reviewed, tested and debugged by me. The design decisions, the architecture and every
-  bug in it are mine.
-- **No song, chart, lyric, vocal line or piece of audio in FullVolume is AI generated.**
-  Charts come from human charters, or from FullVolumeCharter, where a human taps the
-  timing and drags the pitches. The charter's pitch detection is signal processing
-  (autocorrelation), not a model, and it never invents a note it cannot hear.
-- Nothing in the game talks to an AI service at runtime. There is no model in the build.
-
-### Not affiliated
-
-FullVolume is not affiliated with, endorsed by or connected to Harmonix, Epic Games,
-Microsoft, Clone Hero, YARG, Rhythmverse, Chorus, UltraStar or any of the projects above.
-All trade marks belong to their owners.
-
----
-
-## 🐛 Something Broken?
-
-Open an [issue](../../issues) and say what you were doing, what happened, and which version you're on. If it crashed, the log is at `%USERPROFILE%\AppData\LocalLow\JURMR\FullVolume\Player.log` - attach it and I'll have a far better idea what went wrong.
-
----
-
-<div align="center">
-  <a href="https://fullvolumethegame.xyz">
-    <img src="./logo-mark.png" width="72">
-  </a>
-
-**Sing badly, loudly.** The only rule.
-
-Made by **JURMR**.
-[fullvolumethegame.xyz](https://fullvolumethegame.xyz)
-
-[Terms of use](https://fullvolumethegame.xyz/terms/) &nbsp;•&nbsp; [Privacy](https://fullvolumethegame.xyz/privacy/) &nbsp;•&nbsp; [Questions](https://fullvolumethegame.xyz/faq/)
-
-<sub>© 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, Harmonix or Microsoft.</sub>
-
-</div>
+FullVolume ships no music and is not affiliated with Harmonix, Epic Games, Microsoft, Clone Hero, YARG, Rhythmverse, Chorus, UltraStar or any of the projects above. © 2026 JURMR · [Terms](https://fullvolumethegame.xyz/terms/) · [Privacy](https://fullvolumethegame.xyz/privacy/) · [FAQ](https://fullvolumethegame.xyz/faq/)
