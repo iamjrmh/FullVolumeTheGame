@@ -311,10 +311,17 @@
   <div class="hero__scrim"></div>
 
   <div class="hero__inner wrap">
-    <p class="eyebrow hero__eyebrow" data-hero="1">
-      <span class="dot" aria-hidden="true"></span>
-      Windows &middot; v0.9.7 beta &middot; free
-    </p>
+    <div class="hero__top" data-hero="1">
+      <p class="eyebrow hero__eyebrow">
+        <span class="dot" aria-hidden="true"></span>
+        Windows &middot; v0.9.7 beta &middot; free
+      </p>
+      <p class="online" data-online hidden>
+        <span class="online__dot" aria-hidden="true"></span>
+        <span class="online__label">Players online:</span>
+        <b class="online__num" data-online-num>0</b>
+      </p>
+    </div>
 
     <!-- Logo and tagline are one heading on purpose. The logo is a picture, so
          on its own the h1 read as the single word "FullVolume" and said nothing
@@ -979,6 +986,7 @@
 </div>
 
 <script src="js/downloads.js"></script>
+<script src="js/online.js"></script>
 <script src="js/ads.js"></script>
 <script src="js/main.js"></script>
 </body>

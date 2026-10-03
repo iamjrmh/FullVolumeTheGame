@@ -17,13 +17,11 @@
 // same for all of them. So it is asked once here and cached at the edge.
 
 import { json } from "../lib/http.mjs";
+import { REGISTRY, REGISTRY_TIMEOUT_MS as TIMEOUT_MS } from "../lib/registry.mjs";
 
 /** Public, all three. The invite is the permanent one; the widget is opt in and on. */
 const GUILD = process.env.DISCORD_GUILD_ID || "1547333347234160702";
 const INVITE_CODE = process.env.DISCORD_INVITE_CODE || "hut9sPRcr2";
-const REGISTRY = (process.env.REGISTRY_URL || "http://72.72.164.145:8092").replace(/\/+$/, "");
-
-const TIMEOUT_MS = 6000;
 
 /** A room name is typed by a player, so it is cut to something a card can hold. */
 const clip = (text, max) => {

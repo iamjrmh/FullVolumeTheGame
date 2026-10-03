@@ -682,11 +682,21 @@ code {
 }
 
 .hero__inner { position: relative; }
-.hero__eyebrow, .hero__logo, .hero__tagline, .hero__blurb, .hero__cta, .hero__note {
+.hero__top, .hero__logo, .hero__tagline, .hero__blurb, .hero__cta, .hero__note {
   max-width: 760px;
 }
 
-.hero__eyebrow { color: var(--gold); }
+.hero__eyebrow { color: var(--gold); margin: 0; }
+
+/* The eyebrow and the players-online badge share a row, and the badge drops
+   under it on a narrow screen rather than squeezing it. */
+.hero__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3) var(--s4);
+  margin: 0 0 var(--s4);
+}
 
 /* The h1 wraps the logo and the tagline both, so it carries no look of its
    own - the two spans inside it keep the ones they always had. */
@@ -729,6 +739,52 @@ code {
   text-transform: uppercase;
   color: var(--cream-faint);
   margin: 0;
+}
+
+/* Players online: everybody with the game open right now, anywhere in it.
+   js/online.js fills it from /api/players and unhides it; until a real number
+   arrives it takes no room. A dark pill so it reads over the moving room, the
+   game's sage for "live", and the number in the body face because the display
+   face turns to lace at this size. */
+.online {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  margin: 0;
+  padding: 6px 15px 6px 12px;
+  border-radius: 999px;
+  background: rgba(23, 23, 25, .62);
+  border: 1px solid rgba(130, 155, 135, .38);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--cream-dim);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.online[hidden] { display: none; }
+.online.is-arriving { animation: online-in 420ms var(--ease-out); }
+@keyframes online-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.online__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sage);
+  animation: tally-pulse-sage 2.4s var(--ease-out) infinite;
+}
+.online__num {
+  color: var(--cream);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  min-width: 1ch;
+}
+.online.is-bumped .online__num { animation: tally-bump 480ms var(--ease-out); }
+@media (prefers-reduced-motion: reduce) {
+  .online__dot, .online.is-arriving, .online.is-bumped .online__num { animation: none; }
 }
 
 /* --- the vocal track, borrowed as scenery --- */
