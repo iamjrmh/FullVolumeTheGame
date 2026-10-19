@@ -6,7 +6,7 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-10-18T11:29:15.822Z",
+ "generated": "2026-10-19T13:45:20.981Z",
  "repo": "iamjrmh/FullVolumeTheGame",
  "latest": "0.9.7",
  "latestByProduct": {
@@ -64,11 +64,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 85,
+     "downloads": 88,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.7/FullVolumeSetup.exe"
     }
    ],
-   "downloads": 85
+   "downloads": 88
   },
   {
    "tag": "FVC-v0.9.7",
@@ -115,11 +115,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "18 MB",
-     "downloads": 19,
+     "downloads": 23,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FVC-v0.9.7/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 20
+   "downloads": 24
   },
   {
    "tag": "v0.9.6",
@@ -239,11 +239,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "222 MB",
-     "downloads": 3,
+     "downloads": 4,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.6/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 10
+   "downloads": 11
   },
   {
    "tag": "v0.9.5",
@@ -627,11 +627,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 21,
+     "downloads": 22,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.2/FullVolumeSetup.exe"
     }
    ],
-   "downloads": 21
+   "downloads": 22
   },
   {
    "tag": "v0.9.1",
