@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="google-adsense-account" content="ca-pub-5666603521655648">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboards - FullVolume global karaoke scores, live</title>
+<meta name="description" content="The FullVolume global leaderboards, live: the top singers overall on every difficulty, a board for every song, and the newest top plays. Updated every 30 seconds.">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="../assets/img/app-icon.png">
+<link rel="canonical" href="https://fullvolumethegame.xyz/leaderboards/">
+<meta name="theme-color" content="#171719">
+
+<!-- Link card. Absolute URLs on purpose: every scraper fetches these from its
+     own server, where a relative path resolves to nothing. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FullVolume">
+<meta property="og:url" content="https://fullvolumethegame.xyz/leaderboards/">
+<meta property="og:title" content="FullVolume Leaderboards">
+<meta property="og:description" content="Who is singing loudest right now: the global boards, live, for every song and difficulty.">
+<meta property="og:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The FullVolume logo over the game's own living room: a record player, speakers, a bean bag and two posters reading TURN IT UP and FIND YOUR SOUND.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FullVolume Leaderboards">
+<meta name="twitter:description" content="Who is singing loudest right now: the global boards, live, for every song and difficulty.">
+<meta name="twitter:image" content="https://fullvolumethegame.xyz/assets/img/embed.jpg">
+<meta name="twitter:image:alt" content="The FullVolume logo over the game's own living room: a record player, speakers, a bean bag and two posters reading TURN IT UP and FIND YOUR SOUND.">
+<link rel="preload" href="../assets/fonts/FullVolume.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/poppins-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/ads.css">
+<link rel="stylesheet" href="../css/leaderboards.css">
+
+<!-- Structured data. The rows themselves are drawn by script from the two
+     catalogue files, so there is nothing useful to mark up song by song.
+     What this says is what the page is, whose game it belongs to, and
+     where it sits in the site. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://fullvolumethegame.xyz/leaderboards/#page",
+      "url": "https://fullvolumethegame.xyz/leaderboards/",
+      "name": "FullVolume Leaderboards",
+      "description": "The live global leaderboards for FullVolume: top singers overall on each difficulty, a board for every song, and the newest top plays.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://fullvolumethegame.xyz/#website" },
+      "about": { "@id": "https://fullvolumethegame.xyz/#game" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "FullVolume", "item": "https://fullvolumethegame.xyz/" },
+        { "@type": "ListItem", "position": 2, "name": "Leaderboards", "item": "https://fullvolumethegame.xyz/leaderboards/" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page-leaderboards">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="../index.html" aria-label="FullVolume, home">
+      <img class="nav__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+      <span class="nav__word">FULLVOLUME</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <button class="nav__top" id="navGame" type="button"
+                aria-expanded="false" aria-haspopup="true" aria-controls="menu-game">
+          The game
+          <svg class="nav__caret" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav__menu" id="menu-game" aria-labelledby="navGame">
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">The game</p>
+            <a href="../index.html#about">What it is</a>
+            <a href="../index.html#features">Features</a>
+            <a href="../index.html#shots">Screens</a>
+            <a href="../index.html#together">Multiplayer</a>
+            <a href="../index.html#library">Your library</a>
+          </div>
+          <div class="nav__menu-col">
+            <p class="nav__menu-t">Read up</p>
+            <a href="../faq/">All questions</a>
+            <a href="../changelog/">Changelog</a>
+            <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+            <a href="../yarg-vocals/">YARG vocals</a>
+            <a href="../games-like-singstar/">Like SingStar</a>
+            <a href="../karaoke-at-home/">Karaoke at home</a>
+          </div>
+        </div>
+      </div>
+      <a href="../fullvolumecharter/">Charter</a>
+      <a href="../marketplace/">Marketplace</a>
+      <a href="../leaderboards/" aria-current="page">Leaderboards</a>
+      <a href="../community/">Community</a>
+    </nav>
+
+    <button class="sfx-toggle" id="sfxToggle" type="button"
+            aria-pressed="false" title="Play the game's own button sounds">
+      <svg class="sfx-toggle__on" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="sfx-toggle__off" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sfx-toggle__text">SFX</span>
+    </button>
+
+    <a class="plate plate--sm nav__cta" href="../index.html#download">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+
+    <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    <details class="nav__group">
+      <summary>The game</summary>
+      <a href="../index.html#about">What it is</a>
+      <a href="../index.html#features">Features</a>
+      <a href="../index.html#shots">Screens</a>
+      <a href="../index.html#together">Multiplayer</a>
+      <a href="../index.html#library">Your library</a>
+    </details>
+    <details class="nav__group">
+      <summary>Read up</summary>
+      <a href="../faq/">All questions</a>
+      <a href="../changelog/">Changelog</a>
+      <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+      <a href="../yarg-vocals/">YARG vocals</a>
+      <a href="../games-like-singstar/">Like SingStar</a>
+      <a href="../karaoke-at-home/">Karaoke at home</a>
+    </details>
+    <a href="../fullvolumecharter/">FullVolumeCharter</a>
+    <a href="../marketplace/">Marketplace</a>
+    <a href="../leaderboards/" aria-current="page">Leaderboards</a>
+    <a href="../community/">Community</a>
+    <a class="plate plate--sm plate--block nav__mobile-cta" href="../index.html#download">
+      <img class="plate__icon" src="../assets/img/icons/play.png" alt="" width="512" height="512">
+      <span class="plate__label">DOWNLOAD</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HEAD ================= -->
+<section class="lb-hero">
+  <div class="wrap">
+   <div class="lb-hero__inner">
+    <p class="eyebrow">Leaderboards</p>
+    <h1 class="h2 lb-hero__title">Who's singing loudest.</h1>
+    <p class="lead lb-hero__lead">
+      The global boards, live. Everyone signed in with Discord posts their best on every
+      song, at every difficulty. Overall adds those bests up; every song also has a board
+      of its own. A full combo earns a crown.
+    </p>
+    <ul class="lb-stats" id="lbStats">
+      <li><b data-stat="singers">-</b><span>singers</span></li>
+      <li><b data-stat="songs">-</b><span>songs ranked</span></li>
+      <li><b data-stat="scores">-</b><span>scores posted</span></li>
+    </ul>
+   </div>
+  </div>
+</section>
+
+<!-- ================= BOARDS ================= -->
+<section class="lb">
+  <div class="wrap">
+    <div class="lb-bar">
+      <div class="lb-seg" id="lbMode" role="group" aria-label="What to rank">
+        <button type="button" data-mode="overall" aria-pressed="true">Overall</button>
+        <button type="button" data-mode="song" aria-pressed="false">By song</button>
+      </div>
+      <div class="lb-seg" id="lbDiff" role="group" aria-label="Difficulty">
+        <button type="button" data-diff="0" aria-pressed="false">Easy</button>
+        <button type="button" data-diff="1" aria-pressed="false">Medium</button>
+        <button type="button" data-diff="2" aria-pressed="false">Hard</button>
+        <button type="button" data-diff="3" aria-pressed="true">Expert</button>
+      </div>
+    </div>
+    <p class="lb-live" id="lbLive" aria-live="polite"><span class="lb-live__dot" aria-hidden="true"></span><span id="lbLiveText">Loading the boards&hellip;</span></p>
+
+    <div class="lb-grid">
+      <div class="lb-panel">
+        <div class="lb-songs" id="lbSongs" hidden>
+          <label class="lb-search">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input id="lbSearch" type="search" placeholder="Search a song or artist" aria-label="Search songs with scores" spellcheck="false" autocomplete="off">
+          </label>
+          <ul class="lb-songlist" id="lbSongList"></ul>
+        </div>
+        <div class="lb-panel__head">
+          <h2 class="lb-panel__title" id="lbTitle">Expert · overall</h2>
+          <p class="lb-panel__sub" id="lbSub"></p>
+        </div>
+        <ol class="lb-rows" id="lbRows"></ol>
+      </div>
+
+      <aside>
+        <div class="lb-panel lb-recent">
+          <div class="lb-panel__head">
+            <h2 class="lb-panel__title">Recent top plays</h2>
+          </div>
+          <ol class="lb-rows" id="lbRecent"></ol>
+        </div>
+        <div class="lb-panel lb-how">
+          <p><b>Get on the board:</b> in the game, open your profile and sign in with Discord.
+             Every song you finish after that posts your best on its own.</p>
+          <p>Sign-in is only ever for the boards. The name shown is your profile name.</p>
+          <a class="plate plate--sm plate--block" href="../index.html#download"><span class="plate__label">GET THE GAME</span></a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <div class="foot__id">
+      <div class="foot__brand">
+        <img class="foot__mark" src="../assets/img/logo-mark.png" alt="" width="1080" height="1080">
+        <div>
+          <p class="foot__name">FULLVOLUME</p>
+          <p class="foot__dom">fullvolumethegame.xyz</p>
+        </div>
+      </div>
+
+      <p class="foot__tag">The karaoke game that plays your own music library. Free, no account, no song packs.</p>
+
+      <div class="foot__by">
+        <img class="foot__weed" src="../assets/img/jurmrweed.png" alt="JURMRWEED, the author's mascot" width="1024" height="1024">
+        <p>Made by <strong>JURMR</strong><br><span>and one very patient microphone</span></p>
+      </div>
+    </div>
+
+    <nav class="foot__nav" aria-label="Footer">
+      <div class="foot__col">
+        <p class="foot__col-t">The game</p>
+        <a href="../index.html#about">What it is</a>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#shots">Screens</a>
+        <a href="../index.html#together">Multiplayer</a>
+        <a href="../index.html#library">Your library</a>
+        <a href="../index.html#download">Download</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Songs</p>
+        <a href="../fullvolumecharter/">FullVolumeCharter</a>
+        <a href="../marketplace/">Marketplace</a>
+        <a href="../leaderboards/" aria-current="page">Leaderboards</a>
+        <a href="../applyforverifiedcharter/">Become a verified charter</a>
+        <a href="../changelog/">Changelog</a>
+        <a href="https://jurmr.itch.io/fullvolume" target="_blank" rel="noopener">itch.io</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">Read up</p>
+        <a href="../community/">Community</a>
+        <a href="../faq/">All questions</a>
+        <a href="../clone-hero-vocals/">Clone Hero vocals</a>
+        <a href="../yarg-vocals/">YARG vocals</a>
+        <a href="../games-like-singstar/">Like SingStar</a>
+        <a href="../karaoke-at-home/">Karaoke at home</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-t">The small print</p>
+        <a href="../terms/">Terms of use</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="https://github.com/iamjrmh/FullVolumeTheGame/issues" target="_blank" rel="noopener">Report a bug</a>
+        <a href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">Tip jar</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap foot__rule">
+    <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
+    <p>v0.9.8 &middot; beta</p>
+  </div>
+</footer>
+
+
+<!-- ================= TIP JAR =================
+     Ko-fi, drawn out of the game's own parts. The launcher is a plain
+     link to the Ko-fi page, so with scripting off it still does the one
+     thing the widget is for; main.js upgrades it into the box. -->
+<div class="tipjar" id="tipjar">
+  <div class="tipjar__panel" id="tipjarPanel" role="dialog" aria-labelledby="tipjarTitle">
+    <div class="tipjar__head">
+      <span class="tipjar__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path d="M4 8.5h11v6.5a4.5 4.5 0 0 1-4.5 4.5h-2A4.5 4.5 0 0 1 4 15z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15 10.5h2.2a2.6 2.6 0 0 1 0 5.2H15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7.5 2.5v2.2M11.5 2.5v2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div class="tipjar__heading">
+        <p class="eyebrow tipjar__eyebrow">Tip jar</p>
+        <h2 class="tipjar__title" id="tipjarTitle">BUY ME A BREW</h2>
+      </div>
+      <button class="tipjar__close" id="tipjarClose" type="button" aria-label="Close the tip jar">
+        <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="tipjar__copy">
+      FullVolume is free and it stays free. No storefront, no song packs, no
+      subscription. If it has earned you a good night, you can put something
+      in the jar.
+    </p>
+
+    <dl class="tipjar__ledger">
+      <div><dt>Keeps up</dt><dd>The online rooms</dd></div>
+      <div><dt>Pays for</dt><dd>The next feature</dd></div>
+      <div><dt>Mostly</dt><dd>Tea</dd></div>
+    </dl>
+
+    <a class="plate plate--sm plate--block tipjar__go"
+       href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">
+      <span class="plate__label">OPEN KO&#8209;FI</span>
+    </a>
+
+    <p class="tipjar__note">One&#8209;off or monthly. No account needed.</p>
+  </div>
+
+  <a class="plate plate--sm tipjar__launch" id="tipjarLaunch" aria-label="Tip jar"
+     href="https://ko-fi.com/fullvolumethegame" target="_blank" rel="noopener">
+    <svg class="tipjar__icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 8.5h11v6.5a4.5 4.5 0 0 1-4.5 4.5h-2A4.5 4.5 0 0 1 4 15z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M15 10.5h2.2a2.6 2.6 0 0 1 0 5.2H15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M7.5 2.5v2.2M11.5 2.5v2.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span class="plate__label">TIP JAR</span>
+  </a>
+</div>
+
+<script src="../js/ads.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/leaderboards.js"></script>
+</body>
+</html>

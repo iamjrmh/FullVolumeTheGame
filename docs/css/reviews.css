@@ -1,0 +1,91 @@
+/* ============================================================
+   FULLVOLUME - Reviews (home page section)
+   The reviews people post with /review in the Discord server,
+   drawn by js/reviews.js from /api/reviews. The section stays
+   hidden until there is at least one review to show.
+   ============================================================ */
+
+.rv-score {
+  display: inline-flex; align-items: center; gap: var(--s3);
+  margin: 0 auto var(--s6); padding: 10px 18px;
+  background: var(--bg-deep); border: 1px solid var(--hairline); border-radius: 999px;
+  font-size: 14px; color: var(--cream-dim);
+}
+.rv-score b {
+  font-family: var(--display); font-weight: 400; font-size: 26px; line-height: 1;
+  color: var(--gold); -webkit-text-stroke: .6px currentColor;
+}
+.rv-score__stars { color: var(--gold); letter-spacing: 2px; font-size: 16px; }
+.rv-top { text-align: center; }
+
+.rv-grid {
+  display: grid; gap: var(--s5);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 380px));
+  justify-content: center; align-items: start;
+}
+
+.rv-card {
+  position: relative; display: flex; flex-direction: column; gap: var(--s3);
+  padding: var(--s5); background: var(--panel);
+  border: 1px solid var(--hairline); border-radius: var(--radius);
+  box-shadow: 0 18px 40px rgba(0,0,0,.28);
+  animation: rv-rise var(--t-enter) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+.rv-card::before {
+  content: "\201C"; position: absolute; top: 6px; right: 18px;
+  font-family: Georgia, serif; font-size: 72px; line-height: 1; color: rgba(224,184,102,.16);
+  pointer-events: none;
+}
+@keyframes rv-rise { from { opacity: 0; transform: translateY(10px); } }
+
+.rv-who { display: flex; align-items: center; gap: var(--s3); }
+.rv-avatar {
+  flex: none; width: 42px; height: 42px; border-radius: 50%;
+  background: var(--raised); object-fit: cover; border: 2px solid var(--hairline-2);
+}
+.rv-avatar--blank {
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 17px; color: var(--cream);
+}
+.rv-name { margin: 0; font-weight: 700; font-size: 15.5px; color: var(--cream); }
+.rv-meta { margin: 2px 0 0; font-size: 12.5px; color: var(--cream-faint); }
+.rv-meta .rv-stars { color: var(--gold); letter-spacing: 1.5px; margin-right: 6px; }
+
+.rv-title {
+  margin: 0; font-family: var(--display); font-weight: 400; font-size: 21px; line-height: 1.25;
+  color: var(--cream); -webkit-text-stroke: .4px currentColor; paint-order: stroke fill;
+}
+.rv-body {
+  margin: 0; font-size: 15px; line-height: 1.65; color: var(--cream-dim);
+  white-space: pre-line; overflow-wrap: anywhere;
+}
+.rv-body.is-clamped {
+  display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+}
+.rv-more {
+  align-self: flex-start; padding: 0; border: 0; background: none; cursor: pointer;
+  font: 700 13px var(--body); color: var(--gold);
+}
+.rv-more:hover { text-decoration: underline; }
+.rv-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+.rv-better {
+  margin: 0; padding: var(--s3) var(--s4);
+  background: rgba(0,0,0,.14); border-left: 3px solid var(--sage); border-radius: 0 8px 8px 0;
+  font-size: 13.5px; line-height: 1.55; color: var(--cream-dim); white-space: pre-line; overflow-wrap: anywhere;
+}
+.rv-better b { display: block; margin-bottom: 2px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
+
+.rv-shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: var(--s2); }
+.rv-shots a { display: block; border-radius: 8px; overflow: hidden; border: 1px solid var(--hairline); }
+.rv-shots img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform var(--t-hover) var(--ease-out); }
+.rv-shots a:hover img { transform: scale(1.05); }
+
+.rv-cta { margin-top: var(--s6); text-align: center; font-size: 14px; color: var(--cream-faint); }
+.rv-cta a { color: var(--gold); font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv-card { animation: none; }
+  .rv-shots img { transition: none; }
+}

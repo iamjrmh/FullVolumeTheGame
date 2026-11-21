@@ -22,6 +22,43 @@
     X-Robots-Tag = "noindex, nofollow"
     Cache-Control = "no-store"
 
+# The public leaderboards page (docs/leaderboards/) reads the game's score server
+# through these. Only the four read-only routes are passed on, one rule each, so
+# posting a score and the owner-only /lb/admin actions are never reachable through
+# this domain. The query string is passed through as it is.
+[[redirects]]
+  from = "/api/lb/summary"
+  to = "http://192.227.235.140:8092/lb/summary"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/lb/boards"
+  to = "http://192.227.235.140:8092/lb/boards"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/lb/board"
+  to = "http://192.227.235.140:8092/lb/board"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/lb/player"
+  to = "http://192.227.235.140:8092/lb/player"
+  status = 200
+  force = true
+
+# The home page's reviews section (docs/js/reviews.js). The Discord bot serves the
+# reviews posted with /review as JSON on its own port (FullVolumeDiscord
+# src/publicreviews.js); this one read-only route is all that is passed on.
+[[redirects]]
+  from = "/api/reviews"
+  to = "http://192.227.235.140:8091/reviews"
+  status = 200
+  force = true
+
 # The phone remote for phones that are not on the host's Wi-Fi (netlify/functions/remote.mjs
 # sends them here). /x/<code>/ is the remote page, served from this site so that nothing a
 # game sends can ever run as script on this domain; its API calls and cover pictures go to

@@ -1,0 +1,204 @@
+/* ============================================================
+   FULLVOLUME - Leaderboards
+   Loaded after style.css. Tokens, plates, nav and footer all come
+   from there; this file is only the public board page.
+
+   The numbers come live from the game's own score server (through
+   the read-only /api/lb/* proxy in netlify.toml), the same boards
+   the game's LEADERBOARDS screen and the Discord embed read.
+   ============================================================ */
+
+/* ---- Page head ---------------------------------------------------------- */
+.lb-hero {
+  position: relative;
+  padding: clamp(48px, 7vw, 92px) 0 clamp(24px, 3.5vw, 40px);
+  background:
+    radial-gradient(900px 420px at 18% -10%, rgba(224,184,102,.18), transparent 66%),
+    radial-gradient(760px 380px at 88% 0%, rgba(130,155,135,.14), transparent 64%);
+}
+.lb-hero__inner { max-width: 780px; }
+.lb-hero__title { margin-bottom: var(--s4); }
+.lb-hero__lead { max-width: 58ch; margin-bottom: var(--s6); }
+
+.lb-stats { display: flex; flex-wrap: wrap; gap: var(--s6); margin: 0; padding: 0; list-style: none; }
+.lb-stats b {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1;
+  color: var(--gold);
+  -webkit-text-stroke: .7px currentColor;
+  font-variant-numeric: tabular-nums;
+}
+.lb-stats span {
+  font-size: 12px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--cream-faint);
+}
+
+/* ---- Controls ----------------------------------------------------------- */
+.lb { padding: 0 0 var(--s9); }
+
+.lb-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--s4); margin-bottom: var(--s5);
+}
+
+/* Two segmented switches: what to rank, and at which difficulty. */
+.lb-seg {
+  display: inline-flex; gap: 4px; padding: 4px;
+  background: var(--bg-deep); border: 1px solid var(--hairline); border-radius: 12px;
+}
+.lb-seg button {
+  appearance: none; border: 0; cursor: pointer;
+  padding: 9px 16px; border-radius: 9px;
+  background: transparent; color: var(--cream-faint);
+  font: 700 12px/1 var(--body); letter-spacing: .16em; text-transform: uppercase;
+  transition: background var(--t-hover) var(--ease-out), color var(--t-hover) var(--ease-out),
+              transform var(--t-press) var(--ease-out);
+}
+.lb-seg button:hover { color: var(--cream); }
+.lb-seg button:active { transform: scale(.96); }
+.lb-seg button[aria-pressed="true"] { background: var(--gold); color: var(--ink); }
+.lb-seg button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.lb-seg button .lb-seg__n { opacity: .6; margin-left: 6px; letter-spacing: 0; }
+
+.lb-live {
+  display: flex; align-items: center; gap: var(--s2);
+  margin: 0 0 var(--s4); font-size: 13px; color: var(--cream-faint);
+}
+.lb-live__dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--sage);
+  box-shadow: 0 0 0 0 rgba(130,155,135,.6); animation: lb-pulse 2.4s var(--ease-out) infinite;
+}
+.lb-live.is-down .lb-live__dot { background: var(--coral); animation: none; }
+@keyframes lb-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(130,155,135,.55); }
+  70%, 100% { box-shadow: 0 0 0 9px rgba(130,155,135,0); }
+}
+
+/* ---- Layout: the board, with recent plays beside it ---------------------- */
+.lb-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--s6); align-items: start; }
+.lb-panel {
+  background: var(--panel); border: 1px solid var(--hairline); border-radius: var(--radius);
+  box-shadow: 0 18px 40px rgba(0,0,0,.28);
+  overflow: hidden;
+}
+.lb-panel__head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3);
+  padding: var(--s4) var(--s5); border-bottom: 1px solid var(--hairline);
+}
+.lb-panel__title {
+  margin: 0; font-family: var(--display); font-weight: 400; font-size: 22px;
+  color: var(--cream); -webkit-text-stroke: .5px currentColor; paint-order: stroke fill;
+}
+.lb-panel__sub { margin: 0; font-size: 12px; color: var(--cream-faint); text-align: right; }
+
+/* ---- Rows --------------------------------------------------------------- */
+.lb-rows { list-style: none; margin: 0; padding: 0; }
+.lb-row {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center;
+  gap: var(--s3); padding: 12px var(--s5);
+  border-bottom: 1px solid var(--hairline);
+  animation: lb-rise var(--t-enter) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 28ms);
+}
+.lb-row:last-child { border-bottom: 0; }
+.lb-row:nth-child(even) { background: rgba(0,0,0,.08); }
+@keyframes lb-rise { from { opacity: 0; transform: translateY(6px); } }
+
+.lb-rank {
+  font-family: var(--display); font-size: 22px; line-height: 1; color: var(--cream-faint);
+  font-variant-numeric: tabular-nums; text-align: center;
+}
+.lb-row[data-top="1"] .lb-rank { color: var(--gold); -webkit-text-stroke: .6px currentColor; font-size: 28px; }
+.lb-row[data-top="2"] .lb-rank { color: #CFCAC4; font-size: 25px; }
+.lb-row[data-top="3"] .lb-rank { color: #C98E5E; font-size: 24px; }
+.lb-row[data-top="1"] { background: linear-gradient(90deg, rgba(224,184,102,.14), transparent 60%); }
+
+.lb-who { min-width: 0; }
+.lb-name {
+  display: flex; align-items: center; gap: 6px; margin: 0;
+  font-weight: 700; font-size: 16px; color: var(--cream);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lb-crown { flex: none; width: 16px; height: 16px; color: var(--gold); }
+.lb-facts {
+  display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 3px 0 0;
+  font-size: 12.5px; color: var(--cream-faint); font-variant-numeric: tabular-nums;
+}
+.lb-facts b { color: var(--cream-dim); font-weight: 600; }
+.lb-score {
+  font-family: var(--display); font-size: 24px; line-height: 1; color: var(--cream);
+  -webkit-text-stroke: .5px currentColor; font-variant-numeric: tabular-nums; text-align: right;
+}
+.lb-row[data-top="1"] .lb-score { color: var(--gold); }
+.lb-stars { display: block; margin-top: 4px; font-size: 12px; letter-spacing: 1px; color: var(--gold); text-align: right; }
+
+.lb-empty { padding: var(--s7) var(--s5); text-align: center; color: var(--cream-faint); font-size: 15px; }
+.lb-empty b { display: block; margin-bottom: 6px; color: var(--cream); font-size: 17px; }
+
+/* Loading: shimmer rows instead of a spinner. */
+.lb-skel { height: 64px; border-bottom: 1px solid var(--hairline);
+  background: linear-gradient(90deg, transparent, rgba(243,238,231,.05), transparent) 0 0 / 200% 100%;
+  animation: lb-shimmer 1.4s linear infinite; }
+@keyframes lb-shimmer { to { background-position: -200% 0; } }
+
+/* ---- By song: a song picker above its board ------------------------------ */
+.lb-songs { padding: var(--s4) var(--s5); border-bottom: 1px solid var(--hairline); }
+.lb-search { position: relative; }
+.lb-search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--cream-faint); }
+.lb-search input {
+  width: 100%; padding: 12px 14px 12px 42px;
+  background: var(--bg-deep); color: var(--cream);
+  border: 1px solid var(--hairline-2); border-radius: 10px;
+  font: 400 15px var(--body);
+}
+.lb-search input:focus { outline: none; border-color: var(--gold); }
+.lb-songlist { list-style: none; margin: var(--s3) 0 0; padding: 0; max-height: 264px; overflow-y: auto; }
+.lb-songlist button {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s3); align-items: center;
+  width: 100%; padding: 10px 12px; border: 0; border-radius: 9px; cursor: pointer;
+  background: transparent; color: var(--cream); text-align: left; font: inherit;
+  transition: background var(--t-hover) var(--ease-out);
+}
+.lb-songlist button:hover { background: var(--raised); }
+.lb-songlist button[aria-current="true"] { background: rgba(224,184,102,.16); box-shadow: inset 3px 0 0 var(--gold); }
+.lb-songlist .t { display: block; font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lb-songlist .a { display: block; font-size: 13px; color: var(--cream-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lb-songlist .n { font-size: 12px; color: var(--cream-faint); font-variant-numeric: tabular-nums; }
+
+/* ---- Recent top plays ---------------------------------------------------- */
+.lb-recent .lb-row { grid-template-columns: minmax(0, 1fr) auto; padding: 12px var(--s4); }
+.lb-recent .lb-name { font-size: 15px; }
+.lb-recent .lb-score { font-size: 19px; }
+.lb-when { display: block; margin-top: 4px; font-size: 11.5px; color: var(--cream-faint); text-align: right; }
+.lb-tag {
+  display: inline-block; padding: 2px 7px; border-radius: 6px;
+  background: var(--raised); color: var(--cream-dim);
+  font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+}
+.lb-tag--gold { background: rgba(224,184,102,.2); color: var(--gold); }
+
+.lb-how { margin-top: var(--s5); padding: var(--s4) var(--s5); }
+.lb-how p { margin: 0 0 var(--s3); font-size: 14px; color: var(--cream-dim); }
+.lb-how p:last-child { margin: 0; }
+
+/* ---- Small screens ------------------------------------------------------- */
+@media (max-width: 960px) {
+  .lb-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .lb-bar { flex-direction: column; align-items: stretch; }
+  .lb-seg { display: flex; }
+  .lb-seg button { flex: 1; padding: 10px 6px; letter-spacing: .1em; }
+  .lb-row { grid-template-columns: 34px minmax(0, 1fr) auto; padding: 12px var(--s4); gap: var(--s2); }
+  .lb-panel__head { padding: var(--s4); }
+  .lb-songs { padding: var(--s4); }
+  .lb-score { font-size: 20px; }
+  .lb-stats { gap: var(--s5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lb-row, .lb-skel, .lb-live__dot { animation: none; }
+}
