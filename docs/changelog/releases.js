@@ -6,14 +6,256 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-11-20T15:39:36.491Z",
+ "generated": "2026-11-21T14:49:54.140Z",
  "repo": "iamjrmh/FullVolumeTheGame",
- "latest": "0.9.7",
+ "latest": "0.9.8",
  "latestByProduct": {
-  "game": "0.9.7",
-  "charter": "0.9.7"
+  "game": "0.9.8",
+  "charter": "0.9.8"
  },
  "releases": [
+  {
+   "tag": "FVC-v0.9.8",
+   "product": "charter",
+   "products": [
+    "charter"
+   ],
+   "label": "Charter v0.9.8",
+   "version": "0.9.8",
+   "channel": "",
+   "name": "FVC-v0.9.8",
+   "date": "2026-11-21",
+   "prerelease": false,
+   "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/tag/FVC-v0.9.8",
+   "tagline": "",
+   "first": false,
+   "sections": [
+    {
+     "kind": "news",
+     "emoji": "🆕",
+     "title": "New in 0.9.8",
+     "image": null,
+     "blocks": [
+      {
+       "type": "item",
+       "title": "Vibrato notes",
+       "body": "The charter now listens for vibrato in the vocal and marks the notes that have it for you when it reads the pitches (a steady 4 to 7 wobble a second on a held note). Press <strong>V</strong> to mark or unmark any note yourself, or use the Vibrato button in the selection bar or the note's right-click menu, on the lead and on harmonies alike, with undo. Marked notes get a violet border and a wave along the bottom, and in FullVolume 0.9.8 they show up as vibrato notes that reward a real vibrato."
+      },
+      {
+       "type": "item",
+       "title": "A tapping step you can trust",
+       "body": "Clicking a word in the tap box now restarts tapping from that word instead of quietly adding a note and scrambling every word after it (Ctrl-click adds a <code>+</code> now). Backspace takes back exactly your last tap and, mid-song, rewinds a moment so you can tap it again. A tap that lands before the previous note is refused instead of running the chart backwards."
+      },
+      {
+       "type": "item",
+       "title": "See and hear whether you're in sync",
+       "body": "The tapping step has a new <strong>Check</strong> mode (press <strong>C</strong>): it plays a tick on every note you tapped and lights each syllable as it's sung, so a tap that's off is heard as a tick before or after the word. A close-up lane shows your taps against where the voice actually starts each sound, and a sync check row tells you if your taps lean early or late and offers the nudge that fixes it."
+      },
+      {
+       "type": "item",
+       "title": "Songs that start instantly get a beat to breathe",
+       "body": "When a song's audio starts right away with no lead-in, the charter adds exactly one beat of silence to the front, the same on the vocal and the backing so they stay in sync, and tells you it did. A quiet intro is left alone, and your audio files on disk are never changed."
+      },
+      {
+       "type": "item",
+       "title": "Your pitch step settings stick",
+       "body": "Every toggle and choice on the pitch step, like the guide tone sound and the snap (1/8 and so on), is remembered and comes back the next time you open the charter."
+      },
+      {
+       "type": "item",
+       "title": "A cleaner, clearer charter all round",
+       "body": "A full pass over every step fixed 28 rough spots. \"Throw this draft away\" and starting a new song over a draft now ask first, so an evening of charting can't vanish in one click. Every dialog closes with Escape or a click outside and no longer lets key presses through to the page behind it. Each step's explanation folds into a <strong>Tips</strong> button so the work area starts higher on the screen, the roll's toolbar fits on one row with a <strong>More</strong> menu, faint text is easier to read, and a locked step tells you what it's waiting on. There's also a <strong>Check for updates</strong> button in the title bar."
+      },
+      {
+       "type": "item",
+       "title": "A new installer",
+       "body": "The installers have a fresh look and install just for you, with no admin rights needed. Opening <code>.fvchart</code> files with the charter is now your choice during install. An older install updates in place, in the same folder, without you having to uninstall anything first."
+      },
+      {
+       "type": "item",
+       "title": "Fixes",
+       "body": "- The installer's terms now describe what the charter actually connects to (its update check and the one-time vocal separation model download). - The audio drop zone on the first step is a big target again instead of a thin strip."
+      }
+     ]
+    }
+   ],
+   "assets": [
+    {
+     "name": "FullVolumeCharterSetup.exe",
+     "label": "FullVolumeCharter",
+     "size": "20 MB",
+     "downloads": 1,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FVC-v0.9.8/FullVolumeCharterSetup.exe"
+    }
+   ],
+   "downloads": 2
+  },
+  {
+   "tag": "FV-v0.9.8",
+   "product": "game",
+   "products": [
+    "game"
+   ],
+   "label": "v0.9.8",
+   "version": "0.9.8",
+   "channel": "",
+   "name": "FV-v0.9.8",
+   "date": "2026-11-21",
+   "prerelease": false,
+   "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/tag/FV-v0.9.8",
+   "tagline": "",
+   "first": false,
+   "sections": [
+    {
+     "kind": "news",
+     "emoji": "🆕",
+     "title": "New in 0.9.8",
+     "image": null,
+     "blocks": [
+      {
+       "type": "item",
+       "title": "Local multiplayer, rebuilt for the living room and the bar",
+       "body": "LOCAL now opens a <strong>PARTY SETUP</strong> screen where you pick <strong>LIVING ROOM</strong> or <strong>VENUE</strong>, see all four seats big, and set the part, difficulty and microphone for each singer before you start. Every seat card shows the singer's color, difficulty and mic, and the seats stay filled when the group wanders back to the title screen, so nobody has to join again between songs. Lanes are readable from the couch: bigger names and scores, a part label on every lane (LEAD, HARMONY 1 and so on) and a warning when a singer's mic goes quiet. The results screen puts everyone on a podium with awards for the best combo, the most notes hit and the overdrive king, and only calls it A DRAW when it truly is one."
+      },
+      {
+       "type": "item",
+       "title": "Pick up a controller and sing",
+       "body": "Gamepads now work everywhere in the game: A to confirm, B to go back, Start to pause, and the d-pad or left stick to move around every menu, chooser and pause screen. Press START on any controller (or Enter) to take a free seat. No profile? You get a <strong>quick guest seat</strong> that's never saved to disk."
+      },
+      {
+       "type": "item",
+       "title": "One microphone per singer",
+       "body": "Each seat can have its own mic, chosen from a list of every input on the PC, with a live level meter so everyone can check whose mic is whose. Two singers on the same part are now scored separately from their own voices instead of sharing one mic and always tying. Seats left on SHARED still use the main mic, like before."
+      },
+      {
+       "type": "item",
+       "title": "VENUE mode runs a karaoke night for you",
+       "body": "Walk-up singers give their name and pick a song (with an optional duet partner), and they join the <strong>singer queue</strong>, no accounts needed. After each song an <strong>UP NEXT</strong> card counts down (15 seconds by default) in big type you can read across the room, then goes straight into the next song. The next five singers are on screen between songs and in the pause menu. The host can reorder, remove, skip or hold the queue, guests can't wander into settings, and a <strong>night leaderboard</strong> shows tonight's best scores. Countdown length, songs per singer in a row and whether scores are shown are all in the venue settings."
+      },
+      {
+       "type": "item",
+       "title": "Your phone is the setlist remote",
+       "body": "Start or join a lobby, open PARTY SETUP or the queue and press <strong>PHONE</strong>: a QR code and a short link like <code>fullvolumethegame.xyz/r/CODE</code> come up. Open it on any phone, tablet or computer to browse every song on the game PC, add songs to the setlist, reorder and remove them, and even find and download new songs. It works for living room parties, venue nights (it asks for the singer's name) and online rooms, and <strong>it works off the host's Wi-Fi too</strong>, so a friend on mobile data can still queue songs. The first time, Windows may ask whether FullVolume can use the network: allow it on private networks."
+      },
+      {
+       "type": "item",
+       "title": "Global online leaderboards",
+       "body": "Sign in with Discord from your profile and every score you finish is posted to a worldwide board for that song, with a separate board for each difficulty. The song panel shows the top five next to the cover along with your own rank, and the new LEADERBOARDS screen shows the top 100 for any song. A full combo earns a <strong>crown</strong> on the score and the number one spot gets a gold one, and each score shows its accuracy, vibrato and longest streak. Your profile card shows your crowns, stars and best ranks. The name on the board is your profile name, not your Discord username. There's also a live leaderboard in the FullVolume Discord server that updates within a minute of a new score."
+      },
+      {
+       "type": "item",
+       "title": "Vibrato notes",
+       "body": "Notes sung with vibrato now show up on the track with a wave along them and a sparkle while you hold them. Sing them with real vibrato and you get credit for it, or just hold the note steady: a straight hold still scores normally on Easy, Medium and Hard. The results screen counts how many vibrato notes you landed. Charts made with the new FullVolumeCharter mark them for you."
+      },
+      {
+       "type": "item",
+       "title": "The track feels alive",
+       "body": "Sparks fly off the note bars while you're hitting a note, the lane glows behind the singing, and the track has a beat grid, a pulsing hit line and soft edges. Menus, results and the pause screen slide and settle in smoothly instead of popping in, all without getting in the way of reading the notes."
+      },
+      {
+       "type": "item",
+       "title": "Fairer difficulties",
+       "body": "Medium, Hard and Expert were re-tuned so each step up is a fair step and not a cliff. Pitch windows are a little more forgiving, there's a short grace period for a note you come in slightly late on, and an average singer now gets about 4.7 stars on Hard and 3.7 on Expert, up from 4.2 and 2.5. A full combo is still always five stars."
+      },
+      {
+       "type": "item",
+       "title": "Sync by singing",
+       "body": "Settings &gt; Audio &gt; AUTO CALIBRATE has a new <strong>SING ALONG</strong> option that measures your audio delay by having you sing about 50 seconds of a song you know from your own library (it suggests well-charted ones you've sung before or big hits). During a song, <strong>AUTO SYNC</strong> quietly nudges the timing if your singing is clearly running early or late. The video offset still uses the tap test, since singing can't measure the picture."
+      },
+      {
+       "type": "item",
+       "title": "Mic sensitivity",
+       "body": "A new MIC SENSITIVITY slider in Settings &gt; Audio (0 to 100, with 50 being how it worked before) helps a quiet mic get heard, or keeps a noisy room from counting as singing."
+      },
+      {
+       "type": "item",
+       "title": "Star power you can't miss",
+       "body": "When you let out overdrive the lane frame flashes and sweeps, an OVERDRIVE banner comes up above the lyrics, the scoreboard punches and a chime plays. The LET IT OUT prompt at the hit line is easier to read, and it all stays clear on any backdrop, in solo and in party lanes."
+      },
+      {
+       "type": "item",
+       "title": "A smoother profile and sign-up",
+       "body": "Clicking outside the profile dialog or pressing Escape closes it. Pasting a colored name now pastes the name, not its markup. The old color presets are replaced by a full color picker for your name, with gradient stops."
+      },
+      {
+       "type": "item",
+       "title": "Online lobbies are easier to fill",
+       "body": "Pick a song for the room setlist from your whole library instead of only the songs everyone has in common. A \"Song added\" notice confirms when a song lands on the setlist, whoever added it, and queued songs have a <strong>Remove from setlist</strong> button."
+      },
+      {
+       "type": "item",
+       "title": "Cleaner notes on the track",
+       "body": "The connector lines between separate words are gone. A connector is only drawn where one word changes pitch, so the track reads as words, not one long tangle."
+      },
+      {
+       "type": "item",
+       "title": "FullVolume on Mac and Linux",
+       "body": "The Mac version is one app for Intel and Apple silicon Macs, and the Linux version runs on 64-bit x86 PCs. Both have everything the Windows version has, including online rooms, voice chat, the phone remote, leaderboards and Discord presence, and both update themselves the same way. On a Mac, the first launch asks for microphone access; if you said no, turn it on in System Settings &gt; Privacy &amp; Security &gt; Microphone. Mac can't play WMA songs, and Linux plays <code>.m4a</code>, FLAC and ALAC songs through <code>ffmpeg</code>."
+      },
+      {
+       "type": "item",
+       "title": "Fixes",
+       "body": "- The Library page no longer freezes, and the Settings pages are no longer squashed. - Dialogs are no longer see-through over busy backdrops. - Going back to solo after a local party no longer leaves only ADD SINGERS on the results screen. - The FPS counter, pausing when you alt-tab out, and names with emoji all work properly again. - Cover art and backdrops on songs whose folder path has spaces load on Mac and Linux. - The PARTY SETUP footer and seat cards line up, and the seat color edge is a thin accent instead of a wide bar. - Lots of small polish across the menus from a full pass over every button, switch and toggle in the game."
+      }
+     ]
+    },
+    {
+     "kind": "extra",
+     "emoji": "🎤",
+     "title": "What FullVolume is",
+     "image": null,
+     "blocks": [
+      {
+       "type": "text",
+       "body": "A spiritual successor to Xbox 360 <em>LIPS</em>, built for PC. Every other karaoke game wants to sell you the music. FullVolume hasn't got any to sell: it reads the songs already on your drive (Clone Hero folders, <code>.sng</code> archives, Rock Band <code>_rb3con</code> packages, UltraStar <code>.txt</code> charts and <code>.fvchart</code> files) and turns them into a proper karaoke night. Lyrics, pitch, scoring, stars, harmonies, online rooms with voice chat, the lot."
+      },
+      {
+       "type": "text",
+       "body": "No launcher, no storefront, no song packs and no subscription. A Discord sign-in is only needed if you want your scores on the global leaderboards."
+      }
+     ]
+    },
+    {
+     "kind": "extra",
+     "emoji": "🐛",
+     "title": "Bugs",
+     "image": {
+      "src": "https://raw.githubusercontent.com/iamjrmh/FullVolumeTheGame/main/logo-mark.png",
+      "alt": ""
+     },
+     "blocks": [
+      {
+       "type": "text",
+       "body": "It's a beta. If something breaks, <a href=\"https://github.com/iamjrmh/FullVolumeTheGame/issues\" target=\"_blank\" rel=\"noopener\">open an issue</a> with what you were doing, what happened, and what you're running it on (Windows, Mac or Linux). If it crashed, attach the log:"
+      }
+     ]
+    }
+   ],
+   "assets": [
+    {
+     "name": "FullVolumeSetup.exe",
+     "label": "FullVolume",
+     "size": "91 MB",
+     "downloads": 3,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolumeSetup.exe"
+    },
+    {
+     "name": "FullVolume-macOS.zip",
+     "label": "FullVolume for Mac",
+     "size": "104 MB",
+     "downloads": 2,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolume-macOS.zip"
+    },
+    {
+     "name": "FullVolume-Linux.tar.gz",
+     "label": "FullVolume for Linux",
+     "size": "79 MB",
+     "downloads": 2,
+     "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolume-Linux.tar.gz"
+    }
+   ],
+   "downloads": 7
+  },
   {
    "tag": "FV-v0.9.7",
    "product": "game",
@@ -64,11 +306,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 139,
+     "downloads": 140,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.7/FullVolumeSetup.exe"
     }
    ],
-   "downloads": 139
+   "downloads": 140
   },
   {
    "tag": "FVC-v0.9.7",
@@ -115,11 +357,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "18 MB",
-     "downloads": 38,
+     "downloads": 39,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FVC-v0.9.7/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 39
+   "downloads": 41
   },
   {
    "tag": "v0.9.6",
@@ -232,18 +474,18 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 7,
+     "downloads": 8,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.6/FullVolumeSetup.exe"
     },
     {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "222 MB",
-     "downloads": 4,
+     "downloads": 5,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.6/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 11
+   "downloads": 13
   },
   {
    "tag": "v0.9.5",
@@ -338,18 +580,18 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 10,
+     "downloads": 11,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.5/FullVolumeSetup.exe"
     },
     {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "222 MB",
-     "downloads": 5,
+     "downloads": 6,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.5/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 15
+   "downloads": 17
   },
   {
    "tag": "v0.9.4",
@@ -406,18 +648,18 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 5,
+     "downloads": 6,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.4/FullVolumeSetup.exe"
     },
     {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "222 MB",
-     "downloads": 3,
+     "downloads": 4,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.4/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 8
+   "downloads": 10
   },
   {
    "tag": "v0.9.3",
@@ -534,18 +776,18 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 3,
+     "downloads": 4,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.3/FullVolumeSetup.exe"
     },
     {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "222 MB",
-     "downloads": 9,
+     "downloads": 10,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.3/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 12
+   "downloads": 14
   },
   {
    "tag": "v0.9.2",
@@ -627,11 +869,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "107 MB",
-     "downloads": 22,
+     "downloads": 23,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.2/FullVolumeSetup.exe"
     }
    ],
-   "downloads": 22
+   "downloads": 23
   },
   {
    "tag": "v0.9.1",
@@ -681,11 +923,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "127 MB",
-     "downloads": 7,
+     "downloads": 8,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.1/FullVolumeSetup.exe"
     }
    ],
-   "downloads": 7
+   "downloads": 8
   },
   {
    "tag": "v0.9.0",
@@ -812,11 +1054,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "141 MB",
-     "downloads": 2,
+     "downloads": 3,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/v0.9.0/FullVolumeSetup.exe"
     }
    ],
-   "downloads": 2
+   "downloads": 3
   }
  ]
 };
