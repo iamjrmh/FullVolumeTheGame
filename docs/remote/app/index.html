@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#171719">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>FullVolume Remote</title>
+<link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="preload" href="assets/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="room" aria-hidden="true"></div>
+
+<header class="top">
+  <img class="top__logo" src="assets/logo.png" alt="FullVolume" width="534" height="214">
+  <span class="top__mode" id="mode"></span>
+  <span class="top__link" id="link" role="status" aria-live="polite"></span>
+</header>
+
+<section class="stage" id="stage" aria-label="Now singing">
+  <div class="stage__art" id="stageArt"></div>
+  <div class="stage__text">
+    <p class="stage__label" id="stageLabel">Up next</p>
+    <h1 class="stage__title" id="stageTitle">Nothing queued yet</h1>
+    <p class="stage__artist" id="stageArtist">Add a song from the library</p>
+  </div>
+</section>
+
+<main class="panes">
+  <section class="pane pane--queue" id="paneQueue" aria-labelledby="queueHead">
+    <div class="pane__head">
+      <h2 class="h2" id="queueHead">Setlist <span class="count" id="queueCount"></span></h2>
+      <button class="plate plate--sm" id="playNext" hidden><span class="plate__label">PLAY NEXT</span></button>
+    </div>
+    <ol class="queue" id="queue"></ol>
+    <div class="empty" id="queueEmpty">
+      <p class="empty__title">The setlist is empty</p>
+      <p class="empty__body">Pick songs from the library and they play one after another.</p>
+      <button class="plate plate--sm" data-goto="library"><span class="plate__label">BROWSE SONGS</span></button>
+    </div>
+    <div class="downloads" id="downloads" hidden>
+      <h3 class="h3">Downloading</h3>
+      <ul id="downloadList"></ul>
+    </div>
+  </section>
+
+  <section class="pane pane--browse" id="paneBrowse">
+    <div class="tabs" role="tablist" aria-label="Find songs">
+      <button class="tabs__tab" role="tab" id="tabLibrary" aria-selected="true" aria-controls="library">Library</button>
+      <button class="tabs__tab" role="tab" id="tabShop" aria-selected="false" aria-controls="shop">Get songs</button>
+      <span class="tabs__ink" id="tabInk" aria-hidden="true"></span>
+    </div>
+
+    <div class="browse" id="library" role="tabpanel" aria-labelledby="tabLibrary">
+      <label class="search">
+        <span class="visually-hidden">Search the library</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="libSearch" type="search" placeholder="Search songs, artists, albums" autocomplete="off" enterkeyhint="search">
+      </label>
+      <div class="sortbar">
+        <span id="libCount" class="muted"></span>
+        <label class="sortbar__sort">Sort
+          <select id="libSort">
+            <option value="t">Title</option>
+            <option value="a">Artist</option>
+            <option value="y">Newest</option>
+          </select>
+        </label>
+      </div>
+      <ul class="songs" id="libList"></ul>
+      <div class="sentinel" id="libMore"></div>
+      <div class="empty" id="libEmpty" hidden>
+        <p class="empty__title" id="libEmptyTitle">No songs match</p>
+        <p class="empty__body">Try fewer words, or get it from the shop.</p>
+        <button class="plate plate--sm" data-goto="shop"><span class="plate__label">SEARCH THE SHOP</span></button>
+      </div>
+    </div>
+
+    <div class="browse" id="shop" role="tabpanel" aria-labelledby="tabShop" hidden>
+      <form class="search" id="shopForm">
+        <span class="visually-hidden">Search the song shop</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="shopSearch" type="search" placeholder="Search FullVolume, Clone Hero and Rock Band charts" autocomplete="off" enterkeyhint="search">
+      </form>
+      <p class="muted shop__hint" id="shopStatus">Downloads land on the game's computer and go straight onto the setlist.</p>
+      <ul class="songs" id="shopList"></ul>
+    </div>
+  </section>
+</main>
+
+<nav class="dock" aria-label="Sections">
+  <button class="dock__btn" data-goto="queue" aria-current="page">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h11M4 12h11M4 18h7"/><path d="M19 15v-9l3 2"/><circle cx="17" cy="17" r="2.5"/></svg>
+    <span>Setlist</span><b class="dock__badge" id="dockCount" hidden></b>
+  </button>
+  <button class="dock__btn" data-goto="library">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+    <span>Library</span>
+  </button>
+  <button class="dock__btn" data-goto="shop">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 20h16"/></svg>
+    <span>Get songs</span>
+  </button>
+</nav>
+
+<dialog class="sheet" id="singerSheet" aria-labelledby="singerHead">
+  <form method="dialog" class="sheet__body" id="singerForm">
+    <h2 class="h2" id="singerHead">Who's singing?</h2>
+    <p class="muted" id="singerSong"></p>
+    <label class="field"><span>Singer</span>
+      <input id="singerName" maxlength="18" autocomplete="nickname" required>
+    </label>
+    <label class="field"><span>Duet partner <span class="muted">(optional)</span></span>
+      <input id="partnerName" maxlength="18">
+    </label>
+    <div class="sheet__actions">
+      <button class="linkbtn" value="cancel" formnovalidate>Cancel</button>
+      <button class="plate plate--md" value="ok"><span class="plate__label">ADD TO LIST</span></button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="gone" id="gone" hidden>
+  <img src="assets/logo.png" alt="" width="267" height="107">
+  <h2 class="h2">This link has expired</h2>
+  <p>The game has a new one. Press PHONE in the game and scan the code again.</p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

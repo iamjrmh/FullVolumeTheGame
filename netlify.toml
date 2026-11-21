@@ -21,3 +21,49 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
     Cache-Control = "no-store"
+
+# The phone remote for phones that are not on the host's Wi-Fi (netlify/functions/remote.mjs
+# sends them here). /x/<code>/ is the remote page, served from this site so that nothing a
+# game sends can ever run as script on this domain; its API calls and cover pictures go to
+# the game's directory (Relay.cs in the game's Server/FullVolume.Registry), which checks the
+# remote key, hands them to the game over its open poll, and passes back JSON or a picture.
+# Order matters: the first rule that matches wins.
+[[redirects]]
+  from = "/x/:code/api/*"
+  to = "http://192.227.235.140:8092/relay/:code/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/x/:code/cover/*"
+  to = "http://192.227.235.140:8092/relay/:code/cover/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/x/:code/"
+  to = "/remote/app/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/x/:code/*"
+  to = "/remote/app/:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/x/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    # The page's address carries the remote key.
+    Referrer-Policy = "no-referrer"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+
+[[headers]]
+  for = "/remote/app/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"

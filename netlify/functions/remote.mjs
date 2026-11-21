@@ -12,6 +12,15 @@
 // a key, and this checks the shape again, so a code can never point a phone at
 // the internet.
 //
+// Phones that are not on the host's Wi-Fi (an online room's members, a phone on
+// mobile data) cannot reach that LAN address at all. For them the game keeps an
+// off-network relay open with the directory (Relay.cs), and the phone is sent to
+// /x/<code>/ instead: the remote page served from this site (docs/remote/app/),
+// whose API calls netlify.toml proxies to the directory and on to the game. The
+// rule: the LAN address when the phone asks from the same public address the game
+// claimed the code from (the same home network), the relay otherwise, as long as
+// the game is holding it open. ?via=relay or ?via=lan forces one.
+//
 // Anything that cannot be followed lands on /remote/, which says why and has a
 // box to type the code again. Never cached: a code is reused once it expires.
 
@@ -38,8 +47,26 @@ export function isLanUrl(url) {
   return LAN_URL.test(url || "");
 }
 
+/**
+ * Where a phone goes for a directory answer: the LAN address, the relay, or "" for
+ * neither. `record` is the parsed /link line (url, same, relay), `via` the override.
+ */
+export function destination(code, record, via = "") {
+  const url = record.url || "";
+  const lan = isLanUrl(url) ? url : "";
+  const key = lan ? new URL(lan).searchParams.get("k") : "";
+  const relay = record.relay === "1" && key ? `/x/${code}/?k=${encodeURIComponent(key)}` : "";
+
+  if (via === "lan") return lan;
+  if (via === "relay") return relay || lan;
+  if (record.same === "1") return lan || relay;
+  return relay || lan;
+}
+
 export default async function handler(req, context) {
-  const code = codeFrom(new URL(req.url).pathname);
+  const requested = new URL(req.url);
+  const code = codeFrom(requested.pathname);
+  const via = (requested.searchParams.get("via") || "").toLowerCase();
 
   if (!code) return redirect("/remote/");
   if (!CODE.test(code)) return redirect(`/remote/?code=${encodeURIComponent(code.slice(0, 8))}&gone=1`);
@@ -55,8 +82,8 @@ export default async function handler(req, context) {
     if (res.status === 404 || res.status === 400) return redirect(`/remote/?code=${code}&gone=1`);
     if (!res.ok) throw new Error(`the directory answered ${res.status}`);
 
-    const url = readRecord((await res.text()).trim()).url || "";
-    if (!isLanUrl(url)) throw new Error("the directory gave an address that is not on a home network");
+    const url = destination(code, readRecord((await res.text()).trim()), via);
+    if (!url) throw new Error("the directory gave an address that is not on a home network");
 
     return redirect(url, { "Referrer-Policy": "no-referrer" });
   } catch (err) {
