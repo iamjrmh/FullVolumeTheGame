@@ -1,5 +1,7 @@
 // GET /api/download/game
 // GET /api/download/charter
+// GET /api/download/mac       FullVolume-macOS.zip off the game's newest release
+// GET /api/download/linux     FullVolume-Linux.tar.gz, likewise
 //
 // The GET IT buttons. Each one sends the browser to the newest release that
 // actually carries that product's installer, whichever release that happens to
@@ -23,7 +25,7 @@
 // GitHub counts the download against the asset either way, so /api/downloads
 // keeps counting exactly as it did.
 
-import { fetchReleases, latestFor, PRODUCTS, REPO } from "../lib/releasenotes.mjs";
+import { fetchReleases, latestFor, PLATFORMS, PRODUCTS, REPO } from "../lib/releasenotes.mjs";
 import { env, problem } from "../lib/http.mjs";
 
 const CDN_CACHE = "public, max-age=0, s-maxage=300, stale-while-revalidate=86400";
@@ -34,7 +36,8 @@ const FALLBACK = `https://github.com/${REPO}/releases`;
 export default async function handler(request) {
   const product = new URL(request.url).pathname.split("/").filter(Boolean).pop();
 
-  if (!PRODUCTS[product]) {
+  const platform = PLATFORMS[product];
+  if (!PRODUCTS[product] && !platform) {
     return problem(`No such download: ${product}`, 404);
   }
 
@@ -43,7 +46,9 @@ export default async function handler(request) {
 
   try {
     const releases = await fetchReleases({ token: env("GITHUB_TOKEN"), limit: 100 });
-    const latest = latestFor(releases, product);
+    const latest = platform
+      ? latestFor(releases, platform.product, platform.asset)
+      : latestFor(releases, product);
     if (latest) {
       target = latest.url;
       resolved = true;
@@ -68,6 +73,6 @@ export default async function handler(request) {
 }
 
 export const config = {
-  path: ["/api/download/game", "/api/download/charter"],
+  path: ["/api/download/game", "/api/download/charter", "/api/download/mac", "/api/download/linux"],
   method: ["GET", "HEAD"],
 };

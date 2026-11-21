@@ -2991,3 +2991,22 @@ body:has(#burger[aria-expanded="true"]) .tipjar {
      and wrapping the row (not the text) is what happens under that */
   .ch-flag { flex-wrap: wrap; row-gap: 2px; font-size: 11px; letter-spacing: .06em; }
 }
+
+/* Mac and Linux, from 0.9.8: a quiet row under GET IT, the two links in the
+   gold the itch.io card uses, so Windows stays the loud one. */
+.dl__platforms {
+  margin: 0 0 var(--s2);
+  font-size: 15px;
+  color: var(--cream-faint);
+}
+.dl__platforms a {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t-hover) var(--ease-out);
+}
+.dl__platforms a:hover,
+.dl__platforms a:focus-visible { border-bottom-color: currentColor; }
+.dl__platforms span { margin: 0 var(--s1); }
+.dl__small--mac { margin: 0 0 var(--s4); max-width: 460px; }

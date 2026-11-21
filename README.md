@@ -16,8 +16,8 @@
   Runs on Windows 10 and 11.
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-2ea043?style=flat-square)](#download)
-[![Version](https://img.shields.io/badge/version-0.9.7%20beta-D86F67?style=flat-square)](../../releases)
-[![Charter](https://img.shields.io/badge/charter-0.9.7-829B87?style=flat-square)](#fullvolumecharter)
+[![Version](https://img.shields.io/badge/version-0.9.8%20beta-D86F67?style=flat-square)](../../releases)
+[![Charter](https://img.shields.io/badge/charter-0.9.8-829B87?style=flat-square)](#fullvolumecharter)
 [![Website](https://img.shields.io/badge/site-fullvolumethegame.xyz-E0B866?style=flat-square)](https://fullvolumethegame.xyz)
 
   [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R2M426SKPE)
@@ -47,7 +47,7 @@ Grab the latest installer from [fullvolumethegame.xyz](https://fullvolumethegame
 
 | | |
 |---|---|
-| **Version** | 0.9.7 beta |
+| **Version** | 0.9.8 beta |
 | **Runs on** | Windows 10 and 11, 64-bit |
 | **Installer** | `FullVolumeSetup.exe`, per user, no admin |
 
@@ -82,8 +82,8 @@ The song you want isn't charted? **FullVolumeCharter** turns any song you own in
 
 | | |
 |---|---|
-| **Charter version** | 0.9.7 |
-| **Built for** | FullVolume 0.9.7 |
+| **Charter version** | 0.9.8 |
+| **Built for** | FullVolume 0.9.8 |
 
 The charter has its own version and release schedule. A chart made with any version plays in any version of the game.
 

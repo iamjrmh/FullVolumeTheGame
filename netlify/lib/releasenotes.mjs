@@ -50,8 +50,25 @@ export const PRODUCTS = {
   charter: { asset: "FullVolumeCharterSetup.exe", label: "FullVolumeCharter", tag: /^FVC[-_]?v?\d/i },
 };
 
+/**
+ * The game's other platforms, from 0.9.8. They ride on the game's own release
+ * beside FullVolumeSetup.exe, and the in-game updater on each OS looks for
+ * exactly these names (Core/Updater.cs MacPackageName / LinuxPackageName).
+ */
+export const PLATFORMS = {
+  mac: { product: "game", asset: "FullVolume-macOS.zip", label: "FullVolume for Mac" },
+  linux: { product: "game", asset: "FullVolume-Linux.tar.gz", label: "FullVolume for Linux" },
+};
+
 /** Installers, not the source zips GitHub attaches to every release itself. */
-const INSTALLERS = [PRODUCTS.game.asset, PRODUCTS.charter.asset];
+const INSTALLERS = [PRODUCTS.game.asset, PLATFORMS.mac.asset, PLATFORMS.linux.asset, PRODUCTS.charter.asset];
+
+const ASSET_LABELS = {
+  [PRODUCTS.game.asset]: "FullVolume",
+  [PLATFORMS.mac.asset]: PLATFORMS.mac.label,
+  [PLATFORMS.linux.asset]: PLATFORMS.linux.label,
+  [PRODUCTS.charter.asset]: "FullVolumeCharter",
+};
 
 /**
  * The version a tag carries, whatever names the product in front of it:
@@ -103,9 +120,13 @@ export function productOf(raw) {
  * republished over an older tag is still the one handed out. Drafts are not
  * public and are skipped; prereleases are not, and are not.
  */
-export function latestFor(rawReleases, product) {
-  const wanted = PRODUCTS[product];
-  if (!wanted) throw new Error(`No such product: ${product}`);
+export function latestFor(rawReleases, product, assetName) {
+  const known = PRODUCTS[product];
+  if (!known) throw new Error(`No such product: ${product}`);
+  // A platform build (the Mac zip, the Linux tarball) is the same product on
+  // the same release, just a different file; the release still has to be the
+  // product's by tag or by its main installer.
+  const wanted = { ...known, asset: assetName || known.asset };
 
   const candidates = (rawReleases || [])
     .filter((r) => !r.draft && r.tag_name)
@@ -375,7 +396,7 @@ function parseRelease(raw, seenPools, isOldest) {
     .sort((a, b) => INSTALLERS.indexOf(a.name) - INSTALLERS.indexOf(b.name))
     .map((a) => ({
       name: a.name,
-      label: a.name === "FullVolumeCharterSetup.exe" ? "FullVolumeCharter" : "FullVolume",
+      label: ASSET_LABELS[a.name] || "FullVolume",
       size: SIZE(a.size || 0),
       downloads: a.download_count || 0,
       url: a.browser_download_url,

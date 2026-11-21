@@ -62,8 +62,8 @@
       "applicationSubCategory": "Karaoke",
       "genre": ["Karaoke", "Music", "Rhythm", "Party"],
       "gamePlatform": "PC",
-      "operatingSystem": "Windows 10, Windows 11 (64-bit)",
-      "softwareVersion": "0.9.7",
+      "operatingSystem": "Windows 10, Windows 11 (64-bit), macOS, Linux (x86_64)",
+      "softwareVersion": "0.9.8",
       "fileSize": "107 MB",
       "downloadUrl": "https://fullvolumethegame.xyz/api/download/game",
       "installUrl": "https://fullvolumethegame.xyz/#download",
@@ -164,7 +164,7 @@
           "name": "Does it run on Mac, Linux or Steam Deck?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not yet. It is a Windows 10 and 11 build, 64-bit, and at the moment that is the only one there is."
+            "text": "Yes, Mac and Linux both, from 0.9.8. The Mac version is one app for Intel and Apple silicon Macs; the Linux version is a 64-bit x86 build in a .tar.gz. Steam Deck has not been tested yet, but it is the same Linux build, in desktop mode. Windows 10 and 11, 64-bit, is still the main one."
           }
         },
         {
@@ -314,7 +314,7 @@
     <div class="hero__top" data-hero="1">
       <p class="eyebrow hero__eyebrow">
         <span class="dot" aria-hidden="true"></span>
-        Windows &middot; v0.9.7 beta &middot; free
+        Windows &middot; v0.9.8 beta &middot; free
       </p>
       <p class="online" data-online hidden>
         <span class="online__dot" aria-hidden="true"></span>
@@ -722,8 +722,10 @@
       <details class="faq__item">
         <summary class="faq__q">Does it run on Mac, Linux or Steam Deck?</summary>
         <div class="faq__a">
-          <p>Not yet. It is a Windows 10 and 11 build, 64-bit, and at the moment that is
-             the only one there is.</p>
+          <p>Yes, Mac and Linux both, from 0.9.8. The Mac version is one app for Intel and
+             Apple silicon Macs; the Linux version is a 64-bit x86 build in a .tar.gz.
+             Steam Deck has not been tested yet, but it is the same Linux build, in desktop mode. Windows 10 and 11, 64-bit, is
+             still the main one.</p>
         </div>
       </details>
 
@@ -797,6 +799,18 @@
           </div>
         </div>
 
+        <p class="dl__platforms">
+          Also for
+          <a href="/api/download/mac">Mac</a>
+          <span aria-hidden="true">&middot;</span>
+          <a href="/api/download/linux">Linux</a>
+        </p>
+        <p class="dl__small dl__small--mac">
+          The Mac version is not notarized by Apple yet. The first time, right-click
+          FullVolume.app and choose Open, then Open again. On macOS 15 and later, open it
+          once, then System Settings &gt; Privacy &amp; Security &gt; Open Anyway.
+        </p>
+
         <p class="dl__note">
           Uninstall it whenever you like. Your profiles, scores, backdrops and song
           folders stay exactly where they were.
@@ -822,8 +836,8 @@
         <dl>
           <div><dt>File</dt><dd>FullVolumeSetup.exe</dd></div>
           <div><dt>Size</dt><dd>107 MB</dd></div>
-          <div><dt>Version</dt><dd>0.9.7 beta</dd></div>
-          <div><dt>Runs on</dt><dd>Windows 10 and 11, 64&#8209;bit</dd></div>
+          <div><dt>Version</dt><dd>0.9.8 beta</dd></div>
+          <div><dt>Runs on</dt><dd>Windows, Mac, Linux</dd></div>
           <div><dt>Account</dt><dd>Local</dd></div>
           <div><dt>Songs included</dt><dd>None. You bring those</dd></div>
         </dl>
@@ -924,7 +938,7 @@
 
   <div class="wrap foot__rule">
     <p>&copy; 2026 JURMR. FullVolume is not affiliated with Clone Hero, YARG, or Microsoft.</p>
-    <p>v0.9.7 &middot; beta</p>
+    <p>v0.9.8 &middot; beta</p>
   </div>
 </footer>
 
