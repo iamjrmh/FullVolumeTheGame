@@ -93,7 +93,7 @@ Open an [issue](../../issues) with what you were doing, what happened, and your 
 
 ## Credits
 
-- **The charting community.** Every vocal part FullVolume plays was charted by hand, for free, by Rock Band, Clone Hero and UltraStar charters.
+- **The charting community.** Every vocal part FullVolume plays was charted by hand by FullVolume, Rock Band, Clone Hero and UltraStar charters.
 - **The Rock Band modding community**, especially **TrojanNemo** ([Nautilus](https://github.com/trojannemo/Nautilus)), **LocalH** (moggulator) and **Dark** (themethod3), whose reverse engineering of CON and mogg files is the only reason they can be read. FullVolume's mogg support is its own C# implementation of that published work; no code from these projects is included.
 - **[Rhythmverse](https://rhythmverse.co)** and **[Chorus Encore](https://enchor.us)** for the chart catalogues behind GET SONGS. Downloads go through their own pages, and nothing is mirrored.
 - Built on **Unity 6**, [NVorbis](https://github.com/NVorbis/NVorbis), [Concentus](https://github.com/lostromb/concentus), [LiteNetLib](https://github.com/RevenantX/LiteNetLib), [Kenney](https://kenney.nl) sounds and [Simple Icons](https://github.com/simple-icons/simple-icons). Pitch detection is the McLeod Pitch Method. The charter uses [Tauri 2](https://tauri.app), [React](https://react.dev), [hyphen](https://github.com/ytiurin/hyphen) and [UVR](https://github.com/Anjok07/ultimatevocalremovergui)'s karaoke model.
