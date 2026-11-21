@@ -27,19 +27,19 @@
 ## Screenshots
 
 <p align="center">
-  <img src="./shots/shot-15.png" alt="FullVolume - gameplay" width="100%">
+  <img src="./docs/assets/img/shots/v098/08-overdrive.png" alt="FullVolume in play: overdrive let out, the OVERDRIVE banner over the lyrics and a PERFECT call" width="100%">
 </p>
 
 | | |
 |:---:|:---:|
-| ![Title screen](./shots/shot-01.png) | ![Main menu](./shots/shot-03.png) |
-| Title screen | Main menu |
-| ![Song library](./shots/shot-04.png) | ![Queue](./shots/shot-14.png) |
-| Your library, with your best score on every song | Queue up a set list |
-| ![Online rooms](./shots/shot-05.png) | ![Room lobby](./shots/shot-08.png) |
-| Public rooms | The lobby, with voice and chat |
-| ![Results](./shots/shot-13.png) | ![Pause menu](./shots/shot-12.png) |
-| Results | Pause menu |
+| ![Party setup](./docs/assets/img/shots/v098/02-party-setup.png) | ![Four singers](./docs/assets/img/shots/v098/03-party-gameplay.png) |
+| Party setup: four seats, one mic each | Four singers, four lanes |
+| ![Venue mode](./docs/assets/img/shots/v098/04-venue-up-next.png) | ![Results](./docs/assets/img/shots/v098/05-results-awards.png) |
+| Venue mode runs the night | A podium, with awards |
+| ![Song library](./docs/assets/img/shots/v098/06-song-leaderboard.png) | ![Leaderboards](./docs/assets/img/shots/v098/07-leaderboards.png) |
+| Your library, with the world top five | Global leaderboards, crowns for full combos |
+| ![Phone remote](./docs/assets/img/shots/v098/09-phone-qr.png) | ![Note sparks](./docs/assets/img/shots/v098/sparks.gif) |
+| Scan for the phone remote | Sparks while you hit the note |
 
 ## Download
 
@@ -71,7 +71,7 @@ FullVolume updates itself after that. It ships with no songs: add your folders u
 The song you want isn't charted? **FullVolumeCharter** turns any song you own into a `.fvchart`: load the audio, paste the lyrics, tap the timing, fix the pitches and export. It can split the vocals out of a full mix on your GPU, slows the song down without changing its key while you tap, and turns bracketed backing vocals into harmony parts. Everything stays on your PC.
 
 <p align="center">
-  <img src="./shots/Charter/shot-01.png" alt="FullVolumeCharter" width="100%">
+  <img src="./docs/assets/img/shots/charter/charter-12.jpg" alt="FullVolumeCharter: the piano roll with a note per syllable over the sung pitch line, a vibrato note and the lyrics beside it" width="100%">
 </p>
 
 <div align="center">
