@@ -6,7 +6,7 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-11-21T14:49:54.140Z",
+ "generated": "2026-11-22T14:46:17.772Z",
  "repo": "iamjrmh/FullVolumeTheGame",
  "latest": "0.9.8",
  "latestByProduct": {
@@ -84,11 +84,11 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeCharterSetup.exe",
      "label": "FullVolumeCharter",
      "size": "20 MB",
-     "downloads": 1,
+     "downloads": 2,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FVC-v0.9.8/FullVolumeCharterSetup.exe"
     }
    ],
-   "downloads": 2
+   "downloads": 3
   },
   {
    "tag": "FV-v0.9.8",
@@ -236,14 +236,14 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "91 MB",
-     "downloads": 3,
+     "downloads": 5,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolumeSetup.exe"
     },
     {
      "name": "FullVolume-macOS.zip",
      "label": "FullVolume for Mac",
      "size": "104 MB",
-     "downloads": 2,
+     "downloads": 3,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolume-macOS.zip"
     },
     {
@@ -254,7 +254,7 @@ window.FV_CHANGELOG = {
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolume-Linux.tar.gz"
     }
    ],
-   "downloads": 7
+   "downloads": 10
   },
   {
    "tag": "FV-v0.9.7",
