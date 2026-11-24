@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#171719">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>FullVolume Phone Mic</title>
+<link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="preload" href="assets/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="mic.css">
+</head>
+<body class="mic">
+<div class="room" aria-hidden="true"></div>
+
+<header class="top">
+  <img class="top__logo" src="assets/logo.png" alt="FullVolume" width="534" height="214">
+  <span class="top__mode">PHONE MIC</span>
+  <span class="top__link is-lost" id="link" role="status" aria-live="polite">Not connected</span>
+</header>
+
+<!-- Before the microphone is allowed: what this is, and one button. -->
+<main class="mic__start" id="start">
+  <h1 class="mic__title">Sing into this phone</h1>
+  <p class="mic__lead">Your phone becomes a microphone in FullVolume, scored on your voice alone. Your lyrics show here too.</p>
+  <ol class="mic__steps">
+    <li>Join the same Wi-Fi as the PC running FullVolume.</li>
+    <li>Tap the button and allow the microphone.</li>
+    <li>Keep this page open while you sing. The screen stays on by itself.</li>
+  </ol>
+  <button class="plate plate--md mic__go" id="go" type="button"><span class="plate__label">CONNECT MIC</span></button>
+  <p class="mic__problem" id="problem" role="alert" hidden></p>
+</main>
+
+<!-- Connected: who you are, your line, your level. -->
+<main class="mic__live" id="live" hidden>
+  <div class="mic__seat" id="seat">
+    <span class="mic__swatch" id="swatch" aria-hidden="true"></span>
+    <span>SINGING AS <strong id="singer">...</strong></span>
+  </div>
+
+  <section class="mic__lyrics" aria-label="Your lyrics" aria-live="off">
+    <p class="mic__line" id="line"><span class="mic__sung" id="sung"></span><span id="unsung"></span></p>
+    <p class="mic__next" id="next"></p>
+    <p class="mic__idle" id="idle">Waiting for the next song</p>
+  </section>
+
+  <footer class="mic__foot">
+    <div class="mic__meter" role="meter" aria-label="Microphone level" aria-valuemin="0" aria-valuemax="100" id="meterBox">
+      <span class="mic__fill" id="meter"></span>
+    </div>
+    <p class="mic__hint" id="hint">Sing and watch the bar move. The PC hears exactly this.</p>
+    <button class="plate plate--sm" id="again" type="button" hidden><span class="plate__label">RECONNECT</span></button>
+  </footer>
+</main>
+
+<script src="mic.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+/* FullVolume phone mic. Builds on app.css (the remote's palette, faces and plates). */
+
+body.mic { display: flex; flex-direction: column; min-height: 100dvh; }
+
+.mic__start, .mic__live {
+  flex: 1;
+  display: flex; flex-direction: column;
+  padding: 8px var(--gutter) calc(24px + var(--safe-b));
+  max-width: 560px; width: 100%; margin: 0 auto;
+  animation: mic-in 220ms var(--ease-out) both;
+}
+
+/* ------------------------------------------------------------ start */
+
+.mic__start { justify-content: center; gap: 18px; }
+.mic__title {
+  font: 400 34px/1.08 var(--display);
+  -webkit-text-stroke: .9px currentColor;
+  letter-spacing: .02em;
+  margin: 0;
+}
+.mic__lead { margin: 0; color: var(--cream); font-size: 17px; }
+.mic__steps { margin: 0; padding-left: 22px; color: var(--muted); display: grid; gap: 6px; }
+.mic__go { align-self: center; margin-top: 10px; min-width: 240px; }
+.mic__go.is-busy { pointer-events: none; opacity: .7; }
+.mic__problem {
+  margin: 0; padding: 12px 14px;
+  border-radius: 10px; background: rgba(216, 111, 103, .14);
+  border: 1px solid rgba(216, 111, 103, .45);
+  color: var(--cream); font-size: 15px;
+}
+.mic__problem strong { color: var(--coral); }
+
+/* ------------------------------------------------------------ live */
+
+.mic__live { gap: 16px; }
+
+.mic__seat {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 12px;
+  background: var(--row); border: 1px solid var(--line);
+  font-size: 14px; letter-spacing: .08em; color: var(--muted);
+}
+.mic__seat strong { color: var(--cream); letter-spacing: .02em; font-weight: 700; }
+.mic__swatch { width: 14px; height: 14px; border-radius: 50%; background: var(--seat, var(--gold)); flex: none; }
+
+.mic__lyrics {
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: center; gap: 14px;
+  min-height: 220px;
+}
+.mic__line {
+  margin: 0;
+  font: 700 clamp(28px, 8.4vw, 44px)/1.18 var(--body);
+  color: var(--cream);
+  overflow-wrap: anywhere;
+  transition: opacity 160ms ease;
+}
+.mic__sung { color: var(--seat, var(--gold)); }
+.mic__next { margin: 0; font: 600 clamp(18px, 5vw, 24px)/1.3 var(--body); color: var(--muted); overflow-wrap: anywhere; }
+.mic__idle { margin: 0; text-align: center; color: var(--muted); font-size: 18px; }
+.mic__line.is-swap { opacity: 0; }
+
+.mic__foot { display: grid; gap: 10px; justify-items: center; }
+.mic__meter {
+  width: 100%; height: 12px; border-radius: 6px; overflow: hidden;
+  background: rgba(243, 238, 231, .10);
+}
+.mic__fill {
+  display: block; height: 100%; width: 100%;
+  background: var(--seat, var(--sage));
+  transform-origin: left center; transform: scaleX(0);
+}
+.mic__hint { margin: 0; color: var(--muted); font-size: 14px; text-align: center; }
+
+@keyframes mic-in { from { opacity: 0; transform: translateY(6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mic__start, .mic__live { animation: none; }
+  .mic__line { transition: none; }
+}
