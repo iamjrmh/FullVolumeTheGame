@@ -3,7 +3,8 @@
 // The page is served by fullvolumethegame.xyz because a browser only hands the
 // microphone to an https page. It introduces itself to the game through the remote's
 // API (./api/... is relayed to the game by the website), and from then on the audio
-// goes straight to the PC over the Wi-Fi on a WebRTC data channel: 16 kHz, 10 ms
+// goes to the PC on a WebRTC data channel (straight over the Wi-Fi when they share one,
+// through FullVolume's relay server when they don't): 16 kHz, 10 ms
 // numbered frames, unordered and never resent, because a late frame is a useless one.
 (() => {
   "use strict";
@@ -15,7 +16,8 @@
   const $ = (id) => document.getElementById(id);
   const api = (path) => "." + path + "?k=" + encodeURIComponent(KEY);
 
-  const GATHER_MS = 2500;
+  const GATHER_MS = 3000;
+  const CONNECT_MS = 12000;
   const PING_MS = 1000;
   const MAX_BUFFERED = 32 * 1024;
   const AUDIO_FRAME = 1;
@@ -93,7 +95,7 @@
       console.warn(error);
       teardown();
       problem(error && error.userMessage ? error.userMessage
-        : "<strong>Couldn't reach the game.</strong> Check the phone is on the same Wi-Fi as the PC, then try again.");
+        : "<strong>Couldn't reach the game.</strong> Check the phone has internet and FullVolume is still open, then try again.");
       showLive(false);
     } finally {
       busy(false);
@@ -136,7 +138,7 @@
     teardownPeer();
     worklet.port.postMessage("restart");
 
-    peer = new RTCPeerConnection({ iceServers: [] });
+    peer = new RTCPeerConnection({ iceServers: await iceServers() });
     audioChannel = peer.createDataChannel("audio", { ordered: false, maxRetransmits: 0 });
     audioChannel.binaryType = "arraybuffer";
     control = peer.createDataChannel("ctl");
@@ -169,13 +171,27 @@
     applySeat(answer.singer, answer.colour);
     await peer.setRemoteDescription({ type: "answer", sdp: answer.sdp });
 
-    // The channel opens once the phone and the PC have found each other on the Wi-Fi.
+    // The channel opens once the phone and the PC have found a way to each other:
+    // directly on a shared Wi-Fi, otherwise through the relay.
     await new Promise((resolve, reject) => {
       const timer = setTimeout(() => reject(fail(
-        "<strong>The game answered but the phone can't reach the PC.</strong> They need the same Wi-Fi (not a guest network)" +
-        " and the PC's firewall has to allow FullVolume on private networks.")), 8000);
+        "<strong>The game answered but the phone can't reach the PC.</strong> Try again, or switch the phone" +
+        " between Wi-Fi and mobile data.")), CONNECT_MS);
       control.addEventListener("open", () => { clearTimeout(timer); resolve(); }, { once: true });
     });
+  }
+
+  // The relay login the game holds, so the two can meet from any network. Without it
+  // (the game is offline, or an old version) only a shared Wi-Fi works.
+  async function iceServers() {
+    try {
+      const response = await fetch(api("/api/mic/ice"), { cache: "no-store" });
+      if (!response.ok) return [];
+      const body = await response.json();
+      return Array.isArray(body.iceServers) ? body.iceServers : [];
+    } catch {
+      return [];
+    }
   }
 
   function gathered(pc) {
@@ -203,7 +219,7 @@
     teardownPeer();
     setLink("Not connected", false);
     $("again").hidden = false;
-    $("hint").textContent = "Lost the game. Tap Reconnect when you're back on its Wi-Fi.";
+    $("hint").textContent = "Lost the game. Tap Reconnect to join again.";
   }
 
   function teardownPeer() {
