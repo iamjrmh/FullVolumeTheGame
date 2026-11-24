@@ -184,6 +184,12 @@
     }
 
     $("stageLabel").textContent = label;
+
+    // Pause and skip, offered while a song is on the TV (the game sends transport.active).
+    const transport = state.transport || {};
+    $("transport").hidden = !transport.active;
+    $("pauseSong").querySelector(".plate__label").textContent = transport.paused ? "RESUME" : "PAUSE";
+    $("skipSong").hidden = !transport.canSkip;
     if ($("stageTitle").textContent !== title) $("stageTitle").textContent = title;
     $("stageArtist").textContent = artist;
 
@@ -346,6 +352,21 @@
       apply(await call("/api/state"));
     }
   }
+
+  async function transport(action, done) {
+    try {
+      apply(await call("/api/transport", { action }));
+      toast(done);
+    } catch (error) {
+      toast(error.message, true);
+    }
+  }
+
+  $("pauseSong").addEventListener("click", () => {
+    const paused = state.transport && state.transport.paused;
+    transport(paused ? "resume" : "pause", paused ? "Resuming the song" : "Paused");
+  });
+  $("skipSong").addEventListener("click", () => transport("skip", "Skipping to the next song"));
 
   $("playNext").addEventListener("click", async () => {
     try {

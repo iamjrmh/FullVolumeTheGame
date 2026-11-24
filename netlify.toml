@@ -59,6 +59,15 @@
   status = 200
   force = true
 
+# The FullVolume Mic app finding the PC it paired with: GET /api/mic/find?pc=<id> answers
+# code=K7QX while that PC's game is open (Links.FindPc in the registry), 404 otherwise.
+# The app then talks to /x/<code>/api/* below like the web page does.
+[[redirects]]
+  from = "/api/mic/find"
+  to = "http://192.227.235.140:8092/link"
+  status = 200
+  force = true
+
 # The phone remote for phones that are not on the host's Wi-Fi (netlify/functions/remote.mjs
 # sends them here). /x/<code>/ is the remote page, served from this site so that nothing a
 # game sends can ever run as script on this domain; its API calls and cover pictures go to

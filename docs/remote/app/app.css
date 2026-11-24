@@ -117,6 +117,11 @@ button { cursor: pointer; touch-action: manipulation; }
 }
 .stage__artist { margin: 2px 0 0; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+.stage__transport { display: flex; gap: 10px; margin-top: 10px; }
+.stage__transport[hidden] { display: none; }
+.stage__transport .plate { flex: 0 0 auto; }
+body:not(.wide):not([data-view="queue"]) .stage__transport { display: none; }
+
 @keyframes pulse { 50% { opacity: .35; } }
 
 /* ---------------------------------------------------------------- panes */
