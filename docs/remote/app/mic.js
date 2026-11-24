@@ -289,8 +289,33 @@
   }
 
   function applySeat(singer, colour) {
-    if (singer) $("singer").textContent = singer;
+    if (singer) showRichName($("singer"), singer);
     if (colour && /^#[0-9a-fA-F]{6}$/.test(colour)) document.body.style.setProperty("--seat", colour);
+  }
+
+  // Player names carry the game's rich-text colour tags (<color=#6C3BFF>J</color>...).
+  // Coloured runs become spans; every other tag is dropped. Built as text nodes, never
+  // HTML, so a name cannot put markup on the page.
+  function showRichName(element, name) {
+    element.textContent = "";
+    const colours = [];
+    const parts = String(name).split(/(<[^<>]{1,40}>)/);
+    for (const part of parts) {
+      if (!part) continue;
+      const open = /^<color=["']?(#[0-9a-fA-F]{6}(?:[0-9a-fA-F]{2})?)["']?>$/i.exec(part);
+      if (open) { colours.push(open[1].slice(0, 7)); continue; }
+      if (/^<\/color>$/i.test(part)) { colours.pop(); continue; }
+      if (/^<\/?[a-z]/i.test(part)) continue;
+      const colour = colours[colours.length - 1];
+      if (colour) {
+        const span = document.createElement("span");
+        span.style.color = colour;
+        span.textContent = part;
+        element.appendChild(span);
+      } else {
+        element.appendChild(document.createTextNode(part));
+      }
+    }
   }
 
   function setClock(message) {
