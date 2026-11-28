@@ -6,7 +6,7 @@
    to it. Re-bake with: node tools/bake-changelog.mjs
 */
 window.FV_CHANGELOG = {
- "generated": "2026-11-26T17:10:01.225Z",
+ "generated": "2026-11-28T15:43:42.636Z",
  "repo": "iamjrmh/FullVolumeTheGame",
  "latest": "0.9.8",
  "latestByProduct": {
@@ -236,25 +236,25 @@ window.FV_CHANGELOG = {
      "name": "FullVolumeSetup.exe",
      "label": "FullVolume",
      "size": "91 MB",
-     "downloads": 23,
+     "downloads": 25,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolumeSetup.exe"
     },
     {
      "name": "FullVolume-macOS.zip",
      "label": "FullVolume for Mac",
      "size": "104 MB",
-     "downloads": 5,
+     "downloads": 6,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolume-macOS.zip"
     },
     {
      "name": "FullVolume-Linux.tar.gz",
      "label": "FullVolume for Linux",
      "size": "79 MB",
-     "downloads": 4,
+     "downloads": 5,
      "url": "https://github.com/iamjrmh/FullVolumeTheGame/releases/download/FV-v0.9.8/FullVolume-Linux.tar.gz"
     }
    ],
-   "downloads": 32
+   "downloads": 36
   },
   {
    "tag": "FV-v0.9.7",
